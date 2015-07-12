@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_ip_dlg", "stk_ip_dlg.vcproj", "{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA} = {0F0F2B3A-9241-44C8-983E-FA717E070FBA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msgproc", "..\..\com\msgproc\msgproc.vcproj", "{0F0F2B3A-9241-44C8-983E-FA717E070FBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release_win2k|Win32 = Release_win2k|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}.Debug|Win32.Build.0 = Debug|Win32
+		{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}.Release_win2k|Win32.ActiveCfg = Release_win2k|Win32
+		{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}.Release_win2k|Win32.Build.0 = Release_win2k|Win32
+		{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}.Release|Win32.ActiveCfg = Release|Win32
+		{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}.Release|Win32.Build.0 = Release|Win32
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA}.Debug|Win32.Build.0 = Debug|Win32
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA}.Release_win2k|Win32.ActiveCfg = Release|Win32
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA}.Release_win2k|Win32.Build.0 = Release|Win32
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA}.Release|Win32.ActiveCfg = Release|Win32
+		{0F0F2B3A-9241-44C8-983E-FA717E070FBA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

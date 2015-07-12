@@ -1,0 +1,301 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// “ú–{Œê resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "image\\back.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON0               ICON                    "image\\icon0.ico"
+IDI_ICON1               ICON                    "image\\icon1.ico"
+IDI_ICON2               ICON                    "image\\icon2.ico"
+IDI_ICON3               ICON                    "image\\icon3.ico"
+IDI_ICON4               ICON                    "image\\icon4.ico"
+IDI_ICON5               ICON                    "image\\icon5.ico"
+IDI_ICON6               ICON                    "image\\icon6.ico"
+IDI_ICON7               ICON                    "image\\icon7.ico"
+IDI_ICON8               ICON                    "image\\icon8.ico"
+IDI_ICON9               ICON                    "image\\icon9.ico"
+IDI_ICON10              ICON                    "image\\icon10.ico"
+IDI_ICON11              ICON                    "image\\icon11.ico"
+IDI_ICON12              ICON                    "image\\icon12.ico"
+IDI_ICON13              ICON                    "image\\icon13.ico"
+IDI_ICON14              ICON                    "image\\icon14.ico"
+IDI_ICON15              ICON                    "image\\icon15.ico"
+IDI_ICON16              ICON                    "image\\icon16.ico"
+IDI_ICON17              ICON                    "image\\icon17.ico"
+IDI_ICON18              ICON                    "image\\icon18.ico"
+IDI_ICON19              ICON                    "image\\icon19.ico"
+IDI_ICON20              ICON                    "image\\icon20.ico"
+IDI_ICON21              ICON                    "image\\icon21.ico"
+IDI_ICON22              ICON                    "image\\icon22.ico"
+IDI_ICON23              ICON                    "image\\icon23.ico"
+IDI_ICON24              ICON                    "image\\icon24.ico"
+IDI_ICON25              ICON                    "image\\icon25.ico"
+IDI_ICON26              ICON                    "image\\icon26.ico"
+IDI_ICON27              ICON                    "image\\icon27.ico"
+IDI_ICON28              ICON                    "image\\icon28.ico"
+IDI_ICON29              ICON                    "image\\icon29.ico"
+IDI_ICON30              ICON                    "image\\icon30.ico"
+IDI_ICON31              ICON                    "image\\icon31.ico"
+IDI_ICON32              ICON                    "image\\icon32.ico"
+IDI_ICON33              ICON                    "image\\icon33.ico"
+IDI_ICON34              ICON                    "image\\icon34.ico"
+IDI_ICON35              ICON                    "image\\icon35.ico"
+IDI_ICON36              ICON                    "image\\icon36.ico"
+IDI_ICON37              ICON                    "image\\icon37.ico"
+IDI_ICON38              ICON                    "image\\icon38.ico"
+IDI_ICON39              ICON                    "image\\icon39.ico"
+IDI_ICON40              ICON                    "image\\icon40.ico"
+IDI_ICON41              ICON                    "image\\icon41.ico"
+IDI_ICON42              ICON                    "image\\icon42.ico"
+IDI_ICON43              ICON                    "image\\icon43.ico"
+IDI_ICON44              ICON                    "image\\icon44.ico"
+IDI_ICON45              ICON                    "image\\icon45.ico"
+IDI_ICON46              ICON                    "image\\icon46.ico"
+IDI_ICON47              ICON                    "image\\icon47.ico"
+IDI_ICON48              ICON                    "image\\icon48.ico"
+IDI_ICON51              ICON                    "image\\icon51.ico"
+IDI_ICON50              ICON                    "image\\icon50.ico"
+IDI_ICON52              ICON                    "image\\icon52.ico"
+IDI_ICON53              ICON                    "image\\icon53.ico"
+IDI_ICON54              ICON                    "image\\icon54.ico"
+IDI_ICON55              ICON                    "image\\icon55.ico"
+IDI_ICON56              ICON                    "image\\icon56.ico"
+IDI_ICON60              ICON                    "image\\icon60.ico"
+IDI_ICON61              ICON                    "image\\icon61.ico"
+IDI_ICON62              ICON                    "image\\icon62.ico"
+IDI_ICON71              ICON                    "image\\icon71.ico"
+IDI_ICON72              ICON                    "image\\icon72.ico"
+IDI_ICON73              ICON                    "image\\icon73.ico"
+IDI_VARICON1            ICON                    "image\\varicon1.ico"
+IDI_VARICON2            ICON                    "image\\varicon2.ico"
+IDI_VARICON3            ICON                    "image\\varicon3.ico"
+IDI_VARICON4            ICON                    "image\\varicon4.ico"
+IDI_VARICON5            ICON                    "image\\varicon5.ico"
+IDI_VARICON6            ICON                    "image\\varicon6.ico"
+IDI_ABOUTBUG            ICON                    "image\\iconabug.ico"
+IDI_ABOUTENH            ICON                    "image\\iconaenh.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "New",                         IDM_FILE_NEW
+        MENUITEM "Open",                        IDM_FILE_OPEN
+        MENUITEM "Save",                        IDM_FILE_SAVE
+        MENUITEM "Save As",                     IDM_FILE_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        IDM_FILE_EXIT
+    END
+    POPUP "Run"
+    BEGIN
+        MENUITEM "Thread Controller",           IDM_RUN_THREADCONTROLLER
+        MENUITEM SEPARATOR
+        MENUITEM "Start all threads",           IDM_RUN_STARTALLTHREADS
+        MENUITEM "Stop all threads",            IDM_RUN_STOPALLTHREADS
+    END
+    POPUP "Config"
+    BEGIN
+        MENUITEM "Communication variable",      IDM_CONFIG_COMM
+        MENUITEM "Flag variable",               IDM_CONFIG_FLAG
+    END
+    POPUP "About"
+    BEGIN
+        MENUITEM "Manual",                      IDM_ABOUT_MANUAL
+        MENUITEM "About...",                    IDM_ABOUT_ABOUT
+    END
+END
+
+IDR_VARCOMM_MENU MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Import",                      ID_VARFILE_OPENX
+        MENUITEM "Export",                      ID_VARFILE_SAVEX
+        MENUITEM SEPARATOR
+        MENUITEM "Close",                       ID_VARFILE_CLOSEX
+    END
+    POPUP "View"
+    BEGIN
+        MENUITEM "Binary",                      ID_VARVIEW_BINARY
+        MENUITEM "UTF-8",                       ID_VARVIEW_UTF8
+    END
+END
+
+IDR_VARCON_MENU MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Import",                      ID_VARCON_PASTE
+        MENUITEM "Export",                      ID_VARCON_COPY
+        MENUITEM SEPARATOR
+        MENUITEM "Close",                       ID_VARCON_CLOSE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_VARFLAGDLG DIALOGEX 0, 0, 287, 41
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "flag variable"
+FONT 10, "Arial", 400, 0, 0x0
+BEGIN
+    ICON            IDI_VARICON6,IDC_STATIC,6,6,20,20,SS_REALSIZEIMAGE
+    EDITTEXT        IDC_VARFLAGNAMEEDIT,90,6,84,12,ES_AUTOHSCROLL,WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_VARFLAGDESCEDIT,90,24,192,12,ES_AUTOHSCROLL,WS_EX_CLIENTEDGE
+    LTEXT           "Name",IDC_STATIC,36,6,42,12,SS_CENTERIMAGE
+    LTEXT           "Description",IDC_STATIC,36,24,48,12,SS_CENTERIMAGE
+    PUSHBUTTON      "OK",IDC_VARFLAGBTNOK,192,6,42,12
+    PUSHBUTTON      "Cancel",IDC_VARFLAGBTNCANCEL,240,6,42,12
+END
+
+IDD_NEW_WS DIALOGEX 0, 0, 187, 58
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Workspace definition"
+FONT 9, "Arial", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,138,18,38,12
+    EDITTEXT        IDC_EDIT1,90,18,36,12,ES_AUTOHSCROLL
+    LTEXT           "Width (512-2048)",IDC_STATIC,18,18,66,12,SS_CENTERIMAGE
+    LTEXT           "Height (400-2048)",IDC_STATIC,18,37,66,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT2,90,36,36,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Cancel",IDCANCEL,138,36,38,12
+    LTEXT           "Specify workspace size.",IDC_STATIC,6,6,174,12,SS_CENTERIMAGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_NEW_WS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,5,0,0
+ PRODUCTVERSION 1,5,0,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "FileDescription", "StkFw"
+            VALUE "FileVersion", "1, 5, 0, 0"
+            VALUE "LegalCopyright", "Copyright (C) 2014  Shinya Takeuchi"
+            VALUE "OriginalFilename", "stkfw.exe"
+            VALUE "ProductName", "StkFw"
+            VALUE "ProductVersion", "1, 5, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+#endif    // “ú–{Œê resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

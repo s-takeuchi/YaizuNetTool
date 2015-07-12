@@ -1,0 +1,196 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// “ú–{Œê resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_STK_IP_DLG          ICON                    "stk_ip_dlg.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STK_IP_DLG_1 DIALOGEX 0, 0, 159, 180
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add/Remove IP Address Wizard"
+FONT 14, "Arial", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Next",IDC_STK_IP_DLG_NEXT,117,162,35,11
+    PUSHBUTTON      "Cancel",IDC_STK_IP_DLG_CANCEL,7,162,35,11
+    LTEXT           "This program adds (or removes) the logical IP addresses specified to/from the local computer.\r\nIf you do not want to change the network configuration, click Cancel.",IDC_STATIC,7,116,145,41
+    CONTROL         132,IDC_STATIC,"Static",SS_BITMAP,7,7,145,109
+END
+
+IDD_STK_IP_DLG_2 DIALOGEX 0, 0, 159, 180
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add/Remove IP Address Wizard"
+FONT 14, "Arial", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Next",IDC_STK_IP_DLG_NEXT,117,162,35,11
+    PUSHBUTTON      "Cancel",IDC_STK_IP_DLG_CANCEL,7,162,35,11
+    PUSHBUTTON      "Back",IDC_STK_IP_DLG_BACK,78,162,35,11
+    LTEXT           "Network adapter name:",IDC_STATIC,7,79,84,9,SS_CENTERIMAGE
+    LTEXT           "Select the network adapter name.\r\nThis program adds (or removes) the logical IP addresses to/from the specified network adapter.",IDC_STATIC,7,6,145,32
+    COMBOBOX        IDC_STK_IP_DLG_2_C0,31,89,121,70,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_STK_IP_DLG_3 DIALOGEX 0, 0, 159, 180
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add/Remove IP Address Wizard"
+FONT 14, "Arial", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Change",IDC_STK_IP_DLG_NEXT,117,162,35,11
+    PUSHBUTTON      "Cancel",IDC_STK_IP_DLG_CANCEL,7,162,35,11
+    PUSHBUTTON      "Back",IDC_STK_IP_DLG_BACK,78,162,35,11
+    EDITTEXT        IDC_STK_IP_DLG_3_I,6,36,145,38,ES_MULTILINE | ES_READONLY | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "Start IP address",IDC_STATIC,7,90,63,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_STK_IP_DLG_3_E1,73,89,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_STK_IP_DLG_3_E2,93,89,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_STK_IP_DLG_3_E3,113,89,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_STK_IP_DLG_3_E4,133,89,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Number of IP addresses",IDC_STATIC,7,105,90,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_STK_IP_DLG_3_E5,113,104,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Subnet mask",IDC_STATIC,7,120,61,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_STK_IP_DLG_3_E6,73,119,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_STK_IP_DLG_3_E7,93,119,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_STK_IP_DLG_3_E8,113,119,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_STK_IP_DLG_3_E9,133,119,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "ADD",IDC_STK_IP_DLG_3_R1,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,33,142,41,10
+    CONTROL         "REMOVE",IDC_STK_IP_DLG_3_R2,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,81,142,52,10
+    GROUPBOX        "Operation Type",IDC_STATIC,19,133,125,21
+    LTEXT           "The IP addresses shown below have already been registered in the specified network adapter.",IDC_STATIC,6,6,145,24
+    LTEXT           "Input the following items.",IDC_STATIC,7,77,125,9,SS_CENTERIMAGE
+END
+
+IDD_STK_IP_DLG_4 DIALOGEX 0, 0, 159, 180
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add/Remove IP Address Wizard"
+FONT 14, "Arial", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Close",IDC_STK_IP_DLG_NEXT,117,162,35,11
+    EDITTEXT        IDC_STK_IP_DLG_4_I,7,72,145,84,ES_MULTILINE | ES_READONLY | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "The operation has been completed.\r\nConfirm that the specified IP addresses have been added/removed.\r\nIf an error occurred during the addition/removal of multiple IP addresses, operation for some IP addresses might not be completed.",-1,6,6,145,54
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_STK_IP_DLG_1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 152
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+
+    IDD_STK_IP_DLG_2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 152
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 173
+    END
+
+    IDD_STK_IP_DLG_3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 152
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+
+    IDD_STK_IP_DLG_4, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 152
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_STK_IP_DLG_1        BITMAP                  "pc01.bmp"
+#endif    // “ú–{Œê resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
