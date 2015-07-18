@@ -14,20 +14,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkfw", "stklibtest.vcproj"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stklib", "..\stklib\stklib.vcproj", "{E6515A67-EB9D-4F9D-801C-305CEB62FDF2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msgproc", "..\..\com\msgproc\msgproc.vcproj", "{0F0F2B3A-9241-44C8-983E-FA717E070FBA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msgproc", "..\..\..\YaizuComLib\src\msgproc\msgproc.vcproj", "{0F0F2B3A-9241-44C8-983E-FA717E070FBA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_about", "..\..\com\stk_about\stk_about.vcproj", "{416B9FF2-02F0-47E1-808E-F283D2C62358}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_about", "..\..\..\YaizuComLib\src\stk_about\stk_about.vcproj", "{416B9FF2-02F0-47E1-808E-F283D2C62358}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkdata", "..\..\com\stkdata\stkdata.vcproj", "{83E294F2-A071-4ECC-BAE2-B5F127DD537E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkdata", "..\..\..\YaizuComLib\src\stkdata\stkdata.vcproj", "{83E294F2-A071-4ECC-BAE2-B5F127DD537E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthread", "..\..\com\stkthread\stkthread.vcproj", "{C85C9417-1312-4A69-B254-B4F041A9D9C1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stksocket", "..\..\..\YaizuComLib\src\stksocket\stksocket.vcproj", "{3839D168-00F8-420A-BAE6-AB290802FFC7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthreadgui", "..\..\com\stkthreadgui\stkthreadgui.vcproj", "{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C85C9417-1312-4A69-B254-B4F041A9D9C1} = {C85C9417-1312-4A69-B254-B4F041A9D9C1}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthread", "..\..\..\YaizuComLib\src\stkthread\stkthread.vcproj", "{C85C9417-1312-4A69-B254-B4F041A9D9C1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stksocket", "..\..\com\stksocket\stksocket.vcproj", "{3839D168-00F8-420A-BAE6-AB290802FFC7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthreadgui", "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.vcproj", "{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +52,10 @@ Global
 		{83E294F2-A071-4ECC-BAE2-B5F127DD537E}.Debug|Win32.Build.0 = Debug|Win32
 		{83E294F2-A071-4ECC-BAE2-B5F127DD537E}.Release|Win32.ActiveCfg = Release|Win32
 		{83E294F2-A071-4ECC-BAE2-B5F127DD537E}.Release|Win32.Build.0 = Release|Win32
+		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Debug|Win32.Build.0 = Debug|Win32
+		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Release|Win32.ActiveCfg = Release|Win32
+		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Release|Win32.Build.0 = Release|Win32
 		{C85C9417-1312-4A69-B254-B4F041A9D9C1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{C85C9417-1312-4A69-B254-B4F041A9D9C1}.Debug|Win32.Build.0 = Debug|Win32
 		{C85C9417-1312-4A69-B254-B4F041A9D9C1}.Release|Win32.ActiveCfg = Release|Win32
@@ -63,10 +64,6 @@ Global
 		{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}.Debug|Win32.Build.0 = Debug|Win32
 		{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}.Release|Win32.ActiveCfg = Release|Win32
 		{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}.Release|Win32.Build.0 = Release|Win32
-		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Debug|Win32.ActiveCfg = Debug|Win32
-		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Debug|Win32.Build.0 = Debug|Win32
-		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Release|Win32.ActiveCfg = Release|Win32
-		{3839D168-00F8-420A-BAE6-AB290802FFC7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

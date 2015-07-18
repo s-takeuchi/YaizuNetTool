@@ -2,7 +2,7 @@
 #include "NetAseEx.h"
 #include "NetManagerAseEx.h"
 #include "stklibtest.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "LowDbAccess.h"
 
 

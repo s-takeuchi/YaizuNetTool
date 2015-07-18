@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "LowDbAccess.h"
 
 int GetTargetTcpUdpNameArray(TCHAR Name[256][32], int Id[256], int UdpFlag)

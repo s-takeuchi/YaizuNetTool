@@ -1,5 +1,5 @@
 #include <winsock2.h>
-#include "..\..\com\\stksocket\stksocket.h"
+#include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
@@ -8,10 +8,10 @@
 #include "StkPropExecMgr.h"
 #include "StkPropExecElem.h"
 #include "LowDbAccess.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "StkProp.h"
-#include "..\..\com\\stkthread\stkthread.h"
-#include "..\..\com\\stkthreadgui\stkthreadgui.h"
+#include "..\..\..\YaizuComLib\src\\stkthread\stkthread.h"
+#include "..\..\..\YaizuComLib\src\\stkthreadgui\stkthreadgui.h"
 
 
 void RecvInit(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);

@@ -1,4 +1,4 @@
-#include "..\..\com\\stksocket\stksocket.h"
+#include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include <windows.h>
 #include <shlwapi.h>
 #include <tchar.h>
@@ -18,10 +18,10 @@
 #include "..\stklib\ActorStatus.h"
 #include "..\stklib\ActorStatusElement.h"
 
-#include "..\..\com\\msgproc\msgproc.h"
-#include "..\..\com\\stk_about\stk_about.h"
-#include "..\..\com\stkthread\stkthread.h"
-#include "..\..\com\stkthreadgui\stkthreadgui.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\stk_about\stk_about.h"
+#include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
+#include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
 #include "VarCon.h"
 
 #include "NetGseEx.h"

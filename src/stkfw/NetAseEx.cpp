@@ -2,7 +2,7 @@
 #include <shlwapi.h>
 #include "NetAseEx.h"
 #include "stklibtest.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "stkprop.h"
 #include "LowDbAccess.h"
 

@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "LowDbAccess.h"
 
 // アクセス種別に関するラジオボタンのチェックを切り替える

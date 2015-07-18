@@ -7,9 +7,9 @@
 #include "..\stklib\StkFont.h"
 #include "NetGseEx.h"
 #include "stklibtest.h"
-#include "..\..\com\stkthread\stkthread.h"
-#include "..\..\com\stkthreadgui\stkthreadgui.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
+#include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 
 CRITICAL_SECTION NetGseEx::CritSect;
 int NetGseEx::RtiRefreshInterval;

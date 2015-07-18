@@ -2,7 +2,7 @@
 #include <shlobj.h>
 #include "resource.h"
 #include "tchar.h"
-#include "..\..\com\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\msgproc\msgproc.h"
 #include <Lm.h>
 
 

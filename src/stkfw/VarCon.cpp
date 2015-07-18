@@ -9,7 +9,7 @@
 #include "resource.h"
 #include "VarCon.h"
 #include "VarController.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 
 HINSTANCE InstHndl;
 HWND WndHndl;

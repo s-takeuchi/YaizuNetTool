@@ -1,5 +1,5 @@
 #pragma once
-#include "..\..\com\\stkdata\stkdata.h"
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
 
 RecordData* VarCon_GetVariableRecord(int);
 RecordData* VarCon_GetVariableRecords();

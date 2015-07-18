@@ -4,7 +4,7 @@
 #include <commctrl.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "LowDbAccess.h"
 
 void ChangeOperationType(int Type, HWND RdoBtn1, HWND RdoBtn2, HWND IpHndl, HWND PortHndl, HWND TgtHndl)

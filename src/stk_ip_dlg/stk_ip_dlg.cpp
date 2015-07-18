@@ -11,7 +11,7 @@
 #include <Lm.h>
 #include "resource.h"
 #include "StkIpDlgMsg.h"
-#include "..\..\com\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\msgproc\msgproc.h"
 
 #define STK_IP_DLG_IPSTRLEN 20000
 

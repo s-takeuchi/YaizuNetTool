@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "LowDbAccess.h"
 
 HWND ChgDatStart;

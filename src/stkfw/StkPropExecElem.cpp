@@ -1,10 +1,10 @@
-#include "..\..\com\\stksocket\stksocket.h"
+#include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "StkPropExecElem.h"
 #include <windows.h>
 #include <memory.h>
-#include "..\..\com\\\stkthreadgui\stkthreadgui.h"
+#include "..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
 #include "LowDbAccess.h"
-#include "..\..\com\\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 
 void StkPropExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
