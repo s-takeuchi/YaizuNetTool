@@ -1,0 +1,525 @@
+<HEAD>
+<TITLE>stklib - ActorStatusElement</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stklib - ActorStatusElement</H1><BR>
+ActorStatusElement is a class which defines the feature of a element on the window.<BR>
+In the case of multiple elements (like icons which influence each other) exist on the window, 
+multiple ActorStatusElements need to be created, and have relationship to the
+elements on the window.<BR>
+ActorStatus class contains multiple ActorStatusElements using array.<BR>
+<P>
+[Action()]<BR>
+ActorStatus class calls each ActorStatusElement Action() function frequently.<BR>
+Each ActorStatusElement in the array is called from ActorStatus sequentially.<BR>
+Hence, the process of the Action() function of each ActorStatusElement needs to be
+finished in short time.<BR>
+<P>
+[MouseAction()]<BR>
+ActorStatus calls MouseAction() function of each ActorStatusElement in the array
+when user does mouse operation regarding the actor.<BR>
+MouseAction() function of each ActorStatusElement is called sequentially.<BR>
+If MouseAction() returns FALSE, MouseAction() function of next element in the array is not called.<BR>
+<P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetId(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Each ActorStatusElement has ID.<BR>
+This function sets the ID.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: ID of ActorStatusElement<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetId()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function returns the ID of ActorStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: ID of ActorStatusElement<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void EnableAction()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function enables the function-call to Action() function from ActorStatus.<BR>
+AcutorStatus class calls ActorStatusElement frequently after this function is called.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void DisableAction()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function disables the function-call to Action() function from ActorStatus.<BR>
+AcutorStatus class stops the calling to ActorStatusElement after this function is called.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>BOOL GetActionFlag()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the status regarding the function-call from ActorStatus.<BR>
+The status shows enable or disable the function-call to Action() function.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+BOOL: (TRUE: enable, FALSE: disable)<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void EnableMouseAction()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function enables the function-call to MouseAction() function from ActorStatus.<BR>
+AcutorStatus class calls MouseAction() function in ActorStatusElement when some mouse operation is detected.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void DisableMouseAction()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function disables the function-call to MouseAction() function from ActorStatus.<BR>
+AcutorStatus class does not call MouseAction() function in ActorStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>BOOL GetMouseActionFlag()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the status regarding the function-call from ActorStatus to MouseAction function.<BR>
+The status shows enable or disable.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+BOOL: (TRUE: enable, FALSE: disable)<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetActorPos(int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Sets the position of the actor.<BR>
+The position is not meaning the position of active reverse screen area or window/client area.<BR>
+It is depending on the user definition how the position is used.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: horizontal position<BR>
+int: vertical position<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorPosX()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the horizontal position of the actor.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: horizontal position of the actor<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorPosY()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the vertical position of the actor.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: vertical position of the actor<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetActorRect(int, int, int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Sets the area of the actor.<BR>
+When we do some mouse operations in the area,<BR>
+MouseAction() function is called.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: bottom of the area<BR>
+int: top of the area<BR>
+int: right of the area<BR>
+int: left of the area<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorRectBottom()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the bottom position of the area.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: bottom position of the area<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorRectTop()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the top position of the area.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: top position of the area<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorRectRight()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the right position of the area.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: right position of the area<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorRectLeft()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Returns the left position of the area.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: left position of the area<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>virtual void Action(ActorStatusElement**, int*, GameStatus*)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+ActorStatus calls this function frequently.<BR>
+We need to define the behavirs of the actor in this function.<BR>
+In order to pass the information of ActorStatusElement (like position/area) to GameStatusElement.<BR>
+ (1) Get GameStatusElement instance from GameStatus (input parameter).<BR>
+ (2) Call AddRequest function in GameStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+ActorStatusElement**: Pointer to the array which contains the ActorStatusElements.<BR>
+int*: Pointer to the count of the array elements<BR>
+GameStatus*: Pointer to the GameStatus<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>virtual BOOL MouseAction(GameStatus*, int, int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+ActorStatus calls this function when it detects some mouse operations on the area of ActorStatusElement(icon) on window.<BR>
+We need to define the behavirs of the actor in this function when user does the mouse operation about the actor.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+GameStatus*: Pointer to the GameStatus<BR>
+int: x position of the mouse operation<BR>
+int: y position of the mouse operation<BR>
+int: type of the mouse operation (Refer to the section of ActorStatus class)<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+BOOL: (TRUE: MouseAction() function of next ActorStatusElement is processed, FALSE: Next MouseAction() function is not processed.)<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+</BODY>

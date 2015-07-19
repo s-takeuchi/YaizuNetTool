@@ -1,0 +1,159 @@
+stklib-Office
+
+-------------------------------------------------------------------------------
+1. stklib-Office概要
+    stklib-Officeはstklibの一つの実現形態であり，以下の特徴を持つ。
+      - 描画領域内の一つまたは複数のアイコンをマウスで選択できる
+      - 選択した一つまたは複数のアイコンを描画領域内で移動できる
+      - アイコンを右クリックしてポップアップメニューを表示～選択できる
+
+    stklib-Officeは以下の3つのクラスで構成される。
+      - OfficeGSE
+      - OfficeASE
+      - OfficeManagerASE
+
+    ユーザーはこの3つのクラスの派生クラスを作成し，幾つかの関数をオーバーライド
+    することにより，上記特徴を持つアプリケーションを容易に作成することができる。
+
+--------------------------------------------------------------------------------
+2. OfficeGSE
+  2.1 OfficeGSEの特徴
+    GameStatusElementからの派生クラス。stklib-Officeが提供する機能のうち，画面
+    描画に関係する機能をOfficeGSEが受け持つ。
+    画面描画に関係する機能はさらに以下の3種類に分類することができる。
+      - アイコンの描画
+      - 選択矩形の描画
+      - 背景の描画
+
+    (1) アイコンの描画
+      OfficeGSE::DrawOfficeASE()が受け持つ機能。
+      OfficeASEのAction()で投入されたActorRequestの内容に基づいてアイコンを描
+      画する。ActorRequestにはアイコン矩形の座標やID，状態が含まれている。
+      ActorRequestで渡されるIDに対応するアイコンを表示する場合，OfficeGSE::
+      DrawOfficeASE()をオーバーライドし，IDに応じてアイコンを切り替えて表示する
+      処理を追加する。
+
+    (2) 選択矩形の描画
+      OfficeGSE::DrawOfficeManagerASE()が受け持つ機能。
+      OfficeManagerASEのAction()で投入されたActorRequestの内容に基づいて
+      アイコンを描画する。ActorRequestには選択矩形の座標が含まれている。
+      選択矩形のデザインを変更したい場合，この関数をオーバーライドする必要が
+      ある。
+
+    (3) 背景の描画
+      OfficeGSE::DrawBackground()が受け持つ機能。
+      背景を描画する。デフォルトでは，灰色の下地に白の点線のマス目を描画する。
+      背景のデザインを変更したい場合，この関数をオーバーライドする必要がある。
+
+  2.2 OfficeGSEの派生クラスを作成する際の注意点
+    OfficeGSEの派生クラスは，RefreshScreenProcess()をオーバーライドしては
+    いけない。OfficeGSEを特徴付ける処理の大部分は，
+    OfficeGSE::RefreshScreenProcess()で定義されているため，本関数をオーバー
+    ライドするとOfficeGSEの利点は得られなくなる。
+
+--------------------------------------------------------------------------------
+3. OfficeASE
+  3.1 OfficeASEの特徴
+    ActorStatusElementからの派生クラスで以下のアイコンの振る舞いを決定する。
+      - ActorStatusからの定期呼び出し時の振る舞い
+      - マウス右クリック時のメニュー表示およびメニュー選択時の振る舞い
+      - マウス左ダブルクリック時の振る舞い
+
+    (1) ActorStatusからの定期呼び出し時の振る舞い
+      OfficeASE::Action()で定義する振る舞い。
+      デフォルトでは，OfficeASE（アイコン）の領域の座標やID，状態をAddRequest
+      でOfficeGSEに通知する。
+
+        GameStatusElement *gse = gs->GetGameStatusElement(gs->GetGameStatus());
+        gse->AddRequest(m_Selection,
+            m_Id, ActorRequest::IGNORE_SAME_REQ_SAME_ACTOR, 
+            _T(""), _T(""),
+            m_y + m_bottom, m_y + m_top, m_x + m_right, m_x + m_left);
+
+      AddRequest()で通知する情報を変更する場合は，OfficeGSE::DrawOfficeASE()を
+      オーバーライドし，DrawOfficeASE()の処理を変更する必要がある。
+
+    (2) マウス右クリック時のメニュー表示およびメニュー選択時の振る舞い
+      OfficeASE::PopupMenuInit()で定義するマウス右クリック時の振る舞い。
+      OfficeASE::PopupMenuAction()で定義する振る舞い。
+      ユーザーがアイコン上でマウス右クリックするとPopupMenuInit()が呼ばれる。
+      ユーザーがこのポップアップメニューのある項目を選択すると，
+      選択した項目の通し番号を引数にしてPopupMenuAction()が呼ばれる。
+      ユーザープログラムでは，PopupMenuInit()およびPopupMenuAction()を
+      オーバーライドすることにより，アイコン右クリック時のメニュー選択および
+      選択時の処理を定義できる。
+
+    (3) マウス左ダブルクリック時の振る舞い
+      OfficeASE::DoubleClickAction()で定義する振る舞い。
+      マウス左ダブルクリック時にOfficeASE::DoubleClickAction()が呼び出されるよう
+      にするためにはWindowクラスのstyleにCS_DBLCLKSを指定する必要がある。
+
+  3.2 OfficeASEの派生クラスを作成する際の注意点
+    OfficeASEの派生クラスは，MouseAction()をオーバーライドしてはいけない。
+    OfficeASEを特徴付ける処理の大部分は，OfficeASE::MouseAction()で定義されてい
+    るため，本関数をオーバーライドするとOfficeASEの利点は得られなくなる。
+
+  3.3 OfficeASEのインスタンスに付与するIDについて
+    OfficeASEはActorStatusElementの派生クラスとなるため，SetId()で各インスタン
+    スにIDを付与することができる。
+    OfficeASEおよびその派生クラスのインスタンスに付与するIDは，2100以上，
+    3999以下でなければならない。この範囲を外れる場合，アイコンが適切に表示され
+    ないおそれがある。
+
+--------------------------------------------------------------------------------
+4. OfficeManagerASE
+  4.1 OfficeManagerASEの特徴
+    ActorStatusElementからの派生クラスで以下の振る舞いを決定する。
+      - 各アイコンの選択と移動の振る舞い
+      - 背景のマウス右クリック時のメニュー表示およびメニュー選択時の振る舞い
+
+    (1) 各アイコンの選択と移動の振る舞い
+      各アイコンの選択と移動の振る舞いがAction(), MouseAction()で定義されて
+      いる。
+
+    (2) 背景のマウス右クリック時のメニュー表示およびメニュー選択時の振る舞い
+      OfficeASE::PopupMenuInit()で定義するマウス右クリック時の振る舞い。
+      OfficeASE::PopupMenuAction()で定義する振る舞い。
+      ユーザーがアイコン上でマウス右クリックするとPopupMenuInit()が呼ばれる。
+      ユーザーがこのポップアップメニューのある項目を選択すると，
+      選択した項目の通し番号を引数にしてPopupMenuAction()が呼ばれる。
+      ユーザープログラムでは，PopupMenuInit()およびPopupMenuAction()を
+      オーバーライドすることにより，アイコン右クリック時のメニュー選択および
+      選択時の処理を定義できる。
+
+  4.2 OfficeManagerASEの派生クラスを作成するときの注意点
+    OfficeManagerASEの派生クラスは，以下の関数をオーバーライドしてはいけない。
+    OfficeManagerASE::Action()
+    OfficeManagerASE::MouseAction()
+    OfficeASEを特徴付ける処理の大部分は，OfficeASE::MouseAction(), Action()で
+    定義されているため，本関数をオーバーライドするとOfficeASEの利点は得られなく
+    なる。
+    OfficeManagerASEの派生クラス固有の挙動を定義するには，ManagerAction()を
+    オーバーライドする。
+
+  4.3 ManagerOfficeASEのインスタンスに付与するIDについて
+    OfficeASEはActorStatusElementの派生クラスとなるため，SetId()で各インスタン
+    スにIDを付与することができる。
+    OfficeManagerASEおよびその派生クラスのインスタンスに付与するIDとして2000
+    を設定する。
+
+  4.4 ActorStatusのキューにOfficeManagerASEを追加するときの注意点
+    ActorStatusのキューにOfficeManagerASEインスタンスを追加するときは，全ての
+    OfficeASEより先にキューに登録する必要がある。
+
+--------------------------------------------------------------------------------
+5. 性能評価
+  5.1 評価環境
+    32x32ピクセルのアイコン（各アイコン下に10文字のテキストを表示，画面中央へ向
+    かう直線２本）を768個ウィンドウ上に表示させ，選択および移動操作を行った。
+    評価に用いた環境は以下の通り。
+        OS:  Windows XP Home Japanese
+        CPU: Pentium 4  2.8GHz
+        Mem: 3GB
+
+  5.2 評価結果
+    マウス操作（移動やプルダウンメニュー表示）で若干の挙動の遅延が見られる
+    ものの，リフレッシュ間隔は約200msecであり（設定 = 6msec），十分実用に耐え
+    る性能と評価する。
+    ただしタスクマネージャのCPU使用率は常に50%を超えている。
+

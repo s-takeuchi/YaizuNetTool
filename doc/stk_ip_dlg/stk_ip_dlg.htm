@@ -1,0 +1,50 @@
+﻿<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>stk_ip_dlg</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stk_ip_dlg</H1><BR>
+This library provides a dialog box for registring IP addresses.<BR>
+Notice:<BR>
+- This program can manage up to 11 network adapters. In case of more than 11 adapters exist,
+first 11 found adapters are managed.<BR>
+- If specified IP address for addition has already been registered in the target adapter,
+registering process of the address is ignored.<BR>
+- If specified IP address for removal has already been removed from the target adapter,
+removing process of the address is ignored.<BR>
+<P>
+本ウィザードは，対象となるオペレーティングシステムの種類に応じて処理を切り替えている。<BR>
+<TABLE BORDER="1">
+<TR><TD>Windows 2000 Professional</TD><TD>IP Helper APIを用いてIPアドレスの追加／削除を行う。
+このため，本ウィザードで行った変更は，オペレーティングシステムをシャットダウンするまで有効となる。
+オペレーティングシステム再起動後，本ウィザードで行った変更はもとにもどる。</TD></TR>
+<TR><TD>Windows XP Professional<BR>Windows Vista Business</TD><TD>netshコマンドを用いてIPアドレスの
+追加／削除を行う。オペレーティングシステム再起動後も，本ウィザードで行った変更は維持される。</TD></TR>
+</TABLE>
+<P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>__declspec(dllimport) void ShowStkIpDlg(HWND)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Shows the dialog box for registring IP addresses.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>HWND: Window handler. Specify NULL if no parent exists.</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+</BODY>

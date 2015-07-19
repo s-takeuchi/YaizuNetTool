@@ -1,0 +1,458 @@
+<HEAD>
+<TITLE>stklib - ActorRequest</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stklib - ActorRequest</H1><BR>
+This class is used for the communication between ActorStatusElement and GameStatusElement.<BR>
+ActorRequest mainly contains following parameters.<BR>
+- 4 integer parameters<BR>
+- 2 string parameters<BR>
+<P>
+ActorStatusElement can sets itsown status into the parameters of ActorRequest.<BR>
+And ActorStatusElement can post the ActorRequest instance into GameStatusElement
+in order to inform the status of ActorStatusElement.<BR>
+<P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetRequest()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the request code.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Request code</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetRequest(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the request code.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Request code</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorId()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the actor ID.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Actor ID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetActorId(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the actor ID.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Actor ID</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetRequestType()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the request type.<BR>
+One of the following values can be returned.<P>
+ActorRequest::NORMAL (0)<BR>
+ActorRequest::SYNCHRO (10)<BR>
+ActorRequest::IGNORE_SAME_REQ_SAME_ACTOR (100)<BR>
+ActorRequest::IGNORE_SAME_REQ (101)<BR>
+ActorRequest::IGNORE_SAME_ACTOR (102)<BR>
+ActorRequest::OVERWRITE_SAME_REQ_SAME_ACTOR (200)<BR>
+ActorRequest::OVERWRITE_SAME_REQ (201)<BR>
+ActorRequest::OVERWRITE_SAME_ACTOR (202)<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Request type</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetRequestType(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the request type.<BR>
+One of the following values can be set.<P>
+
+ActorRequest::NORMAL (0)<BR>
+Normal Request<P>
+ActorRequest::IGNORE_SAME_REQ_SAME_ACTOR (100)<BR>
+The request which has same request ID and same actor ID can not be registered into GameStatusElement.<P>
+ActorRequest::IGNORE_SAME_REQ (101)<BR>
+The request which has same request ID can not be registered into GameStatusElement.<P>
+ActorRequest::IGNORE_SAME_ACTOR (102)<BR>
+The request which has same actor ID can not be registered into GameStatusElement.<P>
+ActorRequest::OVERWRITE_SAME_REQ_SAME_ACTOR (200)<BR>
+The request is overwritten on the existing request which has same request ID and same actor ID in GameStatusElement.<P>
+ActorRequest::OVERWRITE_SAME_REQ (201)<BR>
+The request is overwritten on the existing request which has same request ID in GameStatusElement.<P>
+ActorRequest::OVERWRITE_SAME_ACTOR (202)<BR>
+The request is overwritten on the existing request which has same actor ID in GameStatusElement.<P>
+
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Request type</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetStringParam1()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the string parameter #1.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: String parameter #1</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetStringParam1(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the string parameter #1.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: String parameter #1</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetStringParam2()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the string parameter #2.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: String parameter #2</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetStringParam2(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the string parameter #2.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: String parameter #2</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetIntParam1()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the integer parameter #1.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Integer parameter #1</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetIntParam1(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the integer parameter #1.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Integer parameter #1</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetIntParam2()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the integer parameter #2.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Integer parameter #2</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetIntParam2(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the integer parameter #2.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Integer parameter #2</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetIntParam3()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the integer parameter #3.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Integer parameter #3</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetIntParam3(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the integer parameter #3.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Integer parameter #3</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetIntParam4()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the integer parameter #4.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>int: Integer parameter #4</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetIntParam4(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the integer parameter #4.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>int: Integer parameter #4</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>void</TD>
+</TR>
+</TABLE>
+<P>
+
+
+</BODY>

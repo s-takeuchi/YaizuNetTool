@@ -1,0 +1,34 @@
+﻿<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" href="./style.css" type="text/css">
+</HEAD>
+
+<BODY>
+<div id="container">
+<H1>B. ホットキー押下時の処理</H1>
+
+StkFwのメインコンソールにフォーカスをあて，下記のキーを押下することにより，押下した
+キーに対応する処理を実行します。<BR>
+<TABLE BORDER="1">
+<TR><TD>[Ctrl]+[SHIFT]+[0]</TD><TD>Propertyテーブル（リポジトリデータ）のViewElement, LinkInfo, MaxLink, DbVersion, 
+Workspace, MaxId, MaxVarId, RefreshIntervalレコードを初期化</TD></TR>
+<TR><TD>[Ctrl]+[SHIFT]+[2]</TD><TD>リポジトリデータの変更をビューに反映</TD></TR>
+<TR><TD>[Ctrl]+[SHIFT]+[3]</TD><TD>ビューの変更をリポジトリデータに反映</TD></TR>
+<TR><TD>[Ctrl]+[SHIFT]+[9]</TD><TD>Runtime情報の表示</TD></TR>
+</TABLE><P>
+スレッドコントローラで実行系要素の処理を実行中の場合，
+または実行系要素／データ系要素のプロパティが開かれている場合，
+上記処理のうち一部が制限されます。<BR>
+<TABLE BORDER="1">
+<TR><TD>Propertyテーブル（リポジトリデータ）のViewElement, LinkInfo, MaxLink, DbVersion, 
+Workspace, MaxId, MaxVarId, RefreshIntervalレコードを初期化</TD><TD>制限なし</TD></TR>
+<TR><TD>リポジトリデータの変更をビューに反映</TD><TD>エラーが発生する</TD></TR>
+<TR><TD>ビューの変更をリポジトリデータに反映</TD><TD>エラーが発生する</TD></TR>
+<TR><TD>Runtime情報の表示</TD><TD>制限なし</TD></TR>
+</TABLE><P>
+ホットキー押下時の処理はユーザー非公開事項とし，StkFwのマニュアルでは一切言及しません。
+<P>
+
+</div>
+</BODY>

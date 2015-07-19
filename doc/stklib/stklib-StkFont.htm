@@ -1,0 +1,513 @@
+<HEAD>
+<TITLE>stklib - StkFont</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stklib - StkFont</H1><BR>
+This class provides text output functions.<BR>
+The class adapts 2 types of font.<BR>
+The 1st font is StkFont. This is original font of stklib. And it uses drawing line functions of GDC.<BR>
+Another font is Arial. This font has already been contained into the system.<BR>
+<P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>static StkFont* GetInstance()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function returns the pointer to StkFont instance.<BR>
+StkFont is developed based on the singleton model.<BR>
+Hence, You need to call this function before you call other functions of StkFont.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>StkFont*: Pointer to StkFont instance</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontTinyTextOut(HDC, int, int, LPCTSTR, COLORREF)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with tiny size of StkFont.<BR>
+Following character can be specified.<BR>
+'0'-'9', 'A'-'Z'(Uppercase), ".,:;+-*/()?@&", Space, '\n'<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontSmallTextOut(HDC, int, int, LPCTSTR, COLORREF)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with small size of StkFont.<BR>
+Following character can be specified.<BR>
+'0'-'9', 'A'-'Z'(Uppercase), ".,:;+-*/()?@&", Space, '\n'<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontMediumTextOut(HDC, int, int, LPCTSTR, COLORREF)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with medium size of StkFont.<BR>
+Following character can be specified.<BR>
+'0'-'9', 'A'-'Z'(Uppercase), ".,:;+-*/()?@&", Space, '\n'<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontLargeTextOut(HDC, int, int, LPCTSTR, COLORREF)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with large size of StkFont.<BR>
+Following character can be specified.<BR>
+'0'-'9', 'A'-'Z'(Uppercase), ".,:;+-*/()?@&", Space, '\n'<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ArialFontTinyTextOut(HDC, int, int, LPCTSTR, COLORREF, BOOL)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with tiny size of Arial Font.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+BOOL: Centerize flag
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ArialFontSmallTextOut(HDC, int, int, LPCTSTR, COLORREF, BOOL)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with small size of Arial Font.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+BOOL: Centerize flag
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ArialFontMediumTextOut(HDC, int, int, LPCTSTR, COLORREF, BOOL)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with medium size of Arial Font.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+BOOL: Centerize flag
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ArialFontLargeTextOut(HDC, int, int, LPCTSTR, COLORREF, BOOL)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function writes the specified text with large size of Arial Font.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position in the device context<BR>
+int: y-position in the device context<BR>
+LPCTSTR: Text which is written<BR>
+COLORREF: Color of the text
+BOOL: Centerize flag
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontScrollTextOut(HDC, int, int, int, COLORREF)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function puts a scrolling text on the specified device context.<BR>
+The scrolling text process changes the start line of showing lines frequently.<BR>
+In order to show the scrolling lines smoothly the program which uses this function need to call
+the function in 50 milli second.<BR>
+If the program does not call the function frequently, lines are not scrolled.<BR>
+The lines need to be registered using StkFontAddScrollText function.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HDC: Handle of device context<BR>
+int: x-position of scrolling text in the device context<BR>
+int: y-position of scrolling text in the device context<BR>
+int: Number of lines which the function displays. 2 or more lines must be specified.
+In case of less than 2, no lines are displayed.<BR>
+COLORREF: Color of the text
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontClearScrollText()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function clears the lines which were registered using StkFontAddScrollText function.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StkFontAddScrollText(LPTSTR str)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function registers the lines of scrolling text.<BR>
+The program which uses this function can register up to 256 lines.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+LPTSTR: A line which is registered as scrolling text.<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>VOID</TD>
+</TR>
+</TABLE>
+<P>
+
+
+sample.cpp<BR>
+<TABLE BORDER="0" BGCOLOR="#A0A0A0"><TR><TD>
+<PRE><CODE>
+
+#include "windows.h"
+#include "tchar.h"
+#include "StkFont.h"
+
+TCHAR szTitle[32];
+TCHAR szWindowClass[32];
+
+ATOM MyRegisterClass( HINSTANCE hInstance);
+BOOL InitInstance( HINSTANCE, int);
+LRESULT CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK RefreshScreen(HWND, UINT, UINT, DWORD);
+
+LRESULT CALLBACK RefreshScreen(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime)
+{
+	RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
+	return TRUE;
+}
+
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	MSG msg;
+
+	lstrcpy(szTitle, _T("Sample"));
+	lstrcpy(szWindowClass, _T("Sample"));
+
+	MyRegisterClass(hInstance);
+
+	if (!InitInstance(hInstance, nCmdShow)) {
+		return FALSE;
+	}
+
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return 0;
+}
+
+ATOM MyRegisterClass(HINSTANCE hInstance)
+{
+	WNDCLASSEX wcex;
+
+	wcex.cbSize        = sizeof(WNDCLASSEX); 
+	wcex.style         = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc   = (WNDPROC)WndProc;
+	wcex.cbClsExtra    = 0;
+	wcex.cbWndExtra    = 0;
+	wcex.hInstance     = hInstance;
+	wcex.hIcon         = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
+	wcex.hIconSm       = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
+	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
+	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+	wcex.lpszMenuName  = szWindowClass;
+	wcex.lpszClassName = szWindowClass;
+
+	return RegisterClassEx(&wcex);
+}
+
+BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+{
+	HWND hWnd;
+
+	hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPED | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX,
+		CW_USEDEFAULT, 0, 600, 400, NULL, NULL, hInstance, NULL);
+
+	if(!hWnd) {
+		return FALSE;
+	}
+
+	ShowWindow(hWnd, nCmdShow);
+	UpdateWindow(hWnd);
+
+	UINT_PTR m_timerId = SetTimer(hWnd, (UINT_PTR)1975, 300, (TIMERPROC)RefreshScreen);
+
+	return TRUE;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message) {
+	case WM_COMMAND:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	case WM_PAINT:
+		{
+			StkFont* SFont = StkFont::GetInstance();
+
+			static BOOL IniFlag = TRUE;
+			if (IniFlag == TRUE) {
+				SFont->StkFontClearScrollText();
+				SFont->StkFontAddScrollText(_T("Yaizu city, Shizuoka Pref."));
+				SFont->StkFontAddScrollText(_T("Numazu city, Shizuoka Pref."));
+				SFont->StkFontAddScrollText(_T("Tatsunokuchi-machi, Ishikawa Pref."));
+				SFont->StkFontAddScrollText(_T("Izumi-ku 1 Yokohama city, Kanagawa Pref."));
+				SFont->StkFontAddScrollText(_T("Izumi-ku 2 Yokohama city, Kanagawa Pref."));
+				SFont->StkFontAddScrollText(_T("Kanagawa-ku Yokohama city, Kanagawa Pref."));
+				SFont->StkFontAddScrollText(_T("Izumi-ku 3 Yokohama city, Kanagawa Pref."));
+				SFont->StkFontAddScrollText(_T("Fujisawa city, Kanagawa Pref."));
+				IniFlag = FALSE;
+			}
+
+			PAINTSTRUCT PaintSt;
+			HDC SFontDC = BeginPaint(hWnd, &PaintSt);
+
+			RECT rt;
+			rt.right = 600;
+			rt.left = 0;
+			rt.top = 0;
+			rt.bottom = 400;
+			HBRUSH b = CreateSolidBrush(RGB(0, 0, 0));
+			SelectObject(SFontDC, b);
+			FillRect(SFontDC, &rt, b);
+			DeleteObject(b);
+
+			SFont->StkFontTinyTextOut(SFontDC, 20, 20, _T("THIS IS TINY TEXT."), RGB(255, 0, 0));
+			SFont->StkFontSmallTextOut(SFontDC, 20, 30, _T("THIS IS SMALL TEXT."), RGB(255, 0, 0));
+			SFont->StkFontMediumTextOut(SFontDC, 20, 50, _T("THIS IS MEDIUM TEXT."), RGB(255, 0, 0));
+			SFont->StkFontLargeTextOut(SFontDC, 20, 80, _T("THIS IS LARGE TEXT."), RGB(255, 0, 0));
+			SFont->ArialFontTinyTextOut(SFontDC, 20, 170, _T("THIS IS TINY TEXT."), RGB(0, 255, 0));
+			SFont->ArialFontSmallTextOut(SFontDC, 20, 180, _T("THIS IS SMALL TEXT."), RGB(0, 255, 0));
+			SFont->ArialFontMediumTextOut(SFontDC, 20, 200, _T("THIS IS MEDIUM TEXT."), RGB(0, 255, 0));
+			SFont->ArialFontLargeTextOut(SFontDC, 20, 230, _T("THIS IS LARGE TEXT."), RGB(0, 255, 0));
+
+			SFont->StkFontScrollTextOut(SFontDC, 20, 300, 4, RGB(255, 255, 255));
+
+			EndPaint(hWnd, &PaintSt);
+		}
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
+}
+
+</CODE></PRE>
+</TD></TR></TABLE>
+
+</BODY>

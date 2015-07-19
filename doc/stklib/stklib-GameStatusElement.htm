@@ -1,0 +1,636 @@
+<HEAD>
+<TITLE>stklib - GameStatusElement</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stklib - GameStatusElement</H1><BR>
+This class is a element of GameStatus class.<BR>
+The class mainly provides the functions shown below.<BR>
+- Control of the refresh screen interval<BR>
+- Process of the request of ActorRequest, and draw the screen based on the request<BR>
+- Control of the window size and draw area<BR>
+<P>
+
+GameStatus class can contain some GameStatusElements.<BR>
+However, we can not active multiple GameStatusElements in the same time.<BR>
+Active GameStatusElement can be choosen by game status ID which is defined in GameStatus class.<BR>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetRefreshInterval(long)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the refresh interval of the screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+long: Refresh screen interval (millisecond)
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>long GetRefreshInterval()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get the refresh interval of the screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+long: Refresh screen interval (millisecond)
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetCurrentWindowSize(int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the current window size.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Horizontal size of the current window<BR>
+int: Vertical size of the current window<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetCurrentWindowSizeX()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get horizontal size of the current window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Horizontal size of the current window
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetCurrentWindowSizeY()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get vertical size of the current window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Vertical size of the current window
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetMaxWindowSize(int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the max size of the window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Max horizontal size of the window<BR>
+int: Max vertical size of the window<BR>
+<P>
+[Tips]<BR>
+If scroll bar is enabled and we want to adjust the window size to active reverse screen size,<BR>
+Following function-call has to be invoked.<BR>
+<P>
+pGameStatusElement->SetMaxWindowSize(Gs.ChangeClientToWindowX(Width, TRUE), Gs.ChangeClientToWindowY(Height, TURE));<BR>
+pGameStatusElement->SetActiveReverseScreen(0, 0, Width, Height);<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetMaxWindowSizeX()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get max horizontal size of the window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Max horizontal size of the window
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetMaxWindowSizeY()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get max vertical size of the window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Max vertical size of the current window
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetMinWindowSize(int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the min size of the window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Min horizontal size of the window<BR>
+int: Min vertical size of the window<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetMinWindowSizeX()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get min horizontal size of the window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Min horizontal size of the window
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetMinWindowSizeY()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get min vertical size of the window.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Min vertical size of the current window
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetActiveReverseScreen(int, int, int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Set the area of the active reserve screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: left position<BR>
+int: top position<BR>
+int: right position<BR>
+int: bottom position<BR>
+<P>
+The horizontal size (right - left) needs to be set as lower value of 1st parameter of GameStatus.CreateReverseScreen().<BR>
+The vertical size (bottom - top) needs to be set as lower value of 2nd parameter of GameStatus.CreateReverseScreen().<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActiveReverseScreenRight()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get right position of the active reserve screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: right position of the active reserve screen
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActiveReverseScreenLeft()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get left position of the active reserve screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: left position of the active reserve screen
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActiveReverseScreenTop()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get top position of the active reserve screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: top position of the active reserve screen
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActiveReverseScreenBottom()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Get bottom position of the active reserve screen.
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: bottom position of the active reserve screen
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void EnableScrollBar()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function enables the scroll bar on the window.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void DisableScrollBar()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function disables the scroll bar.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>BOOL GetScrollBarFlag()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function returns the flag of the scroll bar status.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+BOOL: (TRUE:Enable, FALSE:Disable)<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void AddRequest(int, int, int, LPTSTR, LPTSTR, int, int, int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+GameStatusElement class contains ActorRequest queue.<BR>
+This function makes a ActorRequest instance from the input parameters,
+and registers it into ActorRequest queue.<BR>
+Maximum 1000 ActorRequests can be added into the queue.<BR>
+If the number of the ActorRequests in the queue exceeds the upper limit of the queue, ActorStatus
+which are exceeded are ignored.<P>
+ActorRequest and its queue are used as the messaging mechanism between ActorStatusElement and
+GameStatusElement.<BR>Ordinarily the ActorRequest in the queue is pulled in action() of GameStatusElement,
+and the information is used for displaying the icon regarding the ActorStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Request code<BR>
+int: Actor ID<BR>
+int: Request type<BR>
+LPTSTR: String parameter 1<BR>
+LPTSTR: String parameter 2<BR>
+int: Integer parameter 1<BR>
+int: Integer parameter 2<BR>
+int: Integer parameter 3<BR>
+int: Integer parameter 4<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ClearRequest()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function clears the ActorRequest queue.<BR>
+After we call this function, all of elements in the queue are removed.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>virtual void RefreshScreenProcess(HINSTANCE, HWND, HDC)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function is called from GameStatus class frequently.<BR>
+Sub class of GameStatusElement needs to be implemented the drawing process in this function.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HINSTANCE: Instance handler<BR>
+HWND: Window handler<BR>
+HDC: Handle of device context<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+</BODY>

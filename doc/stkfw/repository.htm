@@ -1,0 +1,734 @@
+﻿<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" href="./style.css" type="text/css">
+</HEAD>
+
+<BODY>
+
+<style type="text/css">
+<!--
+.spc { margin-left: 2em; margin-right: 0em; }
+-->
+</style>
+
+<div id="container">
+<H1>A. リポジトリデータについて</H1>
+
+<H2 ID="A1">A.1 リポジトリデータとは</H2>
+StkFwは画面に出力されるアイコンの情報や変数の値を，リポジトリ管理プログラム(StkData)を介して管理します。<BR>
+StkDataはリポジトリの全てのデータをメモリ中に展開して管理します。StkDataはStkData利用プログラム（上位プログラム：StkFw）
+からファイルへの入出力要求があったときのみメモリ中のデータをファイルに書き込む，またはファイルからメモリ中にデータを
+読込みます。このため，ファイルへの書き込みをしないままStkDataが動作するプロセス(StkFw)を終了すると，メモリ中
+に展開されている全てのデータは失われます。
+リポジトリデータは通常"*.std"というファイルに書き込まれます。<BR>
+デフォルトリポジトリデータはStkFw起動時に自動的にメモリに展開されるデータを指します。
+メモリ中に展開されるデータは"default.std"というファイルに書き込まれているデータとなります。
+※StkFwが起動時にdefault.stdを読み込む仕組みは，バージョン1.4.0で廃止されました。
+<P>
+
+<H2 ID="A2">A.2 StkFwの動作に必要なテーブル</H2>
+StkFwが適切に動作するためには，すくなくとも以下のテーブルを事前に作成しておかなければなりません。<P>
+StkFwの動作に必須のテーブル<BR>
+<TABLE BORDER="1">
+<TR><TD>Propertyテーブル</TD><TD>
+StkFwの動作に必要な各種設定情報を格納します。主な設定情報としては下記のものがあります。<BR>
+・実行系要素，データ系要素の定義<BR>
+・各実行系要素／データ系要素間のリンクの定義<BR>
+・メインコンソールのサイズ<BR>
+</TD></TR>
+<TR><TD>ViewElementテーブル</TD><TD>
+実行系要素，データ系要素の表示情報を格納します。（Propertyテーブルの実行系要素，データ系要素の定義を
+もとに生成する各要素の実体を格納します。）
+</TD></TR>
+<TR><TD>ElementInfo</TD><TD>
+各実行系要素／データ系要素のプロパティ編集ダイアログで設定した情報を格納します。
+</TD></TR>
+<TR><TD>Variable</TD><TD>
+コミュニケーション用変数，フラグ変数の基本情報（変数名，変数詳細）を格納します。
+</TD></TR>
+<TR><TD>VarCommDat</TD><TD>
+コミュニケーション用変数のデータを格納します。
+</TD></TR>
+</TABLE><P>
+
+
+<H2 ID="A3">A.3 ViewElement定義</H2>
+最大レコード数: 500<BR>
+メモリ確保量: 82000 Bytes<BR>
+<TABLE BORDER="1">
+<TR><TD>カラム名</TD><TD>カラム種別</TD><TD>説明</TD></TR>
+<TR><TD>Id</TD><TD>Integer</TD><TD>実行系要素／データ系要素のID（識別子）。レコード追加時にPropertyテーブルの
+Name="MaxId"となるレコードのValueInt1の値を設定します。レコード追加時に設定した値は後で変更する
+ことができません。最初に設定した値を使い続けてください。</TD></TR>
+<TR><TD>Name</TD><TD>WString(32)</TD><TD>名称</TD></TR>
+<TR><TD>Type</TD><TD>Integer</TD><TD>要素の種別。1～99の値を指定できます。<BR>PropertyテーブルのName="ViewElement"と
+なるレコードのValueInt1と一致する種別となります。</TD></TR>
+<TR><TD>Icon</TD><TD>Integer</TD><TD>アイコン種別。<BR>Type属性で関連付くPropertyテーブルのViewElementレコード
+（ValueInt2値）と異なるアイコンが設定されることを許します。</TD></TR>
+<TR><TD>x</TD><TD>Integer</TD><TD>実行系要素／データ系要素のアイコンのX(横)座標。
+メインコンソール左端が0となります。</TD></TR>
+<TR><TD>y</TD><TD>Integer</TD><TD>実行系要素／データ系要素のアイコンのY(縦)座標。
+メインコンソール上端が0となります。</TD></TR>
+<TR><TD>LinkId0</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [0番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp0</TD><TD>Integer</TD><TD>リンク種別 [0番目]。LinkId0が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId1</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [1番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp1</TD><TD>Integer</TD><TD>リンク種別 [1番目]。LinkId1が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId2</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [2番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp2</TD><TD>Integer</TD><TD>リンク種別 [2番目]。LinkId2が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId3</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [3番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp3</TD><TD>Integer</TD><TD>リンク種別 [3番目]。LinkId3が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId4</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [4番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp4</TD><TD>Integer</TD><TD>リンク種別 [4番目]。LinkId4が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId5</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [5番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp5</TD><TD>Integer</TD><TD>リンク種別 [5番目]。LinkId5が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId6</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [6番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp6</TD><TD>Integer</TD><TD>リンク種別 [6番目]。LinkId6が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId7</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [7番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp7</TD><TD>Integer</TD><TD>リンク種別 [7番目]。LinkId7が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId8</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [8番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp8</TD><TD>Integer</TD><TD>リンク種別 [8番目]。LinkId8が-1の場合不定値となります。</TD></TR>
+<TR><TD>LinkId9</TD><TD>Integer</TD><TD>リンク先実行系要素／データ系要素のId [9番目]。リンク未設定の場合-1を指定します。</TD></TR>
+<TR><TD>LinkTp9</TD><TD>Integer</TD><TD>リンク種別 [9番目]。LinkId9が-1の場合不定値となります。</TD></TR>
+</TABLE>
+<P>
+
+<H3>(1) リンク種別</H3>
+<TABLE BORDER="1">
+<TR><TD>101</TD><TD>102</TD><TD>103</TD></TR>
+<TR><TD>白-SOLID</TD><TD>白-DOT</TD><TD>白-DASH</TD></TR>
+<TR><TD>111</TD><TD>112</TD><TD>113</TD></TR>
+<TR><TD>赤-SOLID</TD><TD>赤-DOT</TD><TD>赤-DASH</TD></TR>
+<TR><TD>121</TD><TD>122</TD><TD>123</TD></TR>
+<TR><TD>緑-SOLID</TD><TD>緑-DOT</TD><TD>緑-DASH</TD></TR>
+<TR><TD>131</TD><TD>132</TD><TD>133</TD></TR>
+<TR><TD>青-SOLID</TD><TD>青-DOT</TD><TD>青-DASH</TD></TR>
+<TR><TD>141</TD><TD>142</TD><TD>143</TD></TR>
+<TR><TD>灰-SOLID</TD><TD>灰-DOT</TD><TD>灰-DASH</TD></TR>
+
+</TABLE>
+<P>
+
+<H3>(2) アイコン種別</H3>
+<TABLE BORDER="1">
+<TR><TD><IMG SRC="com01.gif"><BR>001</TD><TD><IMG SRC="com02.gif"><BR>002</TD><TD><IMG SRC="com03.gif"><BR>003</TD><TD><IMG SRC="com04.gif"><BR>004</TD><TD><IMG SRC="com05.gif"><BR>005</TD>
+    <TD><IMG SRC="com06.gif"><BR>006</TD><TD><IMG SRC="com07.gif"><BR>007</TD><TD><IMG SRC="com08.gif"><BR>008</TD><TD><IMG SRC="com09.gif"><BR>009</TD><TD><IMG SRC="com10.gif"><BR>010</TD></TR>
+<TR><TD><IMG SRC="com11.gif"><BR>011</TD><TD><IMG SRC="com12.gif"><BR>012</TD><TD><IMG SRC="com13.gif"><BR>013</TD><TD><IMG SRC="com14.gif"><BR>014</TD><TD><IMG SRC="com15.gif"><BR>015</TD>
+    <TD><IMG SRC="com16.gif"><BR>016</TD><TD><IMG SRC="com17.gif"><BR>017</TD><TD><IMG SRC="com18.gif"><BR>018</TD><TD><IMG SRC="com19.gif"><BR>019</TD><TD><IMG SRC="com20.gif"><BR>020</TD></TR>
+<TR><TD><IMG SRC="com21.gif"><BR>021</TD><TD><IMG SRC="com22.gif"><BR>022</TD><TD><IMG SRC="com23.gif"><BR>023</TD><TD><IMG SRC="com24.gif"><BR>024</TD><TD><IMG SRC="com25.gif"><BR>025</TD>
+    <TD><IMG SRC="com26.gif"><BR>026</TD><TD><IMG SRC="com27.gif"><BR>027</TD><TD><IMG SRC="com28.gif"><BR>028</TD><TD><IMG SRC="com29.gif"><BR>029</TD><TD><IMG SRC="com30.gif"><BR>030</TD></TR>
+<TR><TD><IMG SRC="com31.gif"><BR>031</TD><TD><IMG SRC="com32.gif"><BR>032</TD><TD><IMG SRC="com33.gif"><BR>033</TD><TD><IMG SRC="com34.gif"><BR>034</TD><TD><IMG SRC="com35.gif"><BR>035</TD>
+    <TD><IMG SRC="com36.gif"><BR>036</TD><TD><IMG SRC="com37.gif"><BR>037</TD><TD><IMG SRC="com38.gif"><BR>038</TD><TD><IMG SRC="com39.gif"><BR>039</TD><TD><IMG SRC="com40.gif"><BR>040</TD></TR>
+<TR><TD><IMG SRC="com41.gif"><BR>041</TD><TD><IMG SRC="com42.gif"><BR>042</TD><TD><IMG SRC="com43.gif"><BR>043</TD><TD><IMG SRC="com44.gif"><BR>044</TD><TD><IMG SRC="com45.gif"><BR>045</TD>
+    <TD><IMG SRC="com46.gif"><BR>046</TD><TD><IMG SRC="com47.gif"><BR>047</TD><TD><IMG SRC="com48.gif"><BR>048</TD><TD></TD><TD></TD></TR>
+<TR><TD><IMG SRC="com50.gif"><BR>050</TD><TD><IMG SRC="com51.gif"><BR>051</TD><TD><IMG SRC="com52.gif"><BR>052</TD><TD><IMG SRC="com53.gif"><BR>053</TD><TD><IMG SRC="com54.gif"><BR>054</TD>
+    <TD><IMG SRC="com55.gif"><BR>055</TD><TD><IMG SRC="com56.gif"><BR>056</TD><TD><IMG SRC="com60.gif"><BR>060</TD><TD><IMG SRC="com61.gif"><BR>061</TD><TD><IMG SRC="com62.gif"><BR>062</TD></TR>
+<tr><td><img src="com71.gif"><br>071</td><td><img src="com72.gif"><br>072</td><td><img src="com73.gif"><br>072</td></tr>
+</TABLE>
+<P>
+
+<H3>(3) リンク先要素のId，リンク種別に関する注意事項</H3>
+"LinkId*"(*は1桁の数値)で示されるリンク先実行系要素／データ系要素のIdおよび"LinkTp*"(*は1桁の数値)で示されるリンク種別は，
+StkFw実行後リンク先の情報が変わらない範囲で値が置き換わる可能性があります。例えば下記の値を持つ要素は，<BR>
+<div class=spc>
+LinkId0 = 20, LinkTp0 = 112<BR>
+LinkId1 = -1, LinkTp1 = 101<BR>
+LinkId2 = 22, LinkTp2 = 131<BR>
+</div>
+StkFw実行後下記のように，LinkId1, LinkTp1とLinkId2, LinkTp2の値が置き換わります。<BR>
+<div class=spc>
+LinkId0 = 20, LinkTp0 = 112<BR>
+LinkId1 = 22, LinkTp1 = 131<BR>
+LinkId2 = -1, LinkTp2 = 101<BR>
+</div>
+<P>
+"LinkId*"(*は1桁の数値)に実在しない実行系要素／データ系要素のIdを指定した場合，StkFw実行後"LinkId*"が-1に置き換わる
+可能性があります。
+<P>
+
+<H2 ID="A4">A.4 Property定義</H2>
+最大レコード数: 1000<BR>
+メモリ確保量: 1612000 Bytes<BR>
+<TABLE BORDER="1">
+<TR><TD>カラム名</TD><TD>カラム種別</TD><TD>説明</TD></TR>
+<TR><TD>Name</TD><TD>WString(32)</TD><TD>プロパティ名</TD></TR>
+<TR><TD>ValueInt1</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ValueInt2</TD><TD>Integer</TD><TD>整数値#2</TD></TR>
+<TR><TD>ValueInt3</TD><TD>Integer</TD><TD>整数値#3</TD></TR>
+<TR><TD>ValueStr1</TD><TD>WString(256)</TD><TD>文字列#1</TD></TR>
+<TR><TD>ValueStr2</TD><TD>WString(256)</TD><TD>文字列#2</TD></TR>
+<TR><TD>ValueStr3</TD><TD>WString(256)</TD><TD>文字列#3</TD></TR>
+</TABLE>
+<P>
+
+
+<H3>(1) Name属性値が"Workspace"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>作業領域（クライアント領域）の横サイズ(Pixel)</TD></TR>
+<TR><TD>ValueInt2</TD><TD>作業領域（クライアント領域）の縦サイズ(Pixel)</TD></TR>
+<TR><TD>ValueInt3</TD><TD>グリッド線の有効／無効フラグ。<BR>
+ValueInt3 == 8:有効, ValueInt3 != 8: 無効</TD></TR>
+</TABLE>
+<P>
+<H3>(2) Name属性値が"MaxId"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>現存のViewElementのIdの最大値+1となる値
+（次に追加するViewElementのIdとなります）。
+ViewElementが何も存在しない場合，
+この値は1となります。<BR>
+メインコンソールからの処理要素を追加することによりこの値は自動的にインクリメントします。
+</TD></TR>
+</TABLE>
+<P>
+<H3>(3) Name属性値が"RefreshInterval"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>スレッドコントローラで実行したときのメインコンソールのリフレッシュ間隔を
+ミリ秒で指定します。この属性を指定しない場合，1000ミリ秒がデフォルトとして設定されます。</TD></TR>
+</TABLE>
+<P>
+<H3>(4) Name属性値が"ViewElement"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>ViewElementの種別。1～99の値を指定できます。</TD></TR>
+<TR><TD>ValueInt2</TD><TD>ViewElementのアイコン種別</TD></TR>
+<TR><TD>ValueInt3</TD><TD>実行系要素かデータ系要素かを切り分けるフラグ。<BR>0:処理要素，1:実行可能処理要素<BR>
+実行可能処理要素の場合，スレッドコントローラのリスト領域に項目が表示されます。</TD></TR>
+<TR><TD>ValueStr1</TD><TD>ViewElementの種別名称</TD></TR>
+<TR><TD>ValueStr3</TD><TD>メインコンソール上の追加メニュー項目のカテゴリ。次の何れかの文字列を取りえます。<BR>
+空文字： 追加メニュー項目として表示しない。<br>
+空文字以外： 追加メニュー項目として表示する。文字列は追加メニュー項目のカテゴリ名称となる。<br>
+</TD></TR>
+</TABLE>
+<P>
+<H3>(5) Name属性値が"LinkInfo"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>リンク元ViewElementの種別</TD></TR>
+<TR><TD>ValueInt2</TD><TD>リンク先ViewElementの種別</TD></TR>
+<TR><TD>ValueInt3</TD><TD>最大リンク数</TD></TR>
+<TR><TD>ValueStr1</TD><TD>リンク種別</TD></TR>
+</TABLE>
+<P>
+
+<H3>(6) Name属性値が"MaxVarId"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>現存のVariableのIDの最大値となる値。次に追加する変数のIDは，この値+1となります。</TD></TR>
+</TABLE>
+<P>
+
+<H3>(7) Name属性値が"MaxLink"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>ViewElementの種別</TD></TR>
+<TR><TD>ValueInt2</TD><TD>設定可能なリンク接続先（種別非依存）の最大数</TD></TR>
+<TR><TD>ValueInt3</TD><TD>設定可能なリンク接続元（種別非依存）の最大数</TD></TR>
+</TABLE>
+<P>
+
+<h3>(8) Name属性値が"DbVersion"の場合</h3>
+<table border="1">
+<tr><td>ValueInt1</td><td>データベースのバージョン<br>
+1: StkFw 1.2.0が取り込むデータベースのバージョン<br>
+2: StkFw 1.3.0が取り込むデータベースのバージョン<br>
+3: StkFw 1.4.0が取り込みデータベースのバージョン<br>
+※ StkFw 1.1.0の場合，"DbVersion"を属性名とするレコードは存在しない。
+</td></tr>
+</table>
+<p>
+
+
+<H2 ID="A5">A.5 Variable定義</H2>
+最大レコード数: 1000<BR>
+メモリ確保量: 228000 Bytes<BR>
+<TABLE BORDER="1">
+<TR><TD>カラム名</TD><TD>カラム種別</TD><TD>説明</TD></TR>
+<TR><TD>ID</TD><TD>Integer</TD><TD>変数の識別子</TD></TR>
+<TR><TD>Name</TD><TD>WString(32)</TD><TD>変数名</TD></TR>
+<TR><TD>Desc</TD><TD>WString(64)</TD><TD>変数詳細</TD></TR>
+<TR><TD>Type</TD><TD>Integer</TD><TD>変数種別(0:コミュニケーション用変数, 1:フラグ用変数)</TD></TR>
+<TR><TD>Flag</TD><TD>Integer</TD><TD>フラグの値(0:FALSE, 1:TRUE)</TD></TR>
+<TR><TD>Size</TD><TD>Integer</TD><TD>変数のサイズ(フラグ用変数の場合0)</TD></TR>
+<TR><TD>UdTime</TD><TD>String(20)</TD><TD>変数の更新時刻</TD></TR>
+</TABLE>
+<P>
+
+<H2 ID="A6">A.6 VarCommDat定義</H2>
+最大レコード数: 10000<BR>
+メモリ確保量: 100080000 Bytes<BR>
+<TABLE BORDER="1">
+<TR><TD>カラム名</TD><TD>カラム種別</TD><TD>説明</TD></TR>
+<TR><TD>ID</TD><TD>Integer</TD><TD>変数の識別子</TD></TR>
+<TR><TD>Index</TD><TD>Integer</TD><TD>インデックス値</TD></TR>
+<TR><TD>CommDat</TD><TD>Binary(10000)</TD><TD>実データ</TD></TR>
+</TABLE>
+<P>
+
+<H2 ID="A7">A.7 ElementInfo定義</H2>
+最大レコード数: 500<BR>
+メモリ確保量: 2703000 Bytes<BR>
+<TABLE BORDER="1">
+<TR><TD>カラム名</TD><TD>カラム種別</TD><TD>説明</TD></TR>
+<TR><TD>Id</TD><TD>Integer</TD><TD>実行系要素／データ系要素のID（識別子）</TD></TR>
+<TR><TD>ParamInt1</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ParamInt2</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ParamInt3</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ParamInt4</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ParamInt5</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ParamStr1</TD><TD>WString(256)</TD><TD>文字列#1</TD></TR>
+<TR><TD>ParamStr2</TD><TD>WString(256)</TD><TD>文字列#2</TD></TR>
+<TR><TD>ParamStr3</TD><TD>WString(256)</TD><TD>文字列#3</TD></TR>
+<TR><TD>ParamStr4</TD><TD>WString(256)</TD><TD>文字列#4</TD></TR>
+<TR><TD>ParamStr5</TD><TD>WString(256)</TD><TD>文字列#5</TD></TR>
+<TR><TD>ParamBin</TD><TD>Binary(4096)</TD><TD>バイナリデータ</TD></TR>
+</TABLE>
+<P>
+<H3>(1) 対応する要素の種別が"TCP receiver"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>操作種別<BR>
+0: ホスト名/IPアドレス，ポート番号直接指定<BR>
+1: TCP senderの接続対象指定<BR>
+2: 他のTCP receiverを指定(Multi Accept)
+</TD></TR>
+<TR><TD>ParamInt2</TD><TD>TCP senderまたはTCP receiverのID (ParamInt1の値に依存)</TD></TR>
+<TR><TD>ParamInt3</TD><TD>ポート番号</TD></TR>
+<TR><TD>ParamInt4</TD><TD>データ受信後のソケットのクローズ有無<BR>(0: クローズしない, 1:クローズする(強制クローズ), 2:クローズする(接続先のシャットダウン／クローズを待つ))</TD></TR>
+<TR><TD>ParamInt5</TD><TD>次の処理要素に処理が移行する条件<br>
+0 : データ受信後無条件移行<br>
+1～180000 : データ受信後一定時間(ミリ秒）更なるデータ受信が無い場合移行<br>
+9999999 : 送信側ソケットがクローズされたときだけ次の処理要素に移る<br>
+10000001～19999999 : 指定したバイト数以上のデータを受信した場合移行(設定値=N: N - 10000000)<br>
+マイナス値 : 指定した文字列で終わるデータを受信した場合移行。比較の対象となるコミュニケーション用変数のIDのマイナス反転値。<br>
+</TD></TR>
+<TR><TD>ParamStr1</TD><TD>ホスト名/IPアドレス</TD></TR>
+<tr><td>ParamStr2</td><td>
+このパラメータは，ParamInt5が1～180000のときに有効になります。<br>
+空文字: データ未受信→次の処理要素に遷移しない<br>
+"PROCEED;": データ未受信→次の処理要素に遷移する<br>
+</td></tr>
+</TABLE>
+<P>
+<H3>(2) 対応する要素の種別が"TCP sender"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>操作種別<BR>0: ホスト名/IPアドレス，ポート番号直接指定<BR>1: TCP receiverの接続対象指定</TD></TR>
+<TR><TD>ParamInt2</TD><TD>TCP receiverのID</TD></TR>
+<TR><TD>ParamInt3</TD><TD>ポート番号</TD></TR>
+<TR><TD>ParamInt4</TD><TD>データ送信後のソケットのクローズ有無<BR>(0: クローズしない, 1:クローズする(強制クローズ), 2:クローズする(接続先のシャットダウン／クローズを待つ))</TD></TR>
+<TR><TD>ParamStr1</TD><TD>ホスト名/IPアドレス</TD></TR>
+</TABLE>
+<P>
+<H3>(3) 対応する要素の種別が"Load Data"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>データの取得元となるコミュニケーション用変数のID</TD></TR>
+<TR><TD>ParamInt2</TD><TD>操作種別<BR>0: 1つの変数から情報を取得<BR>1: 複数の変数から情報を取得</TD></TR>
+<TR><TD>ParamInt4</TD><TD>変数名のPrefix後の番号(設定値)</TD></TR>
+<TR><TD>ParamInt5</TD><TD>変数名のPrefix後の番号</TD></TR>
+<TR><TD>ParamStr1</TD><TD>変数名のPrefix</TD></TR>
+</TABLE>
+<P>
+<H3>(4) 対応する要素の種別が"Store Data"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>データの設定先となるコミュニケーション用変数のID</TD></TR>
+<TR><TD>ParamInt2</TD><TD>操作種別<BR>0: 1つの変数への情報の設定<BR>1: 複数の変数への情報の設定</TD></TR>
+<TR><TD>ParamInt4</TD><TD>変数名のPrefix後の番号(設定値)</TD></TR>
+<TR><TD>ParamInt5</TD><TD>変数名のPrefix後の番号</TD></TR>
+<TR><TD>ParamStr1</TD><TD>変数名のPrefix</TD></TR>
+</TABLE>
+<P>
+<H3>(5) 対応する要素の種別が"Check Data"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>チェック対象となるコミュニケーション用変数のID</TD></TR>
+<TR><TD>ParamInt2</TD><TD>チェック種別<BR>
+0: Input data starts with...<BR>
+1: Input data does not start with...<BR>
+2: Input data ends with...<BR>
+3: Input data does not end with...<BR>
+4: Input data contains...<BR>
+5: Input data does not contain...<BR>
+6: Input data equals to...<BR>
+7: Input data does not equal to...<BR>
+</TD></TR>
+</TABLE>
+<P>
+<H3>(6) 対応する要素の種別が"Check flag"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>チェック対象となるフラグ用変数のID</TD></TR>
+<TR><TD>ParamInt2</TD><TD>フラグの値<BR>0: False<BR>1: True</TD></TR>
+</TABLE>
+<P>
+<H3>(7) 対応する要素の種別が"Change data"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>(A)に指定したコミュニケーション用変数のID</TD></TR>
+<TR><TD>ParamInt2</TD><TD>(B)に指定したコミュニケーション用変数のID</TD></TR>
+<TR><TD>ParamInt3</TD><TD>(C)に指定したコミュニケーション用変数のID</TD></TR>
+<TR><TD>ParamInt4</TD><TD>変更種別<BR>
+0: 入力データの開始バイトに(A)を挿入する<BR>
+1: 入力データの終了バイトに(A)を連結する<BR>
+2: 入力データから(A)を検索し(B)に置き換える<BR>
+3: 入力データから(A)で始まり(B)で終わる領域を抽出する<BR>
+4: 入力データを捨て空データを返す<BR>
+5: 入力データを捨て(A)にリセットする<BR>
+</TD></TR>
+</TABLE>
+<P>
+<H3>(8) 対応する要素の種別が"Change flag"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>データの設定先となるフラグ用変数のID</TD></TR>
+<TR><TD>ParamInt2</TD><TD>フラグの値<BR>0: False<BR>1: True</TD></TR>
+</TABLE>
+<P>
+<H3>(9) 対応する要素の種別が"Timer"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>指定された時間を示すデータの上位8ビット</TD></TR>
+<TR><TD>ParamInt2</TD><TD>指定された時間を示すデータの下位8ビット</TD></TR>
+<TR><TD>ParamInt3</TD><TD>待ち時間</TD></TR>
+<TR><TD>ParamInt4</TD><TD>動作種別<BR>0: 日付と時刻指定<BR>1: 待ち時間指定</TD></TR>
+<TR><TD>ParamInt5</TD><TD>動作種別=1のときに本処理要素に到達したTick Countが設定される</TD></TR>
+</TABLE>
+<P>
+<H3>(10) 対応する要素の種別が"Close port"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>Socketクローズの対象となるTCP receiver, TCP senderおよびUDP senderのID</TD></TR>
+<TR><TD>ParamInt2</TD><TD> 0:強制クローズ, 1:接続先のシャットダウン／クローズを待つ</TD></TR>
+<tr><td>ParamInt3</td><td>0:指定するソケットはTCP, 1:指定するソケットはUDP</td></tr>
+</TABLE>
+<P>
+<H3>(11) 対応する要素の種別が"Mapper"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamStr1</TD><TD>検索対象変数名のプレフィックス</TD></TR>
+<TR><TD>ParamStr2</TD><TD>置換対象変数名のプレフィックス</TD></TR>
+<TR><TD>ParamInt1</TD><TD>変数名のPrefix後の番号</TD></TR>
+<TR><TD>ParamInt2</TD><TD>1: 各変数へのマッピングは一度だけ使用される<br>0: 各変数へのマッピングは何度でも使用される</TD></TR>
+</TABLE>
+<P>
+<H3>(12) 対応する要素の種別が"Write file"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>書き込み種別。<br>0:既存のファイルを上書き, 1:既存のファイルの先頭に挿入, 2:既存のファイルの最後に連結</TD></TR>
+<TR><TD>ParamStr1</TD><TD>アクセスするファイルへのパス</TD></TR>
+</TABLE>
+<P>
+<H3>(13) 対応する要素の種別が"Read file"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>読み込み種別。<br>0:入力データを読み込んだデータで置換え, 1:入力データの先頭に挿入, 2:入力データの最後に連結</TD></TR>
+<TR><TD>ParamStr1</TD><TD>アクセスするファイルへのパス</TD></TR>
+</TABLE>
+<P>
+<H3>(14) 対応する要素の種別が"Execute Program"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>動作モード。<br>
+	1bit目が1:外部プログラムが終了するまで待機する<br>
+	2bit目が1:外部プログラムがSTDOUTに出力したデータを次の処理要素の入力に使う<br>
+	3bit目が1:本処理要素の入力データを外部プログラムのSTDINに渡す<br>
+</TD></TR>
+<TR><TD>ParamStr1</TD><TD>実行する外部プログラムへのパス</TD></TR>
+<TR><TD>ParamStr2</TD><TD>実行する外部プログラムのカレントフォルダ</TD></TR>
+</TABLE>
+<P>
+<H3>(15) 対応する要素の種別が"UDP receiver"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>操作種別<BR>0: ホスト名/IPアドレス，ポート番号直接指定<BR>1: UDP senderの接続対象指定</TD></TR>
+<TR><TD>ParamInt2</TD><TD>UDP senderのID</TD></TR>
+<TR><TD>ParamInt3</TD><TD>ポート番号</TD></TR>
+<TR><TD>ParamInt4</TD><TD>データ受信後のソケットのクローズ有無<BR>(0: クローズしない, 1:クローズする)</TD></TR>
+<TR><TD>ParamStr1</TD><TD>ホスト名/IPアドレス</TD></TR>
+</TABLE>
+<P>
+<H3>(16) 対応する要素の種別が"UDP sender"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>操作種別<BR>0: ホスト名/IPアドレス，ポート番号直接指定<BR>1: UDP receiverの接続対象指定</TD></TR>
+<TR><TD>ParamInt2</TD><TD>UDP receiverのID</TD></TR>
+<TR><TD>ParamInt3</TD><TD>ポート番号</TD></TR>
+<TR><TD>ParamInt4</TD><TD>データ送信後のソケットのクローズ有無<BR>(0: クローズしない, 1:クローズする)</TD></TR>
+<TR><TD>ParamStr1</TD><TD>ホスト名/IPアドレス</TD></TR>
+</TABLE>
+<P>
+
+
+
+<H2 ID="A8">A.8 default.stdについて</H2>
+default.stdはStkFw起動時に自動的に読み込まれるStkDataファイルです。<BR>
+default.stdで定義するテーブルおよび登録するレコードを以下に示します。<P>
+<TABLE BORDER="1">
+<TR><TD>ViewElement</TD><TD>テーブルのみ定義します。レコードは登録しません。</TD></TR>
+<TR><TD>ElementInfo</TD><TD>テーブルのみ定義します。レコードは登録しません。</TD></TR>
+<TR><TD>Variable</TD><TD>テーブルのみ定義します。レコードは登録しません。</TD></TR>
+<TR><TD>VarCommDat</TD><TD>テーブルのみ定義します。レコードは登録しません。</TD></TR>
+<TR><TD>Property</TD><TD>下記のレコードを登録します。<BR>
+ViewElement, LinkInfo, MaxLink, MaxId, MaxVarId, Workspace, RefreshInterval
+</TD></TR>
+</TABLE>
+<p>
+StkFwが起動時にdefault.stdを読み込む仕組みは，バージョン1.4.0で廃止されました。
+default.stdはバージョン1.0.0から1.3.0で有効なファイルです。
+<P>
+<H3>(1) Propertyテーブル"ViewElement"のレコード</H3>
+<TABLE BORDER="1">
+<TR><TD>ValueInt1</TD><TD>ValueInt2</TD><TD>ValueInt3</TD><TD>ValueStr1</TD><td>ValueStr3</td></TR>
+
+<TR><TD>1</TD><TD><IMG SRC="com11.gif">11</TD><TD>1</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">TCP receiver [Initiator]</div>
+バージョン1.4:<br><div class="spc">TCP receiver</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Initiator</div>
+</td></TR>
+
+<TR><TD>2</TD><TD><IMG SRC="com42.gif">42</TD><TD>1</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Load Data [Initiator]</div>
+バージョン1.4:<br><div class="spc">Load Data</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Initiator</div>
+</td></TR>
+
+<TR><TD>3</TD><TD><IMG SRC="com39.gif">39</TD><TD>1</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Empty box [Initiator]</div>
+バージョン1.4:<br><div class="spc">Empty box</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Initiator</div>
+</td></TR>
+
+<TR><TD>4</TD><TD><IMG SRC="com21.gif">21</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">TCP sender [Terminator]</div>
+バージョン1.4:<br><div class="spc">TCP sender</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Terminator</div>
+</td></TR>
+
+<TR><TD>5</TD><TD><IMG SRC="com43.gif">43</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Store Data [Terminator]</div>
+バージョン1.4:<br><div class="spc">Store Data</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Terminator</div>
+</td></TR>
+
+<TR><TD>6</TD><TD><IMG SRC="com40.gif">40</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Empty box [Terminator]</div>
+バージョン1.4:<br><div class="spc">Empty box</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Terminator</div>
+</td></TR>
+
+<TR><TD>7</TD><TD><IMG SRC="com01.gif">1</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">TCP sender [Stopper]</div>
+バージョン1.4:<br><div class="spc">TCP sender</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Stopper</div>
+</td></TR>
+
+<TR><TD>8</TD><TD><IMG SRC="com41.gif">41</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Store Data [Stopper]</div>
+バージョン1.4:<br><div class="spc">Store Data</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Stopper</div>
+</td></TR>
+
+<TR><TD>9</TD><TD><IMG SRC="com38.gif">38</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Empty box [Stopper]</div>
+バージョン1.4:<br><div class="spc">Empty box</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Stopper</div>
+</td></TR>
+
+<TR><TD>10</TD><TD><IMG SRC="com37.gif">37</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Check flag [Check point]</div>
+バージョン1.4:<br><div class="spc">Check flag</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Check point</div>
+</td></TR>
+
+<TR><TD>11</TD><TD><IMG SRC="com33.gif">33</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Check data [Check point]</div>
+バージョン1.4:<br><div class="spc">Check data</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Check point</div>
+</td></TR>
+
+<TR><TD>12</TD><TD><IMG SRC="com35.gif">35</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Timer [Check point]</div>
+バージョン1.4:<br><div class="spc">Timer</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Check point</div>
+</td></TR>
+
+<TR><TD>13</TD><TD><IMG SRC="com36.gif">36</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Change flag [Action]</div>
+バージョン1.4:<br><div class="spc">Change flag</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>14</TD><TD><IMG SRC="com32.gif">32</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Change data [Action]</div>
+バージョン1.4:<br><div class="spc">Change data</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>15</TD><TD><IMG SRC="com34.gif">34</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Aggregation/Distribution [Action]</div>
+バージョン1.4:<br><div class="spc">Aggregation/Distribution</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>16</TD><TD><IMG SRC="com44.gif">44</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Close port [Action]</div>
+バージョン1.4:<br><div class="spc">Close port</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>17</TD><TD><IMG SRC="com45.gif">45</TD><TD>0</TD><TD>
+バージョン1.1, 1.2, 1.3:<br><div class="spc">Mapper [Action]</div>
+バージョン1.4:<br><div class="spc">Mapper</div>
+</TD><td>
+1.1, 1.2, 1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>18</TD><TD><IMG SRC="com46.gif">46</TD><TD>0</TD><TD>
+バージョン1.3:<br><div class="spc">Write file [Action]</div>
+バージョン1.4:<br><div class="spc">Write file</div>
+</TD><td>
+1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>19</TD><TD><IMG SRC="com47.gif">47</TD><TD>0</TD><TD>
+バージョン1.3:<br><div class="spc">Read file [Action]</div>
+バージョン1.4:<br><div class="spc">Read file</div>
+</TD><td>
+1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<TR><TD>20</TD><TD><IMG SRC="com48.gif">48</TD><TD>0</TD><TD>
+バージョン1.3:<br><div class="spc">Execute program [Action]</div>
+バージョン1.4:<br><div class="spc">Execute program</div>
+</TD><td>
+1.3:<br><div class="spc">Menu</div>
+1.4:<br><div class="spc">Action</div>
+</td></TR>
+
+<tr><td>21</td><td><img src="com72.gif">72</td><td>1</td><td>
+バージョン1.4:<br><div class="spc">UDP receiver</div>
+</td><td>
+1.4:<br><div class="spc">Initiator</div>
+</td></tr>
+
+<tr><td>22</td><td><img src="com73.gif">73</td><td>0</td><td>
+バージョン1.4:<br><div class="spc">UDP sender</div>
+</td><td>
+1.4:<br><div class="spc">Terminator</div>
+</td></tr>
+
+<tr><td>23</td><td><img src="com71.gif">71</td><td>0</td><td>
+バージョン1.4:<br><div class="spc">UDP sender</div>
+</td><td>
+1.4:<br><div class="spc">Stopper</div>
+</td></tr>
+
+</TABLE>
+<P>
+
+<H3>(2) Propertyテーブル"LinkInfo"のレコード</H3>
+<TABLE BORDER="1">
+<TR><TD>-</TD><TD BGCOLOR="#8080FF">01</TD><TD BGCOLOR="#8080FF">02</TD><TD BGCOLOR="#8080FF">03</TD><TD BGCOLOR="#8080FF">04</TD><TD BGCOLOR="#8080FF">05</TD><TD BGCOLOR="#8080FF">06</TD><TD BGCOLOR="#8080FF">07</TD><TD BGCOLOR="#8080FF">08</TD><TD BGCOLOR="#8080FF">09</TD><TD BGCOLOR="#8080FF">10</TD><TD BGCOLOR="#8080FF">11</TD><TD BGCOLOR="#8080FF">12</TD><TD BGCOLOR="#8080FF">13</TD><TD BGCOLOR="#8080FF">14</TD><TD BGCOLOR="#8080FF">15</TD><TD BGCOLOR="#8080FF">16</TD><TD BGCOLOR="#8080FF">17</TD><TD BGCOLOR="#8080FF">18</TD><TD BGCOLOR="#8080FF">19</TD><TD BGCOLOR="#8080FF">20</TD><TD BGCOLOR="#8080FF">21</TD><TD BGCOLOR="#8080FF">22</TD><TD BGCOLOR="#8080FF">23</TD></TR>
+<TR><TD BGCOLOR="#8080FF">01</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">02</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">03</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">04</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">05</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">06</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">07</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">08</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">09</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">10</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">11</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">12</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">13</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">14</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">15</TD><TD></TD><TD></TD><TD></TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD>10<BR>白</TD><TD></TD><TD>10<BR>白</TD><TD>10<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">16</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">17</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">18</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">19</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">20</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">21</TD><TD></TD><TD></TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD>1<BR>白</TD><TD></TD><TD>1<BR>白</TD><TD>1<BR>白</TD></TR>
+<TR><TD BGCOLOR="#8080FF">22</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD BGCOLOR="#80FF80">1<BR>緑</TD><TD></TD><TD></TD></TR>
+<TR><TD BGCOLOR="#8080FF">23</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+</TABLE>
+横：リンク先，縦：リンク元<BR>
+(例1)種別=1から種別=10へ1個のリンクを設定可能<BR>
+(例2)種別=15から種別=4へ10個のリンクを設定可能<BR>
+白：リンク種別=101, 緑：リンク種別=122<BR>
+<P>
+
+
+<H2 ID="A9">A.9 メインコンソールとの同期</H2>
+メインコンソールで実行系要素，データ系要素に対して操作（アイコンの移動やリンクの設定）を行ったとしても，
+その結果がすぐにリポジトリデータと同期されることはありません。<BR>
+同様にStkDataのデータアクセスGUIでデータを更新したとしても，その結果がすぐにメインコンソールの表示と同期
+されることはありません。<BR>
+メインコンソールとリポジトリデータの同期処理が実行されるタイミングは下表に従います。<P>
+<TABLE BORDER="1">
+<TR><TD></TD><TD>処理1</TD><TD>処理2</TD><TD>処理3</TD><TD>処理4</TD><TD>処理5</TD><TD>処理6</TD><TD>処理7</TD></TR>
+<TR><TD>[File]-[New]メニュー選択</TD><TD>③</TD><TD>－</TD><TD>⑤</TD><TD>－</TD><TD>②</TD><TD>①</TD><TD>④</TD></TR>
+<TR><TD>[File]-[Open]メニュー選択</TD><TD>①</TD><TD>③</TD><TD>④</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>②</TD></TR>
+<TR><TD>[File]-[Save]メニュー選択</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD><TD>－</TD><TD>－</TD><TD>－</TD></TR>
+<TR><TD>[File]-[Save As]メニュー選択</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD><TD>－</TD><TD>－</TD><TD>－</TD></TR>
+<TR><TD>ビューをリポジトリデータに反映</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD><TD>－</TD><TD>－</TD><TD>－</TD></TR>
+<TR><TD>リポジトリデータをビューに反映</TD><TD>－</TD><TD>②</TD><TD>③</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD></TR>
+<TR><TD>スレッド実行直前</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD><TD>－</TD><TD>－</TD><TD>－</TD></TR>
+<TR><TD>スレッド実行直後</TD><TD>－</TD><TD>②</TD><TD>③</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD></TR>
+<TR><TD>スレッド実行中（定期的な同期）</TD><TD>－</TD><TD>②</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD></TR>
+<TR><TD>実行系要素／データ系要素のプロパティを閉じた直後</TD><TD>－</TD><TD>②</TD><TD>③</TD><TD>－</TD><TD>－</TD><TD>－</TD><TD>①</TD></TR>
+<tr><td>ワークスペースサイズ変更時</td><td>②</td><td>④</td><td>－</td><td>－</td><td>①</td><td>－</td><td>③</td></tr>
+</TABLE>数値は同期処理が呼び出される順番を意味します。<P>
+
+処理1:<div class=spc>
+"Property"テーブルのName="Workspace"となるレコードの情報をもとにメインコンソールのウィンドウサイズを変更します。<BR>
+</div>
+処理2:<div class=spc>
+"ViewElement"テーブル内レコードの情報をもとにメインコンソール上の実行系要素，データ系要素の表示（アイコンの種別や座標，リンク，名称等）
+を変更します。<BR>
+</div>
+処理3:<div class=spc>
+"Property"テーブルのName="ViewElement"となるレコードの情報や"ViewElement"テーブル内レコードの情報をもとにスレッドコントローラが管理する
+スレッド情報を変更します。
+</div>
+処理4:<div class=spc>
+メインコンソール上の実行系要素，データ系要素の情報（アイコンの種別や座標，リンク，名称等）をもとに"ViewElement"テーブル内のレコードを
+変更します。<BR>
+</div>
+処理5:<div class=spc>
+入力されたウィンドウサイズをもとに"Property"テーブルのName="Workspace"レコードを変更します。<BR>
+</div>
+処理6:<div class=spc>
+メインコンソール上の実行系要素，データ系要素を消去します。<br>
+バージョン 1.4.0未満:<br>
+<div class=spc>
+default.stdの情報をもとに全てのテーブル内レコード（"Porperty", "ViewElement"テーブル内レコード）の情報を変更します。<br>
+</div>
+バージョン 1.4.0以降:<br>
+<div class=spc>
+全てのテーブル内レコード（"Porperty", "ViewElement"テーブル内レコード）の情報を初期化します。<br>
+</div>
+</div>
+処理7:<div class=spc>
+"Property"テーブルのName="Workspace"となるレコードの情報をもとにメインコンソールのグリッド線の表示を変更します。<BR>
+</div>
+
+<P>
+</BODY>

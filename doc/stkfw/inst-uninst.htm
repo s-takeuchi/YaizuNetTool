@@ -1,0 +1,109 @@
+﻿<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" href="./style.css" type="text/css">
+</HEAD>
+
+<style type="text/css">
+<!--
+.spc { margin-left: 2em; margin-right: 0em; }
+-->
+</style>
+
+<BODY>
+<div id="container">
+<H1>C. インストール／アンインストール</H1>
+
+<H2 ID="C.1">C.1 setup.exeとstkfw.msiについて</H2>
+StkFwのインストール処理は以下の2つのファイルで実現されます。
+<TABLE BORDER="1">
+<TR><TD>setup.exe</TD><TD>EXE形式ファイル。ユーザーは本EXE形式ファイルを実行することにより
+インストーラを起動します。</TD></TR>
+<TR><TD>stkfw.msi</TD><TD>Microsoft Windows インストーラパッケージ。ユーザーは本ファイルを
+直接実行することはできません。本ファイルはsetup.exeから間接的に実行されます。</TD></TR>
+</TABLE>
+<P>
+
+<H2 ID="C.2">C.2 インストールされるファイル一覧</H2>
+インストール実行後下記のファイルが指定したフォルダに配置されます。<BR>
+<TABLE BORDER="1">
+<TR><TD>ファイルパス</TD><TD>ファイル名</TD><TD>説明</TD></TR>
+<TR><TD>(a)</TD><TD>default.std</TD><TD>StkFw起動時に読込まれるリポジトリデータ（デフォルトリポジトリデータ）。<br>バージョン1.4.0以降このファイルは存在しません。</TD></TR>
+<TR><TD>(a)</TD><TD>fwadd.exe</TD><TD>ファイアウォール例外追加用EXEファイル。インストール時にインストーラから実行されます。</TD></TR>
+<TR><TD>(a)</TD><TD>fwdel.exe</TD><TD>ファイアウォール例外削除用EXEファイル。アンインストール時にアンインストーラから実行されます。</TD></TR>
+<TR><TD>(a)</TD><TD>lbadpt32.exe</TD><TD>lbadpt.dllから呼び出される実行ファイル(x86)。ループバックアダプタを追加／削除します。</TD></TR>
+<TR><TD>(a)</TD><TD>lbadpt64.exe</TD><TD>lbadpt.dllから呼び出される実行ファイル(x86-64)。ループバックアダプタを追加／削除します。</TD></TR>
+<TR><TD>(a)</TD><TD>lbadpt.exe</TD><TD>ループバックアダプタ追加／削除用プログラム</TD></TR>
+<TR><TD>(a)</TD><TD>stk_ip_dlg.exe</TD><TD>IPアドレスウィザード。
+インストール対象(Windows 2000 Professional／それ以外)により配置されるファイルが異なります。<BR>
+VersionNT=500のときWindows 2000 Professional用のファイルを配置し，VersionNT>500のとき他のバージョン用ファイルを配置します。
+</TD></TR>
+<TR><TD>(a)</TD><TD>stkdatagui.exe</TD><TD>リポジトリ管理プログラム(StkData)用データファイル(.std)を管理するGUI。</TD></TR>
+<TR><TD>(a)</TD><TD>stkfw.exe</TD><TD>StkFwの実行ファイル</TD></TR>
+<TR><TD>(a)</TD><TD>Title.bmp</TD><TD>インストーラのダイアログ上に表示される画像</TD></TR>
+<TR><TD>(b)</TD><TD>DummyWebServer.std</TD><TD>サンプル用リポジトリデータ</TD></TR>
+<TR><TD>(b)</TD><TD>TELNET-Server.std</TD><TD>サンプル用リポジトリデータ</TD></TR>
+<TR><TD>(b)</TD><TD>TunnelPage.std</TD><TD>サンプル用リポジトリデータ</TD></TR>
+<tr><td>(b)</td><td>_Receiver.std</td><td>サンプル用リポジトリデータ</td></tr>
+<tr><td>(b)</td><td>_Sender.std</td><td>サンプル用リポジトリデータ</td></tr>
+<tr><td>(b)</td><td>GetDateAndTime.std</td><td>サンプル用リポジトリデータ</td></tr>
+<TR><TD>(c)</TD><TD>*.htm</TD><TD>マニュアル用HTMLファイル</TD></TR>
+<TR><TD>(c)</TD><TD>*.css</TD><TD>マニュアル用CSSファイル</TD></TR>
+<TR><TD>(c)</TD><TD>*.jpg</TD><TD>マニュアル用Jpegファイル</TD></TR>
+</TABLE>
+(a) ... ＜インストール先＞\StkFw<BR>
+(b) ... ＜インストール先＞\StkFw\sample<BR>
+(c) ... ＜インストール先＞\StkFw\manual<BR>
+<P>
+
+<H2 ID="C.3">C.3 ファイアウォールの例外登録／削除</H2>
+インストール，アンインストール時にファイアウォールの例外登録／削除を行います。<P>
+■インストール時に下記のファイアウォールの例外を登録します。<BR>
+内部処理として"＜インストール先＞\StkFw\fwadd.exe"を実行します。
+<div class=spc>
+名前：StkFw<BR>
+対象：＜インストール先＞\StkFw<BR>
+</div>
+<BR>
+■アンインストール時に下記のファイアウォールの例外を削除します。<BR>
+内部処理として"＜インストール先＞\StkFw\fwdel.exe"を実行します。
+<div class=spc>
+名前：StkFw<BR>
+対象：＜インストール先＞\StkFw<BR>
+</div>
+<P>
+fwadd.exeが実行するコマンド：<BR>
+<TABLE BORDER="1"><TR><TD>
+netsh firewall add allowedprogram ＜インストール先＞\StkFw\stkfw.exe StkFw ENABLE
+</TD></TR></TABLE><P>
+fwdel.exeが実行するコマンド：<BR>
+<TABLE BORDER="1"><TR><TD>
+netsh firewall delete allowedprogram ＜インストール先＞\StkFw\stkfw.exe
+</TD></TR></TABLE><P>
+
+※Windows 2000 ProfessionalにはWindowsファイアウォールが存在しないため，StkFwインストーラ／
+アンインストーラによる例外登録／削除処理は失敗します。
+ただし当該処理が失敗したことはユーザーには知らされません。<P>
+
+<H2 ID="C.4">C.4 スタートメニューについて</H2>
+スタートメニューには下記の項目が登録されます。<BR>
+<div class=spc>
+[StkFw]-[StkFw] : メインコンソールが起動します<BR>
+[StkFw]-[Manual] : マニュアルが起動します<BR>
+[StkFw]-[Tools]-[Lbadpt] : ループバックアダプタ追加／削除用プログラムが起動します<BR>
+[StkFw]-[Tools]-[IP Address Wizard] : IPアドレスウィザードが起動します<BR>
+[StkFw]-[Samples]-[DummyWebServer] : サンプルデータを開きます<br>
+[StkFw]-[Samples]-[TELNET-Server] : サンプルデータを開きます<br>
+[StkFw]-[Samples]-[TunnelPage] : サンプルデータを開きます<br>
+[StkFw]-[Samples]-[_Receiver] : サンプルデータを開きます<br>
+[StkFw]-[Samples]-[_Sender] : サンプルデータを開きます<br>
+[StkFw]-[Samples]-[GetDataAndTime] : サンプルデータを開きます<br>
+</div>
+<P>
+
+<H2 ID="C.5">C.5 アップグレードインストールについて</H2>
+インストール対象マシンに，既に過去のバージョンのStkFwがインストールされている場合，
+はじめに過去のバージョンのStkFwのアンインストール処理が実行されます。<P>
+
+</div>
+</BODY>

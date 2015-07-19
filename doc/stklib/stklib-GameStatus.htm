@@ -1,0 +1,800 @@
+<HEAD>
+<TITLE>stklib - GameStatus</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stklib - GameStatus</H1><BR>
+GameStatus mainly manages drawing screen.<BR>
+<P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void CreateReverseScreen(int, int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function creates reverse screen.<BR>
+The parameters have to be set the value larger than all of active reverse screen size of GameStatusElement.<BR>
+<P>
+[Error dialog box]<BR>
+"Work screen has already been created." : When CreateReverseScreen() is called after the function is called.<BR>
+"No HWND is set." : When SetHWnd() has not been called.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Horizontal reverse screen size<BR>
+int: Vertical reverse screen size<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>HWND GetHWnd()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Gets window handler<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+HWND: Window handler<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetHWnd(HWND)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Sets window handler<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HWND: Window handler<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>HINSTANCE GetHInstance()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Gets instance handler<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+HINSTANCE: Instance handler<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetHInstance(HINSTANCE)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Sets instance handler<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HINSTANCE: Instance handler<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ChangeGameStatus(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+In this function following steps are invoked.<BR>
+(1) Call StopRefreshScreen() function<BR>
+(2) Changes the game status.<BR>
+(3) Call StartRefreshScreen() function<BR>
+<P>
+[Notice]<BR>
+Normally, this function is called by ActorStatusElement.<BR>
+GameStatusElement does not have to call this function.<BR>
+You can not call this function continually.<BR>
+(ex)<BR>
+ChangeGameStatus(1);<BR>
+ChangeGameStatus(2);<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Game status ID<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetGameStatus()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Gets game status ID<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Game status ID<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetGameStatus(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Sets game status ID<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Game status ID<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StartRefreshScreen()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+The timer in GameStatus starts to call RefreshScreenProcess() function in each GameStatusElement frequently.<BR>
+Before this function is called, functions shown below have to be called appropriately.<BR>
+- SetHWnd()<BR>
+- SetHInstance()<BR>
+- CreateReverseScreen()<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StopRefreshScreen()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+The timer in GameStatus stops to call RefreshScreenProcess() function in each GameStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void AddGameStatusElement(int, GameStatusElement*)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Adds GameStatusElement instance to the array of GameStatus.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Game status ID which is associating to GameStatusElement in 2nd parameter.<BR>
+GameStatusElement*: Pointer to GameStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void DeleteGameStatusElement(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Deletes GameStatusElement instance from the array of GameStatus.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Game status ID<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>GameStatusElement* GetGameStatusElement(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Gets the pointer to GameStatusElement instance which is associating the game status ID in 2nd parameter.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Game status ID<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+GameStatusElement*: Pointer to GameStatusElement<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int ChangeClientToWorldX(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Change the client area position into world area position.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Client area X position<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: World area X position. If no GameStatusElement is active, -1 is returned.<BR>
+
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int ChangeClientToWorldY(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Change the client area position into world area position.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Client area Y position<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: World area Y position. If no GameStatusElement is active, -1 is returned.<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int ChangeClientToWindowX(int, BOOL)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Change the client area position into window area position.<BR>
+Items shown below are considered to the return value.<BR>
+- Scroll bar width<BR>
+<P>
+If the scroll bar flag is TRUE, scroll bar width is also calculated to the return value.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Client area X position<BR>
+BOOL: Scroll bar flag (Whether the scroll bar is enable or not.)<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Window area X position<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int ChangeClientToWindowY(int, BOOL)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Change the client area position into window area position.<BR>
+Items shown below are considered to the return value.<BR>
+- Menu bar height<BR>
+- Caption bar height<BR>
+- Scroll bar height<BR>
+<P>
+If menu bar which is associating to HWND in GameStatus exists,
+menu bar height is also calculated to the return value.<BR>
+If the scroll bar flag is TRUE, scroll bar height is also calculated to the return value.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: Client area Y position<BR>
+BOOL: Scroll bar flag (Whether the scroll bar is enable or not.)<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: Window area Y position<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void MessageDispatcher(HWND, UINT, WPARAM, LPARAM)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Dispatching process of WM messages.<BR>
+Following messages are processed mainly.<BR>
+(1) Redrawing window message.<BR>
+(2) Changing scroll bar message.<BR>
+
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HWND: Window handler<BR>
+UINT: Message<BR>
+WPARAM: wparam<BR>
+LPARAM: lparam<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+sample.cpp<BR>
+<TABLE BORDER="0" BGCOLOR="#A0A0A0"><TR><TD>
+<PRE><CODE>
+
+#include "windows.h"
+#include "tchar.h"
+#include "GameStatus.h"
+#include "GameStatusElementEx.h"
+#include "ActorStatus.h"
+#include "ActorStatusElementEx.h"
+
+TCHAR szTitle[32];
+TCHAR szWindowClass[32];
+
+HWND hWnd;
+
+GameStatus Gs;
+ActorStatus As;
+
+ATOM MyRegisterClass( HINSTANCE hInstance);
+BOOL InitInstance( HINSTANCE, int);
+LRESULT CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM);
+
+
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	MSG msg;
+
+	lstrcpy(szTitle, _T("Sample"));
+	lstrcpy(szWindowClass, _T("Sample"));
+
+	MyRegisterClass(hInstance);
+
+	if (!InitInstance(hInstance, nCmdShow)) {
+		return FALSE;
+	}
+
+	// Configure GameStatusElement
+	Gs.SetHWnd(hWnd);
+	Gs.SetHInstance(hInstance);
+	Gs.CreateReverseScreen(500, 400);
+
+	GameStatusElementEx *GseEx = new GameStatusElementEx();
+	GseEx->SetRefreshInterval(10);
+	GseEx->EnableScrollBar();
+	GseEx->SetCurrentWindowSize(350, 350);
+	GseEx->SetMinWindowSize(300, 300);
+	GseEx->SetMaxWindowSize(Gs.ChangeClientToWindowX(499, TRUE), Gs.ChangeClientToWindowY(399, TRUE));
+	GseEx->SetActiveReverseScreen(0, 0, 499, 399);
+	Gs.AddGameStatusElement(0, (GameStatusElement*)GseEx);
+
+	Gs.StartRefreshScreen();
+
+	// Configure ActorStatusElement
+	As.SetActorActionInterval(10);
+	As.SetGameStatus(&Gs);
+
+	ActorStatusElementEx AseEx[90];
+	for (int i = 0; i < 90; i++) {
+		AseEx[i].SetId(i);
+		AseEx[i].SetActorPos(rand() % 480 + 10, rand() % 380 + 10);
+		AseEx[i].SetActorRect(8, -8, 8, -8);
+		AseEx[i].SetDirection(rand() % 7 - 3, rand() % 7 - 3);
+		AseEx[i].EnableAction();
+		AseEx[i].DisableMouseAction();
+		As.AddActorStatusElement((ActorStatusElement*)&AseEx[i]);
+	}
+
+	As.StartActorAction();
+
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return 0;
+}
+
+ATOM MyRegisterClass(HINSTANCE hInstance)
+{
+	WNDCLASSEX wcex;
+
+	wcex.cbSize        = sizeof(WNDCLASSEX); 
+	wcex.style         = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc   = (WNDPROC)WndProc;
+	wcex.cbClsExtra    = 0;
+	wcex.cbWndExtra    = 0;
+	wcex.hInstance     = hInstance;
+	wcex.hIcon         = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
+	wcex.hIconSm       = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
+	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
+	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+	wcex.lpszMenuName  = szWindowClass;
+	wcex.lpszClassName = szWindowClass;
+
+	return RegisterClassEx(&wcex);
+}
+
+BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+{
+	hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPED | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX,
+		CW_USEDEFAULT, 0, 512, 256, NULL, NULL, hInstance, NULL);
+
+	if(!hWnd) {
+		return FALSE;
+	}
+
+	ShowWindow(hWnd, nCmdShow);
+	UpdateWindow(hWnd);
+
+	return TRUE;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	Gs.MessageDispatcher(hWnd, message, wParam, lParam);
+	As.MessageDispatcher(hWnd, message, wParam, lParam);
+
+	switch (message) {
+	case WM_COMMAND:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
+}
+
+</CODE></PRE>
+</TD></TR></TABLE>
+<P>
+
+GameStatusElementEx.h<BR>
+<TABLE BORDER="0" BGCOLOR="#A0A0A0"><TR><TD>
+<PRE><CODE>
+
+#pragma once
+#include "GameStatusElement.h"
+
+class GameStatusElementEx : public GameStatusElement  
+{
+public:
+	void RefreshScreenProcess(HINSTANCE, HWND, HDC);
+};
+
+</CODE></PRE>
+</TD></TR></TABLE>
+<P>
+
+GameStatusElementEx.cpp<BR>
+<TABLE BORDER="0" BGCOLOR="#A0A0A0"><TR><TD>
+<PRE><CODE>
+
+#include "windows.h"
+#include "ActorRequest.h"
+#include "GameStatusElementEx.h"
+
+void GameStatusElementEx::RefreshScreenProcess(HINSTANCE hinst, HWND hwnd, HDC hdc)
+{
+	RECT rt;
+	rt.right = GetActiveReverseScreenRight();
+	rt.left = GetActiveReverseScreenLeft();
+	rt.top = GetActiveReverseScreenTop();
+	rt.bottom = GetActiveReverseScreenBottom();
+
+	HBRUSH b = CreateSolidBrush(RGB(64, 64, 128));
+	SelectObject(hdc, b);
+	FillRect(hdc, &rt, b);
+	DeleteObject(b);
+
+	for (int i = 0; i < m_CurrentRequest; i++) {
+		ActorRequest* ActReq = m_ActReq[i];
+		int bottom = ActReq->GetIntParam1();
+		int top = ActReq->GetIntParam2();
+		int right = ActReq->GetIntParam3();
+		int left = ActReq->GetIntParam4();
+
+		HPEN Pen = CreatePen(PS_SOLID, 0, RGB(128, 128, 128));
+		SelectObject(hdc, Pen);
+		POINT p[4];
+		p[0].x = (right + left) / 2; p[0].y = top + 2;
+		p[1].x = right - 2;          p[1].y = bottom - 2;
+		p[2].x = left + 2;           p[2].y = bottom - 2;
+		p[3].x = (right + left) / 2; p[3].y = top + 2;
+		Polyline(hdc, p, 4);
+		DeleteObject(Pen);
+	}
+	
+	ClearRequest();
+}	
+
+</CODE></PRE>
+</TD></TR></TABLE>
+<P>
+
+ActorStatusElementEx.h<BR>
+<TABLE BORDER="0" BGCOLOR="#A0A0A0"><TR><TD>
+<PRE><CODE>
+
+#pragma once
+#include "GameStatus.h"
+#include "ActorStatusElement.h"
+#include "ActorStatusElementEx.h"
+
+class ActorStatusElementEx : public ActorStatusElement  
+{
+private:
+	int m_xx;
+	int m_yy;
+public:
+	void SetDirection(int, int);
+	virtual void Action(ActorStatusElement**, int, GameStatus*);
+};
+
+</CODE></PRE>
+</TD></TR></TABLE>
+<P>
+
+ActorStatusElementEx.cpp<BR>
+<TABLE BORDER="0" BGCOLOR="#A0A0A0"><TR><TD>
+<PRE><CODE>
+
+#include "GameStatus.h"
+#include "GameStatusElement.h"
+#include "ActorStatusElement.h"
+#include "ActorStatusElementEx.h"
+
+void ActorStatusElementEx::SetDirection(int x, int y)
+{
+	m_xx = x;
+	m_yy = y;
+}
+
+void ActorStatusElementEx::Action(ActorStatusElement** Ase, int, GameStatus* Gs)
+{
+	if (Gs->GetGameStatus() == 0) {
+		if (m_x < 10) {
+			m_xx *= -1;
+		}
+		if (m_x > 490) {
+			m_xx *= -1;
+		}
+		if (m_y < 10) {
+			m_yy *= -1;
+		}
+		if (m_y > 390) {
+			m_yy *= -1;
+		}
+		m_x += m_xx;
+		m_y += m_yy;
+		GameStatusElement *Gse = Gs->GetGameStatusElement(0);
+		if (Gse != NULL) {
+			Gse->AddRequest(0, m_Id, ActorRequest::IGNORE_SAME_REQ_SAME_ACTOR, _T(""), _T(""), m_y + m_bottom, m_y + m_top, m_x + m_right, m_x + m_left);
+		}
+	}
+}
+
+</CODE></PRE>
+</TD></TR></TABLE>
+<P>
+
+</BODY>

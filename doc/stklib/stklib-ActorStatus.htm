@@ -1,0 +1,283 @@
+<HEAD>
+<TITLE>stklib - ActorStatus</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>stklib - ActorStatus</H1><BR>
+ActorStatus manages some ActorStatusElements in its own array.<BR>
+ActorStatus has a timer, and it calls Action() function of each ActorStatusElement sequentially
+based on the timer schedule.<BR>
+ActorStatus also monitors the mouse operation.<BR>
+When user do some mouse operation on the area of ActorStatusElement, ActorStatus detects it and
+ActorStatus calls MouseAction() function of ActorStatusElement<BR>
+ActorStatus accesses HWND in GameStatus. However it does not access HDC in GameStatus.<BR>
+<P>
+
+Mouse operation<BR>
+When ActorStatus calls MouseAction() of ActorStatusElement, mouse action type shown below is
+specified as a parameter of MouseAction().<BR>
+LBUTTONUP (10)<BR>
+LBUTTONUP_S (11)<BR>
+LBUTTONDOWN (12)<BR>
+LBUTTONDOWN_S (13)<BR>
+LBUTTONDBLCLK (14)<BR>
+RBUTTONUP (20)<BR>
+RBUTTONUP_S (21)<BR>
+RBUTTONDOWN (22)<BR>
+RBUTTONDOWN_S (23)<BR>
+RBUTTONDBLCLK (24)<BR>
+MOVE (100)<BR>
+MOVELDOWN (111)<BR>
+MOVERDOWN (121)<BR>
+If you want LBUTTONDBLCLK and RBUTTONDBLCLK to be available, CS_DBLCLKS need to be set as class-style of Window
+which detects the mouse operation.<BR>
+<P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void AddActorStatusElement(ActorStatusElement*)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Adds ActorStatusElement to the array in ActorStatus.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+ActorStatusElement*: Pointer to ActorStatusElement instance which is added to the array.<BR>
+The array can contain max 1000 ActorStatusElements.<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void ClearActorStatusElement(int)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Clear all ActorStatusElement in the array.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>int GetActorActionInterval()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function returns the interval which ActorStatus calls Action() function in each ActorStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+int: interval<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetActorActionInterval(int actorActionInterval)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+This function sets the interval which ActorStatus calls Action() function in each ActorStatusElement frequently.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+int: interval<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StartActorAction()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Starts to call Action() function of ActorStatusElement frequently.<BR>
+Before this function is called, functions shown below have to be called.<BR>
+- SetActorActionInterval()<BR>
+- SetGameStatus()<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void StopActorAction()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Stops to call Action() function of ActorStatusElement.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void SetGameStatus(GameStatus*)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Sets GameStatus.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+GameStatus*: Pointer to GameStatus<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>GameStatus* GetGameStatus()</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Gets GameStatus.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+GameStatus*: Pointer to GameStatus<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+<TABLE BORDER="1">
+<TR>
+<TD>Function</TD>
+<TD>void MessageDispatcher(HWND, UINT, WPARAM, LPARAM)</TD>
+</TR>
+<TR>
+<TD>Description</TD>
+<TD>
+Dispatching process of WM messages.<BR>
+ActorStatus class processes the mouse operation mainly.<BR>
+</TD>
+</TR>
+<TR>
+<TD>In</TD>
+<TD>
+HWND: Window handler<BR>
+UINT: Message<BR>
+WPARAM: wparam<BR>
+LPARAM: lparam<BR>
+</TD>
+</TR>
+<TR>
+<TD>Out</TD>
+<TD>
+void<BR>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+
+</BODY>
