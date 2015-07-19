@@ -79,31 +79,16 @@ copy "..\src\stkfw\Release\stkfw.exe" stkfw
 copy "..\src\sample\*.*" stkfw\sample
 copy "..\doc\man\eng\*.*" stkfw\manual\eng
 copy "..\doc\man\jpn\*.*" stkfw\manual\jpn
-exit /B
 
-
-rem ########## Making installer ##########
-echo;
-echo Digital signing (1st)...
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\stkfw.exe
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\stkdatagui.exe
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\lbadpt.exe
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\lbadpt32.exe
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\lbadpt64.exe
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\stk_ip_dlg\stk_ip_dlg.exe
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 stkfw\stk_ip_dlg_win2k\stk_ip_dlg_win2k.exe
 
 echo;
 echo Making installer...
 %DEVENV% "setup\setup1.sln" /rebuild Release
 mkdir deployment
-copy ReadmeJPN.txt deployment
-copy ReadmeENG.txt deployment
+copy ..\doc\readme\ReadmeJPN.txt deployment
+copy ..\doc\readme\ReadmeENG.txt deployment
 copy setup\Release\stkfw.msi deployment
-
-echo;
-echo Digital signing (2nd)...
-if exist ..\stkcodesign.pfx "C:\Program Files\Microsoft Platform SDK\Bin\signtool" sign /f ..\stkcodesign.pfx /a /t "http://timestamp.globalsign.com/scripts/timstamp.dll" /p happ1975 deployment\stkfw.msi
+exit /B
 
 
 rem ########## ZIP packing ##########
