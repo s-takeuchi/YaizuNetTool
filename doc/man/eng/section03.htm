@@ -1,0 +1,80 @@
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" href="./style.css" type="text/css">
+</HEAD>
+
+<BODY>
+<style type="text/css">
+<!--
+.spc { margin-left: 2em; margin-right: 0em; }
+-->
+</style>
+
+<div id="container">
+<H1>3. StkFw screen</H1>
+<H2 ID="3.1">3.1 Main console</H2>
+The main console is displayed when StkFw is started.
+The main console is the basic user interface for the functions of StkFw.<BR>
+Operations that can be implemented from this console are listed below.<BR>
+<UL>
+<LI>Launch dialog for file operation
+<LI>Add/remove processing elements, add/remove links between processing elements
+<LI>Launch processing element property setting dialog 
+<LI>Launch thread controller
+<LI>Start/stop all threads
+<LI>Launch variable controller
+<LI>Change workspace size/grid setting
+</UL>
+<P>
+As per the display example shown below, the main console can be separated into the window menu area and the workspace area.<BR>
+The window menu area displays menu options for dialog/controller launch, and the workspace area displays functions for defining data flow.
+<P>
+Main console example<BR>
+<div class=spc>
+<IMG SRC="mainconsole.jpg"><P>
+</div><P>
+
+<H2 ID="3.2">3.2 Main console operations</H2>
+
+(1) Launch dialog for file operation<BR>
+<div class=spc>
+Click [File]-[Open] or [File]-[Save As] in the window menu area of the main console to launch the dialogs for reading or writing of StkFw data. If [File]-[New] is clicked, the current data are discarded and a dialog for new workspace creation is launched.
+</div><P>
+
+(2) Add/remove processing elements, add/remove links between processing elements<BR>
+<div class=spc>
+StkFw can be used to define data flow representing data receipt, dispatch and modification as processing elements (icons) and links between processing elements.
+<UL>
+<LI>Processing elements can be added by right-clicking in the workspace and selecting [Add Processing Element], and can be removed by following the same procedure and selecting [Delete Processing Element].
+<LI>Select multiple icons and click [Add Link] or [Delete Link] to add or delete links between specified processing elements or between threads.
+</UL>
+</div><P>
+
+(3) Launch property setting dialog for processing elements<BR>
+<div class=spc>
+Double-click the [Processing Element] icon in the workspace or right-click and select [Properties] to launch the property setting dialog for the specified processing element.<BR>
+</div><P>
+
+(4) Launch thread controller<BR>
+<div class=spc>
+The thread controller is a dialog for controlling individual worker threads with definition of data flow. Select [Run]-[Thread Controller] from the window menu of the main console to launch the thread controller. <BR>
+</div><P>
+
+(5) Start/stop all threads<br>
+<div class=spc>
+Click [Run]-[Start all threads] from the window menu of the main console to start all threads at the same time. Click [Run]-[Stop all threads] to stop all threads at the same time.<BR>
+</div><P>
+
+(6) Launch variable controller<BR>
+<div class=spc>
+The variable controller can be launched.<BR>
+</div><P>
+
+(7) Change workspace size/grid setting<br>
+<div class=spc>
+Right-click in the workspace and select [Grid]-[On] or [Grid]-[Off] to enable/disable grid line display. 
+Right-click in the workspace and select [Change workspace size] to display the dialog for changing the workspace size.
+</div><P>
+
+</BODY>

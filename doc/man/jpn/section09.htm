@@ -1,0 +1,56 @@
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" href="./style.css" type="text/css">
+</HEAD>
+
+<style type="text/css">
+<!--
+.spc { margin-left: 2em; margin-right: 0em; }
+-->
+</style>
+
+<BODY>
+<div id="container">
+<H1>9. その他</H1>
+<H2 ID="9.1">9.1 FAQ</H2>
+
+Q1: StkFw 1.0.0から何が変わっていますか。
+<div class=spc>
+StkFw 1.0.0では，テストフレームワークという位置づけで公開されており，StkFwを利用するプログラムを
+ユーザー側で作成することが前提となっていました。StkFw 1.1.0以降，独立して動作するテスト支援ソフトウェアとして，
+提供機能を一新しています。
+</div>
+<P>
+
+Q2: サンプルデータファイルはありますか。
+<div class=spc>
+サンプルデータファイルは，"＜インストール先フォルダ＞\StkFw\sample"に配置されています。<br>
+サンプルデータへのショートカットは，スタートメニューの[StkFw]-[Samples]に配置されています。
+</div>
+<P>
+
+Q3: Variable controllerやスレッドコントローラを操作しても反応がありません。
+<div class=spc>
+Variable controllerやスレッドコントローラが使用するリソースを，現在実行中のスレッドが排他的に使用しているため，
+リソースの開放待ち状態になっています。しばらくそのままでお待ちください。
+実行中のスレッドがリソースへのアクセスを完了すると，操作が再開されます。実行中のスレッドが大きなサイズの
+コミュニケーション用変数を処理しているときにこの現象が発生するおそれがあります。
+</div>
+<P>
+
+Q4: ソケットのオープン，クローズのタイミングを知りたいです。
+<div class=spc>
+ソケットのオープン，クローズのタイミングはデータの受信とデータの送信で異なります。<br>
+データを受信するときに使用するソケットには，Listen用ソケットとAccept用ソケットがあります。
+Listen用ソケットはスレッド開始時にオープンし，スレッド停止時にクローズします。それ以外のタイミングでListen用ソケットを
+オープン／クローズすることはできません。
+Accept用ソケットは受信要素に処理が遷移したときにオープンし，処理要素のパラメータの指定に基づいてクローズします。<br>
+データを送信するときに使用するソケットは送信要素に処理が遷移したときにオープンし，
+処理要素のパラメータの指定に基づいてクローズします。<br>
+<img src="socketopenclose.gif">
+</div>
+<P>
+
+</div>
+</BODY>

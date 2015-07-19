@@ -1,0 +1,97 @@
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="content-style-type" content="text/css">
+<link rel="stylesheet" href="./style.css" type="text/css">
+</HEAD>
+
+<style type="text/css">
+<!--
+.spc { margin-left: 2em; margin-right: 0em; }
+-->
+</style>
+
+<BODY>
+<div id="container">
+<H1>8. サンプルデータについて</H1>
+<H2 ID="8.1">8.1 サンプルデータについて</H2>
+StkFwの使用方法を学ぶことを目的に3種類のサンプルデータを用意しています。
+サンプルデータの格納場所は以下のとおりです。<P>
+＜インストール先フォルダ＞\StkFw\sample\*.std <p>
+サンプルデータへのショートカットは，スタートメニューの[StkFw]-[Samples]に配置されます。<p>
+
+DummyWebServer<BR>
+<div class=spc>
+処理要素を連結してWebサーバを構築しています。
+</div><P>
+
+TELNET-Server<BR>
+<div class=spc>
+処理要素を連結してTELNETサーバを構築しています。
+</div><P>
+
+TunnelPage<BR>
+<div class=spc>
+任意のWebサーバへの通信データを保存し，StkFwにシミュレートさせます。
+</div><P>
+
+_Sender/_Receiver<BR>
+<div class=spc>
+データの送信を行うサンプルとデータの受信を行うサンプルです。
+</div><P>
+
+GetDateAndTime<br>
+<div class=spc>
+現在の年月日と時刻をHTTPで返却します。
+</div><P>
+
+
+
+<H2 ID="8.2">8.2 DummyWebServer</H2>
+処理要素を連結してWebサーバを構築しています。<BR>
+スレッド開始後，同じローカルコンピュータ上でWebブラウザを起動し，URLとして"http://localhost/"を指定することにより，
+StkFwで実現されたWebサーバに接続することができます。<BR>
+ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のWebサーバが動作していないことを確認してください。<P>
+
+<H2 ID="8.3">8.3 TELNET-Server</H2>
+処理要素を連結してTELNETサーバを構築しています。<BR>
+スレッド開始後，同じローカルコンピュータのコマンドプロンプトから"telnet localhost"を実行することにより，
+StkFwで実現されたTELNETサーバに接続することができます。<BR>
+TELNETサーバとの接続を切断するときは，[3]キーを押下してください。<BR>
+ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のTELNETサーバが動作していないことを確認してください。<BR>
+オペレーティングシステムによっては（例：Windows Vista）事前にTELNETクライアントを有効化しておく必要があります。
+<P>
+
+<H2 ID="8.4">8.4 TunnelPage</H2>
+任意のWebサーバへの通信データを保存し，StkFwにシミュレートさせます。<BR>
+TunnelPage.stdを開いたあと，ワークスペース上の処理要素"Target web server"のプロパティを開き，
+接続先Webサーバのアドレスを指定してください。<BR>
+次にWebブラウザを起動し，URLとして"http://localhost/"を指定してください。このとき"Target web server"に
+指定したWebサーバに接続し，通信データをコミュニケーション用変数に記憶します。<BR>
+Webブラウザで"http://localhost:8080/"に接続することにより，事前に保存した通信データをもとに
+StkFwがWebブラウザとの通信をシミュレートします。<BR>
+注意事項：<BR>
+<UL>
+<LI>全てのWebページに対応できるわけではありません。Webページによっては，適切にシミュレートできない場合
+があります。
+<LI>WebブラウザからStkFwに接続する前にインターネット一時ファイルを削除することをお勧めします。
+ブラウザが接続先ページのデータをキャッシュしている場合，StkFwで適切にシミュレートできないおそれがあります。
+<li>ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のWebサーバが動作していないことを確認してください。
+</UL>
+<P>
+
+<H2 ID="8.5">8.5 _Sender/_Receiver</H2>
+データの送信を行うサンプルとデータの受信を行うサンプルです。<br>
+_Receiverのスレッドを開始したあと，_Senderのスレッドを開始することで，_Senderで定義されたスレッドから_Receiverで定義
+されたスレッドにデータを送信します。デフォルトでは送信側と受信側のIPアドレス/ホスト名は"localhost"になっています。
+IPアドレス/ホスト名を変更することにより，異なるノード間でデータの送受信を行うことができます。
+<P>
+
+<H2 ID="8.6">8.6 GetDateAndTime</H2>
+現在の年月日と時刻をHTTPで返却します。<br>
+Webブラウザで"http://localhost/"に接続することにより，ブラウザ上に年月日と時刻が表示されます。<br>
+ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のWebサーバが動作していないことを確認してください。
+<p>
+
+
+</div>
+</BODY>
