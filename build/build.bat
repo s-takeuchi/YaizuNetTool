@@ -7,6 +7,7 @@ echo =========================================
 
 set CURRENTPATH=%cd%
 set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe"
+set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
 
 
 rem ########## Initializing ##########
@@ -88,18 +89,15 @@ mkdir deployment
 copy ..\doc\readme\ReadmeJPN.txt deployment
 copy ..\doc\readme\ReadmeENG.txt deployment
 copy setup\Release\stkfw.msi deployment
-exit /B
 
 
 rem ########## ZIP packing ##########
 echo;
 echo ZIP packing stage...
-copy ReadmeJPN.txt deployment
-copy ReadmeENG.txt deployment
 cd deployment
-..\..\7za.exe a sfw150.zip stkfw.msi
-..\..\7za.exe a sfw150.zip ReadmeJPN.txt
-..\..\7za.exe a sfw150.zip ReadmeENG.txt
+%SEVENZIP% a sfw150.zip stkfw.msi
+%SEVENZIP% a sfw150.zip ReadmeJPN.txt
+%SEVENZIP% a sfw150.zip ReadmeENG.txt
 del ReadmeJPN.txt
 del ReadmeENG.txt
 del stkfw.msi
