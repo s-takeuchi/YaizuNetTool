@@ -776,7 +776,7 @@ int SetAboutInfo()
 	SetStkAboutIconBug(IDI_ABOUTBUG);
 	SetStkAboutIconEnhance(IDI_ABOUTENH);
 	TCHAR Title[512];
-	wsprintf(Title, _T("StkFw\r\nVersion 1.5.0  ,  Build date:[%S, %S]\r\nCopyright (C) 2014  Shinya Takeuchi.  All Rights Reserved."), __DATE__, __TIME__);
+	wsprintf(Title, _T("StkFw\r\nVersion 1.5.0  ,  Build date:[%S, %S]\r\nCopyright (C) 2015  Shinya Takeuchi.  All Rights Reserved."), __DATE__, __TIME__);
 	SetAboutTitle(Title);
 
 	ClearHistoryItem();
@@ -805,6 +805,7 @@ int SetAboutInfo()
 	AddHistoryItem(1, _T("1063"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_4));
 	AddHistoryItem(1, _T("1068"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_3));
 	AddHistoryItem(1, _T("1073"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_6));
+	AddHistoryItem(1, _T("2003"), _T("1.5.0"), MessageProc::GetMsg(MessageProc::SFW_140_150_1));
 
 	return 0;
 }
