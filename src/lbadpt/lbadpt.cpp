@@ -5,6 +5,13 @@
 #include "..\..\..\YaizuComLib\src\msgproc\msgproc.h"
 #include <Lm.h>
 
+int LBA_FIRSTINFO = 1101;
+int LBA_PROCCALLFAILED = 1102;
+int LBA_ALREADYINSTALLED = 1103;
+int LBA_NOTINSTALLED = 1104;
+int LBA_OPECOMPLETED = 1105;
+int NEEDADMINRIGHTS = 2903;
+
 
 HINSTANCE InstHndl;
 
@@ -43,7 +50,7 @@ int RunCommand(HWND DlgHndl, int OperationCode)
 	ZeroMemory(&si,sizeof(si));
 	si.cb=sizeof(si);
 	if (CreateProcess(NULL, CmdName, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi) == 0) {
-		MessageProc::StkErr(MessageProc::LBA_PROCCALLFAILED, DlgHndl);
+		MessageProc::StkErr(LBA_PROCCALLFAILED, DlgHndl);
 		return -1;
 	}
 	DWORD RetCode;
@@ -63,11 +70,11 @@ void ShowInformation(HWND DlgHndl)
 	if (AdptStatus == -1) {
 		return;
 	} else if (AdptStatus == 10) {
-		SetDlgItemText(DlgHndl, IDC_STATUS, MessageProc::GetMsg(MessageProc::LBA_ALREADYINSTALLED));
+		SetDlgItemText(DlgHndl, IDC_STATUS, MessageProc::GetMsg(LBA_ALREADYINSTALLED));
 		EnableWindow(InstallHndl, FALSE);
 		EnableWindow(removeHndl, TRUE);
 	} else {
-		SetDlgItemText(DlgHndl, IDC_STATUS, MessageProc::GetMsg(MessageProc::LBA_NOTINSTALLED));
+		SetDlgItemText(DlgHndl, IDC_STATUS, MessageProc::GetMsg(LBA_NOTINSTALLED));
 		EnableWindow(InstallHndl, TRUE);
 		EnableWindow(removeHndl, FALSE);
 	}
@@ -91,7 +98,7 @@ INT_PTR CALLBACK LbAdptDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 			IconHndlrB = (HICON)LoadImage(InstHndl, (LPCTSTR)IDI_LBADPT, IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
 			SendMessage(hDlg, WM_SETICON, ICON_SMALL, (LPARAM)IconHndlrS);
 			SendMessage(hDlg, WM_SETICON, ICON_BIG, (LPARAM)IconHndlrB);
-			SetDlgItemText(hDlg, IDC_TEXT, MessageProc::GetMsg(MessageProc::LBA_FIRSTINFO));
+			SetDlgItemText(hDlg, IDC_TEXT, MessageProc::GetMsg(LBA_FIRSTINFO));
 			ShowInformation(hDlg);
 		}
 		break;
@@ -106,7 +113,7 @@ INT_PTR CALLBACK LbAdptDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 				EnableWindow(removeHndl, FALSE);
 				if (RunCommand(hDlg, 1) == 0) {
 					ShowInformation(hDlg);
-					MessageProc::StkInf(MessageProc::LBA_OPECOMPLETED, hDlg);
+					MessageProc::StkInf(LBA_OPECOMPLETED, hDlg);
 				} else {
 					ShowInformation(hDlg);
 				}
@@ -117,7 +124,7 @@ INT_PTR CALLBACK LbAdptDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 				EnableWindow(removeHndl, FALSE);
 				if (RunCommand(hDlg, -1) == 0) {
 					ShowInformation(hDlg);
-					MessageProc::StkInf(MessageProc::LBA_OPECOMPLETED, hDlg);
+					MessageProc::StkInf(LBA_OPECOMPLETED, hDlg);
 				} else {
 					ShowInformation(hDlg);
 				}
@@ -140,7 +147,7 @@ void CheckExecutorLocalGroup(void)
 	TCHAR Buf[64];
 	DWORD BufSize = 64;
 
-	lstrcpy(ErrorMessage, MessageProc::GetMsg(MessageProc::NEEDADMINRIGHTS));
+	lstrcpy(ErrorMessage, MessageProc::GetMsg(NEEDADMINRIGHTS));
 	lstrcat(ErrorMessage, _T("User name = "));
 	GetUserName(Buf, &BufSize);
 	lstrcat(ErrorMessage, Buf);
@@ -166,6 +173,32 @@ void CheckExecutorLocalGroup(void)
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	// =====================================================================================================
+	//1101 (NC2)
+	MessageProc::AddJpn(LBA_FIRSTINFO, _T("このプログラムはループバック・ネットワークアダプタをインストールまたは削除します。ネットワークの設定を変更したくない場合は Close ボタンをクリックしてください。"));
+	MessageProc::AddEng(LBA_FIRSTINFO, _T("This program will install (or remove) the loopback network adapter to/from your computer. If you do not want to change the network configuration, click Close."));
+
+	//1102 (NC2)
+	MessageProc::AddJpn(LBA_PROCCALLFAILED, _T("コマンドの実行に失敗しました。\r\nlbadpt32.exeまたはlbadpt64.exeがlbadpt.dllと同じフォルダに存在することを確認してください。"));
+	MessageProc::AddEng(LBA_PROCCALLFAILED, _T("Failed to execute command.\r\nCheck whether the command file [lbadpt32.exe or lbadpt64.exe] is located in the same folder as this program [lbadpt.dll]."));
+
+	//1103 (NC2)
+	MessageProc::AddJpn(LBA_ALREADYINSTALLED, _T("ループバックアダプタは既にインストールされています。"));
+	MessageProc::AddEng(LBA_ALREADYINSTALLED, _T("The loopback adapter is already installed."));
+
+	//1104 (NC2)
+	MessageProc::AddJpn(LBA_NOTINSTALLED, _T("ループバックアダプタはインストールされていません。"));
+	MessageProc::AddEng(LBA_NOTINSTALLED, _T("The loopback adapter is not installed."));
+
+	//1105 (NC2)
+	MessageProc::AddJpn(LBA_OPECOMPLETED, _T("操作は完了しました。"));
+	MessageProc::AddEng(LBA_OPECOMPLETED, _T("The operation has completed."));
+
+	//2903 (NC1)
+	MessageProc::AddJpn(NEEDADMINRIGHTS, _T("このプログラムを実行するためにはLocal Administratorの権限が必要です。\r\nプログラムは終了します。\r\n\r\n"));
+	MessageProc::AddEng(NEEDADMINRIGHTS, _T("You need local administrator's rights to run this program.\r\nThe program will be terminated.\r\n\r\n"));
+
+
 	InstHndl = hInstance;
 
 	CheckExecutorLocalGroup();
