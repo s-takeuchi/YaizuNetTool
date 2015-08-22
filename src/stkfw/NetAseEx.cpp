@@ -2,7 +2,7 @@
 #include <shlwapi.h>
 #include "NetAseEx.h"
 #include "stklibtest.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "stkprop.h"
 #include "LowDbAccess.h"
 
@@ -248,10 +248,10 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 		}
 	}
 
-	AppendMenu(MenuHndlTop, AddLinkMenuType, 1, MessageProc::GetMsg(MessageProc::STKFW_ADD_LINK));
-	AppendMenu(MenuHndlTop, DelLinkMenuType, 2, MessageProc::GetMsg(MessageProc::STKFW_DEL_LINK));
+	AppendMenu(MenuHndlTop, AddLinkMenuType, 1, MyMsgProc::GetMsg(MyMsgProc::STKFW_ADD_LINK));
+	AppendMenu(MenuHndlTop, DelLinkMenuType, 2, MyMsgProc::GetMsg(MyMsgProc::STKFW_DEL_LINK));
 	AppendMenu(MenuHndlTop, MF_SEPARATOR, -1, _T(""));
-	AppendMenu(MenuHndlTop, MF_STRING | MF_ENABLED | MF_UNCHECKED, 3, MessageProc::GetMsg(MessageProc::STKFW_DEL_PROCESSING_ELEMENT));
+	AppendMenu(MenuHndlTop, MF_STRING | MF_ENABLED | MF_UNCHECKED, 3, MyMsgProc::GetMsg(MyMsgProc::STKFW_DEL_PROCESSING_ELEMENT));
 	AppendMenu(MenuHndlTop, MF_SEPARATOR, -1, _T(""));
 	AppendMenu(MenuHndlTop, MF_STRING | MF_ENABLED | MF_UNCHECKED, 4, _T("Properties"));
 }

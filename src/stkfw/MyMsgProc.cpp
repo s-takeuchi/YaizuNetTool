@@ -4,6 +4,79 @@
 void MyMsgProc::AddMsg()
 {
 	// =====================================================================================================
+	//2101 (NC2)
+	MessageProc::AddJpn(STKFW_RUNNINGORPROPOPEN, _T("スレッドが実行中かプロパティダイアログボックスが開いたままのため操作を実行できません。\r\nスレッドを停止するかプロパティダイアログボックスを閉じたあと再度操作を試みてください。"));
+	MessageProc::AddEng(STKFW_RUNNINGORPROPOPEN, _T("The operation cannot be performed because threads are running and/or a property dialog box is open.\r\nStop all threads and/or close the property dialog box, then try again."));
+
+	//2102 (NC2)
+	MessageProc::AddJpn(STKFW_OUTOFRANGE, _T("範囲指定エラーが発生しました。\r\n適切なワークスペースのサイズを指定してください。\r\n  - 幅 [512 ～ 2048]\r\n  - 高さ [400 ～ 2048]"));
+	MessageProc::AddEng(STKFW_OUTOFRANGE, _T("An out-of-range error has occurred.\r\nSpecify a valid workspace size.\r\n  - Width [512 to 2048]\r\n  - Height [400 to 2048]"));
+
+	//2103 (NC1)
+	MessageProc::AddJpn(STKFW_DATASAVEFAILED, _T("データの保存に失敗しました。\r\n次の項目を確認してください。\r\n- 対象フォルダのアクセス権限が正しいか。\r\n- 指定したファイルが他のプログラムで既に使用されていないか。"));
+	MessageProc::AddEng(STKFW_DATASAVEFAILED, _T("Data save failed.\r\nCheck the items below.\r\n- Whether the access rights of the target folder are correct.\r\n- The specified file has not already been used by another program."));
+
+	//2104 (NC3)
+	MessageProc::AddJpn(STKFW_FILEINVALID, _T("指定されたファイルは不正です。\r\n次の項目を確認してください。\r\n- 適切なファイルパスが指定されているか。\r\n- 指定されたファイルはこのプログラムを用いて生成されているか。\r\n- ファイルのアクセス権限が正しいか。"));
+	MessageProc::AddEng(STKFW_FILEINVALID, _T("The specified file is invalid.\r\nCheck the items below.\r\n- A valid file path is specified.\r\n- The specified file was created using this program.\r\n- The access rights of the file are correct."));
+
+	//2106 (---)
+	MessageProc::AddJpn(STKFW_RUNNING, _T("実行中..."));
+	MessageProc::AddEng(STKFW_RUNNING, _T("Running..."));
+
+	//2107 (NC1)
+	MessageProc::AddJpn(STKFW_NODLL, _T("DLLファイルが存在しません。\r\nこのプログラムからアクセス可能な適切なフォルダにDLLファイルをコピーしてください。"));
+	MessageProc::AddEng(STKFW_NODLL, _T("No DLL file exists.\r\nCopy the DLL file to an appropriate folder that can be accessed by this program."));
+
+	//2108 (NC1)
+	MessageProc::AddJpn(STKFW_DLLINVALID, _T("ロードされたDLLファイルは不正です。\r\nDLLが次の関数を実装しているか確認してください。\r\n[DllShowProperty]"));
+	MessageProc::AddEng(STKFW_DLLINVALID, _T("The loaded DLL is invalid.\r\nCheck that the DLL implements the following function:\r\n[DllShowProperty]"));
+
+	//2110 (---)
+	MessageProc::AddJpn(STKFW_ADD_PROCESSING_ELEMENT, _T("処理要素の追加"));
+	MessageProc::AddEng(STKFW_ADD_PROCESSING_ELEMENT, _T("Add Processing Element"));
+
+	//2111 (---)
+	MessageProc::AddJpn(STKFW_DEL_PROCESSING_ELEMENT, _T("処理要素の削除"));
+	MessageProc::AddEng(STKFW_DEL_PROCESSING_ELEMENT, _T("Delete Processing Element"));
+
+	//2112 (---)
+	MessageProc::AddJpn(STKFW_ADD_LINK, _T("関連線の追加"));
+	MessageProc::AddEng(STKFW_ADD_LINK, _T("Add Link"));
+
+	//2113 (---)
+	MessageProc::AddJpn(STKFW_DEL_LINK, _T("関連線の削除"));
+	MessageProc::AddEng(STKFW_DEL_LINK, _T("Delete Link"));
+
+	//2120 (NC3)
+	MessageProc::AddJpn(STKFW_DBVERSION_OLD, _T("読み込んだファイルは古いバージョンのStkFwを用いて作成されています。\r\n現在のバージョンで使用できるようにStkFwはデータを変換します。"));
+	MessageProc::AddEng(STKFW_DBVERSION_OLD, _T("The loaded file was generated with an old version of StkFw.\r\nIn order to use the file with the current version, StkFw will migrate the data."));
+
+	//2121 (NC3)
+	MessageProc::AddJpn(STKFW_DBVERSION_UNKNOWN, _T("読み込んだファイルは不明なバージョンのStkFwを用いて作成されています。\r\nStkFwはこのファイルを使用することができません。"));
+	MessageProc::AddEng(STKFW_DBVERSION_UNKNOWN, _T("The loaded file was generated with an unknown version of StkFw.\r\nStkFw cannot handle this file."));
+
+	//2123 (NC3)
+	MessageProc::AddJpn(STKFW_COMPARAM_INVALID, _T("指定されたパラメータは不正です。\r\n指定可能なパラメータは，/start，/stopall，/open のみです。"));
+	MessageProc::AddEng(STKFW_COMPARAM_INVALID, _T("The specified parameter is invalid.\r\nThe only valid parameters are /start, /stopall and /open."));
+
+	//2124 (NC3)
+	MessageProc::AddJpn(STKFW_COMPARAM_NOFILE, _T("指定されたパラメータは不正です。\r\n/startおよび/openパラメータにはSTDファイルへのパス指定が必要です。"));
+	MessageProc::AddEng(STKFW_COMPARAM_NOFILE, _T("The specified parameter is invalid.\r\nThe file path to the STD file must be input after the parameters (/start and /open) are specified."));
+
+	//2125 (---)
+	MessageProc::AddJpn(STKFW_MANUAL_PLACE, _T("\\manual\\jpn\\index.htm"));
+	MessageProc::AddEng(STKFW_MANUAL_PLACE, _T("\\manual\\eng\\index.htm"));
+
+	//2126 (---)
+	MessageProc::AddJpn(STKFW_CHG_WORKSPACE_SIZE, _T("ワークスペースサイズ変更"));
+	MessageProc::AddEng(STKFW_CHG_WORKSPACE_SIZE, _T("Change workspace size"));
+
+	//2127 (---)
+	MessageProc::AddJpn(STKFW_GRID_ONOFF, _T("グリッド"));
+	MessageProc::AddEng(STKFW_GRID_ONOFF, _T("Grid"));
+
+	// =====================================================================================================
 	//9100 (NC2)
 	MessageProc::AddJpn(SFW_100_1, _T("StkFw 初期バージョンをリリースした。"));
 	MessageProc::AddEng(SFW_100_1, _T("StkFw initial version was released."));
@@ -114,4 +187,34 @@ void MyMsgProc::AddMsg()
 TCHAR* MyMsgProc::GetMsg(int Id)
 {
 	return MessageProc::GetMsg(Id);
+}
+
+void MyMsgProc::StkErr(int Id, HWND WndHndl)
+{
+	MessageProc::StkErr(Id, WndHndl);
+}
+
+void MyMsgProc::StkErr(int Id, TCHAR* Str, HWND WndHndl)
+{
+	MessageProc::StkErr(Id, Str, WndHndl);
+}
+
+void MyMsgProc::StkInf(int Id, HWND WndHndl)
+{
+	MessageProc::StkInf(Id, WndHndl);
+}
+
+void MyMsgProc::StkInf(int Id, TCHAR* Str, HWND WndHndl)
+{
+	MessageProc::StkInf(Id, Str, WndHndl);
+}
+
+int MyMsgProc::StkYesNo(int Id, HWND WndHndl)
+{
+	return MessageProc::StkYesNo(Id, WndHndl);
+}
+
+int MyMsgProc::StkYesNo(int Id, TCHAR* Str, HWND WndHndl)
+{
+	return MessageProc::StkYesNo(Id, Str, WndHndl);
 }

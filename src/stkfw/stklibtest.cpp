@@ -204,13 +204,13 @@ int DbMigration()
 	DbVersion = LowDbAccess::GetInstance()->GetPropertyInteger(_T("DbVersion"), 1);
 
 	if (DbVersion > DB_VERSION) {
-		MessageProc::StkErr(MessageProc::STKFW_DBVERSION_UNKNOWN, hWnd);
+		MyMsgProc::StkErr(MyMsgProc::STKFW_DBVERSION_UNKNOWN, hWnd);
 		return -1;
 	}
 	if (DbVersion == DB_VERSION) {
 		return 0;
 	}
-	MessageProc::StkInf(MessageProc::STKFW_DBVERSION_OLD, hWnd);
+	MyMsgProc::StkInf(MyMsgProc::STKFW_DBVERSION_OLD, hWnd);
 
 	if (DbVersion == 0) {
 		DbVersion = DbMigration_00_01(); // Version 1.1.0 → Version 1.2.0
@@ -408,11 +408,11 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 				Ptr += 8;
 				break;
 			}
-			MessageProc::StkErr(MessageProc::STKFW_COMPARAM_INVALID, NULL);
+			MyMsgProc::StkErr(MyMsgProc::STKFW_COMPARAM_INVALID, NULL);
 			ExitProcess(0);
 		}
 		if (CmdParam[Ptr] != ' ') {
-			MessageProc::StkErr(MessageProc::STKFW_COMPARAM_INVALID, NULL);
+			MyMsgProc::StkErr(MyMsgProc::STKFW_COMPARAM_INVALID, NULL);
 			ExitProcess(0);
 		}
 		Ptr++;
@@ -425,7 +425,7 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 	case 2:
 		// パラメータ文字列の直後にスペースが無ければエラー出力&プロセス停止
 		if (CmdParam[Ptr] != ' ') {
-			MessageProc::StkErr(MessageProc::STKFW_COMPARAM_NOFILE, CmdParam, NULL);
+			MyMsgProc::StkErr(MyMsgProc::STKFW_COMPARAM_NOFILE, CmdParam, NULL);
 			ExitProcess(0);
 		}
 		while (CmdParam[Ptr] == ' ') {
@@ -442,7 +442,7 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 	case 4:
 		// パラメータ文字列の直後にスペースまたは\0が無ければエラー出力&プロセス停止
 		if (CmdParam[Ptr] != ' ' && CmdParam[Ptr] != 0) {
-			MessageProc::StkErr(MessageProc::STKFW_COMPARAM_INVALID, CmdParam, NULL);
+			MyMsgProc::StkErr(MyMsgProc::STKFW_COMPARAM_INVALID, CmdParam, NULL);
 			ExitProcess(0);
 		}
 		// stkfwのプロセスを検索し，プロセスを停止する
@@ -505,7 +505,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		LockAllTable(2);
 		if (LoadData(CurrentStdFileName) != 0) {
 			UnlockAllTable();
-			MessageProc::StkErr(MessageProc::STKFW_FILEINVALID, CurrentStdFileName, NULL);
+			MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, CurrentStdFileName, NULL);
 			ExitProcess(0);
 		}
 		UnlockAllTable();
@@ -574,7 +574,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		LockAllTable(2);
 		if (LoadData(CurrentStdFileName) != 0) {
 			UnlockAllTable();
-			MessageProc::StkErr(MessageProc::STKFW_FILEINVALID, CurrentStdFileName, hWnd);
+			MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, CurrentStdFileName, hWnd);
 		} else {
 			UnlockAllTable();
 			DbMigration();
@@ -986,7 +986,7 @@ int ResetWorkspace(int Mode)
 		Width = NewWidth;
 		Height = NewHeight;
 	} else if (Mode == 1 || Mode == 4) {
-		MessageProc::StkErr(MessageProc::STKFW_OUTOFRANGE, hWnd);
+		MyMsgProc::StkErr(MyMsgProc::STKFW_OUTOFRANGE, hWnd);
 		return -1;
 	}
 
@@ -1184,7 +1184,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case HOT_KEY_DB2VIEW:
 			if (GetMouseAction() < 0) {
-				MessageProc::StkErr(MessageProc::STKFW_RUNNINGORPROPOPEN, hWnd);
+				MyMsgProc::StkErr(MyMsgProc::STKFW_RUNNINGORPROPOPEN, hWnd);
 				break;
 			}
 			ResetWorkspace(3);
@@ -1194,7 +1194,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case HOT_KEY_VIEW2DB:
 			if (GetMouseAction() < 0) {
-				MessageProc::StkErr(MessageProc::STKFW_RUNNINGORPROPOPEN, hWnd);
+				MyMsgProc::StkErr(MyMsgProc::STKFW_RUNNINGORPROPOPEN, hWnd);
 				break;
 			}
 			SetViewToDb();
@@ -1215,7 +1215,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 		case IDM_FILE_NEW:
 			if (GetMouseAction() < 0) {
-				MessageProc::StkErr(MessageProc::STKFW_RUNNINGORPROPOPEN, hWnd);
+				MyMsgProc::StkErr(MyMsgProc::STKFW_RUNNINGORPROPOPEN, hWnd);
 				break;
 			}
 			if (LowDbAccess::GetInstance()->IsUpdated(0) || IsActorStatusUpdated(0)) {
@@ -1233,7 +1233,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case IDM_FILE_OPEN:
 			if (GetMouseAction() < 0) {
-				MessageProc::StkErr(MessageProc::STKFW_RUNNINGORPROPOPEN, hWnd);
+				MyMsgProc::StkErr(MyMsgProc::STKFW_RUNNINGORPROPOPEN, hWnd);
 				break;
 			}
 			if (LowDbAccess::GetInstance()->IsUpdated(0) || IsActorStatusUpdated(0)) {
@@ -1251,7 +1251,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				LockAllTable(2);
 				if (LoadData(Buf) != 0) {
 					UnlockAllTable();
-					MessageProc::StkErr(MessageProc::STKFW_FILEINVALID, Buf, hWnd);
+					MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, Buf, hWnd);
 					break;
 				}
 				UnlockAllTable();
@@ -1267,7 +1267,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case IDM_FILE_SAVE:
 			if (GetMouseAction() < 0) {
-				MessageProc::StkErr(MessageProc::STKFW_RUNNINGORPROPOPEN, hWnd);
+				MyMsgProc::StkErr(MyMsgProc::STKFW_RUNNINGORPROPOPEN, hWnd);
 				break;
 			}
 			if (lstrcmp(CurrentStdFileName, _T("")) != 0) {
@@ -1275,7 +1275,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				LockAllTable(1);
 				if (SaveData(CurrentStdFileName) != 0) {
 					UnlockAllTable();
-					MessageProc::StkErr(MessageProc::STKFW_DATASAVEFAILED, hWnd);
+					MyMsgProc::StkErr(MyMsgProc::STKFW_DATASAVEFAILED, hWnd);
 					break;
 				}
 				UnlockAllTable();
@@ -1286,7 +1286,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			// break is not necessary.
 		case IDM_FILE_SAVEAS:
 			if (GetMouseAction() < 0) {
-				MessageProc::StkErr(MessageProc::STKFW_RUNNINGORPROPOPEN, hWnd);
+				MyMsgProc::StkErr(MyMsgProc::STKFW_RUNNINGORPROPOPEN, hWnd);
 				break;
 			}
 			{
@@ -1300,7 +1300,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				LockAllTable(1);
 				if (SaveData(Buf) != 0) {
 					UnlockAllTable();
-					MessageProc::StkErr(MessageProc::STKFW_DATASAVEFAILED, hWnd);
+					MyMsgProc::StkErr(MyMsgProc::STKFW_DATASAVEFAILED, hWnd);
 					break;
 				}
 				UnlockAllTable();
@@ -1342,7 +1342,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				TCHAR HelpPath[MAX_PATH];
 				lstrcpy(HelpPath, StartDir);
-				lstrcat(HelpPath, MessageProc::GetMsg(MessageProc::STKFW_MANUAL_PLACE));
+				lstrcat(HelpPath, MyMsgProc::GetMsg(MyMsgProc::STKFW_MANUAL_PLACE));
 				ShellExecute(hWnd, _T("open"), HelpPath, NULL, NULL, SW_SHOWNOACTIVATE);
 			}
 			break;

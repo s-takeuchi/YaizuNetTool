@@ -2,7 +2,7 @@
 #include "NetAseEx.h"
 #include "NetManagerAseEx.h"
 #include "stklibtest.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 
@@ -27,7 +27,7 @@ void NetManagerAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* ase[]
 	TCHAR VeCatName[100][256];
 	int VeCount = LowDbAccess::GetInstance()->GetViewElementMenus(VeType, VeTypeName, VeCatName);
 
-	AppendMenu(MenuHndlTop, MF_POPUP | MF_STRING | MF_ENABLED | MF_UNCHECKED, (UINT_PTR)MenuHndlAdd, MessageProc::GetMsg(MessageProc::STKFW_ADD_PROCESSING_ELEMENT));
+	AppendMenu(MenuHndlTop, MF_POPUP | MF_STRING | MF_ENABLED | MF_UNCHECKED, (UINT_PTR)MenuHndlAdd, MyMsgProc::GetMsg(MyMsgProc::STKFW_ADD_PROCESSING_ELEMENT));
 
 	int MenuCategoryCount = 0;
 	TCHAR MenuCategoryName[20][256];
@@ -61,10 +61,10 @@ void NetManagerAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* ase[]
 	HMENU MenuHndlGrid = CreatePopupMenu();
 	AppendMenu(MenuHndlGrid, MF_STRING | MF_ENABLED | MF_UNCHECKED, 4001, _T("On"));
 	AppendMenu(MenuHndlGrid, MF_STRING | MF_ENABLED | MF_UNCHECKED, 4002, _T("Off"));
-	AppendMenu(MenuHndlTop, MF_POPUP | MF_STRING | MF_ENABLED | MF_UNCHECKED, (UINT_PTR)MenuHndlGrid, MessageProc::GetMsg(MessageProc::STKFW_GRID_ONOFF));
+	AppendMenu(MenuHndlTop, MF_POPUP | MF_STRING | MF_ENABLED | MF_UNCHECKED, (UINT_PTR)MenuHndlGrid, MyMsgProc::GetMsg(MyMsgProc::STKFW_GRID_ONOFF));
 
 	// Workspace size change menu
-	AppendMenu(MenuHndlTop, MF_POPUP | MF_STRING | MF_ENABLED | MF_UNCHECKED, (UINT_PTR)4003, MessageProc::GetMsg(MessageProc::STKFW_CHG_WORKSPACE_SIZE));
+	AppendMenu(MenuHndlTop, MF_POPUP | MF_STRING | MF_ENABLED | MF_UNCHECKED, (UINT_PTR)4003, MyMsgProc::GetMsg(MyMsgProc::STKFW_CHG_WORKSPACE_SIZE));
 }
 
 void NetManagerAseEx::PopupMenuAction(int MenuId, int x, int y, ActorStatusElement* ase[], int* ElementCount)

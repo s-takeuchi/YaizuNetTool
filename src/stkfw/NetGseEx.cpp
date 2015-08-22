@@ -9,7 +9,7 @@
 #include "stklibtest.h"
 #include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 
 CRITICAL_SECTION NetGseEx::CritSect;
 int NetGseEx::RtiRefreshInterval;
@@ -261,7 +261,7 @@ void NetGseEx::RefreshScreenProcess(HINSTANCE hinst, HWND hwnd, HDC hdc)
 			NumOfOut = 2;
 		}
 		for (int Loop = 0; Loop < NumOfOut; Loop++) {
-			StkFont::GetInstance()->ArialFontLargeTextOut(hdc, StatusRunX[Loop], StatusRunY[Loop], MessageProc::GetMsg(MessageProc::STKFW_RUNNING), RGB(255, 255, 255), FALSE);
+			StkFont::GetInstance()->ArialFontLargeTextOut(hdc, StatusRunX[Loop], StatusRunY[Loop], MyMsgProc::GetMsg(MyMsgProc::STKFW_RUNNING), RGB(255, 255, 255), FALSE);
 		}
 
 		EnterCriticalSection(&CritSect);
