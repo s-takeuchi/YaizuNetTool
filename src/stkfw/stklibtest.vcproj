@@ -593,6 +593,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\MyMsgProc.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\MyMsgProc.h"
+			>
+		</File>
+		<File
 			RelativePath=".\resource.h"
 			>
 		</File>

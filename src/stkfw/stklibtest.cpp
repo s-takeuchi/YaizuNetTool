@@ -33,6 +33,7 @@
 #include "stklibtest.h"
 #include "stkprop.h"
 #include "LowDbAccess.h"
+#include "MyMsgProc.h"
 
 #define DB_VERSION 3
 
@@ -489,6 +490,10 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	// Define messages
+	MyMsgProc::AddMsg();
+
+
 	// コマンド・パラメータを解析する
 	TCHAR CmdParam[1024];
 	wsprintf(CmdParam, _T("%S"), lpCmdLine);
@@ -780,32 +785,32 @@ int SetAboutInfo()
 	SetAboutTitle(Title);
 
 	ClearHistoryItem();
-	AddHistoryItem(1, _T("0000"), _T("1.0.0"), MessageProc::GetMsg(MessageProc::SFW_100_1));
-	AddHistoryItem(0, _T("0015"), _T("1.1.0"), MessageProc::GetMsg(MessageProc::SFW_100_110_1));
-	AddHistoryItem(0, _T("0017"), _T("1.1.0"), MessageProc::GetMsg(MessageProc::SFW_100_110_2));
-	AddHistoryItem(1, _T("0018"), _T("1.1.0"), MessageProc::GetMsg(MessageProc::SFW_100_110_3));
-	AddHistoryItem(1, _T("0034"), _T("1.1.0"), MessageProc::GetMsg(MessageProc::SFW_100_110_4));
-	AddHistoryItem(0, _T("0040"), _T("1.1.0"), MessageProc::GetMsg(MessageProc::SFW_100_110_5));
-	AddHistoryItem(1, _T("0052"), _T("1.1.0"), MessageProc::GetMsg(MessageProc::SFW_100_110_6));
-	AddHistoryItem(1, _T("0074"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_1));
-	AddHistoryItem(1, _T("0075"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_2));
-	AddHistoryItem(1, _T("0078"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_3));
-	AddHistoryItem(1, _T("0079"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_4));
-	AddHistoryItem(1, _T("0080"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_5));
-	AddHistoryItem(1, _T("0081"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_6));
-	AddHistoryItem(0, _T("0083"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_7));
-	AddHistoryItem(0, _T("0084"), _T("1.2.0"), MessageProc::GetMsg(MessageProc::SFW_110_120_8));
-	AddHistoryItem(1, _T("1003"), _T("1.3.0"), MessageProc::GetMsg(MessageProc::SFW_120_130_2));
-	AddHistoryItem(1, _T("1004"), _T("1.3.0"), MessageProc::GetMsg(MessageProc::SFW_120_130_1));
-	AddHistoryItem(1, _T("1008"), _T("1.3.0"), MessageProc::GetMsg(MessageProc::SFW_120_130_3));
-	AddHistoryItem(1, _T("1010"), _T("1.3.0"), MessageProc::GetMsg(MessageProc::SFW_120_130_4));
-	AddHistoryItem(1, _T("1051"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_1));
-	AddHistoryItem(1, _T("1055"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_2));
-	AddHistoryItem(0, _T("1062"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_5));
-	AddHistoryItem(1, _T("1063"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_4));
-	AddHistoryItem(1, _T("1068"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_3));
-	AddHistoryItem(1, _T("1073"), _T("1.4.0"), MessageProc::GetMsg(MessageProc::SFW_130_140_6));
-	AddHistoryItem(1, _T("2003"), _T("1.5.0"), MessageProc::GetMsg(MessageProc::SFW_140_150_1));
+	AddHistoryItem(1, _T("0000"), _T("1.0.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_1));
+	AddHistoryItem(0, _T("0015"), _T("1.1.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_110_1));
+	AddHistoryItem(0, _T("0017"), _T("1.1.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_110_2));
+	AddHistoryItem(1, _T("0018"), _T("1.1.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_110_3));
+	AddHistoryItem(1, _T("0034"), _T("1.1.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_110_4));
+	AddHistoryItem(0, _T("0040"), _T("1.1.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_110_5));
+	AddHistoryItem(1, _T("0052"), _T("1.1.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_100_110_6));
+	AddHistoryItem(1, _T("0074"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_1));
+	AddHistoryItem(1, _T("0075"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_2));
+	AddHistoryItem(1, _T("0078"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_3));
+	AddHistoryItem(1, _T("0079"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_4));
+	AddHistoryItem(1, _T("0080"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_5));
+	AddHistoryItem(1, _T("0081"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_6));
+	AddHistoryItem(0, _T("0083"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_7));
+	AddHistoryItem(0, _T("0084"), _T("1.2.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_110_120_8));
+	AddHistoryItem(1, _T("1003"), _T("1.3.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_120_130_2));
+	AddHistoryItem(1, _T("1004"), _T("1.3.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_120_130_1));
+	AddHistoryItem(1, _T("1008"), _T("1.3.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_120_130_3));
+	AddHistoryItem(1, _T("1010"), _T("1.3.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_120_130_4));
+	AddHistoryItem(1, _T("1051"), _T("1.4.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_130_140_1));
+	AddHistoryItem(1, _T("1055"), _T("1.4.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_130_140_2));
+	AddHistoryItem(0, _T("1062"), _T("1.4.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_130_140_5));
+	AddHistoryItem(1, _T("1063"), _T("1.4.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_130_140_4));
+	AddHistoryItem(1, _T("1068"), _T("1.4.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_130_140_3));
+	AddHistoryItem(1, _T("1073"), _T("1.4.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_130_140_6));
+	AddHistoryItem(1, _T("2003"), _T("1.5.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_140_150_1));
 
 	return 0;
 }
