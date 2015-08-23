@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 // アクセス種別に関するラジオボタンのチェックを切り替える
@@ -43,7 +43,7 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 
 	if (message == WM_CREATE) {
 		// ファイルパスの設定
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_FILEACCESS_NAME), WS_CHILD | WS_VISIBLE, Rect.left + 40, 110, Rect.right - 60, 60, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_FILEACCESS_NAME), WS_CHILD | WS_VISIBLE, Rect.left + 40, 110, Rect.right - 60, 60, WndHndl, NULL, InstHndl, NULL);
 		FileNameEditHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 200, 180, 250, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(FileNameEditHndl, EM_SETLIMITTEXT, (WPARAM)254, (LPARAM)0);
 		TCHAR BufPath[256];
@@ -54,17 +54,17 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 		int AddMsg;
 		int InsertMsg;
 		if (Type == 18) {
-			OverwMsg = MessageProc::PROP_FILEACCESSW_OVERWRITE;
-			AddMsg = MessageProc::PROP_FILEACCESSW_ADD;
-			InsertMsg = MessageProc::PROP_FILEACCESSW_INSERT;
+			OverwMsg = MyMsgProc::PROP_FILEACCESSW_OVERWRITE;
+			AddMsg = MyMsgProc::PROP_FILEACCESSW_ADD;
+			InsertMsg = MyMsgProc::PROP_FILEACCESSW_INSERT;
 		} else {
-			OverwMsg = MessageProc::PROP_FILEACCESSR_OVERWRITE;
-			AddMsg = MessageProc::PROP_FILEACCESSR_ADD;
-			InsertMsg = MessageProc::PROP_FILEACCESSR_INSERT;
+			OverwMsg = MyMsgProc::PROP_FILEACCESSR_OVERWRITE;
+			AddMsg = MyMsgProc::PROP_FILEACCESSR_ADD;
+			InsertMsg = MyMsgProc::PROP_FILEACCESSR_INSERT;
 		}
-		FileAcOverwHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(OverwMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 220, 350, 20, WndHndl, (HMENU)IDC_FILEAC_OVERWRITE, InstHndl, NULL);
-		FileAcInsertHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(InsertMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 250, 350, 20, WndHndl, (HMENU)IDC_FILEAC_INSERT, InstHndl, NULL);
-		FileAcAddHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(AddMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 280, 350, 20, WndHndl, (HMENU)IDC_FILEAC_ADD, InstHndl, NULL);
+		FileAcOverwHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(OverwMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 220, 350, 20, WndHndl, (HMENU)IDC_FILEAC_OVERWRITE, InstHndl, NULL);
+		FileAcInsertHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(InsertMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 250, 350, 20, WndHndl, (HMENU)IDC_FILEAC_INSERT, InstHndl, NULL);
+		FileAcAddHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(AddMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 280, 350, 20, WndHndl, (HMENU)IDC_FILEAC_ADD, InstHndl, NULL);
 		AccessType = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
 		ChangeAccessType(AccessType, FileAcAddHndl, FileAcOverwHndl, FileAcInsertHndl);
 	}

@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 HWND ChkDatStartWith;
@@ -82,14 +82,14 @@ void CheckData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 	GetClientRect(WndHndl, &Rect);
 
 	if (message == WM_CREATE) {
-		ChkDatStartWith = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_START), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 110, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_START, InstHndl, NULL);
-		ChkDatNotStartWith = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_NSTART), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 140, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTSTART, InstHndl, NULL);
-		ChkDatEndWith = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_END), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 170, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_END, InstHndl, NULL);
-		ChkDatNotEndWith = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_NEND), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 200, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTEND, InstHndl, NULL);
-		ChkDatContains = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_CONT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 230, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_CONTAIN, InstHndl, NULL);
-		ChkDatNotContains = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_NCONT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 260, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTCONTAIN, InstHndl, NULL);
-		ChkDatEqual = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_EQUAL), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 290, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_EQUAL, InstHndl, NULL);
-		ChkDatNotEqual = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHKDAT_NEQUAL), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 320, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTEQUAL, InstHndl, NULL);
+		ChkDatStartWith = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_START), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 110, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_START, InstHndl, NULL);
+		ChkDatNotStartWith = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_NSTART), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 140, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTSTART, InstHndl, NULL);
+		ChkDatEndWith = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_END), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 170, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_END, InstHndl, NULL);
+		ChkDatNotEndWith = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_NEND), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 200, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTEND, InstHndl, NULL);
+		ChkDatContains = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_CONT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 230, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_CONTAIN, InstHndl, NULL);
+		ChkDatNotContains = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_NCONT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 260, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTCONTAIN, InstHndl, NULL);
+		ChkDatEqual = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_EQUAL), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 290, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_EQUAL, InstHndl, NULL);
+		ChkDatNotEqual = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_NEQUAL), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 320, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTEQUAL, InstHndl, NULL);
 		ChkDatVarCBox = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 230, 350, 200, 200, WndHndl, (HMENU)IDC_CHKDAT_VAR, InstHndl, NULL);
 
 		// コミュニケーション用変数をコンボボックスの項目として追加する

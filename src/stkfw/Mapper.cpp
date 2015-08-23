@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 HWND MapperSpec1;
@@ -20,13 +20,13 @@ void Mapper(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT mess
 	static int UseOnceChk = 0;
 
 	if (message == WM_CREATE) {
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_MAP_SEARCH), WS_CHILD | WS_VISIBLE, 40, 110, 250, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_MAP_SEARCH), WS_CHILD | WS_VISIBLE, 40, 110, 250, 20, WndHndl, NULL, InstHndl, NULL);
 		MapperEdit1Hndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 200, 140, 100, 24, WndHndl, NULL, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_MAP_REPLACE), WS_CHILD | WS_VISIBLE, 40, 180, 250, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_MAP_REPLACE), WS_CHILD | WS_VISIBLE, 40, 180, 250, 20, WndHndl, NULL, InstHndl, NULL);
 		MapperEdit2Hndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 200, 210, 100, 24, WndHndl, NULL, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_MAP_START), WS_CHILD | WS_VISIBLE, 40, 250, 290, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_MAP_START), WS_CHILD | WS_VISIBLE, 40, 250, 290, 20, WndHndl, NULL, InstHndl, NULL);
 		NumHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 200, 280, 100, 24, WndHndl, NULL, InstHndl, NULL);
-		UseOnceHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_MAP_USEONCE), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 40, 330, Rect.right - 60, 20, WndHndl, (HMENU)IDC_MAP_USEONCE, InstHndl, NULL);
+		UseOnceHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_MAP_USEONCE), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 40, 330, Rect.right - 60, 20, WndHndl, (HMENU)IDC_MAP_USEONCE, InstHndl, NULL);
 		SendMessage(MapperEdit1Hndl, EM_SETLIMITTEXT, (WPARAM)26, (LPARAM)0);
 		SendMessage(MapperEdit2Hndl, EM_SETLIMITTEXT, (WPARAM)26, (LPARAM)0);
 		SendMessage(NumHndl, EM_SETLIMITTEXT, (WPARAM)5, (LPARAM)0);

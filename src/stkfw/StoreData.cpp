@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 HWND StDtVarHndl;
@@ -83,11 +83,11 @@ void StoreData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 	static TCHAR Msg2[100];
 
 	if (Type == 2) {
-		lstrcpyn(Msg1, MessageProc::GetMsg(MessageProc::PROP_LOAD_VAR), 100);
-		lstrcpyn(Msg2, MessageProc::GetMsg(MessageProc::PROP_LOAD_CONT), 100);
+		lstrcpyn(Msg1, MyMsgProc::GetMsg(MyMsgProc::PROP_LOAD_VAR), 100);
+		lstrcpyn(Msg2, MyMsgProc::GetMsg(MyMsgProc::PROP_LOAD_CONT), 100);
 	} else {
-		lstrcpyn(Msg1, MessageProc::GetMsg(MessageProc::PROP_STORE_VAR), 100);
-		lstrcpyn(Msg2, MessageProc::GetMsg(MessageProc::PROP_STORE_CONT), 100);
+		lstrcpyn(Msg1, MyMsgProc::GetMsg(MyMsgProc::PROP_STORE_VAR), 100);
+		lstrcpyn(Msg2, MyMsgProc::GetMsg(MyMsgProc::PROP_STORE_CONT), 100);
 	}
 
 	RECT Rect;
@@ -95,12 +95,12 @@ void StoreData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 
 	if (message == WM_CREATE) {
 		StDtRdoBtn1  = CreateWindow(_T("BUTTON"), Msg1, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 110, Rect.right - 20, 20, WndHndl, (HMENU)IDC_LOADSTORE_RADIO1, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_DATA_COMM), WS_CHILD | WS_VISIBLE, 30, 142, 150, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_DATA_COMM), WS_CHILD | WS_VISIBLE, 30, 142, 150, 20, WndHndl, NULL, InstHndl, NULL);
 		StDtVarHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 200, 140, 230, 200, WndHndl, (HMENU)IDC_LOADDATA_VAR, InstHndl, NULL);
 		StDtRdoBtn2 = CreateWindow(_T("BUTTON"), Msg2, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 200, Rect.right - 20, 20, WndHndl, (HMENU)IDC_LOADSTORE_RADIO2, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_DATA_PREF), WS_CHILD | WS_VISIBLE, 60, 232, 180, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_DATA_PREF), WS_CHILD | WS_VISIBLE, 60, 232, 180, 20, WndHndl, NULL, InstHndl, NULL);
 		StDtPrefixHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 300, 230, 150, 24, WndHndl, NULL, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_DATA_NUM), WS_CHILD | WS_VISIBLE, 60, 262, 230, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_DATA_NUM), WS_CHILD | WS_VISIBLE, 60, 262, 230, 20, WndHndl, NULL, InstHndl, NULL);
 		StDtNumHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 300, 260, 100, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(StDtPrefixHndl, EM_SETLIMITTEXT, (WPARAM)26, (LPARAM)0);
 		SendMessage(StDtNumHndl, EM_SETLIMITTEXT, (WPARAM)5, (LPARAM)0);

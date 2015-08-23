@@ -77,6 +77,340 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(STKFW_GRID_ONOFF, _T("Grid"));
 
 	// =====================================================================================================
+	//2201 (NC2)
+	MessageProc::AddJpn(VAR_SELECTEDNOTONE, _T("変数が指定されていないか，2つ以上の変数が指定されました。\r\n1つの変数のみ指定可能です。"));
+	MessageProc::AddEng(VAR_SELECTEDNOTONE, _T("No variable or more than one variable has been specified.\r\nOnly one variable may be specified."));
+
+	//2202 (NC2)
+	MessageProc::AddJpn(VAR_AREYOUSUREDELETE, _T("指定した変数を削除しても良いですか。"));
+	MessageProc::AddEng(VAR_AREYOUSUREDELETE, _T("Are you sure you want to delete the specified variable(s)?"));
+
+	//2203 (NC2)
+	MessageProc::AddJpn(VAR_NOITEMSELECTED, _T("変数が指定されていません。\r\n１つ以上の変数を指定する必要があります。"));
+	MessageProc::AddEng(VAR_NOITEMSELECTED, _T("No variable has been specified.\r\nPlease specify one or more variables."));
+
+	//2204 (NC2)
+	MessageProc::AddJpn(VAR_NOTTRANSUTF8, _T("UTF-8に変換できないコードが存在するため，\r\nUFT-8表示画面に遷移できません。"));
+	MessageProc::AddEng(VAR_NOTTRANSUTF8, _T("The screen cannot be changed to UTF-8 view \r\nbecause the program has found code that cannot be rendered in UTF-8."));
+
+	//2205 (NC2)
+	MessageProc::AddJpn(VAR_INVALIDNAME, _T("不正な変数名が指定されました。\r\n指定した変数名を確認して再度実行してください。"));
+	MessageProc::AddEng(VAR_INVALIDNAME, _T("Invalid variable name specified.\r\nCheck the specified variable name and then try again."));
+
+	//2206 (NC2)
+	MessageProc::AddJpn(VAR_ALREADYDELETED, _T("編集対象の変数は既に削除されています。\r\n編集操作は実行できません。"));
+	MessageProc::AddEng(VAR_ALREADYDELETED, _T("The edit operation can not be performed because \r\nthe edit target variable has been deleted."));
+
+	//2207 (NC2)
+	MessageProc::AddJpn(VAR_INVALIDTYPE, _T("編集対象の変数は既に異なる種別の変数として使用されています。\r\n編集操作は実行できません。"));
+	MessageProc::AddEng(VAR_INVALIDTYPE, _T("The edit operation can not be performed because \r\nthe target variable has already been used as another type of variable."));
+
+	//2208 (NC3)
+	MessageProc::AddJpn(VAR_BUFOVERFLOW, _T("変数の長さが上限の10Mバイトを超えました。\r\n上限を超えたデータは切り取られます。"));
+	MessageProc::AddEng(VAR_BUFOVERFLOW, _T("The length of the variable specified exceeds the upper limit of 10 MB.\r\nAny data over this limit will be omitted."));
+
+	//2209 (NC2)
+	MessageProc::AddJpn(VAR_MAXVARSIZE, _T("変数を格納するメモリ容量が上限を超えました。"));
+	MessageProc::AddEng(VAR_MAXVARSIZE, _T("The memory size available for storing variable data has exceeded the upper limit."));
+
+	//2210 (NC3)
+	MessageProc::AddJpn(VAR_FLAGVARNOT, _T("フラグ用変数は，インポート／エクスポートを行うことはできません。"));
+	MessageProc::AddEng(VAR_FLAGVARNOT, _T("Import/export operation of the flag variable cannot be performed."));
+
+	//2211 (NC3)
+	MessageProc::AddJpn(VAR_FOLDERSETERR, _T("指定されたインポート，エクスポートフォルダは不正です。\r\nフォルダを確認し，再度操作を実行してください。"));
+	MessageProc::AddEng(VAR_FOLDERSETERR, _T("An invalid import/export folder has been specified.\r\nCheck the folder and try again."));
+
+	//2212 (NC3)
+	MessageProc::AddJpn(VAR_IMPERR, _T("インポート操作が失敗しました。\r\nフォルダのアクセス権限またはファイル名を確認してください。"));
+	MessageProc::AddEng(VAR_IMPERR, _T("Import operation failed.\r\nCheck the folder permissions and file names."));
+
+	//2213 (NC3)
+	MessageProc::AddJpn(VAR_EXPERR, _T("エクスポート操作が失敗しました。\r\nフォルダのアクセス権限や空きディスク容量，選択した変数名を確認してください。"));
+	MessageProc::AddEng(VAR_EXPERR, _T("Export operation failed.\r\nCheck the folder permissions, the amount of free disk space and the variable names specified."));
+
+	//2214 (NC3)
+	MessageProc::AddJpn(VAR_NOIMPTARGET, _T("指定したフォルダにはインポート対象ファイルが存在しません。\r\nインポート対象ファイルの拡張子は\".xxx\"である必要があります。"));
+	MessageProc::AddEng(VAR_NOIMPTARGET, _T("No import target file exists in the folder specified.\r\nThe extension of import target files must be \".xxx\"."));
+
+	//2215 (NC3)
+	MessageProc::AddJpn(VAR_NOEXPTARGET, _T("変数が指定されていません。\r\n一つ以上の変数を指定する必要があります。"));
+	MessageProc::AddEng(VAR_NOEXPTARGET, _T("No variables have been specified.\r\nMore than one variable must be specified."));
+
+	// =====================================================================================================
+	// 2300 (---)
+	MessageProc::AddJpn(PROP_NAME, _T("名称"));
+	MessageProc::AddEng(PROP_NAME, _T("Name"));
+
+	// 2301 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_START, _T("入力データは...から開始する"));
+	MessageProc::AddEng(PROP_CHKDAT_START, _T("Input data starts with..."));
+
+	// 2302 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_NSTART, _T("入力データは...から開始しない"));
+	MessageProc::AddEng(PROP_CHKDAT_NSTART, _T("Input data does not start with..."));
+
+	// 2303 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_END, _T("入力データは...で終了する"));
+	MessageProc::AddEng(PROP_CHKDAT_END, _T("Input data ends with..."));
+
+	// 2304 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_NEND, _T("入力データは...で終了しない"));
+	MessageProc::AddEng(PROP_CHKDAT_NEND, _T("Input data does not end with..."));
+
+	// 2305 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_CONT, _T("入力データは...を含む"));
+	MessageProc::AddEng(PROP_CHKDAT_CONT, _T("Input data contains..."));
+
+	// 2306 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_NCONT, _T("入力データは...を含まない"));
+	MessageProc::AddEng(PROP_CHKDAT_NCONT, _T("Input data does not contain..."));
+
+	// 2307 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_EQUAL, _T("入力データは...と一致する"));
+	MessageProc::AddEng(PROP_CHKDAT_EQUAL, _T("Input data is equal to..."));
+
+	// 2308 (NC2)
+	MessageProc::AddJpn(PROP_CHKDAT_NEQUAL, _T("入力データは...と一致しない"));
+	MessageProc::AddEng(PROP_CHKDAT_NEQUAL, _T("Input data is not equal to..."));
+
+	// 2311 (NC2)
+	MessageProc::AddJpn(PROP_CHGDAT_INSERT, _T("入力データの開始バイトに(A)を挿入する"));
+	MessageProc::AddEng(PROP_CHGDAT_INSERT, _T("Insert (A) at the start byte of the input data."));
+
+	// 2312 (NC2)
+	MessageProc::AddJpn(PROP_CHGDAT_JOIN, _T("入力データの終了バイトに(A)を連結する"));
+	MessageProc::AddEng(PROP_CHGDAT_JOIN, _T("Join (A) to the end byte of the input data."));
+
+	// 2313 (NC2)
+	MessageProc::AddJpn(PROP_CHGDAT_REPLACE, _T("入力データから(A)を検索し(B)に置き換える"));
+	MessageProc::AddEng(PROP_CHGDAT_REPLACE, _T("Search for (A) in the input data and replace with (B)."));
+
+	// 2314 (NC2)
+	MessageProc::AddJpn(PROP_CHGDAT_EXTRACT, _T("入力データから(A)で始まり(B)で終わる領域を抽出する"));
+	MessageProc::AddEng(PROP_CHGDAT_EXTRACT, _T("Extract an area that starts with (A) and ends with (B) from the input data."));
+
+	// 2315 (NC2)
+	MessageProc::AddJpn(PROP_CHGDAT_DROP, _T("入力データを捨て空データを返す"));
+	MessageProc::AddEng(PROP_CHGDAT_DROP, _T("Drop the input data and return empty data."));
+
+	// 2316 (NC2)
+	MessageProc::AddJpn(PROP_CHGDAT_RESET, _T("入力データを捨て(A)にリセットする"));
+	MessageProc::AddEng(PROP_CHGDAT_RESET, _T("Drop the input data and reset to (A)."));
+
+	// 2320 (NC2)
+	MessageProc::AddJpn(PROP_CLOSEPORT, _T("クローズするソケット"));
+	MessageProc::AddEng(PROP_CLOSEPORT, _T("Socket to be closed"));
+
+	// 2321 (NC2)
+	MessageProc::AddJpn(PROP_TIMER_PAST, _T("次に示す日付と時刻が経過したら次のステップに移る"));
+	MessageProc::AddEng(PROP_TIMER_PAST, _T("Progress to the next step if the date and time shown below are in the past."));
+
+	// 2322 (NC2)
+	MessageProc::AddJpn(PROP_TIMER_WAIT, _T("一定時間待ったあと次のステップに移る"));
+	MessageProc::AddEng(PROP_TIMER_WAIT, _T("Progress to the next step after sleeping."));
+
+	// 2323 (---)
+	MessageProc::AddJpn(PROP_TIMER_SEC, _T("(秒) 0-3600"));
+	MessageProc::AddEng(PROP_TIMER_SEC, _T("(Sec) 0-3600"));
+
+	// 2324 (NC2)
+	MessageProc::AddJpn(PROP_MAP_SEARCH, _T("検索対象変数名のプレフィックス"));
+	MessageProc::AddEng(PROP_MAP_SEARCH, _T("Prefix of search target variable name."));
+
+	// 2325 (NC2)
+	MessageProc::AddJpn(PROP_MAP_REPLACE, _T("置換え対象変数名のプレフィックス"));
+	MessageProc::AddEng(PROP_MAP_REPLACE, _T("Prefix of replacement target variable name"));
+
+	// 2326 (NC2)
+	MessageProc::AddJpn(PROP_MAP_START, _T("次の値から自動採番される"));
+	MessageProc::AddEng(PROP_MAP_START, _T("Auto numbering from the next value"));
+
+	// 2327 (NC3)
+	MessageProc::AddJpn(PROP_MAP_USEONCE, _T("各変数へのマッピングは一度だけ使用される"));
+	MessageProc::AddEng(PROP_MAP_USEONCE, _T("The mapping to each variable is used only once."));
+
+	// 2331 (NC2)
+	MessageProc::AddJpn(PROP_CHECK_TRUE, _T("TRUEならば次のステップに移る"));
+	MessageProc::AddEng(PROP_CHECK_TRUE, _T("If TRUE, progress to the next step."));
+
+	// 2332 (NC2)
+	MessageProc::AddJpn(PROP_CHECK_FALSE, _T("FALSEならば次のステップに移る"));
+	MessageProc::AddEng(PROP_CHECK_FALSE, _T("If FALSE, progress to the next step."));
+
+	// 2333 (NC2)
+	MessageProc::AddJpn(PROP_CHANGE_TRUE, _T("フラグをTRUEにする"));
+	MessageProc::AddEng(PROP_CHANGE_TRUE, _T("Change flag to TRUE."));
+
+	// 2334 (NC2)
+	MessageProc::AddJpn(PROP_CHANGE_FALSE, _T("フラグをFALSEにする"));
+	MessageProc::AddEng(PROP_CHANGE_FALSE, _T("Change flag to FALSE."));
+
+	// 2341 (NC2)
+	MessageProc::AddJpn(PROP_LOAD_VAR, _T("次の変数からデータを読込む"));
+	MessageProc::AddEng(PROP_LOAD_VAR, _T("Load data from the following variable."));
+
+	// 2342 (NC2)
+	MessageProc::AddJpn(PROP_LOAD_CONT, _T("次の変数から連続的にデータを読込む"));
+	MessageProc::AddEng(PROP_LOAD_CONT, _T("Load data from the following variables continuously."));
+
+	// 2343 (NC2)
+	MessageProc::AddJpn(PROP_STORE_VAR, _T("次の変数にデータを書き込む"));
+	MessageProc::AddEng(PROP_STORE_VAR, _T("Store data into the following variable."));
+
+	// 2344 (NC2)
+	MessageProc::AddJpn(PROP_STORE_CONT, _T("次の変数に連続的にデータを書き込む"));
+	MessageProc::AddEng(PROP_STORE_CONT, _T("Store data into the following variables continuously."));
+
+	// 2345 (---)
+	MessageProc::AddJpn(PROP_DATA_COMM, _T("コミュニケーション用変数"));
+	MessageProc::AddEng(PROP_DATA_COMM, _T("Communication variable"));
+
+	// 2346 (---)
+	MessageProc::AddJpn(PROP_DATA_PREF, _T("変数名のプレフィックス"));
+	MessageProc::AddEng(PROP_DATA_PREF, _T("Prefix of variable name"));
+
+	// 2347 (NC3)
+	MessageProc::AddJpn(PROP_DATA_NUM, _T("次の値からの自動採番"));
+	MessageProc::AddEng(PROP_DATA_NUM, _T("Auto numbering from the next value"));
+
+	// 2351 (NC2)
+	MessageProc::AddJpn(PROP_NET_RECV, _T("指定したIPアドレスとポートからデータを受信する"));
+	MessageProc::AddEng(PROP_NET_RECV, _T("Receive data using the specified IP address and port."));
+
+	// 2352 (NC5)
+	MessageProc::AddJpn(PROP_NET_RECVTGT, _T("指定した送信要素の接続先からデータを受信する"));
+	MessageProc::AddEng(PROP_NET_RECVTGT, _T("Receive data from the connection target of the specified sender element."));
+
+	// 2353 (NC2)
+	MessageProc::AddJpn(PROP_NET_SEND, _T("指定したIPアドレスとポートにデータを送信する"));
+	MessageProc::AddEng(PROP_NET_SEND, _T("Send data to the specified IP address and port."));
+
+	// 2354 (NC5)
+	MessageProc::AddJpn(PROP_NET_SENDTGT, _T("指定した受信要素の接続先にデータを送信する"));
+	MessageProc::AddEng(PROP_NET_SENDTGT, _T("Send data to the connection target of the specified receiver element."));
+
+	// 2355 (NC2)
+	MessageProc::AddJpn(PROP_NET_CLOSE_AFTERSEND, _T("データ送信後ソケットをクローズする"));
+	MessageProc::AddEng(PROP_NET_CLOSE_AFTERSEND, _T("Close socket after sending data."));
+
+	// 2356 (NC2)
+	MessageProc::AddJpn(PROP_NET_CLOSE_AFTERRECV, _T("データ受信後ソケットをクローズする"));
+	MessageProc::AddEng(PROP_NET_CLOSE_AFTERRECV, _T("Close socket after receiving data."));
+
+	// 2357 (NC4)
+	MessageProc::AddJpn(PROP_NET_TIMEOUT, _T("最終アクセス以降にタイムアウトを検知した [1-180,000 ミリ秒]"));
+	MessageProc::AddEng(PROP_NET_TIMEOUT, _T("Time-out detected after last access.  [1 - 180,000 mSec]"));
+
+	// 2358 (---)
+	MessageProc::AddJpn(PROP_NET_SENDER, _T("送信要素名"));
+	MessageProc::AddEng(PROP_NET_SENDER, _T("Sender name"));
+
+	// 2359 (---)
+	MessageProc::AddJpn(PROP_NET_RECEIVER, _T("受信要素名"));
+	MessageProc::AddEng(PROP_NET_RECEIVER, _T("Receiver name"));
+
+	// 2360 (---)
+	MessageProc::AddJpn(PROP_NET_ICON, _T("アイコン"));
+	MessageProc::AddEng(PROP_NET_ICON, _T("Icon"));
+
+	// 2361 (---)
+	MessageProc::AddJpn(PROP_NET_IPADDR, _T("IPアドレス/ホスト名"));
+	MessageProc::AddEng(PROP_NET_IPADDR, _T("IP address/hostname"));
+
+	// 2362 (---)
+	MessageProc::AddJpn(PROP_NET_PORT, _T("ポート番号"));
+	MessageProc::AddEng(PROP_NET_PORT, _T("Port"));
+
+	// 2363 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESS_NAME, _T("プログラムがアクセスするファイル名を指定\r\nカレントフォルダからの相対パスを指定する必要がある。(例:\"..\\data\\test.bin\")\r\nカレントフォルダは通常，対象の\".std\"ファイルが格納されているフォルダとなる。"));
+	MessageProc::AddEng(PROP_FILEACCESS_NAME, _T("Specify the file name used by the program. \r\nThe relative path from the current folder should be given (ex: \"..\\data\\test.bin\"). \r\nThe current folder is normally set as the one containing the target \".std\" file."));
+
+	// 2364 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESSW_ADD, _T("既存のファイルの最後にデータを連結する"));
+	MessageProc::AddEng(PROP_FILEACCESSW_ADD, _T("Add data to the end of the existing file."));
+
+	// 2365 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESSW_INSERT, _T("既存のファイルの先頭ににデータを挿入する"));
+	MessageProc::AddEng(PROP_FILEACCESSW_INSERT, _T("Insert data at the start of the existing file."));
+
+	// 2366 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESSW_OVERWRITE, _T("既存のファイルを上書きする"));
+	MessageProc::AddEng(PROP_FILEACCESSW_OVERWRITE, _T("Overwrite the existing file."));
+
+	// 2367 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESSR_ADD, _T("入力データの終了バイトに読み込んだデータを連結する"));
+	MessageProc::AddEng(PROP_FILEACCESSR_ADD, _T("Add loaded data to the end byte of the input data."));
+
+	// 2368 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESSR_INSERT, _T("入力データの開始バイトに読み込んだデータを挿入する"));
+	MessageProc::AddEng(PROP_FILEACCESSR_INSERT, _T("Insert loaded data at the start byte of the input data."));
+
+	// 2369 (NC4)
+	MessageProc::AddJpn(PROP_FILEACCESSR_OVERWRITE, _T("ファイルから読み込んだデータを出力する"));
+	MessageProc::AddEng(PROP_FILEACCESSR_OVERWRITE, _T("Output data read from the file."));
+
+	// 2370 (NC4)
+	MessageProc::AddJpn(PROP_EXECPROG_COMMAND, _T("外部プログラムへのパスを指定"));
+	MessageProc::AddEng(PROP_EXECPROG_COMMAND, _T("Specify the path to the external program."));
+
+	// 2371 (NC4)
+	MessageProc::AddJpn(PROP_EXECPROG_WAIT, _T("実行したプログラムが終了するまで待機する"));
+	MessageProc::AddEng(PROP_EXECPROG_WAIT, _T("Wait until the program executed is finished."));
+
+	// 2372 (NC4)
+	MessageProc::AddJpn(PROP_EXECPROG_CURRDIR, _T("外部プログラム実行時のカレントフォルダを指定\r\nカレントフォルダを指定しない場合，対象の\".std\"ファイルが配置されたフォルダがカレントフォルダとなる。"));
+	MessageProc::AddEng(PROP_EXECPROG_CURRDIR, _T("Specify the current folder during external program execution. \r\nIf the current folder is not specified, the one containing the target \".std\" file will be set."));
+
+	// 2373 (NC4)
+	MessageProc::AddJpn(PROP_EXECPROG_STDOUT, _T("外部プログラムがSTDOUTへ書き込んだデータを次の処理要素に渡す"));
+	MessageProc::AddEng(PROP_EXECPROG_STDOUT, _T("Pass data written by the external program to STDOUT to the next element."));
+
+	// 2374 (NC4)
+	MessageProc::AddJpn(PROP_EXECPROG_STDIN, _T("本処理要素の入力データを外部プログラムのSTDINに渡す"));
+	MessageProc::AddEng(PROP_EXECPROG_STDIN, _T("Pass the input data of this processing element to STDIN."));
+
+	// 2375 (NC4)
+	MessageProc::AddJpn(PROP_NET_UNCOND, _T("無条件で次の処理要素に移る"));
+	MessageProc::AddEng(PROP_NET_UNCOND, _T("Proceed unconditionally to the next processing element."));
+
+	// 2376 (NC4)
+	MessageProc::AddJpn(PROP_NET_EXCEEDSIZE, _T("受信データサイズが指定した値を超えた [1-9,999,999 バイト]"));
+	MessageProc::AddEng(PROP_NET_EXCEEDSIZE, _T("The size of the data received exceeds the preset value. [1-9,999,999 bytes]"));
+
+	// 2377 (NC4)
+	MessageProc::AddJpn(PROP_NET_RECVSTR, _T("指定したデータで完了するデータを受信した"));
+	MessageProc::AddEng(PROP_NET_RECVSTR, _T("Data ending with the specified value received."));
+
+	// 2378 (NC4)
+	MessageProc::AddJpn(PROP_NET_TERMCOND, _T("終了条件"));
+	MessageProc::AddEng(PROP_NET_TERMCOND, _T("Termination condition"));
+
+	// 2379 (NC4)
+	MessageProc::AddJpn(PROP_NET_CLOSEDETECT, _T("送信側ソケットがクローズされたときだけ次の処理要素に移る"));
+	MessageProc::AddEng(PROP_NET_CLOSEDETECT, _T("Proceed to the next processing element only when the sender socket is closed."));
+
+	// 2380 (---)
+	MessageProc::AddJpn(PROP_NET_CLOSEFORCE, _T("強制的にクローズする"));
+	MessageProc::AddEng(PROP_NET_CLOSEFORCE, _T("Force close"));
+
+	// 2381 (---)
+	MessageProc::AddJpn(PROP_NET_CLOSEUDPPORT, _T("UDPソケットをクローズする"));
+	MessageProc::AddEng(PROP_NET_CLOSEUDPPORT, _T("Close UDP socket"));
+
+	// 2382 (---)
+	MessageProc::AddJpn(PROP_NET_CLOSETCPPORT, _T("TCPソケットをクローズする"));
+	MessageProc::AddEng(PROP_NET_CLOSETCPPORT, _T("Close TCP socket"));
+
+	// 2383 (NC6)
+	MessageProc::AddJpn(PROP_NET_PROCEEDEVENIFNODATARECV, _T("データ未受信でも次の処理要素に遷移する"));
+	MessageProc::AddEng(PROP_NET_PROCEEDEVENIFNODATARECV, _T("Proceed even if no data are received."));
+
+	// 2384 (★)
+	MessageProc::AddJpn(PROP_NET_RECVMULTI, _T("指定した受信要素からデータを受信する"));
+	MessageProc::AddEng(PROP_NET_RECVMULTI, _T("Receive data from the specified receiver."));
+
+	// =====================================================================================================
 	//9100 (NC2)
 	MessageProc::AddJpn(SFW_100_1, _T("StkFw 初期バージョンをリリースした。"));
 	MessageProc::AddEng(SFW_100_1, _T("StkFw initial version was released."));

@@ -10,6 +10,7 @@
 #include "VarCon.h"
 #include "VarController.h"
 #include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 
 HINSTANCE InstHndl;
 HWND WndHndl;
@@ -421,13 +422,13 @@ void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 		}
 	}
 	if (FoundCount == 0) {
-		MessageProc::StkErr(MessageProc::VAR_NOITEMSELECTED, WndHndl);
+		MyMsgProc::StkErr(MyMsgProc::VAR_NOITEMSELECTED, WndHndl);
 		return;
 	}
 
 	// 項目の削除操作の場合，ユーザーに確認を促す
 	if (Operation == 2) {
-		if (MessageProc::StkYesNo(MessageProc::VAR_AREYOUSUREDELETE, WndHndl) == IDNO) {
+		if (MyMsgProc::StkYesNo(MyMsgProc::VAR_AREYOUSUREDELETE, WndHndl) == IDNO) {
 			return;
 		}
 	}
@@ -570,7 +571,7 @@ void ReplaceCommVariable(HWND EdBxHndl, int Type)
 
 		WorkDatActSize = WideCharToMultiByte(CP_UTF8, 0, WcBuf, ActLen, (LPSTR)WorkDat, 9999999, NULL, NULL);
 		if (ActLen != 0 && WorkDatActSize == 0) {
-			MessageProc::StkErr(MessageProc::VAR_BUFOVERFLOW, WndHndl);
+			MyMsgProc::StkErr(MyMsgProc::VAR_BUFOVERFLOW, WndHndl);
 			WorkDatActSize = 9999999; // エラーが発生したときにWorkDatの内容が変わらないことを期待。取り合えず問題なさそう。
 		}
 		delete WcBuf;
@@ -596,7 +597,7 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 				SendMessage(EdBxHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)OutDat);
 				RedrawWindow(CommWndHndl, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME | RDW_ALLCHILDREN);
 			} else {
-				MessageProc::StkErr(MessageProc::VAR_NOTTRANSUTF8, WndHndl);
+				MyMsgProc::StkErr(MyMsgProc::VAR_NOTTRANSUTF8, WndHndl);
 				Type = 0;
 				SelOutMode = 0;
 				ChangeMenuCheckStatus(0);
@@ -674,7 +675,7 @@ int OpenFileX(HWND WinHndl)
 	DWORD LowSize = 0;
 	LowSize = GetFileSize(FileHndl, &HighSize);
 	if (HighSize != 0 || LowSize >= 10000000) {
-		MessageProc::StkErr(MessageProc::VAR_BUFOVERFLOW, WndHndl);
+		MyMsgProc::StkErr(MyMsgProc::VAR_BUFOVERFLOW, WndHndl);
 	}
 
 	SetFilePointer(FileHndl, NULL, NULL, FILE_BEGIN);
@@ -754,7 +755,7 @@ BOOL VarConEdit_SelectFolder(TCHAR* FolderPath)
     PidlBrowse = SHBrowseForFolder(&Browse);
 	if (PidlBrowse != NULL) {
 		if (SHGetPathFromIDList(PidlBrowse, FolderPath) == FALSE) {
-			MessageProc::StkErr(MessageProc::VAR_FOLDERSETERR, WndHndl);
+			MyMsgProc::StkErr(MyMsgProc::VAR_FOLDERSETERR, WndHndl);
 			return FALSE;
 		}
 	} else {
@@ -767,7 +768,7 @@ void VarConEdit_Export(HWND LstViwHndl)
 {
 	// フラグ用変数ならば処理を終える
 	if (SelVarType == 1) {
-		MessageProc::StkErr(MessageProc::VAR_FLAGVARNOT, WndHndl);
+		MyMsgProc::StkErr(MyMsgProc::VAR_FLAGVARNOT, WndHndl);
 		return;
 	}
 
@@ -802,13 +803,13 @@ void VarConEdit_Export(HWND LstViwHndl)
 			lstrcat(TmpPath, _T(".xxx"));
 			HANDLE FileHndl = CreateFile(TmpPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 			if (FileHndl == INVALID_HANDLE_VALUE) {
-				MessageProc::StkErr(MessageProc::VAR_EXPERR, TmpPath, WndHndl);
+				MyMsgProc::StkErr(MyMsgProc::VAR_EXPERR, TmpPath, WndHndl);
 				delete CommDat;
 				return;
 			};
 			DWORD TmpSize = 0;
 			if (WriteFile(FileHndl, (LPCVOID)CommDat, CommDatLength, &TmpSize, NULL) == 0) {
-				MessageProc::StkErr(MessageProc::VAR_EXPERR, TmpPath, WndHndl);
+				MyMsgProc::StkErr(MyMsgProc::VAR_EXPERR, TmpPath, WndHndl);
 				CloseHandle(FileHndl);
 				delete CommDat;
 				return;
@@ -819,7 +820,7 @@ void VarConEdit_Export(HWND LstViwHndl)
 		}
 	}
 	if (SelCnt == 0) {
-		MessageProc::StkErr(MessageProc::VAR_NOEXPTARGET, WndHndl);
+		MyMsgProc::StkErr(MyMsgProc::VAR_NOEXPTARGET, WndHndl);
 	}
 }
 
@@ -827,7 +828,7 @@ void VarConEdit_Import()
 {
 	// フラグ用変数ならば処理を終える
 	if (SelVarType == 1) {
-		MessageProc::StkErr(MessageProc::VAR_FLAGVARNOT, WndHndl);
+		MyMsgProc::StkErr(MyMsgProc::VAR_FLAGVARNOT, WndHndl);
 		return;
 	}
 
@@ -843,7 +844,7 @@ void VarConEdit_Import()
 	WIN32_FIND_DATAW Fd;
 	HANDLE FileNameHndl = FindFirstFileW(TmpPath, &Fd);
 	if (FileNameHndl == INVALID_HANDLE_VALUE) {
-		MessageProc::StkErr(MessageProc::VAR_NOIMPTARGET, WndHndl);
+		MyMsgProc::StkErr(MyMsgProc::VAR_NOIMPTARGET, WndHndl);
 		return;
 	}
 	do {
@@ -862,7 +863,7 @@ void VarConEdit_Import()
 		// ファイルを読み込む
 		HANDLE FileHndl = CreateFile(TmpPath, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (FileHndl == INVALID_HANDLE_VALUE) {
-			MessageProc::StkErr(MessageProc::VAR_IMPERR, TmpPath, WndHndl);
+			MyMsgProc::StkErr(MyMsgProc::VAR_IMPERR, TmpPath, WndHndl);
 			FindClose(FileNameHndl);
 			return ;
 		};
@@ -870,14 +871,14 @@ void VarConEdit_Import()
 		DWORD LowSize = 0;
 		LowSize = GetFileSize(FileHndl, &HighSize);
 		if (HighSize != 0 || LowSize >= 10000000) {
-			MessageProc::StkErr(MessageProc::VAR_BUFOVERFLOW, WndHndl);
+			MyMsgProc::StkErr(MyMsgProc::VAR_BUFOVERFLOW, WndHndl);
 			LowSize = 9999999;
 		}
 		BYTE* CommDat = new BYTE[LowSize + 10000]; // 10000を加算する理由は，VarCon_UpdateCommunicationVariableで10000バイト毎の書き込みを行うため
 		SetFilePointer(FileHndl, NULL, NULL, FILE_BEGIN);
 		DWORD TmpSize = 0;
 		if (ReadFile(FileHndl, (LPVOID)CommDat, LowSize, &TmpSize, NULL) == 0) {
-			MessageProc::StkErr(MessageProc::VAR_IMPERR, TmpPath, WndHndl);
+			MyMsgProc::StkErr(MyMsgProc::VAR_IMPERR, TmpPath, WndHndl);
 			CloseHandle(FileHndl);
 			delete CommDat;
 			FindClose(FileNameHndl);
@@ -886,7 +887,7 @@ void VarConEdit_Import()
 		CloseHandle(FileHndl);
 
 		if (VarCon_CheckCommunicationVariableSize(LowSize) == FALSE || VarCon_CheckVariableCount() == FALSE) {
-			MessageProc::StkErr(MessageProc::VAR_MAXVARSIZE, WndHndl);
+			MyMsgProc::StkErr(MyMsgProc::VAR_MAXVARSIZE, WndHndl);
 			delete CommDat;
 			FindClose(FileNameHndl);
 			return;
@@ -915,11 +916,11 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 			if (LOWORD(wParam) == IDC_VARFLAGBTNOK) {
 				if (OpType == 1) {
 					if (VarCon_CheckCommunicationVariableSize(-1) == FALSE || VarCon_CheckVariableCount() == FALSE) {
-						MessageProc::StkErr(MessageProc::VAR_MAXVARSIZE, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_MAXVARSIZE, WndHndl);
 						return TRUE;
 					}
 					if (AddVariable(hDlg, IDC_VARFLAGNAMEEDIT, IDC_VARFLAGDESCEDIT, 1) == -1) {
-						MessageProc::StkErr(MessageProc::VAR_INVALIDNAME, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDNAME, WndHndl);
 						return TRUE;
 					}
 					EnableWindow(WndHndl, TRUE);
@@ -929,16 +930,16 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 				} else if (OpType == 2) {
 					RecordData* ChkRec = VarCon_GetVariableRecord(SelVarId);
 					if (ChkRec == NULL) {
-						MessageProc::StkErr(MessageProc::VAR_ALREADYDELETED, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_ALREADYDELETED, WndHndl);
 						return TRUE;
 					}
 					if (((ColumnDataInt*)ChkRec->GetColumn(3))->GetValue() != 1) {
-						MessageProc::StkErr(MessageProc::VAR_INVALIDTYPE, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDTYPE, WndHndl);
 						return TRUE;
 					}
 					ClearRecordData(ChkRec);
 					if (StoreNameAndDescriptionWithId(FlgListWndHndl, hDlg, IDC_VARFLAGNAMEEDIT, IDC_VARFLAGDESCEDIT, SelVarId) == -1) {
-						MessageProc::StkErr(MessageProc::VAR_INVALIDNAME, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDNAME, WndHndl);
 						return TRUE;
 					}
 					EnableWindow(WndHndl, TRUE);
@@ -1039,12 +1040,12 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				if (OpType == 1) {
 					ReplaceCommVariable(CommEdit, SelOutMode);
 					if (VarCon_CheckCommunicationVariableSize(WorkDatActSize) == FALSE || VarCon_CheckVariableCount() == FALSE) {
-						MessageProc::StkErr(MessageProc::VAR_MAXVARSIZE, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_MAXVARSIZE, WndHndl);
 						return TRUE;
 					}
 					int New = AddVariable(CommBkGndWndHndl, IDC_VARCOMMNAMEEDIT, IDC_VARCOMMDESCEDIT, 0);
 					if (New == -1) {
-						MessageProc::StkErr(MessageProc::VAR_INVALIDNAME, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDNAME, WndHndl);
 						return TRUE;
 					}
 					VarCon_UpdateCommunicationVariable(New, WorkDat, WorkDatActSize);
@@ -1055,16 +1056,16 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				} else if (OpType == 2) {
 					RecordData* ChkRec = VarCon_GetVariableRecord(SelVarId);
 					if (ChkRec == NULL) {
-						MessageProc::StkErr(MessageProc::VAR_ALREADYDELETED, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_ALREADYDELETED, WndHndl);
 						return TRUE;
 					}
 					if (((ColumnDataInt*)ChkRec->GetColumn(3))->GetValue() != 0) {
-						MessageProc::StkErr(MessageProc::VAR_INVALIDTYPE, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDTYPE, WndHndl);
 						return TRUE;
 					}
 					ClearRecordData(ChkRec);
 					if (StoreNameAndDescriptionWithId(ComListWndHndl, CommBkGndWndHndl, IDC_VARCOMMNAMEEDIT, IDC_VARCOMMDESCEDIT, SelVarId) == -1) {
-						MessageProc::StkErr(MessageProc::VAR_INVALIDNAME, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDNAME, WndHndl);
 						return TRUE;
 					}
 					int PrevPlaneCnt = VarCon_GetCommunicationVariableSize(SelVarId) / 10000;
@@ -1072,7 +1073,7 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					int CurrPlaneCnt = WorkDatActSize / 10000;
 					int AddSize = (CurrPlaneCnt - PrevPlaneCnt) * 1000;
 					if (VarCon_CheckCommunicationVariableSize((AddSize > 0) ? AddSize : -1) == FALSE) {
-						MessageProc::StkErr(MessageProc::VAR_MAXVARSIZE, WndHndl);
+						MyMsgProc::StkErr(MyMsgProc::VAR_MAXVARSIZE, WndHndl);
 						return TRUE;
 					}
 					VarCon_UpdateCommunicationVariable(SelVarId, WorkDat, WorkDatActSize);
@@ -1273,12 +1274,12 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				// 選択されている１つのアイテムの行番号を取得する
 				int SelItem = GetSelectedVlItem(FlgListWndHndl);
 				if (SelItem == -1) {
-					MessageProc::StkErr(MessageProc::VAR_SELECTEDNOTONE, hWnd);
+					MyMsgProc::StkErr(MyMsgProc::VAR_SELECTEDNOTONE, hWnd);
 					break;
 				}
 				// 対象の変数がリポジトリに存在するか確認する
 				if (VarCon_CheckVariableExistence(GetSelectedVariableId(FlgListWndHndl, SelItem)) == FALSE) {
-					MessageProc::StkErr(MessageProc::VAR_ALREADYDELETED, WndHndl);
+					MyMsgProc::StkErr(MyMsgProc::VAR_ALREADYDELETED, WndHndl);
 					break;
 				}
 				// フラグ用変数設定ダイアログを起動する
@@ -1298,12 +1299,12 @@ COMMEDIT:
 				// 選択されている１つのアイテムの行番号を取得する
 				int SelItem = GetSelectedVlItem(ComListWndHndl);
 				if (SelItem == -1) {
-					MessageProc::StkErr(MessageProc::VAR_SELECTEDNOTONE, hWnd);
+					MyMsgProc::StkErr(MyMsgProc::VAR_SELECTEDNOTONE, hWnd);
 					break;
 				}
 				// 対象の変数がリポジトリに存在するか確認する
 				if (VarCon_CheckVariableExistence(GetSelectedVariableId(ComListWndHndl, SelItem)) == FALSE) {
-					MessageProc::StkErr(MessageProc::VAR_ALREADYDELETED, WndHndl);
+					MyMsgProc::StkErr(MyMsgProc::VAR_ALREADYDELETED, WndHndl);
 					break;
 				}
 				// コミュニケーション用変数設定ウィンドウを起動する

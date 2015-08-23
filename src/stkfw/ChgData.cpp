@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 HWND ChgDatStart;
@@ -96,12 +96,12 @@ void ChgData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT mes
 	GetClientRect(WndHndl, &Rect);
 
 	if (message == WM_CREATE) {
-		ChgDatStart = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHGDAT_INSERT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 110, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_START, InstHndl, NULL);
-		ChgDatEnd = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHGDAT_JOIN), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 140, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_END, InstHndl, NULL);
-		ChgDatReplace = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHGDAT_REPLACE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 170, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_REPLACE, InstHndl, NULL);
-		ChgDatExtract = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHGDAT_EXTRACT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 200, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_EXTRACT, InstHndl, NULL);
-		ChgDatDrop = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHGDAT_DROP), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 230, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_DROP, InstHndl, NULL);
-		ChgDatReset = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHGDAT_RESET), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 260, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_RESET, InstHndl, NULL);
+		ChgDatStart = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHGDAT_INSERT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 110, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_START, InstHndl, NULL);
+		ChgDatEnd = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHGDAT_JOIN), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 140, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_END, InstHndl, NULL);
+		ChgDatReplace = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHGDAT_REPLACE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 170, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_REPLACE, InstHndl, NULL);
+		ChgDatExtract = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHGDAT_EXTRACT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 200, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_EXTRACT, InstHndl, NULL);
+		ChgDatDrop = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHGDAT_DROP), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 230, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_DROP, InstHndl, NULL);
+		ChgDatReset = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHGDAT_RESET), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 260, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHGDAT_RESET, InstHndl, NULL);
 		CreateWindow(_T("STATIC"), _T("(A)"), WS_CHILD | WS_VISIBLE, 200, 292, 20, 20, WndHndl, NULL, InstHndl, NULL);
 		ChgDatVarCBoxA = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 230, 290, 200, 200, WndHndl, (HMENU)IDC_CHGDAT_VARA, InstHndl, NULL);
 		CreateWindow(_T("STATIC"), _T("(B)"), WS_CHILD | WS_VISIBLE, 200, 322, 20, 20, WndHndl, NULL, InstHndl, NULL);

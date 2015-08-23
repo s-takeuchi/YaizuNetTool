@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 HWND ChgTrue;
@@ -50,8 +50,8 @@ void ChangeFlag(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 
 	if (message == WM_CREATE) {
 		ChgVar = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 150, 160, 150, 200, WndHndl, (HMENU)IDC_CHGFLAG_VAR, InstHndl, NULL);
-		ChgTrue = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHANGE_TRUE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 150, 200, 150, 20, WndHndl, (HMENU)IDC_CHGFLAG_TRUE, InstHndl, NULL);
-		ChgFalse = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHANGE_FALSE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 150, 240, 150, 20, WndHndl, (HMENU)IDC_CHGFLAG_FALSE, InstHndl, NULL);
+		ChgTrue = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHANGE_TRUE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 150, 200, 150, 20, WndHndl, (HMENU)IDC_CHGFLAG_TRUE, InstHndl, NULL);
+		ChgFalse = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHANGE_FALSE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 150, 240, 150, 20, WndHndl, (HMENU)IDC_CHGFLAG_FALSE, InstHndl, NULL);
 
 		SelectedVarId = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
 		MaxIndex = StkProp_CollectAndSetFlagVariable(ChgVar, VarId, SelectedVarId);
@@ -101,8 +101,8 @@ void CheckFlag(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 
 	if (message == WM_CREATE) {
 		CheckVar = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 150, 160, 150, 200, WndHndl, (HMENU)IDC_CHECKFLAG_VAR, InstHndl, NULL);
-		CheckTrue = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHECK_TRUE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 110, 200, 250, 20, WndHndl, (HMENU)IDC_CHECKFLAG_TRUE, InstHndl, NULL);
-		CheckFalse = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_CHECK_FALSE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 110, 240, 250, 20, WndHndl, (HMENU)IDC_CHECKFLAG_FALSE, InstHndl, NULL);
+		CheckTrue = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHECK_TRUE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 110, 200, 250, 20, WndHndl, (HMENU)IDC_CHECKFLAG_TRUE, InstHndl, NULL);
+		CheckFalse = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHECK_FALSE), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 110, 240, 250, 20, WndHndl, (HMENU)IDC_CHECKFLAG_FALSE, InstHndl, NULL);
 
 		SelectedVarId = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
 		MaxIndex = StkProp_CollectAndSetFlagVariable(CheckVar, VarId, SelectedVarId);

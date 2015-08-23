@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 
@@ -21,15 +21,15 @@ void ExecProg(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 	GetClientRect(WndHndl, &Rect);
 
 	if (message == WM_CREATE) {
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_EXECPROG_COMMAND), WS_CHILD | WS_VISIBLE, 40, 100, 400, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_EXECPROG_COMMAND), WS_CHILD | WS_VISIBLE, 40, 100, 400, 20, WndHndl, NULL, InstHndl, NULL);
 		ProgNameHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 80, 125, 380, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(ProgNameHndl, EM_SETLIMITTEXT, (WPARAM)254, (LPARAM)0);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_EXECPROG_CURRDIR), WS_CHILD | WS_VISIBLE, 40, 160, 400, 60, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_EXECPROG_CURRDIR), WS_CHILD | WS_VISIBLE, 40, 160, 400, 60, WndHndl, NULL, InstHndl, NULL);
 		CurrDirHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 80, 220, 380, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(CurrDirHndl, EM_SETLIMITTEXT, (WPARAM)254, (LPARAM)0);
-		CheckWaitHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_EXECPROG_WAIT), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 260, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_WAIT, InstHndl, NULL);
-		CheckStdoutHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_EXECPROG_STDOUT), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 290, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_STDOUT, InstHndl, NULL);
-		CheckStdinHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_EXECPROG_STDIN), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 320, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_STDIN, InstHndl, NULL);
+		CheckWaitHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_EXECPROG_WAIT), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 260, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_WAIT, InstHndl, NULL);
+		CheckStdoutHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_EXECPROG_STDOUT), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 290, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_STDOUT, InstHndl, NULL);
+		CheckStdinHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_EXECPROG_STDIN), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 320, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_STDIN, InstHndl, NULL);
 
 		TCHAR BufPath[256];
 		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, BufPath, 6);

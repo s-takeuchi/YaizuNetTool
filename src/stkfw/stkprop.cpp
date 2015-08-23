@@ -8,7 +8,7 @@
 #include "StkPropExecMgr.h"
 #include "StkPropExecElem.h"
 #include "LowDbAccess.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "StkProp.h"
 #include "..\..\..\YaizuComLib\src\\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\\stkthreadgui\stkthreadgui.h"
@@ -156,7 +156,7 @@ LRESULT CALLBACK PropProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lPar
 		BmpWndHndl    = CreateWindow(_T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | SS_BITMAP, 0, 0, 30, 2048, WndHndl, NULL, StkPropInstHndl, NULL);
 		IdTextHndl    = CreateWindow(_T("STATIC"), _T("ID"), WS_CHILD | WS_VISIBLE, 20, 62, 20, 20, WndHndl, NULL, StkPropInstHndl, NULL);
 		IdEditHndl    = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 40, 60, 50, 24, WndHndl, NULL, StkPropInstHndl, NULL);
-		NameTextHndl  = CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NAME), WS_CHILD | WS_VISIBLE, 180, 62, 40, 20, WndHndl, NULL, StkPropInstHndl, NULL);
+		NameTextHndl  = CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NAME), WS_CHILD | WS_VISIBLE, 180, 62, 40, 20, WndHndl, NULL, StkPropInstHndl, NULL);
 		NameEditHndl  = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 225, 60, 270, 24, WndHndl, NULL, StkPropInstHndl, NULL);
 		OkButton      = CreateWindow(_T("BUTTON"), _T("OK"), WS_CHILD | WS_VISIBLE, Rect.right - 180, Rect.bottom - 40, 80, 30, WndHndl, (HMENU)IDC_BTNOK, StkPropInstHndl, NULL);
 		CancelButton  = CreateWindow(_T("BUTTON"), _T("Cancel"), WS_CHILD | WS_VISIBLE, Rect.right - 90, Rect.bottom - 40, 80, 30, WndHndl, (HMENU)IDC_BTNCANCEL, StkPropInstHndl, NULL);

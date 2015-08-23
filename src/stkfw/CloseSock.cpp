@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 int GetTargetTcpUdpNameArray(TCHAR Name[256][32], int Id[256], int UdpFlag)
@@ -64,15 +64,15 @@ void CloseSock(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 	static int SelectedOpeType = 0;
 
 	TCHAR CloseForceMsg[50];
-	static const TCHAR* CloseForce = MessageProc::GetMsg(MessageProc::PROP_NET_CLOSEFORCE);
+	static const TCHAR* CloseForce = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSEFORCE);
 	lstrcpy(CloseForceMsg, CloseForce);
 
 	if (message == WM_CREATE) {
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_CLOSEPORT), WS_CHILD | WS_VISIBLE, 50, 207, 160, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_CLOSEPORT), WS_CHILD | WS_VISIBLE, 50, 207, 160, 20, WndHndl, NULL, InstHndl, NULL);
 		CloseHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 220, 205, 200, 200, WndHndl, (HMENU)IDC_CLOSEPORT, InstHndl, NULL);
 		CloseForceHndl = CreateWindow(_T("BUTTON"), CloseForceMsg, WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 220, 240, 160, 20, WndHndl, (HMENU)IDC_NET_CLOSEFORCE, InstHndl, NULL);
-		RdoBtn1  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_CLOSETCPPORT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 30, 135, 180, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_TCP, InstHndl, NULL);
-		RdoBtn2  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_CLOSEUDPPORT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 30, 165, 180, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_UDP, InstHndl, NULL);
+		RdoBtn1  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSETCPPORT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 30, 135, 180, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_TCP, InstHndl, NULL);
+		RdoBtn2  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSEUDPPORT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 30, 165, 180, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_UDP, InstHndl, NULL);
 
 		// Initialize check box
 		SelectedOpeType = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 3); // Get operation type

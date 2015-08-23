@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 HWND DateSpec;
@@ -48,15 +48,15 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 	static int SelectedType = 0;
 
 	if (message == WM_CREATE) {
-		DateSpec = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_TIMER_PAST), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 110, Rect.right - 40, 20, WndHndl, (HMENU)IDC_TIMER_CHKTIME, InstHndl, NULL);
+		DateSpec = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_TIMER_PAST), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 110, Rect.right - 40, 20, WndHndl, (HMENU)IDC_TIMER_CHKTIME, InstHndl, NULL);
 		CbYearHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 100, 140, 60, 200, WndHndl, (HMENU)IDC_TIMER_YEAR, InstHndl, NULL);
 		CbMonthHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 170, 140, 40, 200, WndHndl, (HMENU)IDC_TIMER_MONTH, InstHndl, NULL);
 		CbDayHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 220, 140, 40, 200, WndHndl, (HMENU)IDC_TIMER_DAY, InstHndl, NULL);
 		CbHourHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 300, 140, 40, 200, WndHndl, (HMENU)IDC_TIMER_HOUR, InstHndl, NULL);
 		CbMinuteHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 350, 140, 40, 200, WndHndl, (HMENU)IDC_TIMER_MINUTE, InstHndl, NULL);
 		CbSecondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 400, 140, 40, 200, WndHndl, (HMENU)IDC_TIMER_SECOND, InstHndl, NULL);
-		SleepSpec = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_TIMER_WAIT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 200, 260, 20, WndHndl, (HMENU)IDC_TIMER_CHKWAIT, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_TIMER_SEC), WS_CHILD | WS_VISIBLE, 360, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
+		SleepSpec = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_TIMER_WAIT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 200, 260, 20, WndHndl, (HMENU)IDC_TIMER_CHKWAIT, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_TIMER_SEC), WS_CHILD | WS_VISIBLE, 360, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
 		EdWaitHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 300, 200, 50, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(EdWaitHndl, EM_SETLIMITTEXT, (WPARAM)4, (LPARAM)0);
 

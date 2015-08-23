@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 int GetMsgWidth(HWND, TCHAR*);
@@ -199,21 +199,21 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 								_T("Enterprise storage device"), _T("Mainframe B"), _T("Note PC"), _T("Desktop PC B")};
 
 	TCHAR ComboFinishCond[5][128];
-	lstrcpy(ComboFinishCond[0], MessageProc::GetMsg(MessageProc::PROP_NET_UNCOND));
-	lstrcpy(ComboFinishCond[1], MessageProc::GetMsg(MessageProc::PROP_NET_CLOSEDETECT));
-	lstrcpy(ComboFinishCond[2], MessageProc::GetMsg(MessageProc::PROP_NET_TIMEOUT));
-	lstrcpy(ComboFinishCond[3], MessageProc::GetMsg(MessageProc::PROP_NET_RECVSTR));
-	lstrcpy(ComboFinishCond[4], MessageProc::GetMsg(MessageProc::PROP_NET_EXCEEDSIZE));
+	lstrcpy(ComboFinishCond[0], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_UNCOND));
+	lstrcpy(ComboFinishCond[1], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSEDETECT));
+	lstrcpy(ComboFinishCond[2], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUT));
+	lstrcpy(ComboFinishCond[3], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVSTR));
+	lstrcpy(ComboFinishCond[4], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_EXCEEDSIZE));
 
-	static const TCHAR* Receiver1 = MessageProc::GetMsg(MessageProc::PROP_NET_RECV);
-	static const TCHAR* Receiver2 = MessageProc::GetMsg(MessageProc::PROP_NET_RECVTGT);
-	static const TCHAR* Sender1 = MessageProc::GetMsg(MessageProc::PROP_NET_SEND);
-	static const TCHAR* Sender2 = MessageProc::GetMsg(MessageProc::PROP_NET_SENDTGT);
-	static const TCHAR* TargetSender = MessageProc::GetMsg(MessageProc::PROP_NET_SENDER);
-	static const TCHAR* TargetRecver = MessageProc::GetMsg(MessageProc::PROP_NET_RECEIVER);
-	static const TCHAR* CloseSender = MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERSEND);
-	static const TCHAR* CloseRecver = MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERRECV);
-	static const TCHAR* CloseForce = MessageProc::GetMsg(MessageProc::PROP_NET_CLOSEFORCE);
+	static const TCHAR* Receiver1 = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECV);
+	static const TCHAR* Receiver2 = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVTGT);
+	static const TCHAR* Sender1 = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SEND);
+	static const TCHAR* Sender2 = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SENDTGT);
+	static const TCHAR* TargetSender = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SENDER);
+	static const TCHAR* TargetRecver = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECEIVER);
+	static const TCHAR* CloseSender = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERSEND);
+	static const TCHAR* CloseRecver = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERRECV);
+	static const TCHAR* CloseForce = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSEFORCE);
 
 	static int IconOffset = 0;
 
@@ -265,19 +265,19 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 	GetClientRect(WndHndl, &Rect);
 
 	if (message == WM_CREATE) {
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_ICON), WS_CHILD | WS_VISIBLE, 100, 102, 80, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ICON), WS_CHILD | WS_VISIBLE, 100, 102, 80, 20, WndHndl, NULL, InstHndl, NULL);
 		IconHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 100, 200, 200, WndHndl, (HMENU)IDC_RECVINIT_ICON, InstHndl, NULL);
 		RdoBtn1  = CreateWindow(_T("BUTTON"), Radio1, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 135, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_ID, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_IPADDR), WS_CHILD | WS_VISIBLE, 50, 167, 140, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_IPADDR), WS_CHILD | WS_VISIBLE, 50, 167, 140, 20, WndHndl, NULL, InstHndl, NULL);
 		IpHndl   = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 190, 165, 200, 24, WndHndl, NULL, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_PORT), WS_CHILD | WS_VISIBLE, 60, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PORT), WS_CHILD | WS_VISIBLE, 60, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
 		PortHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 190, 200, 70, 24, WndHndl, NULL, InstHndl, NULL);
 		RdoBtn2  = CreateWindow(_T("BUTTON"), Radio2, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 230, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
 		CreateWindow(_T("STATIC"), Target, WS_CHILD | WS_VISIBLE, 70, 262, 100, 20, WndHndl, NULL, InstHndl, NULL);
 		SendHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 260, 200, 200, WndHndl, (HMENU)IDC_NET_SENDER, InstHndl, NULL);
 
 		if (Type == 1) {
-			RdoBtn3  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_RECVMULTI), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 290, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_RC, InstHndl, NULL);
+			RdoBtn3  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVMULTI), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 290, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_RC, InstHndl, NULL);
 			CreateWindow(_T("STATIC"), TargetRecver, WS_CHILD | WS_VISIBLE, 70, 322, 100, 20, WndHndl, NULL, InstHndl, NULL);
 			RecvHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 320, 200, 200, WndHndl, (HMENU)IDC_NET_RECEIVER, InstHndl, NULL);
 		}
@@ -287,7 +287,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 
 		// If TCP receiver, finish condition can be specified.
 		if (Type == 1) {
-			CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_TERMCOND), WS_CHILD | WS_VISIBLE, 10, 387, 200, 20, WndHndl, NULL, InstHndl, NULL);
+			CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TERMCOND), WS_CHILD | WS_VISIBLE, 10, 387, 200, 20, WndHndl, NULL, InstHndl, NULL);
 			FinishCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.left + 20, 412, Rect.right - 30, 200, WndHndl, (HMENU)IDC_RECVINIT_FINISHCOND, InstHndl, NULL);
 			for (int Loop = 0; Loop < 5; Loop++) {
 				SendMessage(FinishCondHndl, CB_ADDSTRING, 0, (LPARAM)ComboFinishCond[Loop]);
@@ -296,9 +296,9 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 
 			WaitCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, Rect.left + 20, 445, 70, 24, WndHndl, NULL, InstHndl, NULL);
 			SendMessage(WaitCondHndl, EM_SETLIMITTEXT, (WPARAM)6, (LPARAM)0);
-			ProceedNoDatRecvHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_PROCEEDEVENIFNODATARECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 100, 445, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_PROCEEDEVENIFNODATARECV)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_PROCEEDEVENIFNODATARECV)), 
+			ProceedNoDatRecvHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 100, 445, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV)), 
 				WndHndl, (HMENU)IDC_RECVINIT_PROCEEDNODATRECV, InstHndl, NULL);
 
 			LenCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, Rect.right - 80, 445, 70, 24, WndHndl, NULL, InstHndl, NULL);

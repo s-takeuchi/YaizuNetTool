@@ -4,7 +4,7 @@
 #include <commctrl.h>
 #include "resource.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
+#include "MyMsgProc.h"
 #include "LowDbAccess.h"
 
 void ChangeOperationType(int Type, HWND RdoBtn1, HWND RdoBtn2, HWND IpHndl, HWND PortHndl, HWND TgtHndl)
@@ -64,42 +64,42 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 
 	if (message == WM_CREATE) {
 		if (Type == 21) {
-			RdoBtn1  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_RECV), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 135, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_RECV)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_RECV)), 
+			RdoBtn1  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECV), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 135, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECV)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECV)), 
 				WndHndl, (HMENU)IDC_NET_OPETYPE_ID, InstHndl, NULL);
-			RdoBtn2  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_RECVTGT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 235, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_RECVTGT)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_RECVTGT)), 
+			RdoBtn2  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVTGT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 235, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVTGT)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVTGT)), 
 				WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
 		} else {
-			RdoBtn1  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_SEND), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 135, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_SEND)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_SEND)), 
+			RdoBtn1  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SEND), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 135, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SEND)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SEND)), 
 				WndHndl, (HMENU)IDC_NET_OPETYPE_ID, InstHndl, NULL);
-			RdoBtn2  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_SENDTGT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 235, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_SENDTGT)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_SENDTGT)), 
+			RdoBtn2  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SENDTGT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 10, 235, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SENDTGT)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SENDTGT)), 
 				WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
 		}
 		SIZE BtnWidth;
 		SendMessage(RdoBtn1, BCM_GETIDEALSIZE, 0, (LPARAM)&BtnWidth);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_IPADDR), WS_CHILD | WS_VISIBLE, 50, 167, 140, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_IPADDR), WS_CHILD | WS_VISIBLE, 50, 167, 140, 20, WndHndl, NULL, InstHndl, NULL);
 		IpHndl   = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 190, 165, 200, 24, WndHndl, NULL, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_PORT), WS_CHILD | WS_VISIBLE, 60, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PORT), WS_CHILD | WS_VISIBLE, 60, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
 		PortHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 190, 200, 70, 24, WndHndl, NULL, InstHndl, NULL);
 		if (Type != 21) {
-			CloseSockHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERSEND), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 10, 295, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERSEND)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERSEND)), 
+			CloseSockHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERSEND), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 10, 295, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERSEND)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERSEND)), 
 				WndHndl, (HMENU)IDC_NET_CLOSESOCK, InstHndl, NULL);
-			CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_RECEIVER), WS_CHILD | WS_VISIBLE, 70, 267, 100, 20, WndHndl, NULL, InstHndl, NULL);
+			CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECEIVER), WS_CHILD | WS_VISIBLE, 70, 267, 100, 20, WndHndl, NULL, InstHndl, NULL);
 		} else {
-			CloseSockHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERRECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 10, 295, 
-				GetMsgWidth(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERRECV)) + 30, 
-				GetMsgHeight(WndHndl, MessageProc::GetMsg(MessageProc::PROP_NET_CLOSE_AFTERRECV)), 
+			CloseSockHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERRECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 10, 295, 
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERRECV)) + 30, 
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSE_AFTERRECV)), 
 				WndHndl, (HMENU)IDC_NET_CLOSESOCK, InstHndl, NULL);
-			CreateWindow(_T("STATIC"), MessageProc::GetMsg(MessageProc::PROP_NET_SENDER), WS_CHILD | WS_VISIBLE, 70, 267, 100, 20, WndHndl, NULL, InstHndl, NULL);
+			CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SENDER), WS_CHILD | WS_VISIBLE, 70, 267, 100, 20, WndHndl, NULL, InstHndl, NULL);
 		}
 		TgtHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 265, 200, 200, WndHndl, (HMENU)IDC_NET_SENDER, InstHndl, NULL);
 
