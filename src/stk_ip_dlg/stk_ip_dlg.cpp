@@ -14,6 +14,7 @@
 #include "..\..\..\YaizuComLib\src\msgproc\msgproc.h"
 
 #define STK_IP_DLG_IPSTRLEN 20000
+#define NEEDADMINRIGHTS 2903
 
 // Global veriable
 RECT DlgRect;
@@ -807,7 +808,7 @@ void CheckExecutorLocalGroup(void)
 	TCHAR Buf[64];
 	DWORD BufSize = 64;
 
-	lstrcpy(ErrorMessage, MessageProc::GetMsg(MessageProc::NEEDADMINRIGHTS));
+	lstrcpy(ErrorMessage, MessageProc::GetMsg(NEEDADMINRIGHTS));
 	lstrcat(ErrorMessage, _T("User name = "));
 	GetUserName(Buf, &BufSize);
 	lstrcat(ErrorMessage, Buf);
@@ -834,6 +835,9 @@ void CheckExecutorLocalGroup(void)
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	IpDlgInstanceHndl = hInstance;
+
+	MessageProc::AddJpn(NEEDADMINRIGHTS, _T("このプログラムを実行するためにはLocal Administratorの権限が必要です。\r\nプログラムは終了します。\r\n\r\n"));
+	MessageProc::AddEng(NEEDADMINRIGHTS, _T("You need local administrator's rights to run this program.\r\nThe program will be terminated.\r\n\r\n"));
 
 	CheckExecutorLocalGroup();
 
