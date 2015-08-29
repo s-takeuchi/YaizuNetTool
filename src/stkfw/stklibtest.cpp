@@ -592,7 +592,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 
 	AddStkThreadLog(_T("==========================================\r\n"));
-	AddStkThreadLog(MessageProc::GetMsg(MessageProc::STKFW_LOG_TITLE));
+	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_TITLE));
 	AddStkThreadLog(_T("==========================================\r\n"));
 
 	LowDbAccess::GetInstance()->IsUpdated(1);
@@ -706,7 +706,7 @@ void SetMouseAction(int Flag)
 
 void StartProc(void)
 {
-	AddStkThreadLog(MessageProc::GetMsg(MessageProc::STKFW_LOG_START));
+	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
 
 	StkSocket_ClearLog();
 
@@ -762,17 +762,17 @@ void StopProc(void)
 		LowDbAccess::GetInstance()->IsUpdated(3);
 	}
 
-	AddStkThreadLog(MessageProc::GetMsg(MessageProc::STKFW_LOG_STOP));
+	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_STOP));
 }
 
 void StartProcForCmd(void)
 {
-	AddStkThreadLog(MessageProc::GetMsg(MessageProc::STKFW_LOG_START));
+	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
 }
 
 void StopProcForCmd(void)
 {
-	AddStkThreadLog(MessageProc::GetMsg(MessageProc::STKFW_LOG_STOP));
+	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_STOP));
 }
 
 int SetAboutInfo()
