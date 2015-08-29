@@ -508,6 +508,55 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(STKFW_LOG_UDPSOCKCLOSE, _T("Closure of UDP socket succeeded."));
 
 	// =====================================================================================================
+	//2902 (NC2)
+	MessageProc::AddJpn(FILEACCESSERROR, _T("ファイルアクセスエラーが発生しました。"));
+	MessageProc::AddEng(FILEACCESSERROR, _T("A file access error has occurred."));
+
+	//2903 (NC1)
+	MessageProc::AddJpn(NEEDADMINRIGHTS, _T("このプログラムを実行するためにはLocal Administratorの権限が必要です。\r\nプログラムは終了します。\r\n\r\n"));
+	MessageProc::AddEng(NEEDADMINRIGHTS, _T("You need local administrator's rights to run this program.\r\nThe program will be terminated.\r\n\r\n"));
+
+	//2904 (NC3)
+	MessageProc::AddJpn(DATAUPDATED, _T("プログラムが使用するデータは更新されています。\r\nデータが失われますが操作を続けて良いですか。"));
+	MessageProc::AddEng(DATAUPDATED, _T("Program data updated.\r\nData will be lost. Continue operation?"));
+
+	//2931 (---)
+	MessageProc::AddJpn(COMMON_ADD, _T("追加"));
+	MessageProc::AddEng(COMMON_ADD, _T("Add"));
+
+	//2932 (---)
+	MessageProc::AddJpn(COMMON_DELETE, _T("削除"));
+	MessageProc::AddEng(COMMON_DELETE, _T("Delete"));
+
+	//2933 (---)
+	MessageProc::AddJpn(COMMON_EDIT, _T("編集"));
+	MessageProc::AddEng(COMMON_EDIT, _T("Edit"));
+
+	//2934 (---)
+	MessageProc::AddJpn(COMMON_REFRESH, _T("更新"));
+	MessageProc::AddEng(COMMON_REFRESH, _T("Refresh"));
+
+	//2935 (---)
+	MessageProc::AddJpn(COMMON_TRUE, _T("True"));
+	MessageProc::AddEng(COMMON_TRUE, _T("True"));
+
+	//2936 (---)
+	MessageProc::AddJpn(COMMON_FALSE, _T("False"));
+	MessageProc::AddEng(COMMON_FALSE, _T("False"));
+
+	//2937 (---)
+	MessageProc::AddJpn(COMMON_UNKNOWN, _T("不明"));
+	MessageProc::AddEng(COMMON_UNKNOWN, _T("Unknown"));
+
+	//2941 (---)
+	MessageProc::AddJpn(COMMON_OK, _T("OK"));
+	MessageProc::AddEng(COMMON_OK, _T("OK"));
+
+	//2942 (---)
+	MessageProc::AddJpn(COMMON_CANCEL, _T("ｷｬﾝｾﾙ"));
+	MessageProc::AddEng(COMMON_CANCEL, _T("Cancel"));
+
+	// =====================================================================================================
 	//9100 (NC2)
 	MessageProc::AddJpn(SFW_100_1, _T("StkFw 初期バージョンをリリースした。"));
 	MessageProc::AddEng(SFW_100_1, _T("StkFw initial version was released."));

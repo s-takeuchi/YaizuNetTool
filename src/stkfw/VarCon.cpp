@@ -9,7 +9,6 @@
 #include "resource.h"
 #include "VarCon.h"
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "MyMsgProc.h"
 
 HINSTANCE InstHndl;
@@ -505,11 +504,11 @@ void ChangeWindowTitle(HWND TargetWndHndl, int Id, int Operation)
 	GetWindowText(TargetWndHndl, OrgBuf, 128);
 	// オペレーション名を設定する
 	if (Operation == 1) {
-		lstrcpy(Ope, MessageProc::GetMsg(MessageProc::COMMON_ADD));
+		lstrcpy(Ope, MyMsgProc::GetMsg(MyMsgProc::COMMON_ADD));
 	} else if (Operation == 2) {
-		lstrcpy(Ope, MessageProc::GetMsg(MessageProc::COMMON_EDIT));
+		lstrcpy(Ope, MyMsgProc::GetMsg(MyMsgProc::COMMON_EDIT));
 	} else {
-		lstrcpy(Ope, MessageProc::GetMsg(MessageProc::COMMON_UNKNOWN));
+		lstrcpy(Ope, MyMsgProc::GetMsg(MyMsgProc::COMMON_UNKNOWN));
 	}
 	// ウィンドウタイトルの設定
 	if (Id != -1) {
@@ -987,8 +986,8 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		CommEdDesc       = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 0, 0, 0, 0, CommBkGndWndHndl, (HMENU)IDC_VARCOMMDESCEDIT, InstHndl, NULL);
 		CommEdit         = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | WS_HSCROLL | WS_VSCROLL | ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_MULTILINE, 0, 0, 0, 0, hWnd, NULL, InstHndl, NULL);
 		CommIconWndHndl  = CreateWindow(_T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | SS_ICON, 10, 7, 32, 32, hWnd, NULL, InstHndl, NULL);
-		CommButtonOK     = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_OK), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMBTNOK, InstHndl, NULL);
-		CommButtonCancel = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_CANCEL), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMBTNCANCEL, InstHndl, NULL);
+		CommButtonOK     = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_OK), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMBTNOK, InstHndl, NULL);
+		CommButtonCancel = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_CANCEL), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMBTNCANCEL, InstHndl, NULL);
 
 		SendMessage(CommIconWndHndl, STM_SETICON, (WPARAM)LoadImage(InstHndl, MAKEINTRESOURCE(IDI_VARICON5), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR), (LPARAM)NULL);
 
@@ -1100,14 +1099,14 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			// Openメニューが選択されたとき
 			if (LOWORD(wParam) == ID_VARFILE_OPENX) {
 				if (OpenFileX(WndHndl) == -1) {
-					MessageProc::StkErr(MessageProc::FILEACCESSERROR, WndHndl);
+					MyMsgProc::StkErr(MyMsgProc::FILEACCESSERROR, WndHndl);
 				}
 				break;
 			}
 			// Saveメニューが選択されたとき
 			if (LOWORD(wParam) == ID_VARFILE_SAVEX) {
 				if (SaveFileX(WndHndl) == -1) {
-					MessageProc::StkErr(MessageProc::FILEACCESSERROR, WndHndl);
+					MyMsgProc::StkErr(MyMsgProc::FILEACCESSERROR, WndHndl);
 				}
 				break;
 			}
@@ -1140,19 +1139,19 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		IconWndHndl   = CreateWindow(_T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | SS_ICON, 10, 0, 32, 32, hWnd, NULL, InstHndl, NULL);
 		RadioButton1 = CreateWindow(_T("BUTTON"), _T("Communication"), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON , 0, 0, 0, 0, hWnd, (HMENU)IDC_VARRADIO_COMM, InstHndl, NULL);
 		RadioButton2 = CreateWindow(_T("BUTTON"), _T("Flag"), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON , 0, 0, 0, 0, hWnd, (HMENU)IDC_VARRADIO_FLAG, InstHndl, NULL);
-		ButtonRefWndHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_REFRESH), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARREFRESH, InstHndl, NULL);
+		ButtonRefWndHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_REFRESH), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARREFRESH, InstHndl, NULL);
 
 		// Button of communication
-		ButtonCommAddWndHndl   = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_ADD), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMADDBUTTON, InstHndl, NULL);
-		ButtonCommDelWndHndl   = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_DELETE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMDELBUTTON, InstHndl, NULL);
-		ButtonCommChgWndHndl   = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_EDIT), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMEDITBUTTON, InstHndl, NULL);
+		ButtonCommAddWndHndl   = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_ADD), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMADDBUTTON, InstHndl, NULL);
+		ButtonCommDelWndHndl   = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_DELETE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMDELBUTTON, InstHndl, NULL);
+		ButtonCommChgWndHndl   = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_EDIT), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMEDITBUTTON, InstHndl, NULL);
 
 		// Button of flag
-		ButtonFlagAddWndHndl   = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_ADD), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGADDBUTTON, InstHndl, NULL);
-		ButtonFlagDelWndHndl   = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_DELETE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGDELBUTTON, InstHndl, NULL);
-		ButtonFlagChgWndHndl   = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_EDIT), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGEDITBUTTON, InstHndl, NULL);
-		ButtonFlagTrueWndHndl  = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_TRUE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGTRUE, InstHndl, NULL);
-		ButtonFlagFalseWndHndl = CreateWindow(_T("BUTTON"), MessageProc::GetMsg(MessageProc::COMMON_FALSE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGFALSE, InstHndl, NULL);
+		ButtonFlagAddWndHndl   = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_ADD), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGADDBUTTON, InstHndl, NULL);
+		ButtonFlagDelWndHndl   = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_DELETE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGDELBUTTON, InstHndl, NULL);
+		ButtonFlagChgWndHndl   = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_EDIT), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGEDITBUTTON, InstHndl, NULL);
+		ButtonFlagTrueWndHndl  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_TRUE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGTRUE, InstHndl, NULL);
+		ButtonFlagFalseWndHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_FALSE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGFALSE, InstHndl, NULL);
 
 		// リストビューを作成する
 		ComListWndHndl = CreateWindowEx(0, WC_LISTVIEW, _T(""), WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SHOWSELALWAYS, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMLV, InstHndl, NULL);

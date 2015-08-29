@@ -4,7 +4,6 @@
 #include <memory.h>
 #include "..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
 #include "LowDbAccess.h"
-//#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "MyMsgProc.h"
 
 void StkPropExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)

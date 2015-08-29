@@ -132,6 +132,19 @@ public:
 	static const int STKFW_LOG_SUCCESSCS = 2422;
 	static const int STKFW_LOG_UDPSOCKCLOSE = 2423;
 
+	static const int FILEACCESSERROR = 2902;
+	static const int NEEDADMINRIGHTS = 2903;
+	static const int DATAUPDATED = 2904;
+	static const int COMMON_ADD = 2931;
+	static const int COMMON_DELETE = 2932;
+	static const int COMMON_EDIT = 2933;
+	static const int COMMON_REFRESH = 2934;
+	static const int COMMON_TRUE = 2935;
+	static const int COMMON_FALSE = 2936;
+	static const int COMMON_UNKNOWN = 2937;
+	static const int COMMON_OK = 2941;
+	static const int COMMON_CANCEL = 2942;
+
 	static const int SFW_100_1 = 9100;
 	static const int SFW_100_110_1 = 9101;
 	static const int SFW_100_110_2 = 9102;

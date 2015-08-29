@@ -18,7 +18,6 @@
 #include "..\stklib\ActorStatus.h"
 #include "..\stklib\ActorStatusElement.h"
 
-#include "..\..\..\YaizuComLib\src\\msgproc\msgproc.h"
 #include "..\..\..\YaizuComLib\src\\stk_about\stk_about.h"
 #include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
@@ -1056,7 +1055,7 @@ void CheckExecutorLocalGroup(void)
 	TCHAR Buf[64];
 	DWORD BufSize = 64;
 
-	lstrcpy(ErrorMessage, MessageProc::GetMsg(MessageProc::NEEDADMINRIGHTS));
+	lstrcpy(ErrorMessage, MyMsgProc::GetMsg(MyMsgProc::NEEDADMINRIGHTS));
 	lstrcat(ErrorMessage, _T("User name = "));
 	GetUserName(Buf, &BufSize);
 	lstrcat(ErrorMessage, Buf);
@@ -1219,7 +1218,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 			if (LowDbAccess::GetInstance()->IsUpdated(0) || IsActorStatusUpdated(0)) {
-				if (MessageProc::StkYesNo(MessageProc::DATAUPDATED, hWnd) == IDNO) {
+				if (MyMsgProc::StkYesNo(MyMsgProc::DATAUPDATED, hWnd) == IDNO) {
 					break;
 				}
 			}
@@ -1237,7 +1236,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 			if (LowDbAccess::GetInstance()->IsUpdated(0) || IsActorStatusUpdated(0)) {
-				if (MessageProc::StkYesNo(MessageProc::DATAUPDATED, hWnd) == IDNO) {
+				if (MyMsgProc::StkYesNo(MyMsgProc::DATAUPDATED, hWnd) == IDNO) {
 					break;
 				}
 			}
@@ -1348,7 +1347,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case IDM_FILE_EXIT:
 			if (LowDbAccess::GetInstance()->IsUpdated(0) || IsActorStatusUpdated(0)) {
-				if (MessageProc::StkYesNo(MessageProc::DATAUPDATED, hWnd) == IDNO) {
+				if (MyMsgProc::StkYesNo(MyMsgProc::DATAUPDATED, hWnd) == IDNO) {
 					break;
 				}
 			}
@@ -1361,7 +1360,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_CLOSE:
 		if (LowDbAccess::GetInstance()->IsUpdated(0) || IsActorStatusUpdated(0)) {
-			if (MessageProc::StkYesNo(MessageProc::DATAUPDATED, hWnd) == IDNO) {
+			if (MyMsgProc::StkYesNo(MyMsgProc::DATAUPDATED, hWnd) == IDNO) {
 				break;
 			}
 		}
