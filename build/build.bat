@@ -82,6 +82,7 @@ copy "..\doc\man\eng\*.*" stkfw\manual\eng
 copy "..\doc\man\jpn\*.*" stkfw\manual\jpn
 
 
+rem ########## Making installer ##########
 echo;
 echo Making installer...
 %DEVENV% "setup\setup1.sln" /rebuild Release
@@ -110,6 +111,7 @@ echo All building processes of StkFw have been successfully finished.
 exit /B
 
 
+rem ########## Error ##########
 :FILENOTEXIST
 echo;
 echo Build error occurred because some build target files do not exist.
