@@ -100,6 +100,9 @@ Windows Server 2012 Standard
 (6) Support enabled for Windows 8, Windows Server 2012, Windows Server 2003 R2
     and Windows Server 2008 R2.
 
+* Version 1.4.0 ---> 1.5.0
+(1) Installer program files integrated into one MSI file.
+
 
 =================================================
 4.Installation

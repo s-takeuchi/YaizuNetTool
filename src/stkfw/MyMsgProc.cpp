@@ -658,8 +658,8 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(SFW_130_140_6, _T("Support enabled for Windows 8, Windows Server 2012, Windows Server 2003 R2 and Windows Server 2008 R2."));
 
 	//9125 (★)
-	MessageProc::AddJpn(SFW_140_150_1, _T("インストーラプログラムをひとつのMSIファイルに統合した。"));
-	MessageProc::AddEng(SFW_140_150_1, _T("Installer program integrated into one MSI file."));
+	MessageProc::AddJpn(SFW_140_150_1, _T("インストーラプログラム（ファイル）をひとつのMSIファイルに統合した。"));
+	MessageProc::AddEng(SFW_140_150_1, _T("Installer program files integrated into one MSI file."));
 
 	// =====================================================================================================
 }

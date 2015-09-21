@@ -96,6 +96,9 @@ Windows Server 2012 Standard
 (6) Windows 8, Windows Server 2012, Windows Server 2003 R2, 
     Windows Server 2008 R2をサポートした。
 
+* バージョン 1.4.0 ---> 1.5.0
+(1) インストーラプログラム（ファイル）をひとつのMSIファイルに統合した。
+
 
 =================================================
 4.使用許諾条件
