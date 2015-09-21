@@ -661,6 +661,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_140_150_1, _T("インストーラプログラム（ファイル）をひとつのMSIファイルに統合した。"));
 	MessageProc::AddEng(SFW_140_150_1, _T("Installer program files integrated into one MSI file."));
 
+	//9126 (★)
+	MessageProc::AddJpn(SFW_140_150_2, _T("同一ポートで複数クライアントからの同時接続を可能にした。"));
+	MessageProc::AddEng(SFW_140_150_2, _T("Support enabled for multiple client's connections using same port number."));
+
 	// =====================================================================================================
 }
 
