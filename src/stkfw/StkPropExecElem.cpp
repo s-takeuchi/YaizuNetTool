@@ -30,9 +30,17 @@ void StkPropExecElem::StkPropOutputLog()
 	int Id;
 	int ParamInt1, ParamInt2;
 	TCHAR ParamStr1[256], ParamStr2[256];
+	static BOOL BlkFlag = FALSE;
+
+	for (; BlkFlag == TRUE;); // Wait for BlkFlag == FALSE;
+	BlkFlag = TRUE;
+
 	int NumOfLogs = StkSocket_GetNumOfLogs();
 	for (int Loop = 0; Loop < NumOfLogs; Loop++) {
-		StkSocket_TakeLastLog(&Msg, &Id, ParamStr1, ParamStr2, &ParamInt1, &ParamInt2);
+		StkSocket_TakeFirstLog(&Msg, &Id, ParamStr1, ParamStr2, &ParamInt1, &ParamInt2);
+		if (Msg == 0) {
+			continue;
+		}
 		TCHAR Name[32];
 		LowDbAccess::GetInstance()->GetViewElementNameFromId(Id, Name);
 		TCHAR DummyBuf[128];
@@ -110,9 +118,12 @@ void StkPropExecElem::StkPropOutputLog()
 			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_BINDERR), ParamInt2);
 			break;
 		default:
+			wsprintf(DummyBuf, _T("%s Msg=%d\r\n"),  MyMsgProc::GetMsg(MyMsgProc::COMMON_UNKNOWN), Msg);
+			AddStkThreadLogWithThreadInfo(MyMsgProc::GetMsg(MyMsgProc::COMMON_UNKNOWN), DummyBuf);
 			break;
 		}
 	}
+	BlkFlag = FALSE;
 }
 
 // Constructor
