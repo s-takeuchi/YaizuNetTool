@@ -1,5 +1,5 @@
-<HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+﻿<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="content-style-type" content="text/css">
 <link rel="stylesheet" href="./style.css" type="text/css">
 </HEAD>
@@ -13,54 +13,54 @@
 <BODY>
 <div id="container">
 
-<H1>7. �X���b�h���s�ɂ���</H1>
-<H2 ID="7.1">7.1 �S�X���b�h�ꊇ�J�n�^��~</H2>
-���[�N�X�y�[�X��̃f�[�^�t���[���\�����邷�ׂẴX���b�h���J�n�܂��͒�~���邱�Ƃ��ł��܂��B
-�X�̃X���b�h�̊J�n�^��~�𐧌䂵���ꍇ��C�ʐM���O���m�F�������ꍇ�́C��q�̃X���b�h�R���g���[��
-���g�p���Ă��������B
+<H1>7. スレッド実行について</H1>
+<H2 ID="7.1">7.1 全スレッド一括開始／停止</H2>
+ワークスペース上のデータフローを構成するすべてのスレッドを開始または停止することができます。
+個々のスレッドの開始／停止を制御した場合や，通信ログを確認したい場合は，後述のスレッドコントローラ
+を使用してください。
 <p>
 
-<H2 ID="7.2">7.2 �X���b�h�R���g���[��</H2>
-���[�N�X�y�[�X��̕����̏����v�f�ō\�������X���b�h���ɂ��āC�����̊J�n����ђ�~��
-���䂷�邱�Ƃ��ł��܂��B<br>
-���C���R���\�[������X���b�h�R���g���[�����N������ƁC�ȉ��Ɏ����_�C�A���O���\������܂��B<br>
+<H2 ID="7.2">7.2 スレッドコントローラ</H2>
+ワークスペース上の複数の処理要素で構成されるスレッド一つ一つについて，処理の開始および停止を
+制御することができます。<br>
+メインコンソールからスレッドコントローラを起動すると，以下に示すダイアログが表示されます。<br>
 <img src="threadcontroller.jpg"><p>
-�_�C�A���O��������O�o�͗̈�Ŏ�Ɏ�M�v�f�⑗�M�v�f�̒ʐM���O���o�͂���܂��B<br>
-�_�C�A���O�����̓X���b�h�ꗗ�\���̈�ŁC���ꂼ��̃X���b�h�Ə�Ԃ�\�����܂��BName�ɂ͎�ʂ�Initiator��
-�Ȃ鏈���v�f�̖��̂��\������܂��B<p>
-�J�n�܂��͒�~���������X���b�h���`�F�b�N�{�b�N�X�őI�����C[Start (R)]�܂���[Stop (S)]�{�^��������
-���邱�Ƃɂ��C�X���b�h���J�n�܂��͒�~���邱�Ƃ��ł��܂��B<br>
-�X���b�h�̏�Ԃ́C�X���b�h�ꗗ�\���̈��Status�J�����ɕ\������܂��B��Ԃɂ́C
-Ready:���s�\��ԁCStarting:�X���b�h�J�n���CStopping:�X���b�h��~���CRunning:���s����4��
-��Ԃ�����CReady�̃X���b�h�ɑ΂��ĊJ�n����CRunning�̃X���b�h�ɑ΂��Ē�~������s�����Ƃ��ł��܂��B
+ダイアログ上方がログ出力領域で主に受信要素や送信要素の通信ログが出力されます。<br>
+ダイアログ下方はスレッド一覧表示領域で，それぞれのスレッドと状態を表示します。Nameには種別がInitiatorと
+なる処理要素の名称が表示されます。<p>
+開始または停止させたいスレッドをチェックボックスで選択し，[Start (R)]または[Stop (S)]ボタンを押下
+することにより，スレッドを開始または停止することができます。<br>
+スレッドの状態は，スレッド一覧表示領域のStatusカラムに表示されます。状態には，
+Ready:実行可能状態，Starting:スレッド開始中，Stopping:スレッド停止中，Running:実行中の4つの
+状態があり，Readyのスレッドに対して開始操作，Runningのスレッドに対して停止操作を行うことができます。
 
-<H2 ID="7.3">7.3 �R�}���h�ɂ����s</H2>
-���C���R���\�[���Œ�`�����X���b�h�i�f�[�^�t���[�j�́C�o�b�N�O���E���h�v���Z�X�Ƃ��Ď��s���邱�Ƃ��ł��܂��B<p>
-�E�X���b�h�̎��s<br>
-���C���X�g�[����t�H���_��\StkFw\stkfw.exe /start ��.std�t�@�C������<br>
+<H2 ID="7.3">7.3 コマンドによる実行</H2>
+メインコンソールで定義したスレッド（データフロー）は，バックグラウンドプロセスとして実行することができます。<p>
+・スレッドの実行<br>
+＜インストール先フォルダ＞\StkFw\stkfw.exe /start ＜.stdファイル名＞<br>
 <div class=spc>
-�w�肵��.std�t�@�C���Œ�`����Ă���S�ẴX���b�h�����s���܂��B
+指定した.stdファイルで定義されている全てのスレッドを実行します。
 </div>
 <p>
 
-�E�S�Ă�StkFw�v���Z�X�̏I��<br>
-���C���X�g�[����t�H���_��\StkFw\stkfw.exe /stopall<br>
+・全てのStkFwプロセスの終了<br>
+＜インストール先フォルダ＞\StkFw\stkfw.exe /stopall<br>
 <div class=spc>
-StkFw��GUI�œ��삵�Ă��邩�C�o�b�N�O���E���h�v���Z�X�œ��삵�Ă��邩�Ɋ֌W�Ȃ��C
-���ݎ��s���̑S�Ă�StkFw�̃v���Z�X���I�����܂��B<br>
-StkFw�����s����Ă��邩�ǂ����𒲂ׂ�ɂ́Ctasklist�R�}���h�����s���邩�C
-�^�X�N�}�l�[�W���̃v���Z�X�ꗗ���m�F���Ă��������B
-tasklist�R�}���h��Windows XP�ȍ~�ňȉ��̂悤�ɌĂяo�����Ƃ��ł��܂��B<p>
+StkFwがGUIで動作しているか，バックグラウンドプロセスで動作しているかに関係なく，
+現在実行中の全てのStkFwのプロセスを終了します。<br>
+StkFwが実行されているかどうかを調べるには，tasklistコマンドを実行するか，
+タスクマネージャのプロセス一覧を確認してください。
+tasklistコマンドはWindows XP以降で以下のように呼び出すことができます。<p>
 tasklist /FI "IMAGENAME eq stkfw.exe"<p>
 </div>
 <p>
 
-�E�����StkFw�v���Z�X�̏I��<br>
+・特定のStkFwプロセスの終了<br>
 <div class=spc>
-StkFw�����s�������ƁCtasklist�R�}���h���^�X�N�}�l�[�W�����g�p���āC���s����StkFw�̃v���Z�XID(PID)�𒲂ׂĂ��������B<br>
-Windows XP�ȍ~�ł���Έȉ��̃R�}���h�����s���邱�ƂŁC�w�肵���v���Z�XID������StkFw���I�������邱�Ƃ��ł��܂��B<p>
-taskkill /PID ���v���Z�XID(PID)�� /F<p>
-Windows 2000�̏ꍇ�C�^�X�N�}�l�[�W���̃v���Z�X�ꗗ����Ώۂ̃v���Z�X��T���ďI�����Ă��������B<p>
+StkFwを実行したあと，tasklistコマンドかタスクマネージャを使用して，実行したStkFwのプロセスID(PID)を調べてください。<br>
+Windows XP以降であれば以下のコマンドを実行することで，指定したプロセスIDを持つStkFwを終了させることができます。<p>
+taskkill /PID ＜プロセスID(PID)＞ /F<p>
+Windows 2000の場合，タスクマネージャのプロセス一覧から対象のプロセスを探して終了してください。<p>
 </div>
 <p>
 
