@@ -727,12 +727,16 @@ void StartProc(void)
 	Gs.StartRefreshScreen();
 	As.StartActorAction();
 
+	AddAllSocketInfo();
+
 	LeaveCriticalSection(&NetGseEx::CritSect);
 }
 
 void StopProc(void)
 {
 	EnterCriticalSection(&NetGseEx::CritSect);
+
+	DeleteAllSocketInfo();
 
 	Var_RefreshVariables();
 	ResetThreadController(FALSE);
@@ -767,10 +771,12 @@ void StopProc(void)
 void StartProcForCmd(void)
 {
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
+	AddAllSocketInfo();
 }
 
 void StopProcForCmd(void)
 {
+	DeleteAllSocketInfo();
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_STOP));
 }
 

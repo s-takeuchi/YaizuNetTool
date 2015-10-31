@@ -283,21 +283,14 @@ int DllShowProperty(int Id) // ##10085 戻り値を変更
 	return ShowProperty();
 }
 
-int ElemStkThreadInit(int Id)
+void AddAllSocketInfo()
 {
 	SyncElementInfoAndViewElement();
 
 	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
-	// StkPropExecMgr初期化
-	ExecMgr->AddExecElem(Id);
-	ExecMgr->InitStoreAndLoadDataCounter(Id);
-	ExecMgr->InitTimer(Id);
-	ExecMgr->InitMappingIds(Id);
-	ExecMgr->InitExecProgram(Id);
-	ExecMgr->ThreadStatusChangedIntoStart(Id);
 
 	// StkSocketMgr初期化
-	// 0: Receiver, 1: Sender-Stopper, 2: Sender-Terminator
+	// 0: Receiver, 1: Sender-Stopper, 2: Sender-Terminator, 21: UDP-Receiver, 22: UDP-Sender-Terminator, 23: UDP-Sender-Stopper
 	int TmpIds[6][256];
 	int NumOfElem[6];
 	// Receiver, Senderの全IDを取得する
@@ -309,46 +302,35 @@ int ElemStkThreadInit(int Id)
 	NumOfElem[5] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[5], 23);
 	// ReceiverとSenderの合計が最大値を超えた場合
 	if (NumOfElem[0] + NumOfElem[1] + NumOfElem[2] + NumOfElem[3] + NumOfElem[4] + NumOfElem[5] >= 256) {
-		return 0;
+		return;
 	}
 	// SocketInfoメンバ配列を生成する
 	TCHAR TmpHostOrIpAddr[256];
 	int TmpPort;
 	for (int LoopType = 0; LoopType < 6; LoopType++ ) {
 		for (int Loop = 0; Loop < NumOfElem[LoopType]; Loop++) {
-			StkPropExecElem* ExecElem = ExecMgr->GetExecElem(TmpIds[LoopType][Loop]);
-			if (ExecElem == NULL) {
-				continue;
-			}
-			if (ExecElem->GetRootId() == Id) {
-				if (LowDbAccess::GetInstance()->GetHostIpAddrPort(TmpIds[LoopType][Loop], TmpHostOrIpAddr, &TmpPort) == 0 &&
-					LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 0) {
-					if (LoopType <= 2) {
-						StkSocket_AddInfo(TmpIds[LoopType][Loop], STKSOCKET_TYPE_STREAM, (LoopType == 0)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
-					} else {
-						StkSocket_AddInfo(TmpIds[LoopType][Loop], STKSOCKET_TYPE_DGRAM, (LoopType == 3)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
+			if (LowDbAccess::GetInstance()->GetHostIpAddrPort(TmpIds[LoopType][Loop], TmpHostOrIpAddr, &TmpPort) == 0 &&
+				LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 0) { // Listen socket case
+				if (LoopType <= 2) {
+					StkSocket_AddInfo(TmpIds[LoopType][Loop], STKSOCKET_TYPE_STREAM, (LoopType == 0)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
+				} else {
+					StkSocket_AddInfo(TmpIds[LoopType][Loop], STKSOCKET_TYPE_DGRAM, (LoopType == 3)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
+				}
+			} else if (LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 2) { // Accept socket case
+				if (LoopType <= 2) {
+					int CorrId = LowDbAccess::GetInstance()->GetTcpRecvCorrespodingIdInElementInfo(TmpIds[LoopType][Loop]);
+					LowDbAccess::GetInstance()->GetHostIpAddrPort(CorrId, TmpHostOrIpAddr, &TmpPort);
+					if (StkSocket_GetStatus(CorrId) == -1) {
+						StkSocket_AddInfo(CorrId, STKSOCKET_TYPE_STREAM, (LoopType == 0)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
 					}
-					StkSocket_Open(TmpIds[LoopType][Loop]);
-					ExecElem->StkPropOutputLog();
-				} else if (LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 2) {
-					if (LoopType <= 2) {
-						int CorrId = LowDbAccess::GetInstance()->GetTcpRecvCorrespodingIdInElementInfo(TmpIds[LoopType][Loop]);
-						LowDbAccess::GetInstance()->GetHostIpAddrPort(CorrId, TmpHostOrIpAddr, &TmpPort);
-						if (StkSocket_GetStatus(CorrId) == -1) {
-							StkSocket_AddInfo(CorrId, STKSOCKET_TYPE_STREAM, (LoopType == 0)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
-							StkSocket_Open(CorrId);
-						}
-						StkSocket_CopyInfo(Id, CorrId);
-					}
+					StkSocket_CopyInfo(TmpIds[LoopType][Loop], CorrId);
 				}
 			}
 		}
 	}
-
-	return 0;
 }
 
-int ElemStkThreadFinal(int Id)
+void DeleteAllSocketInfo()
 {
 	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
 
@@ -365,22 +347,80 @@ int ElemStkThreadFinal(int Id)
 	NumOfElem[5] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[5], 23);
 	// ReceiverとSenderの合計が最大値を超えた場合
 	if (NumOfElem[0] + NumOfElem[1] + NumOfElem[2] +NumOfElem[3] + NumOfElem[4] + NumOfElem[5] >= 256) {
-		return 0;
+		return;
 	}
 	// SocketInfoメンバ配列から要素を削除する
 	for (int LoopType = 0; LoopType < 6; LoopType++ ) {
 		for (int Loop = 0; Loop < NumOfElem[LoopType]; Loop++) {
-			StkPropExecElem* ExecElem = ExecMgr->GetExecElem(TmpIds[LoopType][Loop]);
-			if (ExecElem == NULL) {
-				continue;
-			}
-			if (ExecElem->GetRootId() == Id) {
-				StkSocket_Close(TmpIds[LoopType][Loop], FALSE);
+			StkSocket_DeleteInfo(TmpIds[LoopType][Loop]);
+		}
+	}
+}
+
+int ElemStkThreadInit(int Id)
+{
+	SyncElementInfoAndViewElement();
+
+	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	// StkPropExecMgr初期化
+	ExecMgr->AddExecElem(Id);
+	ExecMgr->InitStoreAndLoadDataCounter(Id);
+	ExecMgr->InitTimer(Id);
+	ExecMgr->InitMappingIds(Id);
+	ExecMgr->InitExecProgram(Id);
+	ExecMgr->ThreadStatusChangedIntoStart(Id);
+
+	for (int Loop = 0; Loop < StkSocket_GetNumOfStkInfos(); Loop++) {
+		int TargetId = 0;
+		int SockType = 0;
+		int ActionType = 0;
+		TCHAR TargetAddr[256] = _T("");
+		int TargetPort = 0;
+		BOOL CopiedFlag = FALSE;
+		if (StkSocket_GetInfo(Loop, &TargetId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == -1) {
+			continue;
+		}
+		StkPropExecElem* ExecElem = ExecMgr->GetExecElem(TargetId);
+		if (ExecElem == NULL) {
+			continue;
+		}
+		if (ExecElem->GetRootId() == Id) {
+			if (CopiedFlag == FALSE) {
+				StkSocket_Open(TargetId);
 				ExecElem->StkPropOutputLog();
-				StkSocket_DeleteInfo(TmpIds[LoopType][Loop]);
 			}
 		}
 	}
+
+	return 0;
+}
+
+int ElemStkThreadFinal(int Id)
+{
+	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+
+	for (int Loop = 0; Loop < StkSocket_GetNumOfStkInfos(); Loop++) {
+		int TargetId = 0;
+		int SockType = 0;
+		int ActionType = 0;
+		TCHAR TargetAddr[256] = _T("");
+		int TargetPort = 0;
+		BOOL CopiedFlag = FALSE;
+		if (StkSocket_GetInfo(Loop, &TargetId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == -1) {
+			continue;
+		}
+		StkPropExecElem* ExecElem = ExecMgr->GetExecElem(TargetId);
+		if (ExecElem == NULL) {
+			continue;
+		}
+		if (ExecElem->GetRootId() == Id) {
+			if (CopiedFlag == FALSE) {
+				StkSocket_Close(TargetId, FALSE);
+				ExecElem->StkPropOutputLog();
+			}
+		}
+	}
+
 	// StkPropExecMgr最終処理
 	ExecMgr->ThreadStatusChangedIntoStop(Id);
 	ExecMgr->ClearLineType(Id);
