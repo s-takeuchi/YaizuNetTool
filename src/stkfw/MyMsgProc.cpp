@@ -665,6 +665,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_140_150_2, _T("同一ポートで複数クライアントからの同時接続を可能にした。"));
 	MessageProc::AddEng(SFW_140_150_2, _T("Support enabled for multiple client's connections using same port number."));
 
+	//9127 (★)
+	MessageProc::AddJpn(SFW_140_150_3, _T("/openまたは/startパラメータ指定で起動したときに，カレントフォルダが.stdファイルが配置されたフォルダと異なる不良を対策した。"));
+	MessageProc::AddEng(SFW_140_150_3, _T("A bug fixed that the current folder is not configured as the folder where .std file placed when the program launched with /open and /start parameter."));
+
 	// =====================================================================================================
 }
 

@@ -103,6 +103,8 @@ Windows Server 2012 Standard
 * Version 1.4.0 ---> 1.5.0
 (1) Installer program files integrated into one MSI file.
 (2) Support enabled for multiple client's connections using same port number.
+(3) A bug fixed that the current folder is not configured as the folder where
+    .std file placed when the program launched with /open and /start parameter.
 
 
 =================================================
