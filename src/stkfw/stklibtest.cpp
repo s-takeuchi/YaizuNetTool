@@ -21,6 +21,7 @@
 #include "..\..\..\YaizuComLib\src\\stk_about\stk_about.h"
 #include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
+#include "..\..\..\YaizuComLib\src\commonfunc\StkGeneric.h"
 #include "VarCon.h"
 
 #include "NetGseEx.h"
@@ -508,6 +509,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			ExitProcess(0);
 		}
 		UnlockAllTable();
+
+		// Change current folder
+		TCHAR ConvFullPath[MAX_PATH];
+		StkGeneric::GetInstance()->GetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
+		SetCurrentDirectory(ConvFullPath);
+
 		DbMigration();
 		GetViewFromDb();
 		ResetThreadController(TRUE);
@@ -576,6 +583,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, CurrentStdFileName, hWnd);
 		} else {
 			UnlockAllTable();
+
+			// Change current folder
+			TCHAR ConvFullPath[MAX_PATH];
+			StkGeneric::GetInstance()->GetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
+			SetCurrentDirectory(ConvFullPath);
+
 			DbMigration();
 			ResetWorkspace(2);
 			GetViewFromDb();
