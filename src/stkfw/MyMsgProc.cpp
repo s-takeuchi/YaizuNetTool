@@ -669,6 +669,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_140_150_3, _T("/openまたは/startパラメータ指定で起動したときに，カレントフォルダが.stdファイルが配置されたフォルダと異なる不良を対策した。"));
 	MessageProc::AddEng(SFW_140_150_3, _T("A bug fixed that the current folder is not configured as the folder where .std file placed when the program launched with /open and /start parameter."));
 
+	//9128 (★)
+	MessageProc::AddJpn(SFW_140_150_4, _T("スレッド停止時に同じ受信要素が冗長なソケットクローズのログを出力する不良を対策した。"));
+	MessageProc::AddEng(SFW_140_150_4, _T("A bug fixed that the redundant logs of socket closing for same element are generated when threads are stopping."));
+
 	// =====================================================================================================
 }
 
