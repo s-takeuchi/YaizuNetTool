@@ -673,6 +673,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_140_150_4, _T("スレッド停止時に同じ受信要素が冗長なソケットクローズのログを出力する不良を対策した。"));
 	MessageProc::AddEng(SFW_140_150_4, _T("A bug fixed that the redundant logs of socket closing for same element are generated when threads are stopping."));
 
+	//9129 (★)
+	MessageProc::AddJpn(SFW_140_150_5, _T("IPv6による接続をサポートした。"));
+	MessageProc::AddEng(SFW_140_150_5, _T("Support enabled connectivity for IPv6."));
+
 	// =====================================================================================================
 }
 
