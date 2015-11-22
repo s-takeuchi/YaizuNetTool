@@ -108,15 +108,27 @@ Windows Server 2012 Standard
 =================================================
 4.使用許諾条件
 
-StkFw（以下本ソフトウェアと表記）はフリーウェアです。
-利用者は以下の条件のもと本ソフトウェアを無償で利用することができます。
+The MIT License (MIT)
 
-- 本ソフトウェアを（利用者本人と制作者を除く）第三者に再配布する場合，
-本ソフトウェアに含まれる全てのファイルをパッケージ形式も含め無改変で配布
-しなければなりません。
+Copyright (c) 2015 Shinya Takeuchi
 
-- 本ソフトウェアの制作者は，本ソフトウェアの利用により生じた利用者の
-いかなる損害も補償しません。
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 
 =================================================
