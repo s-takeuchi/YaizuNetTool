@@ -675,7 +675,7 @@ void MyMsgProc::AddMsg()
 
 	//9129 (★)
 	MessageProc::AddJpn(SFW_140_150_5, _T("IPv6による接続をサポートした。"));
-	MessageProc::AddEng(SFW_140_150_5, _T("Support enabled connectivity for IPv6."));
+	MessageProc::AddEng(SFW_140_150_5, _T("Support enabled the connectivity for IPv6."));
 
 	// =====================================================================================================
 }
