@@ -108,6 +108,7 @@ Windows Server 2012 Standard
 (4) A bug fixed that the current folder is not configured as the folder where
     .std file placed when the program launched with /open and /start parameter.
 (5) Support enabled the connectivity for IPv6.
+(6) Support enabled for Windows 8.1, Windows 10 and Windows Server 2012 R2.
 
 
 =================================================

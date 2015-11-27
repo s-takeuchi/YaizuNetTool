@@ -677,6 +677,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_140_150_5, _T("IPv6による接続をサポートした。"));
 	MessageProc::AddEng(SFW_140_150_5, _T("Support enabled the connectivity for IPv6."));
 
+	//9130 (★)
+	MessageProc::AddJpn(SFW_140_150_6, _T("Windows 8.1, Windows 10, Windows Server 2012 R2をサポートした。"));
+	MessageProc::AddEng(SFW_140_150_6, _T("Support enabled for Windows 8.1, Windows 10 and Windows Server 2012 R2."));
+
 	// =====================================================================================================
 }
 
