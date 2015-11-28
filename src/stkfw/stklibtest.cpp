@@ -35,7 +35,7 @@
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 
-#define DB_VERSION 3
+#define DB_VERSION 4
 
 TCHAR szTitle[32];
 TCHAR szWindowClass[32];
@@ -82,7 +82,7 @@ void ShowRunTimeInformation(void);
 int DbMigration_00_01()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
-	// PropertyテーブルにDbVersion = 1を追加する
+	// Set 1 to DbVersion of Property table.
 	Lda->InsertProperty(_T("DbVersion"), 1, 0, 0, _T(""), _T(""), _T(""));
 	// MapperのUseOnlyOnce属性を設定する
 	int AcquiredIds[ActorStatus::ACTOR_STATUS_COUNT];
@@ -97,7 +97,7 @@ int DbMigration_00_01()
 int DbMigration_01_02()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
-	// PropertyテーブルのDbVersionを2に変更する
+	// Set 2 to DbVersion of Property table.
 	Lda->SetPropertyInteger(_T("DbVersion"), 1, 2);
 	// Propertyテーブル:ViewElementを追加
 	Lda->InsertProperty(_T("ViewElement"), 18, 46, 0, _T("Write file [Action]"), _T(""), _T("Menu"));
@@ -131,7 +131,7 @@ int DbMigration_01_02()
 int DbMigration_02_03()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
-	// PropertyテーブルのDbVersionを3に変更する
+	// Set 3 to DbVersion of Property table.
 	Lda->SetPropertyInteger(_T("DbVersion"), 1, 3);
 	// Update existing ViewElement in property table
 	Lda->DeleteProperty(_T("ViewElement"));
@@ -193,8 +193,18 @@ int DbMigration_02_03()
 	return 3;
 }
 
-// この関数を実行する前にLoadAllTableで全てのテーブルをロックしておく必要がある
-// return == 0  :  DbVersion == LATEST_DB_VERSION または 無効
+// Version 1.4.0 → Version 1.5.0
+int DbMigration_03_04()
+{
+	LowDbAccess* Lda = LowDbAccess::GetInstance();
+	// Set 4 to DbVersion of Property table.
+	Lda->SetPropertyInteger(_T("DbVersion"), 1, 4);
+
+	return 4;
+}
+
+// Lock all tables using LockAllTable API before this function is called.
+// return == 0  :  DbVersion == LATEST_DB_VERSION or invalid
 // return == -1 :  DbVersion > LATEST_DB_VERSION
 // return == 1  :  DbVersion < LATEST_DB_VERSION
 int DbMigration()
@@ -213,13 +223,16 @@ int DbMigration()
 	MyMsgProc::StkInf(MyMsgProc::STKFW_DBVERSION_OLD, hWnd);
 
 	if (DbVersion == 0) {
-		DbVersion = DbMigration_00_01(); // Version 1.1.0 → Version 1.2.0
+		DbVersion = DbMigration_00_01(); // Version 1.1.0 -> Version 1.2.0
 	}
 	if (DbVersion == 1) {
-		DbVersion = DbMigration_01_02(); // Version 1.2.0 → Version 1.3.0
+		DbVersion = DbMigration_01_02(); // Version 1.2.0 -> Version 1.3.0
 	}
 	if (DbVersion == 2) {
-		DbVersion = DbMigration_02_03(); // Version 1.3.0 → Version 1.4.0
+		DbVersion = DbMigration_02_03(); // Version 1.3.0 -> Version 1.4.0
+	}
+	if (DbVersion == 3) {
+		DbVersion = DbMigration_03_04(); // Version 1.4.0 -> Version 1.5.0
 	}
 
 	return 1;
