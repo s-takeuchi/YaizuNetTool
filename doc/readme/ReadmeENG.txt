@@ -33,17 +33,13 @@ Memory: 512 MB or more
 Free disk space: 20 MB or more
 
 Operating systems/editions supported:
-Windows 2000 Professional SP4
-Windows XP Professional SP3
-Windows XP Professional x64 SP2
-Windows Vista Business/Ultimate SP2
 Windows 7 Professional/Ultimate SP1
 Windows 8 Pro
-Windows Server 2003 Standard SP2
-Windows Server 2003 R2 Standard SP2
-Windows Server 2008 Standard SP2
-Windows Server 2008 R2 Standard SP1
+Windows 8.1 Pro
+Windows 10 Pro
+Windows Server 2008 R2 Standard
 Windows Server 2012 Standard
+Windows Server 2012 R2 Standard
 
 
 =================================================
