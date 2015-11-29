@@ -10,24 +10,29 @@
 -->
 </style>
 
-<BODY>
+<BODY>s
 <div id="container">
-<H1>6. 処理要素について</H1>
+<H1>6. Processing Element</H1>
 
-<H2 ID="6.1">6.1 処理要素概要</H2>
-StkFwのワークスペースでは，1つまたは複数のデータフローを定義することができます。<BR>
-データフローは，1つまたは複数のスレッドから構成されます。
-スレッドは，さらにデータの受信，加工，送信等を行う処理（処理要素）の組み合わせとして定義されます。<BR>
-各処理要素間には処理間関連線を，各スレッド間にはスレッド間関連線を設定することでができます
-（処理間関連線は白色の実線で，スレッド間関連線は緑色の点線で表現されます）。<BR>
-StkFwは，スレッドコントローラにより，個々のスレッドを独立して実行制御することができます。<P>
+<H2 ID="6.1">6.1 Summary of processing element</H2>
+In the workspace of StkFw, one or more dataflows can be definable.<br>
+One dataflow is composed of one or more threads.<br>
+Moreover the thread is defined as the combination of processes (processing elements) these perform data receiving, modifying and sending.<br>
+The process link can be defined between processing elements and thread link can be defined between threads
+(process link is represented in white solid line and thread link is represented in green dotted line).<br>
+StkFw can control each thread execution independently using thread controller.<P>
 <CENTER><IMG SRC="dataflow.jpg"></CENTER><P>
 
 
-処理要素は以下の種類に大別されます。<P>
+There are few types of processing element.<p>
 <TABLE BORDER="1">
-<TR><TD>Initiator</TD><TD>スレッドの開始を示す処理要素です。スレッドコントローラからInitiatorの処理要素を選択して
-実行／停止を制御することができます。</TD></TR>
+<TR><TD>Initiator</TD><TD>This processing element means thread start point. We can select Initiator element name on the thread controller
+and can control starting and stopping thread.</TD></TR>
+<TR><TD>Terminator</TD><TD>This processing element means thread end point. If Terminator processing element has a thread link to Initiator
+processing element, process proceeds to next Initiator element after Terminator process is finished.
+If there is no thread link to Initiator processing element, the process is go back to first Initiator processing element of same dataflow where this
+Terminator processing element belongs.</TD></TR>
+
 <TR><TD>Terminator</TD><TD>スレッドの終端を示す処理要素です。Terminatorの処理要素がスレッド間関連線で別スレッドのInitiator
 の処理要素と連結している場合は，本処理要素の次のInitiatorの処理要素に処理が移ります。Terminatorの処理要素とリンクしているInitiatorの
 処理要素が存在しない場合，Terminatorの処理要素が属するデータフローの先頭となるInitiatorの処理要素に処理が戻ります。</TD></TR>
