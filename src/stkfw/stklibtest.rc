@@ -272,7 +272,7 @@ BEGIN
         BEGIN
             VALUE "FileDescription", "StkFw"
             VALUE "FileVersion", "1, 5, 0, 0"
-            VALUE "LegalCopyright", "Copyright (C) 2014  Shinya Takeuchi"
+            VALUE "LegalCopyright", "Copyright (C) 2015  Shinya Takeuchi"
             VALUE "OriginalFilename", "stkfw.exe"
             VALUE "ProductName", "StkFw"
             VALUE "ProductVersion", "1, 5, 0, 0"
