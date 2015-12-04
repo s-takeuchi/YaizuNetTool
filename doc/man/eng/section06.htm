@@ -14,42 +14,44 @@
 <div id="container">
 <H1>4. Processing Element</H1>
 
-<H2 ID="4.1">4.1 Summary of processing element</H2>
+<H2 ID="4.1">4.1 Processing element summary</H2>
 In the workspace of StkFw, one or more dataflows can be definable.<br>
-One dataflow is composed of one or more threads.<br>
-Moreover the thread is defined as the combination of processes (processing elements) these perform data receiving, modifying and sending.<br>
-The process link can be defined between processing elements and thread link can be defined between threads
-(process link is represented in white solid line and thread link is represented in green dotted line).<br>
-StkFw can control each thread execution independently using thread controller.<P>
+One or more dataflows can be defined in the StkFw workspace.<br>
+Each dataflow is composed of one or more threads. A thread is defined as a combination of processes (processing elements) for data receipt, modification and dispatch.<br>
+Process links (shown with solid white lines) can be defined between processing elements, and thread links (shown with dotted green lines) can be defined between threads.<br>
+StkFw can be used to control individual thread execution independently via a thread controller.<P>
 <CENTER><IMG SRC="dataflow.jpg"></CENTER><P>
 
 
-There are few types of processing element.<p>
+The different processing element types are outlined below.<p>
 <TABLE BORDER="1">
-<TR><TD>Initiator</TD><TD>This processing element means thread start point. We can select Initiator element name on the thread controller
-and can control starting and stopping thread.</TD></TR>
-<TR><TD>Terminator</TD><TD>This processing element means thread end point. If Terminator processing element has a thread link to Initiator
-processing element on other thread, process proceeds to next Initiator element after Terminator process is finished.
-If there is no thread link to Initiator processing element, the process is go back to first Initiator processing element of same dataflow where this
-Terminator processing element belongs.</TD></TR>
-<TR><TD>Stopper</TD><TD>This processing element means thread end point. The differences from Terminator processing element is that...<br>
-(1) We cannot define thread link to Initiator processing element on other thread. Hence, process cannot proceed from Stopper.<br>
-(2) When Stopper processing element finishes its own process, the process does not go back to Initiator on same dataflow.</TD></TR>
-<TR><TD>Check point</TD><TD>Processing element for conditional checking.
-When the process proceeds to Check point processing element, check the its own presented condition and does not proceed to next processing element
-until the condition satisfied.</TD></TR>
-<TR><TD>Action</TD><TD>This processing element executes the presented particular process.
-The process proceeds to next processing element with no condition after the process is done.</TD></TR>
+<TR><TD>Initiator</TD><TD>This type of processing element is for a thread start point. The initiator element can be selected from a list of elements on the thread controller, 
+and starting/stopping of the thread can be controlled.</TD></TR>
+
+<TR><TD>Terminator</TD><TD>This type of processing element is for a thread end point.
+If a terminator processing element has a thread link to an initiator processing element on another thread,
+the process moves to the next initiator element after the terminator process finishes.
+If there is no thread link to an initiator processing element, the process returns to the first initiator processing element of the dataflow
+to which the terminator processing element belongs. </TD></TR>
+
+<TR><TD>Stopper</TD><TD>This type of processing element is also for a thread end point. It differs from a terminator processing element in the following ways: <br>
+(1) A thread link to an initiator processing element on another thread cannot be defined. As a result, a process cannot proceed from a stopper processing element. <br>
+(2) When a stopper processing element finishes its own process, the process does not return to an initiator in the same dataflow. </TD></TR>
+
+<TR><TD>Check point</TD><TD>This type of processing element is for conditional checking. When the process proceeds to a check point processing element,
+its own presented condition is checked. Processing does not move to the next element until the relevant condition is satisfied. </TD></TR>
+
+<TR><TD>Action</TD><TD>This type of processing element is for the execution of a particular presented process.
+The process moves to the next element with no conditions after this process is complete. </TD></TR>
 </TABLE>
 <P>
-The limitation regarding workspace and thread is shown below.<p>
+Workspace and thread limitations are outlined below.<p>
 <TABLE BORDER="1">
-<TR><TD>Maximum number of processing elements in one thread.</TD><TD>99</TD></TR>
-<TR><TD>Maximum number of processing elements on one workspace</TD><TD>499</TD></TR>
-<tr><td>Maximum number of TCP/UDP receiver and sender processing element on one workspace</td><td>256</td></tr>
+<TR><TD>Maximum number of processing elements in one thread:</TD><TD>99</TD></TR>
+<TR><TD>Maximum number of processing elements in one workspace:</TD><TD>499</TD></TR>
+<tr><td>Maximum number of TCP/UDP receiver and sender processing elements in one workspace:</td><td>256</td></tr>
 </TABLE><BR>
-Note: If we define process link or thread link on workspace, the links on the dataflow must not configure loop topology.
-If we configure the links as loop topology, the thread might not work appropriately.<P>
+Note: When process links or thread links are defined in a workspace, links in the dataflow must not be configured with loop topology as this may cause unexpected thread behavior.<P>
 
 
 </BODY>
