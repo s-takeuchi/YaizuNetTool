@@ -144,6 +144,7 @@ Follow the on-screen dialog prompts.
 =================================================
 6.Contact
 
+URL: https://github.com/s-takeuchi/
 Please use the E-mail address below for inquiries about this product.
 
 bamboo@rj.dream.jp
