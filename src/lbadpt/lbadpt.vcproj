@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Netapi32.lib shell32.lib Debug\msgproc.lib"
+				AdditionalDependencies="Netapi32.lib shell32.lib Debug\commonfunc.lib"
 				LinkIncremental="2"
 				UACExecutionLevel="2"
 				GenerateDebugInformation="true"
@@ -134,7 +134,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Netapi32.lib shell32.lib Release\msgproc.lib"
+				AdditionalDependencies="Netapi32.lib shell32.lib Release\commonfunc.lib"
 				LinkIncremental="1"
 				UACExecutionLevel="2"
 				GenerateDebugInformation="true"

@@ -2,7 +2,7 @@
 #include <shlobj.h>
 #include "resource.h"
 #include "tchar.h"
-#include "..\..\..\YaizuComLib\src\msgproc\msgproc.h"
+#include "..\..\..\YaizuComLib\src\commonfunc\msgproc.h"
 #include <Lm.h>
 
 int LBA_FIRSTINFO = 1101;

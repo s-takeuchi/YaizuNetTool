@@ -76,7 +76,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib Iphlpapi.lib shlwapi.lib Netapi32.lib shell32.lib Debug\msgproc.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib Iphlpapi.lib shlwapi.lib Netapi32.lib shell32.lib Debug\commonfunc.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				UACExecutionLevel="2"
@@ -173,7 +173,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib Iphlpapi.lib shlwapi.lib Netapi32.lib shell32.lib Release\msgproc.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib Iphlpapi.lib shlwapi.lib Netapi32.lib shell32.lib Release\commonfunc.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				GenerateManifest="true"
@@ -270,7 +270,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib Iphlpapi.lib shlwapi.lib Netapi32.lib shell32.lib Release\msgproc.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib wsock32.lib Iphlpapi.lib shlwapi.lib Netapi32.lib shell32.lib Release\commonfunc.lib"
 				OutputFile="$(OutDir)\$(ProjectName)_win2k.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
