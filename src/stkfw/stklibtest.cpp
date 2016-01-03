@@ -35,6 +35,9 @@
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
+
 #define DB_VERSION 4
 
 TCHAR szTitle[32];

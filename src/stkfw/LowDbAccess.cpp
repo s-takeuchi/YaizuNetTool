@@ -1,5 +1,7 @@
 #include <shlwapi.h>
 #include "LowDbAccess.h"
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
 
 LowDbAccess* LowDbAccess::ThisInstance;
 
@@ -53,9 +55,9 @@ int LowDbAccess::GetPropertyInteger(TCHAR* Name, int Index)
 	if (ResultRd != NULL) {
 		ColumnDataInt* ValueInt = (ColumnDataInt*)ResultRd->GetColumn(Index);
 		Ret = ValueInt->GetValue();
-		ClearRecordData(ResultRd);
+		delete ResultRd;
 	}
-	ClearRecordData(SearchRd);
+	delete SearchRd;
 	return Ret;
 }
 
@@ -78,8 +80,8 @@ void LowDbAccess::SetPropertyInteger(TCHAR* Name, int Index, int Value)
 	LockTable(_T("Property"), 2);
 	UpdateRecord(SearchRd, UpdateRd);
 	UnlockTable(_T("Property"));
-	ClearRecordData(SearchRd);
-	ClearRecordData(UpdateRd);
+	delete SearchRd;
+	delete UpdateRd;
 }
 
 // Propertyテーブルにレコードを挿入する
@@ -104,7 +106,7 @@ void LowDbAccess::InsertProperty(TCHAR* Name, int ValInt1, int ValInt2, int ValI
 	LockTable(_T("Property"), 2);
 	InsertRecord(InsertRd);
 	UnlockTable(_T("Property"));
-	ClearRecordData(InsertRd);
+	delete InsertRd;
 }
 
 // 指定したプロパティ名を持つ全レコードを削除する
@@ -117,7 +119,7 @@ void LowDbAccess::DeleteProperty(TCHAR* Name)
 	LockTable(_T("Property"), 2);
 	DeleteRecord(DeleteRd);
 	UnlockTable(_T("Property"));
-	ClearRecordData(DeleteRd);
+	delete DeleteRd;
 }
 
 // ワークスペースサイズおよびグリッド状態を返却する
@@ -143,14 +145,14 @@ BOOL LowDbAccess::GetWorkspaceInfo(int* Width, int* Height, int* GridTypeL)
 		if (*GridTypeL != 1 && *GridTypeL != 8) {
 			*GridTypeL = 1;
 		}
-		ClearRecordData(ResultRd);
-		ClearRecordData(SearchRd);
+		delete ResultRd;
+		delete SearchRd;
 		return TRUE;
 	} else {
 		*Width = 512;
 		*Height = 400;
 		*GridTypeL = 8;
-		ClearRecordData(SearchRd);
+		delete SearchRd;
 		return FALSE;
 	}
 }
@@ -167,8 +169,8 @@ void LowDbAccess::SetWorkspaceGridType(int GridType)
 	LockTable(_T("Property"), 2);
 	UpdateRecord(SearchRd, UpdateRd);
 	UnlockTable(_T("Property"));
-	ClearRecordData(UpdateRd);
-	ClearRecordData(SearchRd);
+	delete UpdateRd;
+	delete SearchRd;
 }
 
 // ViewElement種別からアイコン種別を取得する
@@ -185,8 +187,8 @@ int LowDbAccess::GetIconTypeByViewElementType(int Type)
 	UnlockTable(_T("Property"));
 	ColumnDataInt* ValueInt = (ColumnDataInt*)ResultRd->GetColumn(2);
 	int IcnId = ValueInt->GetValue();
-	ClearRecordData(SearchRd);
-	ClearRecordData(ResultRd);
+	delete SearchRd;
+	delete ResultRd;
 	return IcnId;
 }
 
@@ -225,8 +227,8 @@ int LowDbAccess::GetViewElementBasicInfoFromProperty(int Type[100], int ExecFlag
 			break;
 		}
 	}
-	ClearRecordData(ResultRd);
-	ClearRecordData(SearchRd);
+	delete ResultRd;
+	delete SearchRd;
 	return Count;
 }
 
@@ -261,8 +263,8 @@ int LowDbAccess::GetAllLinkInfos(int LinkFm[500], int LinkTo[500], int LinkCt[50
 			break;
 		}
 	};
-	ClearRecordData(SearchRd);
-	ClearRecordData(ResultRd);
+	delete SearchRd;
+	delete ResultRd;
 	return Idx;
 }
 
@@ -292,8 +294,8 @@ void LowDbAccess::GetMaxLinkInfo(int MaxLinkTo[100], int MaxLinkFrom[100])
 		MaxLinkFrom[MaxLinkType] = ValueMaxLinkfrom->GetValue();
 		ResultRd = ResultRd->GetNextRecord();
 	};
-	ClearRecordData(SearchRd);
-	ClearRecordData(ResultRd);
+	delete SearchRd;
+	delete ResultRd;
 }
 
 // Get types and categories of ViewElements.
@@ -329,8 +331,8 @@ int LowDbAccess::GetViewElementMenus(int VeType[100], TCHAR VeTypeName[100][256]
 			break;
 		}
 	};
-	ClearRecordData(SearchRd);
-	ClearRecordData(ResultRd);
+	delete SearchRd;
+	delete ResultRd;
 
 	return Loop;
 }
@@ -375,9 +377,9 @@ int LowDbAccess::GetViewElementIdsFromType(int* Ids, int NumOfIds, int Type)
 		}
 	};
 	if (ResultRootRd != NULL) {
-		ClearRecordData(ResultRootRd);
+		delete ResultRootRd;
 	}
-	ClearRecordData(SearchRd);
+	delete SearchRd;
 	return CurrentNum;
 }
 
@@ -401,8 +403,8 @@ int LowDbAccess::GetViewElementIds(int Ids[256], int Type)
 		Index++;
 		RetRec = RetRec->GetNextRecord();
 	}
-	ClearRecordData(RecSch);
-	ClearRecordData(TopRec);
+	delete RecSch;
+	delete TopRec;
 	return Index;
 }
 
@@ -443,8 +445,8 @@ int LowDbAccess::GetViewElementNamesAndIdsFromType(TCHAR Name[256][32], int Id[2
 		}
 		RetRec = RetRec->GetNextRecord();
 	}
-	ClearRecordData(RecSch);
-	ClearRecordData(HeadRec);
+	delete RecSch;
+	delete HeadRec;
 
 	return MaxNumOfName;
 }
@@ -464,9 +466,9 @@ int LowDbAccess::GetViewElementTypeFromId(int TargetId)
 	if (RetRec != NULL) {
 		ColumnDataInt* RetCol = (ColumnDataInt*)RetRec->GetColumn(2);
 		Type = RetCol->GetValue();
-		ClearRecordData(RetRec);
+		delete RetRec;
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 	return Type;
 }
 
@@ -485,11 +487,11 @@ void LowDbAccess::GetViewElementNameFromId(int TargetId, TCHAR Name[32])
 	if (RecRes != NULL) {
 		ColumnDataWStr* ColRes = (ColumnDataWStr*)RecRes->GetColumn(1);
 		lstrcpy(Name, ColRes->GetValue());
-		ClearRecordData(RecRes);
+		delete RecRes;
 	} else {
 		lstrcpy(Name, _T(""));
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 }
 
 // This function updates the name of ViewElement which can be identified by the specified TargetId.
@@ -506,8 +508,8 @@ void LowDbAccess::UpdateViewElementName(int TargetId, TCHAR Name[32])
 	LockTable(_T("ViewElement"), 2);
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ViewElement"));
-	ClearRecordData(RecUpd);
-	ClearRecordData(RecSch);
+	delete RecUpd;
+	delete RecSch;
 }
 
 int LowDbAccess::GetViewElementLinkInfo(int TargetId, int* Type, int LinkId[10], int LinkType[10])
@@ -518,14 +520,14 @@ int LowDbAccess::GetViewElementLinkInfo(int TargetId, int* Type, int LinkId[10],
 	LockTable(_T("ViewElement"), 1);
 	RecordData* RetRec = GetRecord(RecSch);
 	UnlockTable(_T("ViewElement"));
-	ClearRecordData(RecSch);
+	delete RecSch;
 	if (RetRec != NULL) {
 		for (int Loop = 0; Loop < 20; Loop += 2) {
 			LinkId[Loop / 2] = ((ColumnDataInt*)RetRec->GetColumn(Loop + 6))->GetValue();
 			LinkType[Loop / 2] = ((ColumnDataInt*)RetRec->GetColumn(Loop + 7))->GetValue();
 		}
 		*Type = ((ColumnDataInt*)RetRec->GetColumn(2))->GetValue();
-		ClearRecordData(RetRec);
+		delete RetRec;
 		return 0;
 	} else {
 		return -1;
@@ -546,11 +548,11 @@ int LowDbAccess::GetViewElementLinkOriginInfo(int TargetId, int* LinkOrgId, int*
 	LockTable(_T("ViewElement"), 1);
 	RecordData* RetRec = GetRecord(RecSch);
 	UnlockTable(_T("ViewElement"));
-	ClearRecordData(RecSch);
+	delete RecSch;
 	if (RetRec != NULL) {
 		*LinkOrgId = ((ColumnDataInt*)RetRec->GetColumn(0))->GetValue();
 		*LinkType = ((ColumnDataInt*)RetRec->GetColumn(7))->GetValue();
-		ClearRecordData(RetRec);
+		delete RetRec;
 		return 0;
 	} else {
 		return -1;
@@ -584,8 +586,8 @@ int LowDbAccess::UpdateViewElementLinkType(int Index, int FromId, int ToId, int 
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ViewElement"));
 
-	ClearRecordData(RecSch);
-	ClearRecordData(RecUpd);
+	delete RecSch;
+	delete RecUpd;
 	return 0;
 }
 
@@ -650,12 +652,12 @@ int LowDbAccess::GetTargetTcpUdpNameAndId(TCHAR AcquiredName[256][32], int Acqui
 			CurRec[LoopType] = CurRec[LoopType]->GetNextRecord();
 		}
 	}
-	ClearRecordData(RecSch1);
-	ClearRecordData(RetRec1);
-	ClearRecordData(RecSch2);
-	ClearRecordData(RetRec2);
-	ClearRecordData(RecSch3);
-	ClearRecordData(RetRec3);
+	delete RecSch1;
+	delete RetRec1;
+	delete RecSch2;
+	delete RetRec2;
+	delete RecSch3;
+	delete RetRec3;
 
 	return MaxNumOfName;
 }
@@ -721,10 +723,10 @@ int LowDbAccess::GetTcpSenderReceiver(TCHAR TargetName[256][32], int TargetId[25
 			CurRec[LoopType] = CurRec[LoopType]->GetNextRecord();
 		}
 	}
-	ClearRecordData(RecSch1);
-	ClearRecordData(RetRec1);
-	ClearRecordData(RecSch2);
-	ClearRecordData(RetRec2);
+	delete RecSch1;
+	delete RetRec1;
+	delete RecSch2;
+	delete RetRec2;
 
 	return MaxNumOfName;
 }
@@ -744,9 +746,9 @@ int LowDbAccess::GetIconId(int TargetId)
 	if (RetRec != NULL) {
 		ColumnDataInt* RetCol = (ColumnDataInt*)RetRec->GetColumn(3);
 		Icon = RetCol->GetValue();
-		ClearRecordData(RetRec);
+		delete RetRec;
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 	return Icon;
 }
 
@@ -764,8 +766,8 @@ void LowDbAccess::SetIconId(int TargetId, int IconId)
 	LockTable(_T("ViewElement"), 2);
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ViewElement"));
-	ClearRecordData(RecUpd);
-	ClearRecordData(RecSch);
+	delete RecUpd;
+	delete RecSch;
 }
 
 // Insert record into ViewElement table.
@@ -795,7 +797,7 @@ void LowDbAccess::InsertViewElement(int Id, TCHAR Name[32], int Type, int Icon, 
 	}
 	RecordData* InsertRd = new RecordData(_T("ViewElement"), ColDat, 26);
 	InsertRecord(InsertRd);
-	ClearRecordData(InsertRd);
+	delete InsertRd;
 	UnlockTable(_T("ViewElement"));
 }
 
@@ -843,7 +845,7 @@ int LowDbAccess::GetAllViewElementRecords(int Id[1000], TCHAR Name[1000][32], in
 			break;
 		}
 	}
-	ClearRecordData(ResultRd);
+	delete ResultRd;
 	UnlockTable(_T("ViewElement"));
 
 	return CurElem;
@@ -876,9 +878,9 @@ int LowDbAccess::GetElementInfoInt(int CurrentId, int Index)
 	if (RetRec != NULL) {
 		ColumnDataInt* RetCol = (ColumnDataInt*)RetRec->GetColumn(Index);
 		IntValue = RetCol->GetValue();
-		ClearRecordData(RetRec);
+		delete RetRec;
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 	return IntValue;
 }
 
@@ -894,8 +896,8 @@ void LowDbAccess::SetElementInfoInt(int CurrentId, int IntValue, int Index)
 	LockTable(_T("ElementInfo"), 2);
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ElementInfo"));
-	ClearRecordData(RecUpd);
-	ClearRecordData(RecSch);
+	delete RecUpd;
+	delete RecSch;
 }
 
 void LowDbAccess::GetElementInfoStr(int CurrentId, TCHAR GetStr[256], int Index)
@@ -909,9 +911,9 @@ void LowDbAccess::GetElementInfoStr(int CurrentId, TCHAR GetStr[256], int Index)
 	if (RetRec != NULL) {
 		ColumnDataWStr* RetCol = (ColumnDataWStr*)RetRec->GetColumn(Index);
 		lstrcpyn(GetStr, RetCol->GetValue(), 256);
-		ClearRecordData(RetRec);
+		delete RetRec;
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 }
 
 void LowDbAccess::SetElementInfoStr(int CurrentId, TCHAR SetStr[256], int Index)
@@ -926,8 +928,8 @@ void LowDbAccess::SetElementInfoStr(int CurrentId, TCHAR SetStr[256], int Index)
 	LockTable(_T("ElementInfo"), 2);
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ElementInfo"));
-	ClearRecordData(RecUpd);
-	ClearRecordData(RecSch);
+	delete RecUpd;
+	delete RecSch;
 }
 
 void LowDbAccess::GetElementInfoBin(int CurrentId, BYTE BinDat[4096])
@@ -941,9 +943,9 @@ void LowDbAccess::GetElementInfoBin(int CurrentId, BYTE BinDat[4096])
 	if (RetRec != NULL) {
 		ColumnDataBin* RetCol = (ColumnDataBin*)RetRec->GetColumn(11);
 		memcpy(BinDat, RetCol->GetValue(), 4096);
-		ClearRecordData(RetRec);
+		delete RetRec;
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 }
 
 void LowDbAccess::SetElementInfoBin(int CurrentId, BYTE BinDat[4096])
@@ -957,8 +959,8 @@ void LowDbAccess::SetElementInfoBin(int CurrentId, BYTE BinDat[4096])
 	LockTable(_T("ElementInfo"), 2);
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ElementInfo"));
-	ClearRecordData(RecUpd);
-	ClearRecordData(RecSch);
+	delete RecUpd;
+	delete RecSch;
 }
 
 // Acquire integer value from string column.
@@ -977,9 +979,9 @@ int LowDbAccess::GetElementInfoStrAsInt(int CurrentId, int Index)
 	if (RetRec != NULL) {
 		ColumnDataWStr* RetCol = (ColumnDataWStr*)RetRec->GetColumn(Index);
 		lstrcpyn(TmpBuf, RetCol->GetValue(), 256);
-		ClearRecordData(RetRec);
+		delete RetRec;
 	}
-	ClearRecordData(RecSch);
+	delete RecSch;
 	DWORD Ret = (DWORD)*TmpBuf;
 	return Ret;
 }
@@ -1003,8 +1005,8 @@ void LowDbAccess::SetElementInfoStrAsInt(int CurrentId, int Index, int Value)
 	LockTable(_T("ElementInfo"), 2);
 	UpdateRecord(RecSch, RecUpd);
 	UnlockTable(_T("ElementInfo"));
-	ClearRecordData(RecUpd);
-	ClearRecordData(RecSch);
+	delete RecUpd;
+	delete RecSch;
 }
 
 // 指定したIDのホスト名またはIPアドレスとポート番号を返却する
@@ -1036,8 +1038,8 @@ int LowDbAccess::GetHostIpAddrPort(int TargetId, TCHAR HostOrIpAddr[256], int* P
 			ResultCode = -1;
 		}
 	}
-	ClearRecordData(RecSch);
-	ClearRecordData(RetRec);
+	delete RecSch;
+	delete RetRec;
 	return ResultCode;
 }
 
@@ -1121,7 +1123,7 @@ void LowDbAccess::UpdateElementInfoFromViewElement()
 			ColDatIns[11] = new ColumnDataBin(_T("ParamBin"), DummyBin, 4096);
 			RecordData* NewRdElemIf = new RecordData(_T("ElementInfo"), ColDatIns, 12);
 			InsertRecord(NewRdElemIf);
-			ClearRecordData(NewRdElemIf);
+			delete NewRdElemIf;
 		}
 		CurrentRdVelem = CurrentRdVelem->GetNextRecord();
 	}
@@ -1149,7 +1151,7 @@ void LowDbAccess::UpdateElementInfoFromViewElement()
 			ColDatDel[0] = new ColumnDataInt(_T("Id"), EleIfId);
 			RecordData* DelRdVol = new RecordData(_T("ElementInfo"), ColDatDel, 1);
 			DeleteRecord(DelRdVol);
-			ClearRecordData(DelRdVol);
+			delete DelRdVol;
 		}
 		CurrentRdEleIf = CurrentRdEleIf->GetNextRecord();
 	}
@@ -1157,9 +1159,9 @@ void LowDbAccess::UpdateElementInfoFromViewElement()
 	UnlockTable(_T("ElementInfo"));
 	UnlockTable(_T("ViewElement"));
 
-	ClearRecordData(ResultRdVelem);
-	ClearRecordData(ResultRdEleIf);
-	ClearRecordData(ResultRdEleIfIm);
+	delete ResultRdVelem;
+	delete ResultRdEleIf;
+	delete ResultRdEleIfIm;
 }
 
 // テーブルが更新されている場合TRUEを返す
@@ -1221,8 +1223,8 @@ BOOL LowDbAccess::ChangeWorkspace(int Width, int Height, int GridTypeL)
 	LockTable(_T("Property"), 2);
 	UpdateRecord(SearchRdWs, UpdateRdWs);
 	UnlockTable(_T("Property"));
-	ClearRecordData(UpdateRdWs);
-	ClearRecordData(SearchRdWs);
+	delete UpdateRdWs;
+	delete SearchRdWs;
 
 	LockTable(_T("ViewElement"), LOCK_SHARE);
 	RecordData* ResultRd = GetRecord(_T("ViewElement"));
@@ -1268,10 +1270,10 @@ BOOL LowDbAccess::ChangeWorkspace(int Width, int Height, int GridTypeL)
 		UpdateRecord(SearchRd, UpdateRd);
 		UnlockTable(_T("ViewElement"));
 
-		ClearRecordData(SearchRd);
-		ClearRecordData(UpdateRd);
+		delete SearchRd;
+		delete UpdateRd;
 	}
-	ClearRecordData(ResultRd);
+	delete ResultRd;
 
 	return TRUE;
 }

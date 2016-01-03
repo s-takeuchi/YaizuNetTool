@@ -122,7 +122,7 @@ void StoreData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 			}
 			CurVarRec = CurVarRec->GetNextRecord();
 		}
-		ClearRecordData(VarRecs);
+		delete VarRecs;
 		SelectedVarId = GetStoreVarId(CurrentId);
 		for (int Loop = 0; Loop < MaxIndex; Loop++) {
 			if (VarId[Loop] == SelectedVarId) {

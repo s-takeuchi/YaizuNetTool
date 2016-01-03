@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <memory.h>
 #include "VarController.h"
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
+#include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
 
 // 指定されたIdと一致するVariableテーブルのUdTime属性を更新する
 // Variableテーブルに対し予めロックを掛けておく必要がある
@@ -20,8 +22,8 @@ void LastUpdateTime(int Id)
 	RecordData* UpdRec = new RecordData(_T("Variable"), &ColUpdt, 1);
 
 	UpdateRecord(SchRec, UpdRec);
-	ClearRecordData(SchRec);
-	ClearRecordData(UpdRec);
+	delete SchRec;
+	delete UpdRec;
 }
 
 // 指定したIdと一致するコミュニケーション用変数のサイズを返却する
@@ -35,7 +37,7 @@ int VarCon_GetCommunicationVariableSize(int Id)
 	LockTable(_T("Variable"), 2);
 	RecordData* GetRec = GetRecord(RecSz);
 	UnlockTable(_T("Variable"));
-	ClearRecordData(RecSz);
+	delete RecSz;
 	if (GetRec == NULL) {
 		return -1;
 	}
@@ -43,7 +45,7 @@ int VarCon_GetCommunicationVariableSize(int Id)
 	ColumnDataInt* ColSize = (ColumnDataInt*)GetRec->GetColumn(5);
 	int Size = ColSize->GetValue();
 	int Type = ColType->GetValue();
-	ClearRecordData(GetRec);
+	delete GetRec;
 
 	if (Type != 0) {
 		return -1;
@@ -62,7 +64,7 @@ RecordData* VarCon_GetVariableRecord(int Id)
 	LockTable(_T("Variable"), 1);
 	RecordData* RtRecDat = GetRecord(SchRec);
 	UnlockTable(_T("Variable"));
-	ClearRecordData(SchRec);
+	delete SchRec;
 	return RtRecDat;
 }
 
@@ -78,9 +80,9 @@ int VarCon_GetVariableNameAndDesc(int Id, TCHAR VarName[32], TCHAR VarDesc[64])
 	LockTable(_T("Variable"), 1);
 	RecordData* RtRecDat = GetRecord(SchRec);
 	UnlockTable(_T("Variable"));
-	ClearRecordData(SchRec);
+	delete SchRec;
 	if (RtRecDat == NULL) {
-		ClearRecordData(RtRecDat);
+		delete RtRecDat;
 		return -1;
 	}
 
@@ -89,7 +91,7 @@ int VarCon_GetVariableNameAndDesc(int Id, TCHAR VarName[32], TCHAR VarDesc[64])
 	ColumnDataWStr* ColDesc = (ColumnDataWStr*)RtRecDat->GetColumn(2);
 	lstrcpyn(VarDesc, ColDesc->GetValue(), 64);
 
-	ClearRecordData(RtRecDat);
+	delete RtRecDat;
 
 	return 0;
 }
@@ -104,12 +106,12 @@ BOOL VarCon_CheckVariableExistence(int Id)
 	LockTable(_T("Variable"), 1);
 	RecordData* RtRecDat = GetRecord(SchRec);
 	UnlockTable(_T("Variable"));
-	ClearRecordData(SchRec);
+	delete SchRec;
 	BOOL Ret = TRUE;
 	if (RtRecDat == NULL) {
 		Ret = FALSE;
 	}
-	ClearRecordData(RtRecDat);
+	delete RtRecDat;
 	return Ret;
 }
 
@@ -133,13 +135,13 @@ int VarCon_GetCommunicationVariableId(TCHAR Name[32])
 	LockTable(_T("Variable"), 1);
 	RecordData* GetDat = GetRecord(RecDat);
 	UnlockTable(_T("Variable"));
-	ClearRecordData(RecDat);
+	delete RecDat;
 	if (GetDat == NULL) {
 		return -1;
 	}
 	ColumnDataInt* TmpColId = (ColumnDataInt*)GetDat->GetColumn(0);
 	int FndId = TmpColId->GetValue();
-	ClearRecordData(GetDat);
+	delete GetDat;
 	return FndId;
 }
 
@@ -178,8 +180,8 @@ int VarCon_ChangeNameAndDescription(int Id, TCHAR Name[32], TCHAR Description[64
 	UpdateRecord(SchRec, UpdRec);
 	LastUpdateTime(Id);
 	UnlockTable(_T("Variable"));
-	ClearRecordData(SchRec);
-	ClearRecordData(UpdRec);
+	delete SchRec;
+	delete UpdRec;
 	return Id;
 }
 
@@ -209,8 +211,8 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	ColumnDataInt* TmpColId = (ColumnDataInt*)RetRecDat->GetColumn(1);
 	int MaxId = TmpColId->GetValue();
 	MaxId++;
-	ClearRecordData(RetRecDat);
-	ClearRecordData(FndRecDat);
+	delete RetRecDat;
+	delete FndRecDat;
 
 	// レコードを追加する
 	ColumnData* AddColDat[7];
@@ -227,7 +229,7 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	AddColDat[6] = new ColumnDataStr(_T("UdTime"), Buf);
 	RecordData* AddRecDat = new RecordData(_T("Variable"), AddColDat, 7);
 	InsertRecord(AddRecDat);
-	ClearRecordData(AddRecDat);
+	delete AddRecDat;
 
 	// PropertyテーブルのName=MaxVarIdとなる値を更新する
 	ColumnData* FndCol = new ColumnDataWStr(_T("Name"), _T("MaxVarId"));
@@ -235,8 +237,8 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	ColumnData* UpdCol = new ColumnDataInt(_T("ValueInt1"), MaxId);
 	RecordData* UpdRec = new RecordData(_T("Property"), &UpdCol, 1);
 	UpdateRecord(FndRec, UpdRec);
-	ClearRecordData(FndRec);
-	ClearRecordData(UpdRec);
+	delete FndRec;
+	delete UpdRec;
 
 	UnlockTable(_T("Variable"));
 	UnlockTable(_T("Property"));
@@ -254,12 +256,12 @@ void VarCon_DeleteVariableRecord(int Id)
 	ColumnData* ColId = new ColumnDataInt(_T("ID"), Id);
 	RecordData* SchRec = new RecordData(_T("Variable"), &ColId, 1);
 	DeleteRecord(SchRec);
-	ClearRecordData(SchRec);
+	delete SchRec;
 
 	ColumnData* ColIdC = new ColumnDataInt(_T("ID"), Id);
 	RecordData* SchRecC = new RecordData(_T("VarCommDat"), &ColIdC, 1);
 	DeleteRecord(SchRecC);
-	ClearRecordData(SchRecC);
+	delete SchRecC;
 
 	AzSortRecord(_T("Variable"), _T("ID"));
 
@@ -279,8 +281,8 @@ void VarCon_ChangeFlagVariable(int Id, BOOL Flag)
 	RecordData* UpdRec = new RecordData(_T("Variable"), &ColUpd, 1);
 	UpdateRecord(SchRec, UpdRec);
 	LastUpdateTime(Id);
-	ClearRecordData(SchRec);
-	ClearRecordData(UpdRec);
+	delete SchRec;
+	delete UpdRec;
 	UnlockTable(_T("Variable"));
 }
 
@@ -295,8 +297,8 @@ int VarCon_GetFlagVariable(int Id)
 	RecordData* Rec = GetRecord(SchRec);
 	ColumnDataInt* Col= (ColumnDataInt*)Rec->GetColumn(4);
 	int Ret = Col->GetValue();
-	ClearRecordData(Rec);
-	ClearRecordData(SchRec);
+	delete Rec;
+	delete SchRec;
 	UnlockTable(_T("Variable"));
 	return Ret;
 }
@@ -316,13 +318,13 @@ void VarCon_UpdateCommunicationVariable(int Id, BYTE* Strm, int Size)
 	RecordData* UpdRec = new RecordData(_T("Variable"), &UpdCol, 1);
 	UpdateRecord(UpdSRec, UpdRec);
 	LastUpdateTime(Id);
-	ClearRecordData(UpdSRec);
-	ClearRecordData(UpdRec);
+	delete UpdSRec;
+	delete UpdRec;
 
 	ColumnData* SchCol = new ColumnDataInt(_T("ID"), Id);
 	RecordData* SchRec = new RecordData(_T("VarCommDat"), &SchCol, 1);
 	DeleteRecord(SchRec);
-	ClearRecordData(SchRec);
+	delete SchRec;
 
 	ColumnData* ColDt[3];
 	int CurPnt = 0;
@@ -333,7 +335,7 @@ void VarCon_UpdateCommunicationVariable(int Id, BYTE* Strm, int Size)
 		ColDt[2] = new ColumnDataBin(_T("CommDat"), &Strm[CurPnt], 10000);
 		RecordData* RecDat = new RecordData(_T("VarCommDat"), ColDt, 3);
 		InsertRecord(RecDat);
-		ClearRecordData(RecDat);
+		delete RecDat;
 		CurPnt += 10000;
 	}
 
@@ -365,14 +367,14 @@ int VarCon_GetCommunicationVariable(int Id, BYTE* Strm, int Size)
 		RecordData* RecDat = new RecordData(_T("VarCommDat"), ColDt, 2);
 		RecordData* GetDat = GetRecord(RecDat);
 		if (GetDat == NULL) {
-			ClearRecordData(RecDat);
+			delete RecDat;
 			break;
 		}
 		ColumnDataBin* DatBin = (ColumnDataBin*)GetDat->GetColumn(2);
 		BYTE* DatBinPnt = DatBin->GetValue();
 		memcpy(&TmpStrm[CurPnt], DatBinPnt, 10000);
-		ClearRecordData(RecDat);
-		ClearRecordData(GetDat);
+		delete RecDat;
+		delete GetDat;
 		CurPnt += 10000;
 	}
 	UnlockTable(_T("Variable"));
@@ -431,6 +433,6 @@ int VarCon_GetAllCommVariableNames(int Ids[1000], TCHAR Names[1000][32])
 		}
 		CurVarRec = CurVarRec->GetNextRecord();
 	}
-	ClearRecordData(VarRecs);
+	delete VarRecs;
 	return MaxIndex;
 }

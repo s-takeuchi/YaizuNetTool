@@ -32,7 +32,7 @@ int StkProp_CollectAndSetFlagVariable(HWND ComboB, int VarId[2000], int Selected
 		}
 		CurVarRec = CurVarRec->GetNextRecord();
 	}
-	ClearRecordData(VarRecs);
+	delete VarRecs;
 	for (int Loop = 0; Loop < MaxIndex; Loop++) {
 		if (VarId[Loop] == SelectedVarId) {
 			SendMessage(ComboB, CB_SETCURSEL, Loop, 0);

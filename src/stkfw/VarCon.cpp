@@ -320,7 +320,7 @@ void ViewData(BOOL Init)
 
 		CurRecDat = CurRecDat->GetNextRecord();
 	};
-	ClearRecordData(RtRecDat);
+	delete RtRecDat;
 }
 
 int ChangeRadioButton()
@@ -936,7 +936,7 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDTYPE, WndHndl);
 						return TRUE;
 					}
-					ClearRecordData(ChkRec);
+					delete ChkRec;
 					if (StoreNameAndDescriptionWithId(FlgListWndHndl, hDlg, IDC_VARFLAGNAMEEDIT, IDC_VARFLAGDESCEDIT, SelVarId) == -1) {
 						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDNAME, WndHndl);
 						return TRUE;
@@ -1062,7 +1062,7 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDTYPE, WndHndl);
 						return TRUE;
 					}
-					ClearRecordData(ChkRec);
+					delete ChkRec;
 					if (StoreNameAndDescriptionWithId(ComListWndHndl, CommBkGndWndHndl, IDC_VARCOMMNAMEEDIT, IDC_VARCOMMDESCEDIT, SelVarId) == -1) {
 						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDNAME, WndHndl);
 						return TRUE;

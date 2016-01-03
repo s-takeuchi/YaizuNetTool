@@ -128,7 +128,7 @@ void ChgData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT mes
 			}
 			CurVarRec = CurVarRec->GetNextRecord();
 		}
-		ClearRecordData(VarRecs);
+		delete VarRecs;
 		SelectedVarIdA = GetChgDatVarIdA(CurrentId);
 		SelectedVarIdB = GetChgDatVarIdB(CurrentId);
 		SelectedVarIdC = GetChgDatVarIdC(CurrentId);
