@@ -934,6 +934,7 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 					}
 					if (((ColumnDataInt*)ChkRec->GetColumn(3))->GetValue() != 1) {
 						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDTYPE, WndHndl);
+						delete ChkRec;
 						return TRUE;
 					}
 					delete ChkRec;
@@ -1060,6 +1061,7 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					}
 					if (((ColumnDataInt*)ChkRec->GetColumn(3))->GetValue() != 0) {
 						MyMsgProc::StkErr(MyMsgProc::VAR_INVALIDTYPE, WndHndl);
+						delete ChkRec;
 						return TRUE;
 					}
 					delete ChkRec;

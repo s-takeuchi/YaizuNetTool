@@ -82,7 +82,6 @@ int VarCon_GetVariableNameAndDesc(int Id, TCHAR VarName[32], TCHAR VarDesc[64])
 	UnlockTable(_T("Variable"));
 	delete SchRec;
 	if (RtRecDat == NULL) {
-		delete RtRecDat;
 		return -1;
 	}
 
@@ -110,6 +109,7 @@ BOOL VarCon_CheckVariableExistence(int Id)
 	BOOL Ret = TRUE;
 	if (RtRecDat == NULL) {
 		Ret = FALSE;
+		return Ret;
 	}
 	delete RtRecDat;
 	return Ret;
