@@ -50,7 +50,10 @@ int RunCommand(HWND DlgHndl, int OperationCode)
 	ZeroMemory(&si,sizeof(si));
 	si.cb=sizeof(si);
 	if (CreateProcess(NULL, CmdName, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi) == 0) {
-		MessageProc::StkErr(LBA_PROCCALLFAILED, DlgHndl);
+		//MessageProc::StkErr(LBA_PROCCALLFAILED, DlgHndl);
+		TCHAR Buf[32];
+		wsprintf(Buf, _T("Message ID : %d"), LBA_PROCCALLFAILED);
+		MessageBox(DlgHndl, MessageProc::GetMsg(LBA_PROCCALLFAILED), Buf, MB_OK | MB_ICONSTOP);
 		return -1;
 	}
 	DWORD RetCode;
@@ -113,7 +116,10 @@ INT_PTR CALLBACK LbAdptDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 				EnableWindow(removeHndl, FALSE);
 				if (RunCommand(hDlg, 1) == 0) {
 					ShowInformation(hDlg);
-					MessageProc::StkInf(LBA_OPECOMPLETED, hDlg);
+					// MessageProc::StkInf(LBA_OPECOMPLETED, hDlg);
+					TCHAR Buf[32];
+					wsprintf(Buf, _T("Message ID : %d"), LBA_OPECOMPLETED);
+					MessageBox(hDlg, MessageProc::GetMsg(LBA_OPECOMPLETED), Buf, MB_OK | MB_ICONINFORMATION);
 				} else {
 					ShowInformation(hDlg);
 				}
@@ -124,7 +130,10 @@ INT_PTR CALLBACK LbAdptDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 				EnableWindow(removeHndl, FALSE);
 				if (RunCommand(hDlg, -1) == 0) {
 					ShowInformation(hDlg);
-					MessageProc::StkInf(LBA_OPECOMPLETED, hDlg);
+					//MessageProc::StkInf(LBA_OPECOMPLETED, hDlg);
+					TCHAR Buf[32];
+					wsprintf(Buf, _T("Message ID : %d"), LBA_OPECOMPLETED);
+					MessageBox(hDlg, MessageProc::GetMsg(LBA_OPECOMPLETED), Buf, MB_OK | MB_ICONINFORMATION);
 				} else {
 					ShowInformation(hDlg);
 				}
