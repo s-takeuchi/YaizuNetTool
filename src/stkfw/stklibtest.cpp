@@ -17,8 +17,8 @@
 #include "..\stklib\GameStatusElement.h"
 #include "..\stklib\ActorStatus.h"
 #include "..\stklib\ActorStatusElement.h"
+#include "..\\stk_about\stk_about.h"
 
-#include "..\..\..\YaizuComLib\src\\stk_about\stk_about.h"
 #include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
 #include "..\..\..\YaizuComLib\src\commonfunc\StkGeneric.h"
