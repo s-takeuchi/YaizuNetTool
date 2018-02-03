@@ -4,7 +4,7 @@
 #include <shlwapi.h>
 #include <shlobj.h>
 #include <winnls.h>
-#include <shfolder.h>
+//#include <shfolder.h>
 
 #include "resource.h"
 #include "VarCon.h"

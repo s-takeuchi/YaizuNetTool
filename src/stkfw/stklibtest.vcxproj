@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>stkfw</ProjectName>
+    <ProjectGuid>{A2B58C10-8C98-4EA0-A7DC-8DA33D4F8EE4}</ProjectGuid>
+    <RootNamespace>stklibtest</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.27130.2020</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;Psapi.lib;shell32.lib;Debug\stklib.lib;Debug\stkdata.lib;Debug\stk_about.lib;Debug\stkthread.lib;Debug\stkthreadgui.lib;Debug\commonfunc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>msvcrtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <StackReserveSize>3000000</StackReserveSize>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;shell32.lib;Psapi.lib;Release\stklib.lib;Release\stkdata.lib;Release\stk_about.lib;Release\stkthread.lib;Release\stkthreadgui.lib;Release\commonfunc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <StackReserveSize>3000000</StackReserveSize>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <LinkTimeCodeGeneration />
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CheckData.cpp" />
+    <ClCompile Include="ChgData.cpp" />
+    <ClCompile Include="CloseSock.cpp" />
+    <ClCompile Include="ExecProg.cpp" />
+    <ClCompile Include="FileAccess.cpp" />
+    <ClCompile Include="FlagView.cpp" />
+    <ClCompile Include="LowDbAccess.cpp" />
+    <ClCompile Include="Mapper.cpp" />
+    <ClCompile Include="MyMsgProc.cpp" />
+    <ClCompile Include="NetAseEx.cpp" />
+    <ClCompile Include="NetGseEx.cpp" />
+    <ClCompile Include="NetManagerAseEx.cpp" />
+    <ClCompile Include="RecvInit.cpp" />
+    <ClCompile Include="stklibtest.cpp" />
+    <ClCompile Include="stkprop.cpp" />
+    <ClCompile Include="StkPropExecElem.cpp" />
+    <ClCompile Include="StkPropExecMgr.cpp" />
+    <ClCompile Include="StoreData.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="UdpRecvSend.cpp" />
+    <ClCompile Include="VarCon.cpp" />
+    <ClCompile Include="VarController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LowDbAccess.h" />
+    <ClInclude Include="MyMsgProc.h" />
+    <ClInclude Include="NetAseEx.h" />
+    <ClInclude Include="NetGseEx.h" />
+    <ClInclude Include="NetManagerAseEx.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stklibtest.h" />
+    <ClInclude Include="stkprop.h" />
+    <ClInclude Include="StkPropExecElem.h" />
+    <ClInclude Include="StkPropExecMgr.h" />
+    <ClInclude Include="VarCon.h" />
+    <ClInclude Include="VarController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image\back.bmp" />
+    <Image Include="image\icon0.ico" />
+    <Image Include="image\icon1.ico" />
+    <Image Include="image\icon10.ico" />
+    <Image Include="image\icon11.ico" />
+    <Image Include="image\icon12.ico" />
+    <Image Include="image\icon13.ico" />
+    <Image Include="image\icon14.ico" />
+    <Image Include="image\icon15.ico" />
+    <Image Include="image\icon16.ico" />
+    <Image Include="image\icon17.ico" />
+    <Image Include="image\icon18.ico" />
+    <Image Include="image\icon19.ico" />
+    <Image Include="image\icon2.ico" />
+    <Image Include="image\icon20.ico" />
+    <Image Include="image\icon21.ico" />
+    <Image Include="image\icon22.ico" />
+    <Image Include="image\icon23.ico" />
+    <Image Include="image\icon24.ico" />
+    <Image Include="image\icon25.ico" />
+    <Image Include="image\icon26.ico" />
+    <Image Include="image\icon27.ico" />
+    <Image Include="image\icon28.ico" />
+    <Image Include="image\icon29.ico" />
+    <Image Include="image\icon3.ico" />
+    <Image Include="image\icon30.ico" />
+    <Image Include="image\icon31.ico" />
+    <Image Include="image\icon32.ico" />
+    <Image Include="image\icon33.ico" />
+    <Image Include="image\icon34.ico" />
+    <Image Include="image\icon35.ico" />
+    <Image Include="image\icon36.ico" />
+    <Image Include="image\icon37.ico" />
+    <Image Include="image\icon38.ico" />
+    <Image Include="image\icon39.ico" />
+    <Image Include="image\icon4.ico" />
+    <Image Include="image\icon40.ico" />
+    <Image Include="image\icon41.ico" />
+    <Image Include="image\icon42.ico" />
+    <Image Include="image\icon43.ico" />
+    <Image Include="image\icon44.ico" />
+    <Image Include="image\icon45.ico" />
+    <Image Include="image\icon46.ico" />
+    <Image Include="image\icon47.ico" />
+    <Image Include="image\icon48.ico" />
+    <Image Include="image\icon5.ico" />
+    <Image Include="image\icon50.ico" />
+    <Image Include="image\icon51.ico" />
+    <Image Include="image\icon52.ico" />
+    <Image Include="image\icon53.ico" />
+    <Image Include="image\icon54.ico" />
+    <Image Include="image\icon55.ico" />
+    <Image Include="image\icon56.ico" />
+    <Image Include="image\icon6.ico" />
+    <Image Include="image\icon60.ico" />
+    <Image Include="image\icon61.ico" />
+    <Image Include="image\icon62.ico" />
+    <Image Include="image\icon7.ico" />
+    <Image Include="image\icon71.ico" />
+    <Image Include="image\icon72.ico" />
+    <Image Include="image\icon73.ico" />
+    <Image Include="image\icon8.ico" />
+    <Image Include="image\icon9.ico" />
+    <Image Include="image\iconabug.ico" />
+    <Image Include="image\iconaenh.ico" />
+    <Image Include="image\varicon1.ico" />
+    <Image Include="image\varicon2.ico" />
+    <Image Include="image\varicon3.ico" />
+    <Image Include="image\varicon4.ico" />
+    <Image Include="image\varicon5.ico" />
+    <Image Include="image\varicon6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="stklibtest.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\YaizuComLib\src\commonfunc\commonfunc.vcxproj">
+      <Project>{8061dcb2-52a6-462e-8955-fcfe6f7a7d41}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\YaizuComLib\src\stkdata\stkdata.vcxproj">
+      <Project>{83e294f2-a071-4ecc-bae2-b5f127dd537e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\YaizuComLib\src\stksocket\stksocket.vcxproj">
+      <Project>{3839d168-00f8-420a-bae6-ab290802ffc7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.vcxproj">
+      <Project>{b9a3808f-c8ff-42c4-9f67-8c4274aee32d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\YaizuComLib\src\stkthread\stkthread.vcxproj">
+      <Project>{c85c9417-1312-4a69-b254-b4f041a9d9c1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\stklib\stklib.vcxproj">
+      <Project>{e6515a67-eb9d-4f9d-801c-305ceb62fdf2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\stk_about\stk_about.vcxproj">
+      <Project>{416b9ff2-02f0-47e1-808e-f283d2c62358}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

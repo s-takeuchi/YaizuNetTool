@@ -1,30 +1,23 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkfw", "stklibtest.vcproj", "{A2B58C10-8C98-4EA0-A7DC-8DA33D4F8EE4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C85C9417-1312-4A69-B254-B4F041A9D9C1} = {C85C9417-1312-4A69-B254-B4F041A9D9C1}
-		{E6515A67-EB9D-4F9D-801C-305CEB62FDF2} = {E6515A67-EB9D-4F9D-801C-305CEB62FDF2}
-		{3839D168-00F8-420A-BAE6-AB290802FFC7} = {3839D168-00F8-420A-BAE6-AB290802FFC7}
-		{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D} = {B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}
-		{8061DCB2-52A6-462E-8955-FCFE6F7A7D41} = {8061DCB2-52A6-462E-8955-FCFE6F7A7D41}
-		{83E294F2-A071-4ECC-BAE2-B5F127DD537E} = {83E294F2-A071-4ECC-BAE2-B5F127DD537E}
-		{416B9FF2-02F0-47E1-808E-F283D2C62358} = {416B9FF2-02F0-47E1-808E-F283D2C62358}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkfw", "stklibtest.vcxproj", "{A2B58C10-8C98-4EA0-A7DC-8DA33D4F8EE4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stklib", "..\stklib\stklib.vcproj", "{E6515A67-EB9D-4F9D-801C-305CEB62FDF2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stklib", "..\stklib\stklib.vcxproj", "{E6515A67-EB9D-4F9D-801C-305CEB62FDF2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkdata", "..\..\..\YaizuComLib\src\stkdata\stkdata.vcproj", "{83E294F2-A071-4ECC-BAE2-B5F127DD537E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkdata", "..\..\..\YaizuComLib\src\stkdata\stkdata.vcxproj", "{83E294F2-A071-4ECC-BAE2-B5F127DD537E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stksocket", "..\..\..\YaizuComLib\src\stksocket\stksocket.vcproj", "{3839D168-00F8-420A-BAE6-AB290802FFC7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stksocket", "..\..\..\YaizuComLib\src\stksocket\stksocket.vcxproj", "{3839D168-00F8-420A-BAE6-AB290802FFC7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthread", "..\..\..\YaizuComLib\src\stkthread\stkthread.vcproj", "{C85C9417-1312-4A69-B254-B4F041A9D9C1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthread", "..\..\..\YaizuComLib\src\stkthread\stkthread.vcxproj", "{C85C9417-1312-4A69-B254-B4F041A9D9C1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthreadgui", "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.vcproj", "{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stkthreadgui", "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.vcxproj", "{B9A3808F-C8FF-42C4-9F67-8C4274AEE32D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonfunc", "..\..\..\YaizuComLib\src\commonfunc\commonfunc.vcproj", "{8061DCB2-52A6-462E-8955-FCFE6F7A7D41}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonfunc", "..\..\..\YaizuComLib\src\commonfunc\commonfunc.vcxproj", "{8061DCB2-52A6-462E-8955-FCFE6F7A7D41}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_about", "..\stk_about\stk_about.vcproj", "{416B9FF2-02F0-47E1-808E-F283D2C62358}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_about", "..\stk_about\stk_about.vcxproj", "{416B9FF2-02F0-47E1-808E-F283D2C62358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,5 +60,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09D4C258-B5A4-4F52-88FD-017C87EDFD9A}
 	EndGlobalSection
 EndGlobal

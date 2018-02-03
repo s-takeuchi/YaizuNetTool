@@ -1,12 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_ip_dlg", "stk_ip_dlg.vcproj", "{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8061DCB2-52A6-462E-8955-FCFE6F7A7D41} = {8061DCB2-52A6-462E-8955-FCFE6F7A7D41}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stk_ip_dlg", "stk_ip_dlg.vcxproj", "{CCF6CAC8-24EB-4C71-9DB6-B3F297A55ED7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonfunc", "..\..\..\YaizuComLib\src\commonfunc\commonfunc.vcproj", "{8061DCB2-52A6-462E-8955-FCFE6F7A7D41}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonfunc", "..\..\..\YaizuComLib\src\commonfunc\commonfunc.vcxproj", "{8061DCB2-52A6-462E-8955-FCFE6F7A7D41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +29,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5B889D7-9E58-4412-AD7E-B3A0DDB9E2EC}
 	EndGlobalSection
 EndGlobal
