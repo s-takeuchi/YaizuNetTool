@@ -137,8 +137,8 @@ void MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbClsExtra    = 0;
 	wcex.cbWndExtra    = 0;
 	wcex.hInstance     = hInstance;
-	wcex.hIcon         = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
-	wcex.hIconSm       = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
+	wcex.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
+	wcex.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
 	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName  = MAKEINTRESOURCE(IDR_VARCON_MENU);
@@ -152,8 +152,8 @@ void MyRegisterClass(HINSTANCE hInstance)
 	CommWc.cbClsExtra    = 0;
 	CommWc.cbWndExtra    = 0;
 	CommWc.hInstance     = hInstance;
-	CommWc.hIcon         = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
-	CommWc.hIconSm       = LoadIcon(NULL, MAKEINTRESOURCE(IDI_APPLICATION));
+	CommWc.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
+	CommWc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
 	CommWc.hCursor       = LoadCursor(NULL, IDC_ARROW);
 	CommWc.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
 	CommWc.lpszMenuName  = MAKEINTRESOURCE(IDR_VARCOMM_MENU);
