@@ -150,36 +150,6 @@ void ShowLbadptDialog(HWND ParentWndHndl)
 	DialogBox(InstHndl, MAKEINTRESOURCE(IDD_LBADPT), ParentWndHndl, LbAdptDlg);
 }
 
-void CheckExecutorLocalGroup(void)
-{
-	TCHAR ErrorMessage[1024] = _T("");
-	TCHAR Buf[64];
-	DWORD BufSize = 64;
-
-	lstrcpy(ErrorMessage, MessageProc::GetMsg(NEEDADMINRIGHTS));
-	lstrcat(ErrorMessage, _T("User name = "));
-	GetUserName(Buf, &BufSize);
-	lstrcat(ErrorMessage, Buf);
-	lstrcat(ErrorMessage, _T("\r\n"));
-
-	lstrcat(ErrorMessage, _T("Local group :\r\n"));
-    DWORD EntriesRead = 0;
-    DWORD TotalEntries = 0;
-	LPLOCALGROUP_USERS_INFO_0 GrpBuf = NULL;
-	NetUserGetLocalGroups(NULL, Buf, 0, LG_INCLUDE_INDIRECT, (LPBYTE*)&GrpBuf, MAX_PREFERRED_LENGTH, &EntriesRead, &TotalEntries);
-	for (int Loop = 0; Loop < (int)EntriesRead; Loop++) {
-		lstrcat(ErrorMessage, _T("    "));
-		lstrcat(ErrorMessage, GrpBuf->lgrui0_name);
-		lstrcat(ErrorMessage, _T("\r\n"));
-		GrpBuf++;
-	}
-	NetApiBufferFree(GrpBuf);
-	if (IsUserAnAdmin() == FALSE) {
-		MessageBox(NULL, ErrorMessage, _T("Error"), MB_OK | MB_ICONERROR);
-		ExitProcess(0);
-	}
-}
-
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	// =====================================================================================================
@@ -209,8 +179,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 
 	InstHndl = hInstance;
-
-	CheckExecutorLocalGroup();
 
 	// Check whether same program is already executed.
 	HANDLE MutexHndl = CreateMutex(NULL, TRUE, _T("Lbadpt (S.Takeuchi)"));
