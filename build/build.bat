@@ -107,9 +107,9 @@ rem ########## ZIP packing ##########
 echo;
 echo ZIP packing stage...
 cd deployment
-%SEVENZIP% a sfw150.zip stkfw.msi
-%SEVENZIP% a sfw150.zip ReadmeJPN.txt
-%SEVENZIP% a sfw150.zip ReadmeENG.txt
+%SEVENZIP% a sfw160.zip stkfw.msi
+%SEVENZIP% a sfw160.zip ReadmeJPN.txt
+%SEVENZIP% a sfw160.zip ReadmeENG.txt
 del ReadmeJPN.txt
 del ReadmeENG.txt
 del stkfw.msi
