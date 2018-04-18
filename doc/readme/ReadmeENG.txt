@@ -1,5 +1,5 @@
 =================================================
-StkFw 1.5.0
+StkFw 1.6.0
 =================================================
 1.Summary of StkFw
 
@@ -113,7 +113,7 @@ Windows Server 2012 R2 Standard
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Shinya Takeuchi
+Copyright (c) 2018 Shinya Takeuchi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
