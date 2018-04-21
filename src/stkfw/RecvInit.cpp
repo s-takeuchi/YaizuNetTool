@@ -173,6 +173,12 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND Wa
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_SHOW);
 			SendMessage(SpecVarRecvHndl, CB_SETCURSEL, 0, 0);
+		} else if (CondValue == 9999998) {
+			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
+			ShowWindow(WaitCondHndl, SW_HIDE);
+			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
+			ShowWindow(LenCondHndl, SW_HIDE);
+			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 		} else {
 			wsprintf(Buf, _T("%d"), CondValue - 10000000);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 4, 0);
@@ -198,12 +204,13 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 								_T("Server"), _T("Thin client"), _T("Mainframe A"),
 								_T("Enterprise storage device"), _T("Mainframe B"), _T("Note PC"), _T("Desktop PC B")};
 
-	TCHAR ComboFinishCond[5][128];
+	TCHAR ComboFinishCond[6][128];
 	lstrcpy(ComboFinishCond[0], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_UNCOND));
 	lstrcpy(ComboFinishCond[1], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSEDETECT));
 	lstrcpy(ComboFinishCond[2], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUT));
 	lstrcpy(ComboFinishCond[3], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVSTR));
 	lstrcpy(ComboFinishCond[4], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_EXCEEDSIZE));
+	lstrcpy(ComboFinishCond[5], MyMsgProc::GetMsg(MyMsgProc::PROP_NET_HTTPCONTLEN));
 
 	static const TCHAR* Receiver1 = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECV);
 	static const TCHAR* Receiver2 = MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVTGT);
@@ -289,7 +296,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		if (Type == 1) {
 			CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TERMCOND), WS_CHILD | WS_VISIBLE, 10, 387, 200, 20, WndHndl, NULL, InstHndl, NULL);
 			FinishCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.left + 20, 412, Rect.right - 30, 200, WndHndl, (HMENU)IDC_RECVINIT_FINISHCOND, InstHndl, NULL);
-			for (int Loop = 0; Loop < 5; Loop++) {
+			for (int Loop = 0; Loop < 6; Loop++) {
 				SendMessage(FinishCondHndl, CB_ADDSTRING, 0, (LPARAM)ComboFinishCond[Loop]);
 			}
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 0, 0);
@@ -453,8 +460,11 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					CondValue = 500;
 				} else if (SelectedFinishCond == 3) {
 					CondValue = -1;
-				} else {
+				} else if (SelectedFinishCond == 4) {
 					CondValue = 10000001;
+				} else if (SelectedFinishCond == 5) {
+					CondValue = 9999998;
+				} else {
 				}
 				UpdateFinishCondition(CondValue, Type, FinishCondHndl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
 			}
@@ -540,6 +550,8 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						} else {
 							CondDummy *= -1;
 						}
+					} else if (SelFinCnd == 5) {
+						CondDummy = 9999998;
 					} else {
 						SendMessage(LenCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						CondDummy = StrToInt(CondDummyStr);

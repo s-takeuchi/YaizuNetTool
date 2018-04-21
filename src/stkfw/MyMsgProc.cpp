@@ -410,6 +410,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_RECVMULTI, _T("指定した受信要素からデータを受信する"));
 	MessageProc::AddEng(PROP_NET_RECVMULTI, _T("Receive data from the specified receiver element."));
 
+	// 2385 (★)
+	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTP headerのContent-Lengthで指定したサイズのデータを受信した"));
+	MessageProc::AddEng(PROP_NET_HTTPCONTLEN, _T("Data which size specified in Content-Length in HTTP header received."));
+
 	// =====================================================================================================
 	// 2400 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));
