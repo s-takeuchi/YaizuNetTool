@@ -173,9 +173,11 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND Wa
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_SHOW);
 			SendMessage(SpecVarRecvHndl, CB_SETCURSEL, 0, 0);
-		} else if (CondValue == 9999998) {
+		} else if (CondValue >= 200001 && CondValue <= 380000) {
+			wsprintf(Buf, _T("%d"), CondValue - 200000);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
-			ShowWindow(WaitCondHndl, SW_HIDE);
+			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
+			ShowWindow(WaitCondHndl, SW_SHOW);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
@@ -463,7 +465,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				} else if (SelectedFinishCond == 4) {
 					CondValue = 10000001;
 				} else if (SelectedFinishCond == 5) {
-					CondValue = 9999998;
+					CondValue = 200500;
 				} else {
 				}
 				UpdateFinishCondition(CondValue, Type, FinishCondHndl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
@@ -551,7 +553,15 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 							CondDummy *= -1;
 						}
 					} else if (SelFinCnd == 5) {
-						CondDummy = 9999998;
+						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
+						CondDummy = StrToInt(CondDummyStr);
+						if (CondDummy < 1) {
+							CondDummy = 1;
+						}
+						if (CondDummy > 180000) {
+							CondDummy = 180000;
+						}
+						CondDummy += 200000;
 					} else {
 						SendMessage(LenCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						CondDummy = StrToInt(CondDummyStr);
