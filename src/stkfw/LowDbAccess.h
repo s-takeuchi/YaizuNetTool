@@ -60,6 +60,7 @@ public:
 	void SetTcpRecvOperationTypeInElementInfo(int, int);
 	int GetTcpRecvCorrespodingIdInElementInfo(int);
 	void SetTcpRecvCorrespodingIdInElementInfo(int, int);
+	void ModifyElementInfoScheme();
 
 	// Delete all records of specified table
 	int DeleteAllRecords(TCHAR[TABLE_NAME_SIZE]);

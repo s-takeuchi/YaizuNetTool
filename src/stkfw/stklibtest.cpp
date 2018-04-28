@@ -38,7 +38,7 @@
 #include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
 #include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
 
-#define DB_VERSION 4
+#define DB_VERSION 5
 
 TCHAR szTitle[32];
 TCHAR szWindowClass[32];
@@ -206,6 +206,16 @@ int DbMigration_03_04()
 	return 4;
 }
 
+// Version 1.5.0 ¨ Version 1.6.0
+int DbMigration_04_05()
+{
+	LowDbAccess* Lda = LowDbAccess::GetInstance();
+	// Set 4 to DbVersion of Property table.
+	Lda->SetPropertyInteger(_T("DbVersion"), 1, 5);
+	Lda->ModifyElementInfoScheme();
+	return 5;
+}
+
 // Lock all tables using LockAllTable API before this function is called.
 // return == 0  :  DbVersion == LATEST_DB_VERSION or invalid
 // return == -1 :  DbVersion > LATEST_DB_VERSION
@@ -236,6 +246,9 @@ int DbMigration()
 	}
 	if (DbVersion == 3) {
 		DbVersion = DbMigration_03_04(); // Version 1.4.0 -> Version 1.5.0
+	}
+	if (DbVersion == 4) {
+		DbVersion = DbMigration_04_05(); // Version 1.5.0 -> Version 1.6.0
 	}
 
 	return 1;

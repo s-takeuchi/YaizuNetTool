@@ -1063,6 +1063,74 @@ void LowDbAccess::SetTcpRecvCorrespodingIdInElementInfo(int TargetId, int CorrId
 	LowDbAccess::GetInstance()->SetElementInfoInt(TargetId, CorrId, 2);
 }
 
+void LowDbAccess::ModifyElementInfoScheme()
+{
+	TableDef TabDefElementInfo(_T("NewElementInfo"), 500);
+	ColumnDef* ElementInfoColDef[17];
+	ElementInfoColDef[0] = new ColumnDefInt(_T("Id"));
+	ElementInfoColDef[1] = new ColumnDefInt(_T("ParamInt1"));
+	ElementInfoColDef[2] = new ColumnDefInt(_T("ParamInt2"));
+	ElementInfoColDef[3] = new ColumnDefInt(_T("ParamInt3"));
+	ElementInfoColDef[4] = new ColumnDefInt(_T("ParamInt4"));
+	ElementInfoColDef[5] = new ColumnDefInt(_T("ParamInt5"));
+	ElementInfoColDef[6] = new ColumnDefInt(_T("ParamInt6"));
+	ElementInfoColDef[7] = new ColumnDefInt(_T("ParamInt7"));
+	ElementInfoColDef[8] = new ColumnDefWStr(_T("ParamStr1"), 256);
+	ElementInfoColDef[9] = new ColumnDefWStr(_T("ParamStr2"), 256);
+	ElementInfoColDef[10] = new ColumnDefWStr(_T("ParamStr3"), 256);
+	ElementInfoColDef[11] = new ColumnDefWStr(_T("ParamStr4"), 256);
+	ElementInfoColDef[12] = new ColumnDefWStr(_T("ParamStr5"), 256);
+	ElementInfoColDef[13] = new ColumnDefWStr(_T("ParamStr6"), 256);
+	ElementInfoColDef[14] = new ColumnDefWStr(_T("ParamStr7"), 256);
+	ElementInfoColDef[15] = new ColumnDefBin(_T("ParamBin"), 4096);
+	for (int Loop = 0; Loop < 16; Loop++) {
+		TabDefElementInfo.AddColumnDef(ElementInfoColDef[Loop]);
+	}
+	CreateTable(&TabDefElementInfo);
+	LockTable(_T("ElementInfo"), LOCK_SHARE);
+	RecordData* RecDat = GetRecord(_T("ElementInfo"));
+	UnlockTable(_T("ElementInfo"));
+	while (RecDat) {
+		int ColDatId = ((ColumnDataInt*)RecDat->GetColumn(0))->GetValue();
+		int ColDatParamInt1 = ((ColumnDataInt*)RecDat->GetColumn(1))->GetValue();
+		int ColDatParamInt2 = ((ColumnDataInt*)RecDat->GetColumn(2))->GetValue();
+		int ColDatParamInt3 = ((ColumnDataInt*)RecDat->GetColumn(3))->GetValue();
+		int ColDatParamInt4 = ((ColumnDataInt*)RecDat->GetColumn(4))->GetValue();
+		int ColDatParamInt5 = ((ColumnDataInt*)RecDat->GetColumn(5))->GetValue();
+		TCHAR* ColDatParamStr1 = ((ColumnDataWStr*)RecDat->GetColumn(6))->GetValue();
+		TCHAR* ColDatParamStr2 = ((ColumnDataWStr*)RecDat->GetColumn(7))->GetValue();
+		TCHAR* ColDatParamStr3 = ((ColumnDataWStr*)RecDat->GetColumn(8))->GetValue();
+		TCHAR* ColDatParamStr4 = ((ColumnDataWStr*)RecDat->GetColumn(9))->GetValue();
+		TCHAR* ColDatParamStr5 = ((ColumnDataWStr*)RecDat->GetColumn(10))->GetValue();
+		BYTE* ColDatParamBin = ((ColumnDataBin*)RecDat->GetColumn(11))->GetValue();
+		ColumnData* ColDat[16];
+		ColDat[0] = new ColumnDataInt(_T("Id"), ColDatId);
+		ColDat[1] = new ColumnDataInt(_T("ParamInt1"), ColDatParamInt1);
+		ColDat[2] = new ColumnDataInt(_T("ParamInt2"), ColDatParamInt2);
+		ColDat[3] = new ColumnDataInt(_T("ParamInt3"), ColDatParamInt3);
+		ColDat[4] = new ColumnDataInt(_T("ParamInt4"), ColDatParamInt4);
+		ColDat[5] = new ColumnDataInt(_T("ParamInt5"), ColDatParamInt5);
+		ColDat[6] = new ColumnDataInt(_T("ParamInt6"), 0);
+		ColDat[7] = new ColumnDataInt(_T("ParamInt7"), 0);
+		ColDat[8] = new ColumnDataWStr(_T("ParamStr1"), ColDatParamStr1);
+		ColDat[9] = new ColumnDataWStr(_T("ParamStr2"), ColDatParamStr2);
+		ColDat[10] = new ColumnDataWStr(_T("ParamStr3"), ColDatParamStr3);
+		ColDat[11] = new ColumnDataWStr(_T("ParamStr4"), ColDatParamStr4);
+		ColDat[12] = new ColumnDataWStr(_T("ParamStr5"), ColDatParamStr5);
+		ColDat[13] = new ColumnDataWStr(_T("ParamStr6"), _T(""));
+		ColDat[14] = new ColumnDataWStr(_T("ParamStr7"), _T(""));
+		ColDat[15] = new ColumnDataBin(_T("ParamBin"), ColDatParamBin, 4096);
+		RecordData* NewRecDat = new RecordData(_T("NewElementInfo"), ColDat, 16);
+		LockTable(_T("NewElementInfo"), LOCK_EXCLUSIVE);
+		InsertRecord(NewRecDat);
+		UnlockTable(_T("NewElementInfo"));
+		RecDat = RecDat->GetNextRecord();
+	}
+	UnlockTable(_T("ElementInfo"));
+	DeleteTable(_T("ElementInfo"));
+	RenameTable(_T("NewElementInfo"), _T("ElementInfo"));
+}
+
 
 
 
