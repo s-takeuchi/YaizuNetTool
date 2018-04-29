@@ -918,7 +918,7 @@ void LowDbAccess::GetElementInfoStr(int CurrentId, TCHAR GetStr[256], int Index)
 
 void LowDbAccess::SetElementInfoStr(int CurrentId, TCHAR SetStr[256], int Index)
 {
-	TCHAR ParamStrName[7][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5"), _T("ParamInt6"), _T("ParamInt7") };
+	TCHAR ParamStrName[7][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5"), _T("ParamStr6"), _T("ParamStr7") };
 	ColumnData* ColSch[1];
 	ColumnData* ColUpd[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
