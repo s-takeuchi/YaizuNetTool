@@ -886,7 +886,7 @@ int LowDbAccess::GetElementInfoInt(int CurrentId, int Index)
 
 void LowDbAccess::SetElementInfoInt(int CurrentId, int IntValue, int Index)
 {
-	TCHAR ParamIntName[5][10] = {_T("ParamInt1"), _T("ParamInt2"), _T("ParamInt3"), _T("ParamInt4"), _T("ParamInt5")};
+	TCHAR ParamIntName[7][10] = {_T("ParamInt1"), _T("ParamInt2"), _T("ParamInt3"), _T("ParamInt4"), _T("ParamInt5"), _T("ParamInt6"), _T("ParamInt7") };
 	ColumnData* ColSch[1];
 	ColumnData* ColUpd[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
@@ -918,7 +918,7 @@ void LowDbAccess::GetElementInfoStr(int CurrentId, TCHAR GetStr[256], int Index)
 
 void LowDbAccess::SetElementInfoStr(int CurrentId, TCHAR SetStr[256], int Index)
 {
-	TCHAR ParamStrName[5][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5")};
+	TCHAR ParamStrName[7][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5"), _T("ParamInt6"), _T("ParamInt7") };
 	ColumnData* ColSch[1];
 	ColumnData* ColUpd[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
@@ -988,14 +988,14 @@ int LowDbAccess::GetElementInfoStrAsInt(int CurrentId, int Index)
 
 // Set integer value to string column.
 // CurrentId [in] : ID for the target element
-// Index [in] : Index for the string (6:ParamStr1, 7:ParamStr2, ..., 10:ParamStr5)
+// Index [in] : Index for the string (6:ParamStr1, 7:ParamStr2, ..., 12:ParamStr5)
 // Value [in] : Integer value to be stored
 void LowDbAccess::SetElementInfoStrAsInt(int CurrentId, int Index, int Value)
 {
 	TCHAR TmpBuf[256];
 	DWORD *PtrTmpBuf = (DWORD*)TmpBuf;
 	*PtrTmpBuf = (DWORD)Value;
-	TCHAR ParamStrName[5][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5")};
+	TCHAR ParamStrName[7][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5"), _T("ParamStr6") , _T("ParamStr7") };
 	ColumnData* ColSch[1];
 	ColumnData* ColUpd[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
