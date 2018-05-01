@@ -14,42 +14,42 @@ HWND StDtRdoBtn2;
 
 int GetStoreVarId(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 }
 
 void SetStoreVarId(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 1);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 1);
 }
 
 int GetLoadStoreType(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 }
 
 void SetLoadStoreType(int CurrentId, int Type)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, Type, 2);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Type, 2);
 }
 
 int GetLoadStoreStartNum(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 4);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4);
 }
 
 void SetLoadStoreStartNum(int CurrentId, int StartNum)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, StartNum, 4);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, StartNum, 4);
 }
 
 void GetLoadStorePrefix(int CurrentId, TCHAR Prefix[256])
 {
-	LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, Prefix, 6);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, Prefix, 1);
 }
 
 void SetLoadStorePrefix(int CurrentId, TCHAR Prefix[256])
 {
-	LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, Prefix, 6);
+	LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, Prefix, 1);
 }
 
 void ChangeSettingType(int Type)

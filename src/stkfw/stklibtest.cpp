@@ -91,7 +91,7 @@ int DbMigration_00_01()
 	int AcquiredIds[ActorStatus::ACTOR_STATUS_COUNT];
 	int IdCnt = Lda->GetViewElementIdsFromType(AcquiredIds, ActorStatus::ACTOR_STATUS_COUNT, 17);
 	for (int Loop = 0; Loop < IdCnt; Loop++) {
-		Lda->SetElementInfoInt(AcquiredIds[Loop], 0, 2);
+		Lda->SetElementInfoParamInt(AcquiredIds[Loop], 0, 2);
 	}
 	return 1;
 }

@@ -32,62 +32,62 @@ void SetIconId(int CurrentId, int IconId)
 
 int GetOperationType(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 }
 
 void SetOperationType(int CurrentId, int OperationId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, OperationId, 1);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, OperationId, 1);
 }
 
 int GetTargetId(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 }
 
 void SetTargetId(int CurrentId, int SenderId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SenderId, 2);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SenderId, 2);
 }
 
 int GetPortNumber(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 3);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3);
 }
 
 void SetPortNumber(int CurrentId, int PortNumber)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, PortNumber, 3);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, PortNumber, 3);
 }
 
 int GetCloseSockCheck(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 4);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4);
 }
 
 void SetCloseSockCheck(int CurrentId, int Check)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, Check, 4);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Check, 4);
 }
 
 int GetCondition(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 5);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 5);
 }
 
 void SetCondition(int CurrentId, int Check)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, Check, 5);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Check, 5);
 }
 
 void GetIpAddressOrHostname(int CurrentId, TCHAR GetStr[256])
 {
-	LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, GetStr, 6);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, GetStr, 1);
 }
 
 void SetIpAddressOrHostname(int CurrentId, TCHAR SetStr[256])
 {
-	LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, SetStr, 6);
+	LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, SetStr, 1);
 }
 
 // Flag == TRUE ... sender names and IDs can be acquired.
@@ -380,7 +380,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		// Initialize for each finish conditions
 		if (Type == 1) {
 			TCHAR TmpBuf[256];
-			LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, TmpBuf, 7);
+			LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, TmpBuf, 2);
 			if (lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
 				SelectedProceedNoDatRecv = 1;
 			} else {
@@ -574,9 +574,9 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						CondDummy += 10000000;
 					}
 					if (SelectedProceedNoDatRecv == 1) {
-						LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, _T("PROCEED;"), 7);
+						LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T("PROCEED;"), 2);
 					} else {
-						LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, _T(""), 7);
+						LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 2);
 					}
 				}
 				SetCondition(CurrentId, CondDummy);

@@ -34,16 +34,16 @@ void Mapper(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT mess
 		TCHAR Prefix1[32];
 		TCHAR Prefix2[32];
 		TCHAR NumBuf[10];
-		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, Prefix1, 6);
-		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, Prefix2, 7);
-		int Num = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, Prefix1, 1);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, Prefix2, 2);
+		int Num = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 		wsprintf(NumBuf, _T("%d"), Num);
 		SendMessage(MapperEdit1Hndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Prefix1);
 		SendMessage(MapperEdit2Hndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Prefix2);
 		SendMessage(NumHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)NumBuf);
 
 		// チェックボックスの初期化
-		UseOnceChk = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+		UseOnceChk = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 		if (UseOnceChk == 0) {
 			SendMessage(UseOnceHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
 		} else {
@@ -68,11 +68,11 @@ void Mapper(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT mess
 				SendMessage(MapperEdit1Hndl, WM_GETTEXT, (WPARAM)32, (LPARAM)Buf1);
 				SendMessage(MapperEdit2Hndl, WM_GETTEXT, (WPARAM)32, (LPARAM)Buf2);
 				SendMessage(NumHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)NumBuf);
-				LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, Buf1, 6);
-				LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, Buf2, 7);
+				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, Buf1, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, Buf2, 2);
 				int Num = StrToInt(NumBuf);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, Num, 1);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, UseOnceChk, 2);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Num, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, UseOnceChk, 2);
 			}
 		}
 	}

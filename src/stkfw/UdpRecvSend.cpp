@@ -108,7 +108,7 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 		SendMessage(PortHndl, EM_SETLIMITTEXT, (WPARAM)5, (LPARAM)0);
 
 		// 操作種別の初期化
-		SelectedOpeType = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1); // Get operation type
+		SelectedOpeType = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1); // Get operation type
 		ChangeOperationType(SelectedOpeType, RdoBtn1, RdoBtn2, IpHndl, PortHndl, TgtHndl);
 
 		// Switch enable/disable close check box
@@ -139,7 +139,7 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 		for (int Loop = 0; Loop < MaxNum; Loop++) {
 			SendMessage(TgtHndl, CB_ADDSTRING, 0, (LPARAM)TargetName[Loop]);
 		}
-		SelectedTargetId = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2); // Get target ID
+		SelectedTargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2); // Get target ID
 		for (int Loop = 0; Loop < MaxNum; Loop++) {
 			if (TargetId[Loop] == SelectedTargetId) {
 				SendMessage(TgtHndl, CB_SETCURSEL, Loop, 0);
@@ -148,17 +148,17 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 
 		// IP address/hostnameの初期化
 		TCHAR IpAddrHostname[256];
-		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, IpAddrHostname, 6);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, IpAddrHostname, 1);
 		SendMessage(IpHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)IpAddrHostname);
 
 		// Portの初期化
-		int PortNum = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 3); // Get port number
+		int PortNum = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3); // Get port number
 		TCHAR Buf[10];
 		wsprintf(Buf, _T("%d"), PortNum);
 		SendMessage(PortHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 
 		// チェックボックスの初期化
-		SelectedCheck = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 4); // Close check box
+		SelectedCheck = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4); // Close check box
 		if (SelectedCheck == 0) {
 			SendMessage(CloseSockHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
 		} else if (SelectedCheck == 1) {
@@ -194,7 +194,7 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 				// Set Ip Address
 				TCHAR IpAddrHostname[256];
 				SendMessage(IpHndl, WM_GETTEXT, (WPARAM)256, (LPARAM)IpAddrHostname);
-				LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, IpAddrHostname, 6);
+				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, IpAddrHostname, 1);
 				// Set port number
 				TCHAR PortNum[10];
 				SendMessage(PortHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)PortNum);
@@ -205,13 +205,13 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 				if (PortNumber > 65535) {
 					PortNumber = 65535;
 				}
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, PortNumber, 3);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, PortNumber, 3);
 				// Operation type
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedOpeType, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedOpeType, 1);
 				// Target ID
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedTargetId, 2);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedTargetId, 2);
 				// Close sock check
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedCheck, 4);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedCheck, 4);
 			}
 			if (LOWORD(wParam) == IDC_NET_OPETYPE_ID) {
 				ChangeOperationType(0, RdoBtn1, RdoBtn2, IpHndl, PortHndl, TgtHndl);

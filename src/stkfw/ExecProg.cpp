@@ -32,12 +32,12 @@ void ExecProg(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		CheckStdinHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_EXECPROG_STDIN), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 20, 320, Rect.right - 40, 20, WndHndl, (HMENU)IDC_EXECPROG_STDIN, InstHndl, NULL);
 
 		TCHAR BufPath[256];
-		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, BufPath, 6);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, BufPath, 1);
 		SendMessage(ProgNameHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)BufPath);
-		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, BufPath, 7);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, BufPath, 2);
 		SendMessage(CurrDirHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)BufPath);
 
-		SelectedCheck = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+		SelectedCheck = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 		if (SelectedCheck & 0x00000001) {
 			SendMessage(CheckWaitHndl, BM_SETCHECK, BST_CHECKED, 0L);
 			EnableWindow(CheckStdoutHndl, TRUE);
@@ -90,10 +90,10 @@ void ExecProg(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			if (LOWORD(wParam) == IDC_BTNOK) {
 				TCHAR BufPath[256];
 				SendMessage(ProgNameHndl, WM_GETTEXT, (WPARAM)255, (LPARAM)BufPath);
-				LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, BufPath, 6);
+				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, BufPath, 1);
 				SendMessage(CurrDirHndl, WM_GETTEXT, (WPARAM)255, (LPARAM)BufPath);
-				LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, BufPath, 7);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedCheck, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, BufPath, 2);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedCheck, 1);
 			}
 		}
 	}

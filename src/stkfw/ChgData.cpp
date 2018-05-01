@@ -17,42 +17,42 @@ HWND ChgDatVarCBoxC;
 
 int GetChgDatVarIdA(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 }
 
 void SetChgDatVarIdA(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 1);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 1);
 }
 
 int GetChgDatVarIdB(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 }
 
 void SetChgDatVarIdB(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 2);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 2);
 }
 
 int GetChgDatVarIdC(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 3);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3);
 }
 
 void SetChgDatVarIdC(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 3);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 3);
 }
 
 int GetChgDatType(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 4);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4);
 }
 
 void SetChgDatType(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 4);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 4);
 }
 
 void ChangeChgDatType(int Type)

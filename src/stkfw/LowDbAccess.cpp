@@ -436,7 +436,7 @@ int LowDbAccess::GetViewElementNamesAndIdsFromType(TCHAR Name[256][32], int Id[2
 				break;
 			}
 		}
-		if (GetElementInfoInt(CurId, 1) == 0) {
+		if (GetElementInfoParamInt(CurId, 1) == 0) {
 			if (FndFlag == FALSE && MaxNumOfName < 256) {
 				Id[MaxNumOfName] = CurId;
 				lstrcpyn(Name[MaxNumOfName], CurName, 32);
@@ -642,7 +642,7 @@ int LowDbAccess::GetTargetTcpUdpNameAndId(TCHAR AcquiredName[256][32], int Acqui
 			}
 			// If it is not port direct specification, name and ID are not inserted to the array.
 			// Operation type of sender/receiver element is indicating 1.
-			if (LowDbAccess::GetInstance()->GetElementInfoInt(Id, 1) == 0 || LowDbAccess::GetInstance()->GetElementInfoInt(Id, 1) == 2) {
+			if (LowDbAccess::GetInstance()->GetElementInfoParamInt(Id, 1) == 0 || LowDbAccess::GetInstance()->GetElementInfoParamInt(Id, 1) == 2) {
 				if (FndFlag == FALSE && MaxNumOfName < 256) {
 					AcquiredId[MaxNumOfName] = Id;
 					lstrcpyn(AcquiredName[MaxNumOfName], Name, 32);
@@ -712,8 +712,8 @@ int LowDbAccess::GetTcpSenderReceiver(TCHAR TargetName[256][32], int TargetId[25
 					break;
 				}
 			}
-			if (((GetElementInfoInt(Id, 1) == 0 || GetElementInfoInt(Id, 1) == 2) && RemovalId != Id && MaFlag == TRUE) ||
-				(GetElementInfoInt(Id, 1) == 0 && RemovalId != Id && MaFlag == FALSE)) {
+			if (((GetElementInfoParamInt(Id, 1) == 0 || GetElementInfoParamInt(Id, 1) == 2) && RemovalId != Id && MaFlag == TRUE) ||
+				(GetElementInfoParamInt(Id, 1) == 0 && RemovalId != Id && MaFlag == FALSE)) {
 				if (FndFlag == FALSE && MaxNumOfName < 256) {
 					TargetId[MaxNumOfName] = Id;
 					lstrcpyn(TargetName[MaxNumOfName], Name, 32);
@@ -866,7 +866,11 @@ int LowDbAccess::GetAllViewElementRecords(int Id[1000], TCHAR Name[1000][32], in
 //
 /////////////////////////////////////////////////////////////////////////
 
-int LowDbAccess::GetElementInfoInt(int CurrentId, int Index)
+// Get ParamInt value in ElementInfo table.
+// CurrentId [in] : The target ID of ElementInfo
+// Index [in] : 1:ParamInt1, 2:ParamInt2, ..., 7:ParamInt7
+// Return : The target ParamInt value
+int LowDbAccess::GetElementInfoParamInt(int CurrentId, int Index)
 {
 	int IntValue = 0;
 	ColumnData* ColSch[1];
@@ -884,7 +888,10 @@ int LowDbAccess::GetElementInfoInt(int CurrentId, int Index)
 	return IntValue;
 }
 
-void LowDbAccess::SetElementInfoInt(int CurrentId, int IntValue, int Index)
+// Set ParamInt value to the ElementInfo table.
+// CurrentId [in] : The target ID of ElementInfo
+// Index [in] : 1:ParamInt1, 2:ParamInt2, ..., 7:ParamInt7
+void LowDbAccess::SetElementInfoParamInt(int CurrentId, int IntValue, int Index)
 {
 	TCHAR ParamIntName[7][10] = {_T("ParamInt1"), _T("ParamInt2"), _T("ParamInt3"), _T("ParamInt4"), _T("ParamInt5"), _T("ParamInt6"), _T("ParamInt7") };
 	ColumnData* ColSch[1];
@@ -900,7 +907,11 @@ void LowDbAccess::SetElementInfoInt(int CurrentId, int IntValue, int Index)
 	delete RecSch;
 }
 
-void LowDbAccess::GetElementInfoStr(int CurrentId, TCHAR GetStr[256], int Index)
+// Get ParamStr value in ElementInfo table.
+// CurrentId [in] : The target ID of ElementInfo
+// GetStr [out] : The acquired string
+// Index [in] : 1:ParamInt1, 2:ParamInt2, ..., 7:ParamInt7
+void LowDbAccess::GetElementInfoParamStr(int CurrentId, TCHAR GetStr[256], int Index)
 {
 	ColumnData* ColSch[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
@@ -909,20 +920,24 @@ void LowDbAccess::GetElementInfoStr(int CurrentId, TCHAR GetStr[256], int Index)
 	RecordData* RetRec = GetRecord(RecSch);
 	UnlockTable(_T("ElementInfo"));
 	if (RetRec != NULL) {
-		ColumnDataWStr* RetCol = (ColumnDataWStr*)RetRec->GetColumn(Index);
+		ColumnDataWStr* RetCol = (ColumnDataWStr*)RetRec->GetColumn(Index + 7);
 		lstrcpyn(GetStr, RetCol->GetValue(), 256);
 		delete RetRec;
 	}
 	delete RecSch;
 }
 
-void LowDbAccess::SetElementInfoStr(int CurrentId, TCHAR SetStr[256], int Index)
+// Set ParamStr value to the ElementInfo table.
+// CurrentId [in] : The target ID of ElementInfo
+// SetStr [in] : String will be configured
+// Index [in] : 1:ParamInt1, 2:ParamInt2, ..., 7:ParamInt7
+void LowDbAccess::SetElementInfoParamStr(int CurrentId, TCHAR SetStr[256], int Index)
 {
 	TCHAR ParamStrName[7][10] = {_T("ParamStr1"), _T("ParamStr2"), _T("ParamStr3"), _T("ParamStr4"), _T("ParamStr5"), _T("ParamStr6"), _T("ParamStr7") };
 	ColumnData* ColSch[1];
 	ColumnData* ColUpd[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
-	ColUpd[0] = new ColumnDataWStr(ParamStrName[Index - 6], SetStr);
+	ColUpd[0] = new ColumnDataWStr(ParamStrName[Index - 1], SetStr);
 	RecordData* RecSch = new RecordData(_T("ElementInfo"), ColSch, 1);
 	RecordData* RecUpd = new RecordData(_T("ElementInfo"), ColUpd, 1);
 	LockTable(_T("ElementInfo"), 2);
@@ -941,7 +956,7 @@ void LowDbAccess::GetElementInfoBin(int CurrentId, BYTE BinDat[4096])
 	RecordData* RetRec = GetRecord(RecSch);
 	UnlockTable(_T("ElementInfo"));
 	if (RetRec != NULL) {
-		ColumnDataBin* RetCol = (ColumnDataBin*)RetRec->GetColumn(11);
+		ColumnDataBin* RetCol = (ColumnDataBin*)RetRec->GetColumn(15);
 		memcpy(BinDat, RetCol->GetValue(), 4096);
 		delete RetRec;
 	}
@@ -965,9 +980,9 @@ void LowDbAccess::SetElementInfoBin(int CurrentId, BYTE BinDat[4096])
 
 // Acquire integer value from string column.
 // CurrentId [in] : ID for the target element
-// Index [in] : Index for the string (6:ParamStr1, 7:ParamStr2, ..., 10:ParamStr5)
+// Index [in] : Index for the string (1:ParamStr1, 2:ParamStr2, ..., 7:ParamStr7)
 // Return : Acquired value
-int LowDbAccess::GetElementInfoStrAsInt(int CurrentId, int Index)
+int LowDbAccess::GetElementInfoParamStrAsInt(int CurrentId, int Index)
 {
 	TCHAR TmpBuf[256];
 	ColumnData* ColSch[1];
@@ -977,7 +992,7 @@ int LowDbAccess::GetElementInfoStrAsInt(int CurrentId, int Index)
 	RecordData* RetRec = GetRecord(RecSch);
 	UnlockTable(_T("ElementInfo"));
 	if (RetRec != NULL) {
-		ColumnDataWStr* RetCol = (ColumnDataWStr*)RetRec->GetColumn(Index);
+		ColumnDataWStr* RetCol = (ColumnDataWStr*)RetRec->GetColumn(Index + 7);
 		lstrcpyn(TmpBuf, RetCol->GetValue(), 256);
 		delete RetRec;
 	}
@@ -988,9 +1003,9 @@ int LowDbAccess::GetElementInfoStrAsInt(int CurrentId, int Index)
 
 // Set integer value to string column.
 // CurrentId [in] : ID for the target element
-// Index [in] : Index for the string (6:ParamStr1, 7:ParamStr2, ..., 12:ParamStr5)
+// Index [in] : Index for the string (1:ParamStr1, 2:ParamStr2, ..., 7:ParamStr7)
 // Value [in] : Integer value to be stored
-void LowDbAccess::SetElementInfoStrAsInt(int CurrentId, int Index, int Value)
+void LowDbAccess::SetElementInfoParamStrAsInt(int CurrentId, int Index, int Value)
 {
 	TCHAR TmpBuf[256];
 	DWORD *PtrTmpBuf = (DWORD*)TmpBuf;
@@ -999,7 +1014,7 @@ void LowDbAccess::SetElementInfoStrAsInt(int CurrentId, int Index, int Value)
 	ColumnData* ColSch[1];
 	ColumnData* ColUpd[1];
 	ColSch[0] = new ColumnDataInt(_T("Id"), CurrentId);
-	ColUpd[0] = new ColumnDataWStr(ParamStrName[Index - 6], TmpBuf);
+	ColUpd[0] = new ColumnDataWStr(ParamStrName[Index - 1], TmpBuf);
 	RecordData* RecSch = new RecordData(_T("ElementInfo"), ColSch, 1);
 	RecordData* RecUpd = new RecordData(_T("ElementInfo"), ColUpd, 1);
 	LockTable(_T("ElementInfo"), 2);
@@ -1031,7 +1046,7 @@ int LowDbAccess::GetHostIpAddrPort(int TargetId, TCHAR HostOrIpAddr[256], int* P
 		if (Type == 0 || Type == 2) {
 			ColumnDataInt* RetColPort = (ColumnDataInt*)RetRec->GetColumn(3);
 			*Port = RetColPort->GetValue();
-			ColumnDataWStr* RetColNameOrIpAddr = (ColumnDataWStr*)RetRec->GetColumn(6);
+			ColumnDataWStr* RetColNameOrIpAddr = (ColumnDataWStr*)RetRec->GetColumn(8);
 			TCHAR* NameOrIpAddr = RetColNameOrIpAddr->GetValue();
 			lstrcpy(HostOrIpAddr, NameOrIpAddr);
 		} else {
@@ -1045,28 +1060,28 @@ int LowDbAccess::GetHostIpAddrPort(int TargetId, TCHAR HostOrIpAddr[256], int* P
 
 int LowDbAccess::GetTcpRecvOperationTypeInElementInfo(int TargetId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(TargetId, 1);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(TargetId, 1);
 }
 
 void LowDbAccess::SetTcpRecvOperationTypeInElementInfo(int TargetId, int OpeType)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(TargetId, OpeType, 1);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(TargetId, OpeType, 1);
 }
 
 int LowDbAccess::GetTcpRecvCorrespodingIdInElementInfo(int TargetId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(TargetId, 2);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(TargetId, 2);
 }
 
 void LowDbAccess::SetTcpRecvCorrespodingIdInElementInfo(int TargetId, int CorrId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(TargetId, CorrId, 2);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(TargetId, CorrId, 2);
 }
 
 void LowDbAccess::ModifyElementInfoScheme()
 {
 	TableDef TabDefElementInfo(_T("NewElementInfo"), 500);
-	ColumnDef* ElementInfoColDef[17];
+	ColumnDef* ElementInfoColDef[16];
 	ElementInfoColDef[0] = new ColumnDefInt(_T("Id"));
 	ElementInfoColDef[1] = new ColumnDefInt(_T("ParamInt1"));
 	ElementInfoColDef[2] = new ColumnDefInt(_T("ParamInt2"));
@@ -1175,21 +1190,25 @@ void LowDbAccess::UpdateElementInfoFromViewElement()
 			CurrentRdEleIf = CurrentRdEleIf->GetNextRecord();
 		}
 		if (FndFlag == FALSE) {
-			ColumnData* ColDatIns[12];
+			ColumnData* ColDatIns[16];
 			ColDatIns[0]  = new ColumnDataInt(_T("Id"), VelemId);
 			ColDatIns[1]  = new ColumnDataInt(_T("ParamInt1"), 0);
 			ColDatIns[2]  = new ColumnDataInt(_T("ParamInt2"), 0);
 			ColDatIns[3]  = new ColumnDataInt(_T("ParamInt3"), 0);
 			ColDatIns[4]  = new ColumnDataInt(_T("ParamInt4"), 0);
 			ColDatIns[5]  = new ColumnDataInt(_T("ParamInt5"), 0);
-			ColDatIns[6]  = new ColumnDataWStr(_T("ParamStr1"), _T(""));
-			ColDatIns[7]  = new ColumnDataWStr(_T("ParamStr2"), _T(""));
-			ColDatIns[8]  = new ColumnDataWStr(_T("ParamStr3"), _T(""));
-			ColDatIns[9]  = new ColumnDataWStr(_T("ParamStr4"), _T(""));
-			ColDatIns[10] = new ColumnDataWStr(_T("ParamStr5"), _T(""));
+			ColDatIns[6]  = new ColumnDataInt(_T("ParamInt6"), 0);
+			ColDatIns[7]  = new ColumnDataInt(_T("ParamInt7"), 0);
+			ColDatIns[8]  = new ColumnDataWStr(_T("ParamStr1"), _T(""));
+			ColDatIns[9]  = new ColumnDataWStr(_T("ParamStr2"), _T(""));
+			ColDatIns[10] = new ColumnDataWStr(_T("ParamStr3"), _T(""));
+			ColDatIns[11] = new ColumnDataWStr(_T("ParamStr4"), _T(""));
+			ColDatIns[12] = new ColumnDataWStr(_T("ParamStr5"), _T(""));
+			ColDatIns[13] = new ColumnDataWStr(_T("ParamStr6"), _T(""));
+			ColDatIns[14] = new ColumnDataWStr(_T("ParamStr7"), _T(""));
 			BYTE DummyBin[4096];
-			ColDatIns[11] = new ColumnDataBin(_T("ParamBin"), DummyBin, 4096);
-			RecordData* NewRdElemIf = new RecordData(_T("ElementInfo"), ColDatIns, 12);
+			ColDatIns[15] = new ColumnDataBin(_T("ParamBin"), DummyBin, 4096);
+			RecordData* NewRdElemIf = new RecordData(_T("ElementInfo"), ColDatIns, 16);
 			InsertRecord(NewRdElemIf);
 			delete NewRdElemIf;
 		}
@@ -1441,20 +1460,24 @@ int LowDbAccess::StkFwRepositoryCreateTable()
 
 	// Create ElementInfo table
 	TableDef TabDefElementInfo(_T("ElementInfo"), 500);
-	ColumnDef* ElementInfoColDef[12];
+	ColumnDef* ElementInfoColDef[16];
 	ElementInfoColDef[0] = new ColumnDefInt(_T("Id"));
 	ElementInfoColDef[1] = new ColumnDefInt(_T("ParamInt1"));
 	ElementInfoColDef[2] = new ColumnDefInt(_T("ParamInt2"));
 	ElementInfoColDef[3] = new ColumnDefInt(_T("ParamInt3"));
 	ElementInfoColDef[4] = new ColumnDefInt(_T("ParamInt4"));
 	ElementInfoColDef[5] = new ColumnDefInt(_T("ParamInt5"));
-	ElementInfoColDef[6] = new ColumnDefWStr(_T("ParamStr1"), 256);
-	ElementInfoColDef[7] = new ColumnDefWStr(_T("ParamStr2"), 256);
-	ElementInfoColDef[8] = new ColumnDefWStr(_T("ParamStr3"), 256);
-	ElementInfoColDef[9] = new ColumnDefWStr(_T("ParamStr4"), 256);
-	ElementInfoColDef[10] = new ColumnDefWStr(_T("ParamStr5"), 256);
-	ElementInfoColDef[11] = new ColumnDefBin(_T("ParamBin"), 4096);
-	for (int Loop = 0; Loop < 12; Loop++) {
+	ElementInfoColDef[6] = new ColumnDefInt(_T("ParamInt6"));
+	ElementInfoColDef[7] = new ColumnDefInt(_T("ParamInt7"));
+	ElementInfoColDef[8] = new ColumnDefWStr(_T("ParamStr1"), 256);
+	ElementInfoColDef[9] = new ColumnDefWStr(_T("ParamStr2"), 256);
+	ElementInfoColDef[10] = new ColumnDefWStr(_T("ParamStr3"), 256);
+	ElementInfoColDef[11] = new ColumnDefWStr(_T("ParamStr4"), 256);
+	ElementInfoColDef[12] = new ColumnDefWStr(_T("ParamStr5"), 256);
+	ElementInfoColDef[13] = new ColumnDefWStr(_T("ParamStr6"), 256);
+	ElementInfoColDef[14] = new ColumnDefWStr(_T("ParamStr7"), 256);
+	ElementInfoColDef[15] = new ColumnDefBin(_T("ParamBin"), 4096);
+	for (int Loop = 0; Loop < 16; Loop++) {
 		TabDefElementInfo.AddColumnDef(ElementInfoColDef[Loop]);
 	}
 	if (CreateTable(&TabDefElementInfo) != 0) {

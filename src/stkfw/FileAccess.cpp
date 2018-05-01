@@ -47,7 +47,7 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 		FileNameEditHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 200, 180, 250, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(FileNameEditHndl, EM_SETLIMITTEXT, (WPARAM)254, (LPARAM)0);
 		TCHAR BufPath[256];
-		LowDbAccess::GetInstance()->GetElementInfoStr(CurrentId, BufPath, 6);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, BufPath, 1);
 		SendMessage(FileNameEditHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)BufPath);
 		// ‘‚«ž‚ÝŽí•Ê‚ÌÝ’è
 		int OverwMsg;
@@ -65,7 +65,7 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 		FileAcOverwHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(OverwMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 220, 350, 20, WndHndl, (HMENU)IDC_FILEAC_OVERWRITE, InstHndl, NULL);
 		FileAcInsertHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(InsertMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 250, 350, 20, WndHndl, (HMENU)IDC_FILEAC_INSERT, InstHndl, NULL);
 		FileAcAddHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(AddMsg), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 40, 280, 350, 20, WndHndl, (HMENU)IDC_FILEAC_ADD, InstHndl, NULL);
-		AccessType = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+		AccessType = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 		ChangeAccessType(AccessType, FileAcAddHndl, FileAcOverwHndl, FileAcInsertHndl);
 	}
 	if (message == WM_COMMAND) {
@@ -87,8 +87,8 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 			if (LOWORD(wParam) == IDC_BTNOK) {
 				TCHAR BufPath[256];
 				SendMessage(FileNameEditHndl, WM_GETTEXT, (WPARAM)255, (LPARAM)BufPath);
-				LowDbAccess::GetInstance()->SetElementInfoStr(CurrentId, BufPath, 6);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, AccessType, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, BufPath, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, AccessType, 1);
 			}
 		}
 	}

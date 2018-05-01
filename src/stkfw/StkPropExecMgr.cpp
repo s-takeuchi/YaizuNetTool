@@ -145,8 +145,8 @@ void StkPropExecMgr::InitStoreAndLoadDataCounter(int Id)
 			int TargetId = ExecElem->GetElementId();
 			int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
 			if (Type == 2 || Type == 5 || Type == 8) {
-				int InitCounter = LowDbAccess::GetInstance()->GetElementInfoInt(TargetId, 4);
-				LowDbAccess::GetInstance()->SetElementInfoInt(TargetId, InitCounter, 5);
+				int InitCounter = LowDbAccess::GetInstance()->GetElementInfoParamInt(TargetId, 4);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(TargetId, InitCounter, 5);
 			}
 		}
 	}
@@ -165,7 +165,7 @@ void StkPropExecMgr::InitTimer(int Id)
 			int TargetId = ExecElem->GetElementId();
 			int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
 			if (Type == 12) {
-				LowDbAccess::GetInstance()->SetElementInfoInt(TargetId, 0, 5);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(TargetId, 0, 5);
 			}
 		}
 	}
@@ -345,7 +345,7 @@ void StkPropExecMgr::ExecuteElement(int Id)
 
 				// Timerをクリア
 				if (ExecElemClr->GetRootId() == Id && ExecElemClr->GetType() == 12) {
-					LowDbAccess::GetInstance()->SetElementInfoInt(ExecElemClr->GetElementId(), 0, 5);
+					LowDbAccess::GetInstance()->SetElementInfoParamInt(ExecElemClr->GetElementId(), 0, 5);
 				}
 
 				// STATUS_CLEARを終端の状態とするスレッドに関してリンク種別のクリアとデータ領域の開放

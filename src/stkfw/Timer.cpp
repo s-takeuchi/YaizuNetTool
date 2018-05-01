@@ -93,8 +93,8 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 
 		// 年月日時分秒の初期化
 		SYSTEMTIME SysTm;
-		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
-		DWORD LowTm = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
+		DWORD LowTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 		if (HighTm == 0 && LowTm == 0) {
 			GetLocalTime(&SysTm);
 		} else {
@@ -111,13 +111,13 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 		SendMessage(CbSecondHndl, CB_SETCURSEL, SysTm.wSecond, 0);
 
 		// 待ち時間の初期化
-		int WaitTm = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 3);
+		int WaitTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3);
 		TCHAR WaitTmBuf[20];
 		wsprintf(WaitTmBuf, _T("%d"), WaitTm);
 		SendMessage(EdWaitHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)WaitTmBuf);
 
 		// ラジオボタン初期化
-		SelectedType = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 4);
+		SelectedType = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4);
 		ChangeTimerType(SelectedType);
 	}
 
@@ -137,8 +137,8 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 				SystemTimeToFileTime(&SysTm, &FileTm);
 				int *HighTm = (int*)&FileTm.dwHighDateTime;
 				int *LowTm = (int*)&FileTm.dwLowDateTime;
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, *HighTm, 1);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, *LowTm, 2);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, *HighTm, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, *LowTm, 2);
 				TCHAR Buf[10];
 				SendMessage(EdWaitHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)Buf);
 				int WaitTime = StrToInt(Buf);
@@ -148,8 +148,8 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 				if (WaitTime > 3600) {
 					WaitTime = 3600;
 				}
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, WaitTime, 3);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedType, 4);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, WaitTime, 3);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedType, 4);
 			}
 			if (LOWORD(wParam) == IDC_TIMER_CHKTIME) {
 				ChangeTimerType(0);

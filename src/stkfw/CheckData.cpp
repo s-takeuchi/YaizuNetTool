@@ -17,22 +17,22 @@ HWND ChkDatVarCBox;
 
 int GetChkDatVarId(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 }
 
 void SetChkDatVarId(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 1);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 1);
 }
 
 int GetChkDatType(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 }
 
 void SetChkDatType(int CurrentId, int VarId)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, VarId, 2);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, VarId, 2);
 }
 
 void ChangeChkDatType(int Type)

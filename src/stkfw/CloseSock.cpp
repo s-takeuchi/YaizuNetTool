@@ -12,12 +12,12 @@ int GetTargetTcpUdpNameArray(TCHAR Name[256][32], int Id[256], int UdpFlag)
 
 int GetForceClose(int CurrentId)
 {
-	return LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 2);
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 }
 
 void SetForceClose(int CurrentId, int Check)
 {
-	LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, Check, 2);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Check, 2);
 }
 
 void ChangeUdpTcpOperationType(int Type, HWND RdoBtn1, HWND RdoBtn2, HWND CloseForceHndl)
@@ -75,11 +75,11 @@ void CloseSock(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 		RdoBtn2  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CLOSEUDPPORT), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 30, 165, 180, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_UDP, InstHndl, NULL);
 
 		// Initialize check box
-		SelectedOpeType = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 3); // Get operation type
+		SelectedOpeType = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3); // Get operation type
 		ChangeUdpTcpOperationType(SelectedOpeType, RdoBtn1, RdoBtn2, CloseForceHndl);
 
 		// initialize combo box
-		SelectedTargetId = LowDbAccess::GetInstance()->GetElementInfoInt(CurrentId, 1);
+		SelectedTargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 		CloseSockSetMenu(CloseHndl, SelectedOpeType, SelectedTargetId, CurrentId);
 
 		// Configure force close button
@@ -111,9 +111,9 @@ void CloseSock(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 				}
 			}
 			if (LOWORD(wParam) == IDC_BTNOK) {
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedTargetId, 1);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedTargetId, 1);
 				SetForceClose(CurrentId, SelectedCloseType);
-				LowDbAccess::GetInstance()->SetElementInfoInt(CurrentId, SelectedOpeType, 3); // Set operation type
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, SelectedOpeType, 3); // Set operation type
 			}
 			if (LOWORD(wParam) == IDC_BTNCANCEL) {
 			}

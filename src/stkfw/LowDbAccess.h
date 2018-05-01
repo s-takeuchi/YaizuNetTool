@@ -47,14 +47,14 @@ public:
 	void GetMaxLinkInfo(int[100], int[100]);
 
 	// ElementInfoÉeÅ[ÉuÉã
-	int GetElementInfoInt(int, int);
-	void SetElementInfoInt(int, int, int);
-	void GetElementInfoStr(int, TCHAR[256], int);
-	void SetElementInfoStr(int, TCHAR[256], int);
+	int GetElementInfoParamInt(int, int);
+	void SetElementInfoParamInt(int, int, int);
+	void GetElementInfoParamStr(int, TCHAR[256], int);
+	void SetElementInfoParamStr(int, TCHAR[256], int);
 	void GetElementInfoBin(int, BYTE[4096]);
 	void SetElementInfoBin(int, BYTE[4096]);
-	int GetElementInfoStrAsInt(int, int);
-	void SetElementInfoStrAsInt(int, int, int);
+	int GetElementInfoParamStrAsInt(int, int);
+	void SetElementInfoParamStrAsInt(int, int, int);
 	int GetHostIpAddrPort(int, TCHAR[256], int*);
 	int GetTcpRecvOperationTypeInElementInfo(int);
 	void SetTcpRecvOperationTypeInElementInfo(int, int);

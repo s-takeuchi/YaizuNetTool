@@ -223,7 +223,7 @@ void StkPropExecElem::SetDataLength(int Len)
 int StkPropExecElem::Type1Execution()
 {
 	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
 	// ホスト名/IPアドレス，ポート番号直接指定またはMulti Acceptの場合
 	if (SpecType == 0 || SpecType == 2) {
@@ -235,12 +235,12 @@ int StkPropExecElem::Type1Execution()
 		}
 	} else {
 		// Senderの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
 	// 終了条件設定
-	int FinishCondition = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 5);
+	int FinishCondition = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
 
 	// If the finish condition shows the string-end condition, load communication variable.
 	BYTE* VarDat = NULL;
@@ -287,7 +287,7 @@ int StkPropExecElem::Type1Execution()
 	// タイムアウト
 	if (ActSize == -2) {
 		TCHAR TmpBuf[256];
-		LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, TmpBuf, 7);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpBuf, 2);
 		if (FinishCondition >= 0 && FinishCondition <= 180000 && lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
 			BYTE* TmpVarDat = new BYTE[0];
 			SetDataLength(0);
@@ -308,7 +308,7 @@ int StkPropExecElem::Type1Execution()
 	delete Buf;
 
 	// 受信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 4);
+	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0 || SpecType == 2) {
 			StkSocket_CloseAccept(TargetId, TargetId, (IsClose == 2)? TRUE : FALSE);
@@ -327,14 +327,14 @@ int StkPropExecElem::Type2Execution()
 	BYTE* VarDat = NULL;
 	int VarDatSize = 0;
 	// 操作種別=0:"1つの変数から情報を取得", 1:"複数の変数から情報を取得"
-	if (LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2) == 0) {
+	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2) == 0) {
 		// コミュニケーション用変数のIDを取得する
-		VarId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+		VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	} else {
 		TCHAR TmpVarName[256];
 		TCHAR TgtName[32];
-		int Counter = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 5);
-		LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, TmpVarName, 6);
+		int Counter = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpVarName, 1);
 		wsprintf(TmpVarName, _T("%s%05d"), TmpVarName, Counter);
 		lstrcpyn(TgtName, TmpVarName, 32);
 		VarId = VarCon_GetCommunicationVariableId(TgtName);
@@ -344,7 +344,7 @@ int StkPropExecElem::Type2Execution()
 			return -1;
 		}
 		Counter++;
-		LowDbAccess::GetInstance()->SetElementInfoInt(ElementId, Counter, 5);
+		LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, Counter, 5);
 	}
 
 	VarDatSize = VarCon_GetCommunicationVariableSize(VarId);
@@ -365,7 +365,7 @@ int StkPropExecElem::Type2Execution()
 int StkPropExecElem::Type4Execution()
 {
 	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	if (SpecType == 0) {
 		// ホスト名/IPアドレス，ポート番号直接指定の場合
 		TargetId = ElementId;
@@ -375,7 +375,7 @@ int StkPropExecElem::Type4Execution()
 		}
 	} else {
 		// Receiverの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
@@ -386,7 +386,7 @@ int StkPropExecElem::Type4Execution()
 	StkPropOutputLog();
 
 	// 送信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 4);
+	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0) {
 			StkSocket_Disconnect(TargetId, TargetId, (IsClose == 2)? TRUE : FALSE);
@@ -410,9 +410,9 @@ void StkPropExecElem::Type5Execution()
 	int VarDatSize = GetDataLength();
 
 	// 操作種別=0:"1つの変数への情報の設定" ,1:"複数の変数への情報の設定"
-	if (LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2) == 0) {
+	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2) == 0) {
 		// コミュニケーション用変数のIDを取得する
-		VarId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+		VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 		// 変数が存在するかチェックする
 		if (VarCon_CheckVariableExistence(VarId) == FALSE) {
 			return;
@@ -432,11 +432,11 @@ void StkPropExecElem::Type5Execution()
 		TCHAR TmpVarName[256];
 		TCHAR TgtName[32];
 		TCHAR TgtDesc[64];
-		int Counter = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 5);
+		int Counter = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
 		if (Counter < 0 || Counter > 99999) {
 			Counter = 0;
 		}
-		LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, TmpVarName, 6);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpVarName, 1);
 		wsprintf(TmpVarName, _T("%s%05d"), TmpVarName, Counter);
 		lstrcpyn(TgtName, TmpVarName, 32);
 		lstrcpyn(TgtDesc, TmpVarName, 64);
@@ -455,7 +455,7 @@ void StkPropExecElem::Type5Execution()
 			VarId = VarCon_AddVariableRecord(TgtName, TgtDesc, 0);
 		}
 		Counter++;
-		LowDbAccess::GetInstance()->SetElementInfoInt(ElementId, Counter, 5);
+		LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, Counter, 5);
 	}
 
 	BYTE* TmpVarDat = new BYTE[10000000];
@@ -467,8 +467,8 @@ void StkPropExecElem::Type5Execution()
 // Check Flag
 int StkPropExecElem::Type10Execution()
 {
-	int VarId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
-	int VarValue = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
+	int VarValue = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	if (VarCon_CheckVariableExistence(VarId) == FALSE) {
 		return 2;
 	}
@@ -486,8 +486,8 @@ int StkPropExecElem::Type11Execution()
 	int VarDatSize = 0;
 	BYTE* SrcVarDat = NULL;
 	int SrcVarDatSize = 0;
-	int VarId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
-	int OpType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
+	int OpType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	VarDatSize = VarCon_GetCommunicationVariableSize(VarId);
 	if (VarDatSize != -1) {
 		VarDat = new BYTE[VarDatSize];
@@ -588,9 +588,9 @@ int StkPropExecElem::Type11Execution()
 // Timer
 int StkPropExecElem::Type12Execution()
 {
-	if (LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 4) == 0) {
-		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
-		DWORD LowTm = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4) == 0) {
+		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
+		DWORD LowTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 		if (HighTm != 0 || LowTm != 0) {
 			FILETIME LocFileTm;
 			SYSTEMTIME SysTm;
@@ -604,15 +604,15 @@ int StkPropExecElem::Type12Execution()
 		}
 		return 0;
 	} else {
-		DWORD WorkTm = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 5);
-		DWORD WaitTm = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 3);
+		DWORD WorkTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
+		DWORD WaitTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 3);
 		DWORD CurrentTm = GetTickCount();
 		if (WorkTm == 0) {
 			int *TcInt = (int*)&CurrentTm;
-			LowDbAccess::GetInstance()->SetElementInfoInt(ElementId, *TcInt, 5);
+			LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, *TcInt, 5);
 		} else {
 			if (CurrentTm - WorkTm > (WaitTm * 1000)) {
-				LowDbAccess::GetInstance()->SetElementInfoInt(ElementId, 0, 5);
+				LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, 0, 5);
 				return 0;
 			}
 		}
@@ -623,8 +623,8 @@ int StkPropExecElem::Type12Execution()
 // Change Flag
 int StkPropExecElem::Type13Execution()
 {
-	int VarId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
-	int VarValue = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
+	int VarValue = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	if (VarCon_CheckVariableExistence(VarId) == FALSE) {
 		return 0;
 	}
@@ -648,14 +648,14 @@ int StkPropExecElem::Type14Execution()
 	BYTE* InputVarDat = (BYTE*)GetData();
 	int InputVarDatSize = GetDataLength();
 
-	int OpType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 4);
+	int OpType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	// 種別が不正のときは，何もせず次の要素に移行
 	if (OpType < 0 || OpType > 5) {
 		return 0;
 	}
-	int VarIdA = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
-	int VarIdB = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
-	int VarIdC = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 3);
+	int VarIdA = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
+	int VarIdB = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
+	int VarIdC = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 3);
 
 	if (OpType == 0 || OpType == 1) {
 		VarDatSizeA = VarCon_GetCommunicationVariableSize(VarIdA);
@@ -823,12 +823,12 @@ int StkPropExecElem::Type14Execution()
 // Close port
 int StkPropExecElem::Type16Execution()
 {
-	int TargetId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	int TargetType = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
 	if (TargetType == -1) {
 		return 0;
 	}
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	if (TargetType == 1) {
 		StkSocket_CloseAccept(TargetId, ElementId, (IsClose == 1)? TRUE : FALSE);
 	}
@@ -855,10 +855,10 @@ int StkPropExecElem::Type17Execution()
 	TCHAR ReplaceVarName[256];
 	TCHAR SearchPrefixName[32];
 	TCHAR ReplacePrefixName[32];
-	int Counter = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
-	int ChkUseOnce = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
-	LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, SearchPrefixName, 6);
-	LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, ReplacePrefixName, 7);
+	int Counter = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
+	int ChkUseOnce = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, SearchPrefixName, 1);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, ReplacePrefixName, 2);
 	BYTE TmpDat[4096];
 	INT16* TmpDatInt = (INT16*)TmpDat;
 
@@ -930,9 +930,9 @@ int StkPropExecElem::Type18Execution()
 {
 	// 書き込み対象ファイルパスの取得
 	TCHAR BufPath[256];
-	LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, BufPath, 6);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufPath, 1);
 	// アクセス種別の取得
-	int AccessType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int AccessType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
 	// 入力データの取得
 	BYTE* InputDat = (BYTE*)GetData();
@@ -1019,9 +1019,9 @@ int StkPropExecElem::Type19Execution()
 {
 	// 読み込み対象ファイルパスの取得
 	TCHAR BufPath[256];
-	LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, BufPath, 6);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufPath, 1);
 	// アクセス種別の取得
-	int AccessType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int AccessType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
 	// 入力データの取得
 	BYTE* InputDat = (BYTE*)GetData();
@@ -1100,16 +1100,16 @@ int StkPropExecElem::Type20Execution()
 	int InputDatLength = GetDataLength();
 	// Acquire path for the external program
 	TCHAR BufPath[256];
-	LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, BufPath, 6);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufPath, 1);
 	// Acquire current folder for the external program
 	TCHAR BufCurr[256];
-	LowDbAccess::GetInstance()->GetElementInfoStr(ElementId, BufCurr, 7);
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufCurr, 2);
 	TCHAR* SpecBufCurr = BufCurr;
 	if (lstrlen(BufCurr) == 0) {
 		SpecBufCurr = (TCHAR*)NULL;
 	}
 	// Acquire "WAIT FLAG"
-	int ExecType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int ExecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
 	// Wait for the command completion
 	if (ExecType & 0x00000001 && ExeProcInfo.dwProcessId != NULL) {
@@ -1218,7 +1218,7 @@ int StkPropExecElem::Type20Execution()
 int StkPropExecElem::Type21Execution()
 {
 	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1); // Specified type
+	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1); // Specified type
 
 	// ホスト名/IPアドレス，ポート番号直接指定の場合
 	if (SpecType == 0) {
@@ -1226,7 +1226,7 @@ int StkPropExecElem::Type21Execution()
 		TargetId = ElementId;
 	} else {
 		// Senderの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
@@ -1250,7 +1250,7 @@ int StkPropExecElem::Type21Execution()
 	delete Buf;
 
 	// 受信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 4);
+	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0) {
 			//nothing to do
@@ -1267,7 +1267,7 @@ int StkPropExecElem::Type21Execution()
 int StkPropExecElem::Type22Execution()
 {
 	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 1);
+	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	if (SpecType == 0) {
 		// ホスト名/IPアドレス，ポート番号直接指定の場合
 		TargetId = ElementId;
@@ -1277,7 +1277,7 @@ int StkPropExecElem::Type22Execution()
 		}
 	} else {
 		// Receiverの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 2);
+		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
@@ -1288,7 +1288,7 @@ int StkPropExecElem::Type22Execution()
 	StkPropOutputLog();
 
 	// 送信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoInt(ElementId, 4);
+	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0) {
 			StkSocket_Disconnect(TargetId, TargetId, FALSE);
