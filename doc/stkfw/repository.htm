@@ -266,15 +266,19 @@ ViewElementが何も存在しない場合，
 <TR><TD>カラム名</TD><TD>カラム種別</TD><TD>説明</TD></TR>
 <TR><TD>Id</TD><TD>Integer</TD><TD>実行系要素／データ系要素のID（識別子）</TD></TR>
 <TR><TD>ParamInt1</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
-<TR><TD>ParamInt2</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
-<TR><TD>ParamInt3</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
-<TR><TD>ParamInt4</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
-<TR><TD>ParamInt5</TD><TD>Integer</TD><TD>整数値#1</TD></TR>
+<TR><TD>ParamInt2</TD><TD>Integer</TD><TD>整数値#2</TD></TR>
+<TR><TD>ParamInt3</TD><TD>Integer</TD><TD>整数値#3</TD></TR>
+<TR><TD>ParamInt4</TD><TD>Integer</TD><TD>整数値#4</TD></TR>
+<TR><TD>ParamInt5</TD><TD>Integer</TD><TD>整数値#5</TD></TR>
+<TR><TD>ParamInt6</TD><TD>Integer</TD><TD>整数値#6 (Ver.1.6.0で追加)</TD></TR>
+<TR><TD>ParamInt7</TD><TD>Integer</TD><TD>整数値#7 (Ver.1.6.0で追加)</TD></TR>
 <TR><TD>ParamStr1</TD><TD>WString(256)</TD><TD>文字列#1</TD></TR>
 <TR><TD>ParamStr2</TD><TD>WString(256)</TD><TD>文字列#2</TD></TR>
 <TR><TD>ParamStr3</TD><TD>WString(256)</TD><TD>文字列#3</TD></TR>
 <TR><TD>ParamStr4</TD><TD>WString(256)</TD><TD>文字列#4</TD></TR>
 <TR><TD>ParamStr5</TD><TD>WString(256)</TD><TD>文字列#5</TD></TR>
+<TR><TD>ParamStr6</TD><TD>WString(256)</TD><TD>文字列#6 (Ver.1.6.0で追加)</TD></TR>
+<TR><TD>ParamStr7</TD><TD>WString(256)</TD><TD>文字列#7 (Ver.1.6.0で追加)</TD></TR>
 <TR><TD>ParamBin</TD><TD>Binary(4096)</TD><TD>バイナリデータ</TD></TR>
 </TABLE>
 <P>
@@ -391,10 +395,10 @@ ViewElementが何も存在しない場合，
 <P>
 <H3>(11) 対応する要素の種別が"Mapper"の場合</H3>
 <TABLE BORDER="1">
-<TR><TD>ParamStr1</TD><TD>検索対象変数名のプレフィックス</TD></TR>
-<TR><TD>ParamStr2</TD><TD>置換対象変数名のプレフィックス</TD></TR>
 <TR><TD>ParamInt1</TD><TD>変数名のPrefix後の番号</TD></TR>
 <TR><TD>ParamInt2</TD><TD>1: 各変数へのマッピングは一度だけ使用される<br>0: 各変数へのマッピングは何度でも使用される</TD></TR>
+<TR><TD>ParamStr1</TD><TD>検索対象変数名のプレフィックス</TD></TR>
+<TR><TD>ParamStr2</TD><TD>置換対象変数名のプレフィックス</TD></TR>
 </TABLE>
 <P>
 <H3>(12) 対応する要素の種別が"Write file"の場合</H3>
