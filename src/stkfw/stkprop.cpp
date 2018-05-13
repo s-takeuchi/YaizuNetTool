@@ -258,7 +258,7 @@ int ShowProperty() // ##10085 ñﬂÇËílÇïœçX
 	wcex.lpszClassName = _T("Properties");
 	RegisterClassEx(&wcex);
 
-	HWND WndHndl = CreateWindow(_T("Properties"), _T("Properties"), WS_CAPTION | WS_SYSMENU | WS_DLGFRAME, CW_USEDEFAULT, CW_USEDEFAULT, 520, 550, GetForegroundWindow(), NULL, StkPropInstHndl, NULL);
+	HWND WndHndl = CreateWindow(_T("Properties"), _T("Properties"), WS_CAPTION | WS_SYSMENU | WS_DLGFRAME, CW_USEDEFAULT, CW_USEDEFAULT, 520, 580, GetForegroundWindow(), NULL, StkPropInstHndl, NULL);
 	ShowWindow(WndHndl, SW_SHOW);
 	UpdateWindow(WndHndl);
 	StkPropSetIconToWnd(WndHndl);

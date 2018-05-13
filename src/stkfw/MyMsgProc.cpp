@@ -414,6 +414,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTP headerのContent-Lengthで指定したサイズのデータを受信した"));
 	MessageProc::AddEng(PROP_NET_HTTPCONTLEN, _T("Data which size specified in Content-Length in HTTP header received."));
 
+	// 2386 (★)
+	MessageProc::AddJpn(PROP_NET_TIMEOUTINTERVAL, _T("タイムアウト間隔"));
+	MessageProc::AddEng(PROP_NET_TIMEOUTINTERVAL, _T("Timeout Interval"));
+
 	// =====================================================================================================
 	// 2400 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));

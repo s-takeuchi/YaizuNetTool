@@ -136,18 +136,20 @@ void ChangeOperationType(int Type)
 // FinishCondHndl [in] : Handle of finish condition combo box
 // WaitCondHndl [in] : Handle of wait condition edit box
 // LenCondHndl [in] : Handle of length condition edit box
-void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND WaitCondHndl, HWND LenCondHndl, HWND SpecVarRecvHndl, HWND ProceedNoDatRecvHndl, int SelectedProceedNoDatRecv)
+void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND LabelTimeoutIntvl, HWND WaitCondHndl, HWND LenCondHndl, HWND SpecVarRecvHndl, HWND ProceedNoDatRecvHndl, int SelectedProceedNoDatRecv)
 {
 	if (Type == 1) {
 		TCHAR Buf[10];
 		if (CondValue == 0) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 0, 0);
+			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
 			ShowWindow(WaitCondHndl, SW_HIDE);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 		} else if (CondValue == 9999999) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 1, 0);
+			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
 			ShowWindow(WaitCondHndl, SW_HIDE);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
@@ -156,6 +158,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND Wa
 			wsprintf(Buf, _T("%d"), CondValue);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 2, 0);
 			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
+			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
 			ShowWindow(WaitCondHndl, SW_SHOW);
 			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
 			if (SelectedProceedNoDatRecv == 0) {
@@ -168,6 +171,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND Wa
 		} else if (CondValue < 0) {
 			CondValue = CondValue * -1;
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 3, 0);
+			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
 			ShowWindow(WaitCondHndl, SW_HIDE);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
@@ -177,6 +181,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND Wa
 			wsprintf(Buf, _T("%d"), CondValue - 200000);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
 			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
+			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
 			ShowWindow(WaitCondHndl, SW_SHOW);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
@@ -185,6 +190,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND Wa
 			wsprintf(Buf, _T("%d"), CondValue - 10000000);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 4, 0);
 			SendMessage(LenCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
+			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
 			ShowWindow(WaitCondHndl, SW_HIDE);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_SHOW);
@@ -237,6 +243,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 
 	// Finish conditions for TCP receiver
 	static HWND FinishCondHndl; // For combo box of receiver finish condition
+	static HWND LabelTimeoutIntvl; // Timeout interval label
 	static HWND WaitCondHndl; // For edit box of wait time
 	static HWND ProceedNoDatRecvHndl;
 	static HWND LenCondHndl; // For edit box of length
@@ -303,9 +310,16 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			}
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 0, 0);
 
-			WaitCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, Rect.left + 20, 445, 70, 24, WndHndl, NULL, InstHndl, NULL);
+			LabelTimeoutIntvl = CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL), WS_CHILD | WS_VISIBLE, Rect.left + 20, 472,
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)) + 30,
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)),
+				WndHndl, NULL, InstHndl, NULL);
+			WaitCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
+				Rect.left + 25 + GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)),
+				470, 
+				70, 24, WndHndl, NULL, InstHndl, NULL);
 			SendMessage(WaitCondHndl, EM_SETLIMITTEXT, (WPARAM)6, (LPARAM)0);
-			ProceedNoDatRecvHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 100, 445, 
+			ProceedNoDatRecvHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 210, 472, 
 				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV)) + 30, 
 				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV)), 
 				WndHndl, (HMENU)IDC_RECVINIT_PROCEEDNODATRECV, InstHndl, NULL);
@@ -388,7 +402,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			}
 
 			int CondValue = GetCondition(CurrentId);
-			UpdateFinishCondition(CondValue, Type, FinishCondHndl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
+			UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
 			if (CondValue < 0) {
 				CondValue *= -1;
 				for (int Loop = 0; Loop < FinConVarCnt; Loop++) {
@@ -468,7 +482,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					CondValue = 200500;
 				} else {
 				}
-				UpdateFinishCondition(CondValue, Type, FinishCondHndl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
+				UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
 			}
 		}
 		if (HIWORD(wParam) == BN_CLICKED) {

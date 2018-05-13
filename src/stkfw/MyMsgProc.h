@@ -107,6 +107,7 @@ public:
 	static const int PROP_NET_PROCEEDEVENIFNODATARECV = 2383;
 	static const int PROP_NET_RECVMULTI = 2384;
 	static const int PROP_NET_HTTPCONTLEN = 2385;
+	static const int PROP_NET_TIMEOUTINTERVAL = 2386;
 
 	static const int STKFW_LOG_TITLE = 2400;
 	static const int STKFW_LOG_START = 2401;
