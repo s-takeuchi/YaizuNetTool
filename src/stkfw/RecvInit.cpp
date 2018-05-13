@@ -80,6 +80,16 @@ void SetCondition(int CurrentId, int Check)
 	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Check, 5);
 }
 
+int GetTimeoutInterval(int CurrentId)
+{
+	return LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 6);
+}
+
+void SetTimeoutInterval(int CurrentId, int Interval)
+{
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(CurrentId, Interval, 6);
+}
+
 void GetIpAddressOrHostname(int CurrentId, TCHAR GetStr[256])
 {
 	LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, GetStr, 1);
@@ -134,9 +144,13 @@ void ChangeOperationType(int Type)
 // CurrentId [in] : ID for the processing element
 // Type [in] : Element type (1:TCP receiver, otherwise:Non target element type)
 // FinishCondHndl [in] : Handle of finish condition combo box
+// LabelTimeoutIntvl [in] : A label of timeout interval
 // WaitCondHndl [in] : Handle of wait condition edit box
 // LenCondHndl [in] : Handle of length condition edit box
-void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND LabelTimeoutIntvl, HWND WaitCondHndl, HWND LenCondHndl, HWND SpecVarRecvHndl, HWND ProceedNoDatRecvHndl, int SelectedProceedNoDatRecv)
+// SpecVarRecvHndl [in] : Variable name for string
+// ProceedNoDatRecvHndl [in] : Check box for proceeding next with no data
+// SelectedProceedNoDatRecv [in] : Initial state of check box
+void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND LabelTimeoutIntvl, HWND WaitCondHndl, HWND LenCondHndl, HWND SpecVarRecvHndl, HWND ProceedNoDatRecvHndl, int SelectedProceedNoDatRecv, int TimeoutIntvl)
 {
 	if (Type == 1) {
 		TCHAR Buf[10];
@@ -155,10 +169,10 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 		} else if (CondValue >= 1 && CondValue <= 180000) {
-			wsprintf(Buf, _T("%d"), CondValue);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 2, 0);
-			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
+			wsprintf(Buf, _T("%d"), CondValue);
+			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(WaitCondHndl, SW_SHOW);
 			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
 			if (SelectedProceedNoDatRecv == 0) {
@@ -169,30 +183,49 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 		} else if (CondValue < 0) {
-			CondValue = CondValue * -1;
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 3, 0);
-			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
-			ShowWindow(WaitCondHndl, SW_HIDE);
-			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
+			CondValue = CondValue * -1;
+			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
+			wsprintf(Buf, _T("%d"), TimeoutIntvl);
+			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
+			ShowWindow(WaitCondHndl, SW_SHOW);
+			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
+			if (SelectedProceedNoDatRecv == 0) {
+				SendMessage(ProceedNoDatRecvHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
+			} else {
+				SendMessage(ProceedNoDatRecvHndl, BM_SETCHECK, BST_CHECKED, 0L);
+			}
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_SHOW);
 			SendMessage(SpecVarRecvHndl, CB_SETCURSEL, 0, 0);
 		} else if (CondValue >= 200001 && CondValue <= 380000) {
-			wsprintf(Buf, _T("%d"), CondValue - 200000);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
-			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
+			wsprintf(Buf, _T("%d"), CondValue - 200000);
+			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(WaitCondHndl, SW_SHOW);
-			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
+			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
+			if (SelectedProceedNoDatRecv == 0) {
+				SendMessage(ProceedNoDatRecvHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
+			} else {
+				SendMessage(ProceedNoDatRecvHndl, BM_SETCHECK, BST_CHECKED, 0L);
+			}
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 		} else {
-			wsprintf(Buf, _T("%d"), CondValue - 10000000);
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 4, 0);
+			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
+			wsprintf(Buf, _T("%d"), TimeoutIntvl);
+			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
+			ShowWindow(WaitCondHndl, SW_SHOW);
+			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
+			if (SelectedProceedNoDatRecv == 0) {
+				SendMessage(ProceedNoDatRecvHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
+			} else {
+				SendMessage(ProceedNoDatRecvHndl, BM_SETCHECK, BST_CHECKED, 0L);
+			}
+			wsprintf(Buf, _T("%d"), CondValue - 10000000);
 			SendMessage(LenCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
-			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
-			ShowWindow(WaitCondHndl, SW_HIDE);
-			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_SHOW);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 		}
@@ -310,16 +343,14 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			}
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 0, 0);
 
-			LabelTimeoutIntvl = CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL), WS_CHILD | WS_VISIBLE, Rect.left + 20, 472,
+			LabelTimeoutIntvl = CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL), WS_CHILD | WS_VISIBLE, Rect.left + 20, 477,
 				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)) + 30,
 				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)),
 				WndHndl, NULL, InstHndl, NULL);
 			WaitCondHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
-				Rect.left + 25 + GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)),
-				470, 
-				70, 24, WndHndl, NULL, InstHndl, NULL);
+				Rect.left + 25 + GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_TIMEOUTINTERVAL)), 475, 70, 24, WndHndl, NULL, InstHndl, NULL);
 			SendMessage(WaitCondHndl, EM_SETLIMITTEXT, (WPARAM)6, (LPARAM)0);
-			ProceedNoDatRecvHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 210, 472, 
+			ProceedNoDatRecvHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 205, 477, 
 				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV)) + 30, 
 				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PROCEEDEVENIFNODATARECV)), 
 				WndHndl, (HMENU)IDC_RECVINIT_PROCEEDNODATRECV, InstHndl, NULL);
@@ -402,7 +433,8 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			}
 
 			int CondValue = GetCondition(CurrentId);
-			UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
+			int TimeoutIntvl = GetTimeoutInterval(CurrentId);
+			UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv, TimeoutIntvl);
 			if (CondValue < 0) {
 				CondValue *= -1;
 				for (int Loop = 0; Loop < FinConVarCnt; Loop++) {
@@ -467,22 +499,29 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			}
 			if (LOWORD(wParam) == IDC_RECVINIT_FINISHCOND) {
 				int SelectedFinishCond = (int)SendMessage(FinishCondHndl, CB_GETCURSEL, 0, 0);
-				int CondValue;
+				int CondValue = 0;
+				int TimeoutIntvl = 0;
 				if (SelectedFinishCond == 0) {
 					CondValue = 0;
+					TimeoutIntvl = 0;
 				} else if (SelectedFinishCond == 1) {
 					CondValue = 9999999;
+					TimeoutIntvl = 0;
 				} else if (SelectedFinishCond == 2) {
 					CondValue = 500;
+					TimeoutIntvl = 500;
 				} else if (SelectedFinishCond == 3) {
 					CondValue = -1;
+					TimeoutIntvl = 500;
 				} else if (SelectedFinishCond == 4) {
 					CondValue = 10000001;
+					TimeoutIntvl = 500;
 				} else if (SelectedFinishCond == 5) {
 					CondValue = 200500;
+					TimeoutIntvl = 500;
 				} else {
 				}
-				UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, SelectedProceedNoDatRecv);
+				UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, 0, TimeoutIntvl);
 			}
 		}
 		if (HIWORD(wParam) == BN_CLICKED) {
@@ -541,14 +580,19 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				SetPortNumber(CurrentId, PortNumber);
 
 				// Set finish condition
-				int CondDummy = 0;
 				if (Type == 1) {
 					TCHAR CondDummyStr[10];
+					int CondDummy = 0;
+
 					int SelFinCnd = SendMessage(FinishCondHndl, CB_GETCURSEL, 0, 0);
 					if (SelFinCnd == 0) {
 						CondDummy = 0;
+						SetCondition(CurrentId, CondDummy);
+						SetTimeoutInterval(CurrentId, 0);
 					} else if (SelFinCnd == 1) {
 						CondDummy = 9999999;
+						SetCondition(CurrentId, CondDummy);
+						SetTimeoutInterval(CurrentId, 0);
 					} else if (SelFinCnd == 2) {
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						CondDummy = StrToInt(CondDummyStr);
@@ -558,6 +602,8 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						if (CondDummy > 180000) {
 							CondDummy = 180000;
 						}
+						SetCondition(CurrentId, CondDummy);
+						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 3) {
 						int SelFinCnd = SendMessage(SpecVarRecvHndl, CB_GETCURSEL, 0, 0);
 						CondDummy = FinConVarIds[SelFinCnd];
@@ -566,6 +612,24 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						} else {
 							CondDummy *= -1;
 						}
+						SetCondition(CurrentId, CondDummy);
+						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
+						CondDummy = StrToInt(CondDummyStr);
+						SetTimeoutInterval(CurrentId, CondDummy);
+					} else if (SelFinCnd == 4) {
+						SendMessage(LenCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
+						CondDummy = StrToInt(CondDummyStr);
+						if (CondDummy < 1) {
+							CondDummy = 1;
+						}
+						if (CondDummy > 9999999) {
+							CondDummy = 9999999;
+						}
+						CondDummy += 10000000;
+						SetCondition(CurrentId, CondDummy);
+						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
+						CondDummy = StrToInt(CondDummyStr);
+						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 5) {
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						CondDummy = StrToInt(CondDummyStr);
@@ -576,16 +640,9 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 							CondDummy = 180000;
 						}
 						CondDummy += 200000;
+						SetCondition(CurrentId, CondDummy);
+						SetTimeoutInterval(CurrentId, CondDummy - 200000);
 					} else {
-						SendMessage(LenCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
-						CondDummy = StrToInt(CondDummyStr);
-						if (CondDummy < 1) {
-							CondDummy = 1;
-						}
-						if (CondDummy > 9999999) {
-							CondDummy = 9999999;
-						}
-						CondDummy += 10000000;
 					}
 					if (SelectedProceedNoDatRecv == 1) {
 						LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T("PROCEED;"), 2);
@@ -593,7 +650,6 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 2);
 					}
 				}
-				SetCondition(CurrentId, CondDummy);
 			}
 			if (LOWORD(wParam) == IDC_BTNCANCEL) {
 			}
