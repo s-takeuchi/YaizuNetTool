@@ -241,6 +241,7 @@ int StkPropExecElem::Type1Execution()
 
 	// I—¹ðŒÝ’è
 	int FinishCondition = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
+	int FinishCondTimeout = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 6);
 
 	// If the finish condition shows the string-end condition, load communication variable.
 	BYTE* VarDat = NULL;
@@ -260,7 +261,6 @@ int StkPropExecElem::Type1Execution()
 	BYTE* Buf = new BYTE[10000000];
 	int ActSize = 0;
 	BOOL ForceStop = (StartStopFlag == TRUE)? FALSE : TRUE;
-	int FinishCondTimeout = 0;
 	int RevisedFinishCondition = 0;
 	if (FinishCondition < 0) {
 		RevisedFinishCondition = -1;
@@ -268,10 +268,8 @@ int StkPropExecElem::Type1Execution()
 		RevisedFinishCondition = 0;
 	} else if (FinishCondition >= 1 && FinishCondition <= 180000) {
 		RevisedFinishCondition = 0;
-		FinishCondTimeout = FinishCondition;
 	} else if (FinishCondition >= 200001 && FinishCondition <= 380000) {
 		RevisedFinishCondition = -3;
-		FinishCondTimeout = FinishCondition - 200000;
 	} else if (FinishCondition == 9999999) {
 		RevisedFinishCondition = -2;
 	} else if (FinishCondition >= 10000001 && FinishCondition <= 19999999) {

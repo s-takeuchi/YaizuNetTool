@@ -171,7 +171,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 		} else if (CondValue >= 1 && CondValue <= 180000) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 2, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
-			wsprintf(Buf, _T("%d"), CondValue);
+			wsprintf(Buf, _T("%d"), TimeoutIntvl);
 			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(WaitCondHndl, SW_SHOW);
 			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
@@ -201,7 +201,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 		} else if (CondValue >= 200001 && CondValue <= 380000) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
-			wsprintf(Buf, _T("%d"), CondValue - 200000);
+			wsprintf(Buf, _T("%d"), TimeoutIntvl);
 			SendMessage(WaitCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(WaitCondHndl, SW_SHOW);
 			ShowWindow(ProceedNoDatRecvHndl, SW_SHOW);
