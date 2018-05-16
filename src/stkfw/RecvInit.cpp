@@ -161,14 +161,14 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
-		} else if (CondValue == 9999999) {
+		} else if (CondValue == 2) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 1, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_HIDE);
 			ShowWindow(WaitCondHndl, SW_HIDE);
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
-		} else if (CondValue >= 1 && CondValue <= 180000) {
+		} else if (CondValue == 1) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 2, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
 			wsprintf(Buf, _T("%d"), TimeoutIntvl);
@@ -198,7 +198,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_SHOW);
 			SendMessage(SpecVarRecvHndl, CB_SETCURSEL, 0, 0);
-		} else if (CondValue >= 200001 && CondValue <= 380000) {
+		} else if (CondValue == 3) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
 			wsprintf(Buf, _T("%d"), TimeoutIntvl);
@@ -505,10 +505,10 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					CondValue = 0;
 					TimeoutIntvl = 0;
 				} else if (SelectedFinishCond == 1) {
-					CondValue = 9999999;
+					CondValue = 2;
 					TimeoutIntvl = 0;
 				} else if (SelectedFinishCond == 2) {
-					CondValue = 500;
+					CondValue = 1;
 					TimeoutIntvl = 500;
 				} else if (SelectedFinishCond == 3) {
 					CondValue = -1;
@@ -517,7 +517,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					CondValue = 10000001;
 					TimeoutIntvl = 500;
 				} else if (SelectedFinishCond == 5) {
-					CondValue = 200500;
+					CondValue = 3;
 					TimeoutIntvl = 500;
 				} else {
 				}
@@ -582,31 +582,28 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				// Set finish condition
 				if (Type == 1) {
 					TCHAR CondDummyStr[10];
-					int CondDummy = 0;
 
 					int SelFinCnd = SendMessage(FinishCondHndl, CB_GETCURSEL, 0, 0);
 					if (SelFinCnd == 0) {
-						CondDummy = 0;
-						SetCondition(CurrentId, CondDummy);
+						SetCondition(CurrentId, 0);
 						SetTimeoutInterval(CurrentId, 0);
 					} else if (SelFinCnd == 1) {
-						CondDummy = 9999999;
-						SetCondition(CurrentId, CondDummy);
+						SetCondition(CurrentId, 2);
 						SetTimeoutInterval(CurrentId, 0);
 					} else if (SelFinCnd == 2) {
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
-						CondDummy = StrToInt(CondDummyStr);
+						int CondDummy = StrToInt(CondDummyStr);
 						if (CondDummy < 1) {
 							CondDummy = 1;
 						}
 						if (CondDummy > 180000) {
 							CondDummy = 180000;
 						}
-						SetCondition(CurrentId, CondDummy);
+						SetCondition(CurrentId, 1);
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 3) {
 						int SelFinCnd = SendMessage(SpecVarRecvHndl, CB_GETCURSEL, 0, 0);
-						CondDummy = FinConVarIds[SelFinCnd];
+						int CondDummy = FinConVarIds[SelFinCnd];
 						if (CondDummy == 0) {
 							CondDummy = -1;
 						} else {
@@ -618,7 +615,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 4) {
 						SendMessage(LenCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
-						CondDummy = StrToInt(CondDummyStr);
+						int CondDummy = StrToInt(CondDummyStr);
 						if (CondDummy < 1) {
 							CondDummy = 1;
 						}
@@ -632,16 +629,15 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 5) {
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
-						CondDummy = StrToInt(CondDummyStr);
+						int CondDummy = StrToInt(CondDummyStr);
 						if (CondDummy < 1) {
 							CondDummy = 1;
 						}
 						if (CondDummy > 180000) {
 							CondDummy = 180000;
 						}
-						CondDummy += 200000;
-						SetCondition(CurrentId, CondDummy);
-						SetTimeoutInterval(CurrentId, CondDummy - 200000);
+						SetCondition(CurrentId, 3);
+						SetTimeoutInterval(CurrentId, CondDummy);
 					} else {
 					}
 					if (SelectedProceedNoDatRecv == 1) {

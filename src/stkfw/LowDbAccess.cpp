@@ -1120,15 +1120,20 @@ void LowDbAccess::ModifyElementInfoScheme()
 		BYTE* ColDatParamBin = ((ColumnDataBin*)RecDat->GetColumn(11))->GetValue();
 		ColumnData* ColDat[16];
 		int TimeoutInterval = 0;
+		int NewFinishCondition = 0;
 		if (ColDatParamInt5 >= 1 && ColDatParamInt5 <= 180000) {
+			NewFinishCondition = 1;
 			TimeoutInterval = ColDatParamInt5;
+		} else if (ColDatParamInt5 == 9999999) {
+			NewFinishCondition = 2;
+			TimeoutInterval = 0;
 		}
 		ColDat[0] = new ColumnDataInt(_T("Id"), ColDatId);
 		ColDat[1] = new ColumnDataInt(_T("ParamInt1"), ColDatParamInt1);
 		ColDat[2] = new ColumnDataInt(_T("ParamInt2"), ColDatParamInt2);
 		ColDat[3] = new ColumnDataInt(_T("ParamInt3"), ColDatParamInt3);
 		ColDat[4] = new ColumnDataInt(_T("ParamInt4"), ColDatParamInt4);
-		ColDat[5] = new ColumnDataInt(_T("ParamInt5"), ColDatParamInt5);
+		ColDat[5] = new ColumnDataInt(_T("ParamInt5"), NewFinishCondition);
 		ColDat[6] = new ColumnDataInt(_T("ParamInt6"), TimeoutInterval);
 		ColDat[7] = new ColumnDataInt(_T("ParamInt7"), 0);
 		ColDat[8] = new ColumnDataWStr(_T("ParamStr1"), ColDatParamStr1);
