@@ -504,21 +504,27 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				if (SelectedFinishCond == 0) {
 					CondValue = 0;
 					TimeoutIntvl = 0;
+					SelectedProceedNoDatRecv = 0;
 				} else if (SelectedFinishCond == 1) {
 					CondValue = 2;
 					TimeoutIntvl = 0;
+					SelectedProceedNoDatRecv = 0;
 				} else if (SelectedFinishCond == 2) {
 					CondValue = 1;
 					TimeoutIntvl = 500;
+					SelectedProceedNoDatRecv = 0;
 				} else if (SelectedFinishCond == 3) {
 					CondValue = -1;
 					TimeoutIntvl = 500;
+					SelectedProceedNoDatRecv = 0;
 				} else if (SelectedFinishCond == 4) {
 					CondValue = 10000001;
 					TimeoutIntvl = 500;
+					SelectedProceedNoDatRecv = 0;
 				} else if (SelectedFinishCond == 5) {
 					CondValue = 3;
 					TimeoutIntvl = 500;
+					SelectedProceedNoDatRecv = 0;
 				} else {
 				}
 				UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, 0, TimeoutIntvl);
