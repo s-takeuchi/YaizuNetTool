@@ -303,7 +303,7 @@ int StkPropExecElem::Type1Execution()
 	if (ActSize == -2) {
 		TCHAR TmpBuf[256];
 		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpBuf, 2);
-		if (FinishCondition >= 0 && FinishCondition <= 180000 && lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
+		if (lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
 			BYTE* TmpVarDat = new BYTE[0];
 			SetDataLength(0);
 			SetData(TmpVarDat);
