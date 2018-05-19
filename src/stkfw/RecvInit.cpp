@@ -597,15 +597,15 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						SetCondition(CurrentId, 2);
 						SetTimeoutInterval(CurrentId, 0);
 					} else if (SelFinCnd == 2) {
+						SetCondition(CurrentId, 1);
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						int CondDummy = StrToInt(CondDummyStr);
-						if (CondDummy < 1) {
-							CondDummy = 1;
+						if (CondDummy < 0) {
+							CondDummy = 0;
 						}
 						if (CondDummy > 180000) {
 							CondDummy = 180000;
 						}
-						SetCondition(CurrentId, 1);
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 3) {
 						int SelFinCnd = SendMessage(SpecVarRecvHndl, CB_GETCURSEL, 0, 0);
@@ -618,6 +618,12 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						SetCondition(CurrentId, CondDummy);
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						CondDummy = StrToInt(CondDummyStr);
+						if (CondDummy < 0) {
+							CondDummy = 0;
+						}
+						if (CondDummy > 180000) {
+							CondDummy = 180000;
+						}
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 4) {
 						SendMessage(LenCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
@@ -632,17 +638,23 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						SetCondition(CurrentId, CondDummy);
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						CondDummy = StrToInt(CondDummyStr);
-						SetTimeoutInterval(CurrentId, CondDummy);
-					} else if (SelFinCnd == 5) {
-						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
-						int CondDummy = StrToInt(CondDummyStr);
-						if (CondDummy < 1) {
-							CondDummy = 1;
+						if (CondDummy < 0) {
+							CondDummy = 0;
 						}
 						if (CondDummy > 180000) {
 							CondDummy = 180000;
 						}
+						SetTimeoutInterval(CurrentId, CondDummy);
+					} else if (SelFinCnd == 5) {
 						SetCondition(CurrentId, 3);
+						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
+						int CondDummy = StrToInt(CondDummyStr);
+						if (CondDummy < 0) {
+							CondDummy = 0;
+						}
+						if (CondDummy > 180000) {
+							CondDummy = 180000;
+						}
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else {
 					}

@@ -1120,7 +1120,7 @@ void LowDbAccess::ModifyElementInfoScheme()
 		BYTE* ColDatParamBin = ((ColumnDataBin*)RecDat->GetColumn(11))->GetValue();
 		ColumnData* ColDat[16];
 		int TimeoutInterval = 0;
-		int NewFinishCondition = 0;
+		int NewFinishCondition = ColDatParamInt5;
 		if (ColDatParamInt5 >= 1 && ColDatParamInt5 <= 180000) {
 			NewFinishCondition = 1;
 			TimeoutInterval = ColDatParamInt5;
