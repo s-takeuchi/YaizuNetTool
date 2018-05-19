@@ -263,15 +263,15 @@ int StkPropExecElem::Type1Execution()
 	BOOL ForceStop = (StartStopFlag == TRUE)? FALSE : TRUE;
 	int RevisedFinishCondition = 0;
 	if (FinishCondition < 0) {
-		RevisedFinishCondition = -1;
+		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_STRING;
 	} else if (FinishCondition == 0) {
-		RevisedFinishCondition = 0;
-	} else if (FinishCondition >= 1 && FinishCondition <= 180000) {
-		RevisedFinishCondition = 0;
-	} else if (FinishCondition >= 200001 && FinishCondition <= 380000) {
-		RevisedFinishCondition = -3;
-	} else if (FinishCondition == 9999999) {
-		RevisedFinishCondition = -2;
+		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_UNCONDITIONAL;
+	} else if (FinishCondition == 1) {
+		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_TIMEOUT;
+	} else if (FinishCondition == 3) {
+		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_CONTENTLENGTH;
+	} else if (FinishCondition == 2) {
+		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_PEERCLOSURE;
 	} else if (FinishCondition >= 10000001 && FinishCondition <= 19999999) {
 		RevisedFinishCondition = FinishCondition - 10000000;
 	}
