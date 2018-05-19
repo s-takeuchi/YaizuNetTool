@@ -299,8 +299,8 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(PROP_NET_CLOSE_AFTERRECV, _T("Close socket after receiving data."));
 
 	// 2357 (NC4)
-	MessageProc::AddJpn(PROP_NET_TIMEOUT, _T("最終アクセス以降にタイムアウトを検知した [1-180,000 ミリ秒]"));
-	MessageProc::AddEng(PROP_NET_TIMEOUT, _T("Time-out detected after last access.  [1 - 180,000 mSec]"));
+	MessageProc::AddJpn(PROP_NET_TIMEOUT, _T("最終アクセス以降にタイムアウトを検知した"));
+	MessageProc::AddEng(PROP_NET_TIMEOUT, _T("Time-out detected after last access."));
 
 	// 2358 (---)
 	MessageProc::AddJpn(PROP_NET_SENDER, _T("送信要素名"));
@@ -374,13 +374,13 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_UNCOND, _T("無条件で次の処理要素に移る"));
 	MessageProc::AddEng(PROP_NET_UNCOND, _T("Proceed unconditionally to the next processing element."));
 
-	// 2376 (NC4)
-	MessageProc::AddJpn(PROP_NET_EXCEEDSIZE, _T("受信データサイズが指定した値を超えた [1-9,999,999 バイト]"));
-	MessageProc::AddEng(PROP_NET_EXCEEDSIZE, _T("The size of the data received exceeds the preset value. [1-9,999,999 bytes]"));
+	// 2376 (★)
+	MessageProc::AddJpn(PROP_NET_EXCEEDSIZE, _T("受信データサイズが指定した値に達した [1-9,999,999 バイト]"));
+	MessageProc::AddEng(PROP_NET_EXCEEDSIZE, _T("The size of the data received reached the preset value. [1-9,999,999 bytes]"));
 
-	// 2377 (NC4)
-	MessageProc::AddJpn(PROP_NET_RECVSTR, _T("指定したデータで完了するデータを受信した"));
-	MessageProc::AddEng(PROP_NET_RECVSTR, _T("Data ending with the specified value received."));
+	// 2377 (★)
+	MessageProc::AddJpn(PROP_NET_RECVSTR, _T("指定したデータを受信した"));
+	MessageProc::AddEng(PROP_NET_RECVSTR, _T("Specified data received."));
 
 	// 2378 (NC4)
 	MessageProc::AddJpn(PROP_NET_TERMCOND, _T("終了条件"));
@@ -411,7 +411,7 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(PROP_NET_RECVMULTI, _T("Receive data from the specified receiver element."));
 
 	// 2385 (★)
-	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTP headerのContent-Lengthで指定したサイズのデータを受信した"));
+	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTPヘッダのContent-Lengthで指定したサイズのデータを受信した"));
 	MessageProc::AddEng(PROP_NET_HTTPCONTLEN, _T("Data which size specified in Content-Length in HTTP header received."));
 
 	// 2386 (★)
