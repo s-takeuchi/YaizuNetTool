@@ -107,6 +107,9 @@ Windows Server 2012 R2 Standard
 (5) Support for IPv6 connectivity enabled.
 (6) Support enabled for Windows 8.1, Windows 10 and Windows Server 2012 R2.
 
+* Version 1.5.0 ---> 1.6.0
+(1) Support enabled for data reception which the specified size of
+    Content-Length in HTTP header as a new terminate condition of TCP receiver.
 
 =================================================
 4.License Agreement
