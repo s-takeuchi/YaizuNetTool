@@ -35,9 +35,6 @@
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
-
 #define DB_VERSION 5
 
 TCHAR szTitle[32];
@@ -531,13 +528,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	// バックグラウンド実行
 	if (OpeType == 2) {
-		LockAllTable(2);
-		if (LoadData(CurrentStdFileName) != 0) {
-			UnlockAllTable();
+		;
+		if (LowDbAccess::GetInstance()->LoadStdFile(CurrentStdFileName) != 0) {
 			MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, CurrentStdFileName, NULL);
 			ExitProcess(0);
 		}
-		UnlockAllTable();
 
 		// Change current folder
 		TCHAR ConvFullPath[MAX_PATH];
@@ -606,13 +601,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	// /openパラメータが指定されていた場合，.stdファイルを読み込む
 	if (lstrcmp(CurrentStdFileName, _T("")) != 0) {
-		LockAllTable(2);
-		if (LoadData(CurrentStdFileName) != 0) {
-			UnlockAllTable();
+		if (LowDbAccess::GetInstance()->LoadStdFile(CurrentStdFileName) != 0) {
 			MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, CurrentStdFileName, hWnd);
 		} else {
-			UnlockAllTable();
-
 			// Change current folder
 			TCHAR ConvFullPath[MAX_PATH];
 			StkGeneric::GetInstance()->GetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
@@ -1301,13 +1292,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					break;
 				}
 				lstrcpy(CurrentStdFileName, Buf);
-				LockAllTable(2);
-				if (LoadData(Buf) != 0) {
-					UnlockAllTable();
+				if (LowDbAccess::GetInstance()->LoadStdFile(Buf) != 0) {
 					MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, Buf, hWnd);
 					break;
 				}
-				UnlockAllTable();
 				DbMigration();
 				ResetWorkspace(2);
 				GetViewFromDb();
@@ -1325,13 +1313,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 			if (lstrcmp(CurrentStdFileName, _T("")) != 0) {
 				SetViewToDb();
-				LockAllTable(1);
-				if (SaveData(CurrentStdFileName) != 0) {
-					UnlockAllTable();
+				if (LowDbAccess::GetInstance()->SaveStdFile(CurrentStdFileName) != 0) {
 					MyMsgProc::StkErr(MyMsgProc::STKFW_DATASAVEFAILED, hWnd);
 					break;
 				}
-				UnlockAllTable();
 				LowDbAccess::GetInstance()->IsUpdated(1);
 				IsActorStatusUpdated(1);
 				break;
@@ -1350,13 +1335,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				}
 				lstrcpy(CurrentStdFileName, Buf);
 				SetViewToDb();
-				LockAllTable(1);
-				if (SaveData(Buf) != 0) {
-					UnlockAllTable();
+				if (LowDbAccess::GetInstance()->SaveStdFile(Buf) != 0) {
 					MyMsgProc::StkErr(MyMsgProc::STKFW_DATASAVEFAILED, hWnd);
 					break;
 				}
-				UnlockAllTable();
 				SetWindowTitle(CurrentStdFileName);
 				LowDbAccess::GetInstance()->IsUpdated(1);
 				IsActorStatusUpdated(1);

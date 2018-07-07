@@ -1382,6 +1382,26 @@ int LowDbAccess::DeleteAllRecords(TCHAR TableName[TABLE_NAME_SIZE])
 	return 0;
 }
 
+int LowDbAccess::LoadStdFile(TCHAR* FileName)
+{
+	int Ret = 0;
+	LockAllTable(LOCK_EXCLUSIVE);
+	Ret = LoadData(FileName);
+	UnlockAllTable();
+
+	return Ret;
+}
+
+int LowDbAccess::SaveStdFile(TCHAR* FileName)
+{
+	int Ret = 0;
+	LockAllTable(LOCK_SHARE);
+	Ret = SaveData(FileName);
+	UnlockAllTable();
+
+	return 0;
+}
+
 int LowDbAccess::StkFwRepositoryCreateTable()
 {
 	// Create ViewElement table

@@ -79,4 +79,8 @@ public:
 
 	// Sync ElementInfo with ViewElement
 	void UpdateElementInfoFromViewElement();
+
+	// Std file access
+	int LoadStdFile(TCHAR*);
+	int SaveStdFile(TCHAR*);
 };
