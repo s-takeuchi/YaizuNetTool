@@ -6,7 +6,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "StkPropExecMgr.h"
-#include "StkPropExecElem.h"
+#include "ExecElem.h"
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "StkProp.h"

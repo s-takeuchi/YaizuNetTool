@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include <memory.h>
 #include "StkPropExecMgr.h"
-#include "StkPropExecElem.h"
+#include "ExecElem.h"
 #include "LowDbAccess.h"
 
 StkPropExecMgr* StkPropExecMgr::ThisInstance;
