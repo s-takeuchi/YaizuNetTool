@@ -6,7 +6,7 @@
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 
-void StkPropExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
+void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
 	TCHAR Name[32];
 	LowDbAccess::GetInstance()->GetViewElementNameFromId(LogId, Name);
@@ -15,7 +15,7 @@ void StkPropExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 	AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 }
 
-void StkPropExecElem::SendReceiveLog(int LogId, int Size, TCHAR* Msg)
+void ExecElem::SendReceiveLog(int LogId, int Size, TCHAR* Msg)
 {
 	TCHAR Name[32];
 	LowDbAccess::GetInstance()->GetViewElementNameFromId(LogId, Name);
@@ -24,7 +24,7 @@ void StkPropExecElem::SendReceiveLog(int LogId, int Size, TCHAR* Msg)
 	AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 }
 
-void StkPropExecElem::StkPropOutputLog()
+void ExecElem::StkPropOutputLog()
 {
 	int Msg;
 	int Id;
@@ -127,7 +127,7 @@ void StkPropExecElem::StkPropOutputLog()
 }
 
 // Constructor
-StkPropExecElem::StkPropExecElem(int Id)
+ExecElem::ExecElem(int Id)
 {
 	ElementId = Id;
 	Status = STATUS_NOTINSCOPE;
@@ -139,88 +139,88 @@ StkPropExecElem::StkPropExecElem(int Id)
 }
 
 // Destructor
-StkPropExecElem::~StkPropExecElem()
+ExecElem::~ExecElem()
 {
 }
 
 // 要素の種別を取得する
-int StkPropExecElem::GetType()
+int ExecElem::GetType()
 {
 	return ElementType;
 }
 
 // 要素の種別を設定する
-void StkPropExecElem::SetType(int Tp)
+void ExecElem::SetType(int Tp)
 {
 	ElementType = Tp;
 }
 
 // エレメントの状態を取得する
-int StkPropExecElem::GetStatus()
+int ExecElem::GetStatus()
 {
 	return Status;
 }
 
 // エレメントの状態を設定する
-void StkPropExecElem::SetStatus(int St)
+void ExecElem::SetStatus(int St)
 {
 	Status = St;
 }
 
 // 実行依存Idを取得する
-int StkPropExecElem::GetWaitForExecId()
+int ExecElem::GetWaitForExecId()
 {
 	return WaitForExecId;
 }
 
 // 実行依存Idを設定する
-void StkPropExecElem::SetWaitForExecId(int ExecId)
+void ExecElem::SetWaitForExecId(int ExecId)
 {
 	WaitForExecId = ExecId;
 }
 
 // ElementIdを取得する
-int StkPropExecElem::GetElementId()
+int ExecElem::GetElementId()
 {
 	return ElementId;
 }
 
 // 根となる要素のIDを取得する
-int StkPropExecElem::GetRootId()
+int ExecElem::GetRootId()
 {
 	return RootId;
 }
 
 // 根となる要素のIDを設定する
-void StkPropExecElem::SetRootId(int Id)
+void ExecElem::SetRootId(int Id)
 {
 	RootId = Id;
 }
 
 // データを取得する
-void* StkPropExecElem::GetData()
+void* ExecElem::GetData()
 {
 	return Data;
 }
 
-int StkPropExecElem::GetDataLength()
+int ExecElem::GetDataLength()
 {
 	return DataLength;
 }
 
 // データを設定する
-void StkPropExecElem::SetData(void* Dt)
+void ExecElem::SetData(void* Dt)
 {
 	Data = Dt;
 }
 
-void StkPropExecElem::SetDataLength(int Len)
+void ExecElem::SetDataLength(int Len)
 {
 	DataLength = Len;
 }
 
 // Receiver
-int StkPropExecElem::Type1Execution()
+int ExecElem::Type1Execution()
 {
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
@@ -336,7 +336,7 @@ int StkPropExecElem::Type1Execution()
 }
 
 // Load Data
-int StkPropExecElem::Type2Execution()
+int ExecElem::Type2Execution()
 {
 	int VarId;
 	BYTE* VarDat = NULL;
@@ -377,7 +377,7 @@ int StkPropExecElem::Type2Execution()
 }
 
 // Sender
-int StkPropExecElem::Type4Execution()
+int ExecElem::Type4Execution()
 {
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
@@ -418,7 +418,7 @@ int StkPropExecElem::Type4Execution()
 }
 
 // Store Data
-void StkPropExecElem::Type5Execution()
+void ExecElem::Type5Execution()
 {
 	int VarId;
 	BYTE* VarDat = (BYTE*)GetData();
@@ -480,7 +480,7 @@ void StkPropExecElem::Type5Execution()
 }
 
 // Check Flag
-int StkPropExecElem::Type10Execution()
+int ExecElem::Type10Execution()
 {
 	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	int VarValue = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
@@ -495,7 +495,7 @@ int StkPropExecElem::Type10Execution()
 }
 
 // Check data
-int StkPropExecElem::Type11Execution()
+int ExecElem::Type11Execution()
 {
 	BYTE* VarDat = NULL;
 	int VarDatSize = 0;
@@ -601,7 +601,7 @@ int StkPropExecElem::Type11Execution()
 }
 
 // Timer
-int StkPropExecElem::Type12Execution()
+int ExecElem::Type12Execution()
 {
 	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4) == 0) {
 		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
@@ -636,7 +636,7 @@ int StkPropExecElem::Type12Execution()
 }
 
 // Change Flag
-int StkPropExecElem::Type13Execution()
+int ExecElem::Type13Execution()
 {
 	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	int VarValue = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
@@ -652,7 +652,7 @@ int StkPropExecElem::Type13Execution()
 }
 
 // Change data
-int StkPropExecElem::Type14Execution()
+int ExecElem::Type14Execution()
 {
 	BYTE* VarDatA = NULL;
 	int VarDatSizeA = 0;
@@ -836,7 +836,7 @@ int StkPropExecElem::Type14Execution()
 }
 
 // Close port
-int StkPropExecElem::Type16Execution()
+int ExecElem::Type16Execution()
 {
 	int TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	int TargetType = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
@@ -858,7 +858,7 @@ int StkPropExecElem::Type16Execution()
 }
 
 // Mapper
-int StkPropExecElem::Type17Execution()
+int ExecElem::Type17Execution()
 {
 	BYTE* InputDat = (BYTE*)GetData();
 	int InputDatLength = GetDataLength();
@@ -941,7 +941,7 @@ int StkPropExecElem::Type17Execution()
 }
 
 // Write file
-int StkPropExecElem::Type18Execution()
+int ExecElem::Type18Execution()
 {
 	// 書き込み対象ファイルパスの取得
 	TCHAR BufPath[256];
@@ -1030,7 +1030,7 @@ int StkPropExecElem::Type18Execution()
 }
 
 // Read file
-int StkPropExecElem::Type19Execution()
+int ExecElem::Type19Execution()
 {
 	// 読み込み対象ファイルパスの取得
 	TCHAR BufPath[256];
@@ -1108,7 +1108,7 @@ int StkPropExecElem::Type19Execution()
 }
 
 // Execute program
-int StkPropExecElem::Type20Execution()
+int ExecElem::Type20Execution()
 {
 	// Acquire input data
 	BYTE* InputDat = (BYTE*)GetData();
@@ -1230,7 +1230,7 @@ int StkPropExecElem::Type20Execution()
 }
 
 // UDP Receiver
-int StkPropExecElem::Type21Execution()
+int ExecElem::Type21Execution()
 {
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1); // Specified type
@@ -1279,7 +1279,7 @@ int StkPropExecElem::Type21Execution()
 }
 
 // UDP Sender
-int StkPropExecElem::Type22Execution()
+int ExecElem::Type22Execution()
 {
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
@@ -1321,7 +1321,7 @@ int StkPropExecElem::Type22Execution()
 
 // 要素の処理を実行する
 // 戻り値: (0:Terminator以外の処理が正常終了, 1:Terminatorの処理が正常終了, 2:異常終了(処理を進めない))
-int StkPropExecElem::Execute()
+int ExecElem::Execute()
 {
 	if (ElementType == 1) { // Receiver
 		if (Type1Execution() == -1) {
@@ -1416,13 +1416,13 @@ int StkPropExecElem::Execute()
 }
 
 // Thread status was changed into "Start"
-void StkPropExecElem::ThreadStatusChangedIntoStart()
+void ExecElem::ThreadStatusChangedIntoStart()
 {
 	StartStopFlag = TRUE;
 }
 
 // Thread status was changed into "Stop"
-void StkPropExecElem::ThreadStatusChangedIntoStop()
+void ExecElem::ThreadStatusChangedIntoStop()
 {
 	StartStopFlag = FALSE;
 }

@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "VarController.h"
 
-class StkPropExecElem
+class ExecElem
 {
 private:
 	// エレメントID
@@ -64,9 +64,9 @@ private:
 
 public:
 	// Constructor
-	StkPropExecElem(int);
+	ExecElem(int);
 	// Destructor
-	~StkPropExecElem();
+	~ExecElem();
 
 	// エレメントの状態を取得する
 	int GetStatus();

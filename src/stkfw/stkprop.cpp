@@ -380,7 +380,7 @@ int ElemStkThreadInit(int Id)
 		if (StkSocket_GetInfo(Loop, &TargetId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == -1) {
 			continue;
 		}
-		StkPropExecElem* ExecElemTgt = ExecMgr->GetExecElem(TargetId);
+		ExecElem* ExecElemTgt = ExecMgr->GetExecElem(TargetId);
 		if (ExecElemTgt == NULL) {
 			continue;
 		}
@@ -409,7 +409,7 @@ int ElemStkThreadFinal(int Id)
 		if (StkSocket_GetInfo(Loop, &TargetId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == -1) {
 			continue;
 		}
-		StkPropExecElem* ExecElemTgt = ExecMgr->GetExecElem(TargetId);
+		ExecElem* ExecElemTgt = ExecMgr->GetExecElem(TargetId);
 		if (ExecElemTgt == NULL) {
 			continue;
 		}

@@ -9,7 +9,7 @@ private:
 	static StkPropExecMgr* ThisInstance;
 
 	// 各実行系要素，データ系要素の実行実体
-	StkPropExecElem* ExecElems[1000];
+	ExecElem* ExecElems[1000];
 	int NumOfExecElem;
 
 	// クリティカルセクション
@@ -39,9 +39,9 @@ public:
 	static StkPropExecMgr* GetInstance();
 
 	// 指定したIDのExecElemをExecElems配列から取得する
-	StkPropExecElem* GetExecElem(int);
+	ExecElem* GetExecElem(int);
 	// ExecElems配列のX番目にあるExecElemを取得する
-	StkPropExecElem* GetExecElemByIndex(int);
+	ExecElem* GetExecElemByIndex(int);
 	// ExecElems配列に存在するExecElemインスタンスの数を取得する
 	int GetExecElemCount();
 

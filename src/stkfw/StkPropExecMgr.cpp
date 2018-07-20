@@ -36,10 +36,10 @@ StkPropExecMgr* StkPropExecMgr::GetInstance()
 // 指定したIDのExecElemをExecElems配列から取得する
 // [in] : Id : 取得対象のExecElemのID
 // return : ExecElemインスタンス。見つからなかった場合NULL。
-StkPropExecElem* StkPropExecMgr::GetExecElem(int Id)
+ExecElem* StkPropExecMgr::GetExecElem(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			return NULL;
 		}
@@ -53,7 +53,7 @@ StkPropExecElem* StkPropExecMgr::GetExecElem(int Id)
 // ExecElems配列のIndex番目にあるExecElemを取得する
 // [in] : Index : 0からはじまる通し番号
 // return : ExecElemインスタンス。見つからなかった場合NULL。
-StkPropExecElem* StkPropExecMgr::GetExecElemByIndex(int Index)
+ExecElem* StkPropExecMgr::GetExecElemByIndex(int Index)
 {
 	if (Index < 0 || Index >= NumOfExecElem) {
 		return NULL;
@@ -93,13 +93,13 @@ void StkPropExecMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Coun
 		}
 		/////// 同じId, OrgId, PrevIdが既にExecElemsに登録されている場合，再登録しない
 		for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-			StkPropExecElem* CmpExecElem = ExecElems[Loop];
+			ExecElem* CmpExecElem = ExecElems[Loop];
 			if (CmpExecElem->GetRootId() == OrgId && CmpExecElem->GetElementId() == Id && CmpExecElem->GetWaitForExecId() == PrevId) {
 				return;
 			}
 		}
 		///////
-		StkPropExecElem* NewExecElem = new StkPropExecElem(Id);
+		ExecElem* NewExecElem = new ExecElem(Id);
 		NewExecElem->SetRootId(OrgId);
 		NewExecElem->SetWaitForExecId(PrevId);
 		NewExecElem->SetType(Type);
@@ -118,7 +118,7 @@ void StkPropExecMgr::SetWaitForThreadEnd(int Id)
 	
 	RetCode = LowDbAccess::GetInstance()->GetViewElementLinkOriginInfo(Id, &LinkOrgId, &LinkType);
 	if (RetCode == 0) {
-		StkPropExecElem* CurrentExecElem = GetExecElem(Id);
+		ExecElem* CurrentExecElem = GetExecElem(Id);
 		if (CurrentExecElem == NULL) {
 			return;
 		}
@@ -127,8 +127,8 @@ void StkPropExecMgr::SetWaitForThreadEnd(int Id)
 		}
 		CurrentExecElem->SetWaitForExecId(LinkOrgId);
 	} else {
-		StkPropExecElem* CurrentExecElem = GetExecElem(Id);
-		CurrentExecElem->SetStatus(StkPropExecElem::STATUS_WAITING);
+		ExecElem* CurrentExecElem = GetExecElem(Id);
+		CurrentExecElem->SetStatus(ExecElem::STATUS_WAITING);
 	}
 }
 
@@ -137,7 +137,7 @@ void StkPropExecMgr::SetWaitForThreadEnd(int Id)
 void StkPropExecMgr::InitStoreAndLoadDataCounter(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -157,7 +157,7 @@ void StkPropExecMgr::InitStoreAndLoadDataCounter(int Id)
 void StkPropExecMgr::InitTimer(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -175,7 +175,7 @@ void StkPropExecMgr::InitTimer(int Id)
 void StkPropExecMgr::InitMappingIds(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -199,7 +199,7 @@ void StkPropExecMgr::InitExecProgram(int Id)
 {
 	// Initialize attributes for the "Execute Program"
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -218,7 +218,7 @@ void StkPropExecMgr::InitExecProgram(int Id)
 void StkPropExecMgr::ThreadStatusChangedIntoStart(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -233,7 +233,7 @@ void StkPropExecMgr::ThreadStatusChangedIntoStart(int Id)
 void StkPropExecMgr::ThreadStatusChangedIntoStop(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -259,7 +259,7 @@ void StkPropExecMgr::DeleteExecElem(int Id)
 {
 	EnterCriticalSection(&CritSect);
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem == NULL) {
 			continue;
 		}
@@ -282,14 +282,14 @@ void StkPropExecMgr::DeleteExecElem(int Id)
 void StkPropExecMgr::ChangeNotInScopeToWaiting(int Id, int RootId)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
-		if (CurExecElem->GetWaitForExecId() == Id && CurExecElem->GetStatus() == StkPropExecElem::STATUS_NOTINSCOPE) {
+		ExecElem* CurExecElem = ExecElems[Loop];
+		if (CurExecElem->GetWaitForExecId() == Id && CurExecElem->GetStatus() == ExecElem::STATUS_NOTINSCOPE) {
 			int Tp = CurExecElem->GetType();
 			if (Tp == 1 || Tp == 2 || Tp == 3 || Tp == 21) {
-				CurExecElem->SetStatus(StkPropExecElem::STATUS_DWAITING);
+				CurExecElem->SetStatus(ExecElem::STATUS_DWAITING);
 			} else {
 				if (CurExecElem->GetRootId() == RootId) {
-					CurExecElem->SetStatus(StkPropExecElem::STATUS_WAITING);
+					CurExecElem->SetStatus(ExecElem::STATUS_WAITING);
 				}
 			}
 		}
@@ -322,7 +322,7 @@ void StkPropExecMgr::ClearLineType(int Id)
 {
 	EnterCriticalSection(&CritSect);
 	for (int LoopClr = 0; LoopClr < NumOfExecElem; LoopClr++) {
-		StkPropExecElem* ExecElemClr = ExecElems[LoopClr];
+		ExecElem* ExecElemClr = ExecElems[LoopClr];
 		if (ExecElemClr->GetRootId() == Id) {
 			if (ExecElemClr->GetWaitForExecId() != -1) {
 				ChangeLineType(ExecElemClr->GetWaitForExecId(), ExecElemClr->GetElementId(), 5);
@@ -338,10 +338,10 @@ void StkPropExecMgr::ExecuteElement(int Id)
 	// STATUS_CLEARの処理
 	EnterCriticalSection(&CritSect);
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
-		if (CurExecElem->GetRootId() == Id && CurExecElem->GetStatus() == StkPropExecElem::STATUS_CLEAR) {
+		ExecElem* CurExecElem = ExecElems[Loop];
+		if (CurExecElem->GetRootId() == Id && CurExecElem->GetStatus() == ExecElem::STATUS_CLEAR) {
 			for (int LoopClr = 0; LoopClr < NumOfExecElem; LoopClr++) {
-				StkPropExecElem* ExecElemClr = ExecElems[LoopClr];
+				ExecElem* ExecElemClr = ExecElems[LoopClr];
 
 				// Timerをクリア
 				if (ExecElemClr->GetRootId() == Id && ExecElemClr->GetType() == 12) {
@@ -353,7 +353,7 @@ void StkPropExecMgr::ExecuteElement(int Id)
 					if (ExecElemClr->GetWaitForExecId() != -1) {
 						ChangeLineType(ExecElemClr->GetWaitForExecId(), ExecElemClr->GetElementId(), 5);
 					}
-					ExecElemClr->SetStatus(StkPropExecElem::STATUS_NOTINSCOPE);
+					ExecElemClr->SetStatus(ExecElem::STATUS_NOTINSCOPE);
 					void* FreeData = ExecElemClr->GetData();
 					if (FreeData != NULL)  {
 						delete FreeData;
@@ -364,16 +364,16 @@ void StkPropExecMgr::ExecuteElement(int Id)
 
 				// 指定したIDを持つスレッド開始要素で，直前のスレッドは存在しない
 				if (ExecElemClr->GetElementId() == Id && ExecElemClr->GetWaitForExecId() == -1) {
-					ExecElemClr->SetStatus(StkPropExecElem::STATUS_WAITING);
+					ExecElemClr->SetStatus(ExecElem::STATUS_WAITING);
 				}
 
 				// 指定したIDを持つスレッド開始要素で，直前のスレッドから連鎖している
 				if (ExecElemClr->GetElementId() == Id && ExecElemClr->GetWaitForExecId() != -1) {
 					for (int LoopClr2 = 0; LoopClr2 < NumOfExecElem; LoopClr2++) {
-						StkPropExecElem* ExecElemClr2 = ExecElems[LoopClr2];
+						ExecElem* ExecElemClr2 = ExecElems[LoopClr2];
 						if (ExecElemClr2->GetElementId() == ExecElemClr->GetWaitForExecId() &&
-							ExecElemClr2->GetStatus() == StkPropExecElem::STATUS_DONE) {
-							ExecElemClr2->SetStatus(StkPropExecElem::STATUS_CLEAR);
+							ExecElemClr2->GetStatus() == ExecElem::STATUS_DONE) {
+							ExecElemClr2->SetStatus(ExecElem::STATUS_CLEAR);
 							Loop = 0;
 						}
 					}
@@ -385,17 +385,17 @@ void StkPropExecMgr::ExecuteElement(int Id)
 
 	EnterCriticalSection(&CritSect);
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		StkPropExecElem* CurExecElem = ExecElems[Loop];
+		ExecElem* CurExecElem = ExecElems[Loop];
 		if (CurExecElem->GetRootId() == Id &&
-			(CurExecElem->GetStatus() == StkPropExecElem::STATUS_WAITING ||
-			CurExecElem->GetStatus() == StkPropExecElem::STATUS_DWAITING ||
-			CurExecElem->GetStatus() == StkPropExecElem::STATUS_BWAITING)) {
+			(CurExecElem->GetStatus() == ExecElem::STATUS_WAITING ||
+			CurExecElem->GetStatus() == ExecElem::STATUS_DWAITING ||
+			CurExecElem->GetStatus() == ExecElem::STATUS_BWAITING)) {
 			int PrevId = CurExecElem->GetWaitForExecId();
-			if (PrevId != -1 && CurExecElem->GetStatus() != StkPropExecElem::STATUS_BWAITING) {
+			if (PrevId != -1 && CurExecElem->GetStatus() != ExecElem::STATUS_BWAITING) {
 				ChangeLineType(PrevId, CurExecElem->GetElementId(), -5);
 				// データを前の要素から引き継ぐ
 				for (int LoopDt = 0; LoopDt < NumOfExecElem; LoopDt++) {
-					StkPropExecElem* ExecElemDt = ExecElems[LoopDt];
+					ExecElem* ExecElemDt = ExecElems[LoopDt];
 					// 前の要素がAggregation/Destributionでなければポインタを移動
 					if (ExecElemDt->GetRootId() == CurExecElem->GetRootId() && ExecElemDt->GetElementId() == PrevId && ExecElemDt->GetType() != 15) {
 						if (CurExecElem->GetData() == NULL) {
@@ -449,7 +449,7 @@ void StkPropExecMgr::ExecuteElement(int Id)
 
 			EnterCriticalSection(&CritSect);
 
-			if (CurExecElem->GetStatus() == StkPropExecElem::STATUS_CLEAR) {
+			if (CurExecElem->GetStatus() == ExecElem::STATUS_CLEAR) {
 				break;
 			}
 
@@ -460,24 +460,24 @@ void StkPropExecMgr::ExecuteElement(int Id)
 					// ExecElemの次の要素がDWAITINGならばExecElemの状態をDONEにする
 					int LoopWt;
 					for (LoopWt = 0; LoopWt < NumOfExecElem; LoopWt++) {
-						StkPropExecElem* ExecElemWt = ExecElems[LoopWt];
+						ExecElem* ExecElemWt = ExecElems[LoopWt];
 						if (ExecElemWt->GetWaitForExecId() == CurExecElem->GetElementId()) {
-							// ##10084 if (ExecElemWt->GetStatus() == StkPropExecElem::STATUS_DWAITING) {
+							// ##10084 if (ExecElemWt->GetStatus() == ExecElem::STATUS_DWAITING) {
 							// データが余分に処理されることへの対処
-							CurExecElem->SetStatus(StkPropExecElem::STATUS_DONE);
+							CurExecElem->SetStatus(ExecElem::STATUS_DONE);
 							// ##10084 }
 							break;
 						}
 					}
 					// ExecElemの次の要素が存在しなければ状態をCLEARにする
 					if (LoopWt == NumOfExecElem) {
-						CurExecElem->SetStatus(StkPropExecElem::STATUS_CLEAR);
+						CurExecElem->SetStatus(ExecElem::STATUS_CLEAR);
 					}
 				} else {
-					CurExecElem->SetStatus(StkPropExecElem::STATUS_DONE);
+					CurExecElem->SetStatus(ExecElem::STATUS_DONE);
 				}
 			} else if (Ret == 2) {
-				CurExecElem->SetStatus(StkPropExecElem::STATUS_BWAITING);
+				CurExecElem->SetStatus(ExecElem::STATUS_BWAITING);
 			}
 		}
 	}
