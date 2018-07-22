@@ -99,10 +99,9 @@ void StkPropExecMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Coun
 			}
 		}
 		///////
-		ExecElem* NewExecElem = new ExecElem(Id);
+		ExecElem* NewExecElem = ExecElem::CreateExecElem(Id, Type);
 		NewExecElem->SetRootId(OrgId);
 		NewExecElem->SetWaitForExecId(PrevId);
-		NewExecElem->SetType(Type);
 		ExecElems[NumOfExecElem] = NewExecElem;
 		NumOfExecElem++;
 	}

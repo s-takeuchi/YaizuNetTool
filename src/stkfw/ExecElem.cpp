@@ -3,8 +3,10 @@
 #include <windows.h>
 #include <memory.h>
 #include "..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
+#include "VarController.h"
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
+#include "ExecElem_CheckFlag.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -141,6 +143,22 @@ ExecElem::ExecElem(int Id)
 // Destructor
 ExecElem::~ExecElem()
 {
+}
+
+// Create ExecElem instance
+// Id [in] : ID of newly created ExecElem
+// Type [in] : Type of newly created ExecElem
+ExecElem* ExecElem::CreateExecElem(int Id, int Type)
+{
+	if (Type == CHECKFLAG) {
+		ExecElem_CheckFlag* NewExecElem = new ExecElem_CheckFlag(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
+	} else {
+		ExecElem* NewExecElem = new ExecElem(Id);
+		NewExecElem->SetType(Type);
+		return NewExecElem;
+	}
 }
 
 // —v‘f‚ÌŽí•Ê‚ðŽæ“¾‚·‚é
@@ -477,21 +495,6 @@ void ExecElem::Type5Execution()
 	memcpy((void*)TmpVarDat, (void*)VarDat, VarDatSize);
 	VarCon_UpdateCommunicationVariable(VarId, TmpVarDat, VarDatSize);
 	delete TmpVarDat;
-}
-
-// Check Flag
-int ExecElem::Type10Execution()
-{
-	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-	int VarValue = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	if (VarCon_CheckVariableExistence(VarId) == FALSE) {
-		return 2;
-	}
-	int FlagVal = VarCon_GetFlagVariable(VarId);
-	if (VarValue == FlagVal) {
-		return 0;
-	}
-	return 2;
 }
 
 // Check data
@@ -1363,9 +1366,6 @@ int ExecElem::Execute()
 	}
 	if (ElementType == 9) {
 		return 0;
-	}
-	if (ElementType == 10) { // Check Flag
-		return Type10Execution();
 	}
 	if (ElementType == 11) { // Check data
 		return Type11Execution();

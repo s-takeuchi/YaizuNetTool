@@ -1,10 +1,9 @@
 #pragma once
 #include <windows.h>
-#include "VarController.h"
 
 class ExecElem
 {
-private:
+protected:
 	// エレメントID
 	int ElementId;
 
@@ -36,6 +35,8 @@ public:
 	static const int STATUS_DWAITING = 6; // 次のスレッドに処理が引き継がれた直後の状態
 	static const int STATUS_BWAITING = 7; // 実行結果がブロック状態(Ret==2)の場合
 
+	static const int CHECKFLAG = 10;
+
 public:
 	// Attributes for the "Execute Program"
 	PROCESS_INFORMATION ExeProcInfo;
@@ -46,7 +47,6 @@ private:
 	int Type2Execution();
 	int Type4Execution();
 	void Type5Execution();
-	int Type10Execution();
 	int Type11Execution();
 	int Type12Execution();
 	int Type13Execution();
@@ -66,7 +66,10 @@ public:
 	// Constructor
 	ExecElem(int);
 	// Destructor
-	~ExecElem();
+	virtual ~ExecElem();
+
+	// Create ExecElem instance
+	static ExecElem* CreateExecElem(int, int);
 
 	// エレメントの状態を取得する
 	int GetStatus();
@@ -99,7 +102,7 @@ public:
 	int GetElementId();
 
 	// 要素の処理を実行する
-	int Execute();
+	virtual int Execute();
 
 	// Thread status was changed into "Start"
 	void ThreadStatusChangedIntoStart();
