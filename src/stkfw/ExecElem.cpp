@@ -8,7 +8,9 @@
 #include "MyMsgProc.h"
 #include "ExecElem_CheckFlag.h"
 #include "ExecElem_Receiver.h"
+#include "ExecElem_ReceiverUdp.h"
 #include "ExecElem_Sender.h"
+#include "ExecElem_SenderUdp.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -160,8 +162,16 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		ExecElem_Receiver* NewExecElem = new ExecElem_Receiver(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
-	} else if (Type == SENDER_R || Type ==SENDER) {
+	} else if (Type == RECEIVERUDP) {
+		ExecElem_ReceiverUdp* NewExecElem = new ExecElem_ReceiverUdp(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
+	} else if (Type == SENDER_R || Type == SENDER) {
 		ExecElem_Sender* NewExecElem = new ExecElem_Sender(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
+	} else if (Type == SENDERUDP_R || Type == SENDERUDP) {
+		ExecElem_SenderUdp* NewExecElem = new ExecElem_SenderUdp(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
 	} else {
@@ -1085,96 +1095,6 @@ int ExecElem::Type20Execution()
 	return 0;
 }
 
-// UDP Receiver
-int ExecElem::Type21Execution()
-{
-	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1); // Specified type
-
-	// ホスト名/IPアドレス，ポート番号直接指定の場合
-	if (SpecType == 0) {
-		// ホスト名/IPアドレス，ポート番号直接指定の場合
-		TargetId = ElementId;
-	} else {
-		// Senderの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	}
-	StkPropOutputLog();
-
-	// データの受信
-	BYTE* Buf = new BYTE[10000000];
-	int ActSize = 0;
-	ActSize = StkSocket_ReceiveUdp(TargetId, ElementId, Buf, 9999999);
-	StkPropOutputLog();
-
-	// データ受信中エラー発生／ソケット切断
-	if (ActSize == SOCKET_ERROR || ActSize == -1 || ActSize == -2) {
-		delete Buf;
-		return -1;
-	}
-
-	// データを適切なサイズの領域にコピーする
-	BYTE* TmpVarDat = new BYTE[ActSize];
-	memcpy((void*)TmpVarDat, (void*)Buf, ActSize);
-	SetDataLength(ActSize);
-	SetData(TmpVarDat);
-	delete Buf;
-
-	// 受信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
-	if (IsClose != 0) {
-		if (SpecType == 0) {
-			//nothing to do
-		} else {
-			StkSocket_Disconnect(TargetId, ElementId, FALSE);
-			StkPropOutputLog();
-		}
-	}
-
-	return 0;
-}
-
-// UDP Sender
-int ExecElem::Type22Execution()
-{
-	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-	if (SpecType == 0) {
-		// ホスト名/IPアドレス，ポート番号直接指定の場合
-		TargetId = ElementId;
-		if (StkSocket_Connect(TargetId) == -1) {
-			StkPropOutputLog();
-			return -1;
-		}
-	} else {
-		// Receiverの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	}
-	StkPropOutputLog();
-
-	// データ送信
-	int DatSize = GetDataLength();
-	BYTE* Dat = (BYTE*)GetData();
-	int Ret = StkSocket_SendUdp(TargetId, ElementId, Dat, DatSize);
-	StkPropOutputLog();
-
-	// 送信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
-	if (IsClose != 0) {
-		if (SpecType == 0) {
-			StkSocket_Disconnect(TargetId, TargetId, FALSE);
-			StkPropOutputLog();
-		} else {
-			//nothing to do
-		}
-	}
-	if (Ret == SOCKET_ERROR) {
-		return -1;
-	}
-
-	return 0;
-}
-
 // 要素の処理を実行する
 // 戻り値: (0:Terminator以外の処理が正常終了, 1:Terminatorの処理が正常終了, 2:異常終了(処理を進めない))
 int ExecElem::Execute()
@@ -1229,24 +1149,7 @@ int ExecElem::Execute()
 	if (ElementType == 20) { // Execute program
 		return Type20Execution();
 	}
-	if (ElementType == 21) { // UDP Receiver
-		if (Type21Execution() == -1) {
-			return 2;
-		}
-		return 0;
-	}
-	if (ElementType == 22) { // UDP Sender
-		if (Type22Execution() == -1) {
-			return 2;
-		}
-		return 1;
-	}
-	if (ElementType == 23) {
-		if (Type22Execution() == -1) {
-			return 2;
-		}
-		return 0;
-	}
+
 	return 0;
 }
 

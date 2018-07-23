@@ -106,7 +106,9 @@
     <ClCompile Include="ExecElem.cpp" />
     <ClCompile Include="ExecElem_CheckFlag.cpp" />
     <ClCompile Include="ExecElem_Receiver.cpp" />
+    <ClCompile Include="ExecElem_ReceiverUdp.cpp" />
     <ClCompile Include="ExecElem_Sender.cpp" />
+    <ClCompile Include="ExecElem_SenderUdp.cpp" />
     <ClCompile Include="ExecProg.cpp" />
     <ClCompile Include="FileAccess.cpp" />
     <ClCompile Include="FlagView.cpp" />
@@ -130,7 +132,9 @@
     <ClInclude Include="ExecElem.h" />
     <ClInclude Include="ExecElem_CheckFlag.h" />
     <ClInclude Include="ExecElem_Receiver.h" />
+    <ClInclude Include="ExecElem_ReceiverUdp.h" />
     <ClInclude Include="ExecElem_Sender.h" />
+    <ClInclude Include="ExecElem_SenderUdp.h" />
     <ClInclude Include="LowDbAccess.h" />
     <ClInclude Include="MyMsgProc.h" />
     <ClInclude Include="NetAseEx.h" />
