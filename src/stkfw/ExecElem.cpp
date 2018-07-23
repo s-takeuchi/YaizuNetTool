@@ -7,6 +7,8 @@
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "ExecElem_CheckFlag.h"
+#include "ExecElem_Receiver.h"
+#include "ExecElem_Sender.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -154,6 +156,14 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		ExecElem_CheckFlag* NewExecElem = new ExecElem_CheckFlag(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
+	} else if (Type == RECEIVER) {
+		ExecElem_Receiver* NewExecElem = new ExecElem_Receiver(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
+	} else if (Type == SENDER_R || Type ==SENDER) {
+		ExecElem_Sender* NewExecElem = new ExecElem_Sender(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
 	} else {
 		ExecElem* NewExecElem = new ExecElem(Id);
 		NewExecElem->SetType(Type);
@@ -237,122 +247,6 @@ void ExecElem::SetDataLength(int Len)
 	DataLength = Len;
 }
 
-// Receiver
-int ExecElem::Type1Execution()
-{
-	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-
-	// ホスト名/IPアドレス，ポート番号直接指定またはMulti Acceptの場合
-	if (SpecType == 0 || SpecType == 2) {
-		// ホスト名/IPアドレス，ポート番号直接指定またはMulti Acceptの場合
-		TargetId = ElementId;
-		if (StkSocket_Accept(TargetId) == -1) {
-			StkPropOutputLog();
-			return -1;
-		}
-	} else {
-		// Senderの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	}
-	StkPropOutputLog();
-
-	// 終了条件設定
-	int FinishCondition = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
-	int FinishCondTimeout = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 6);
-
-	// If the finish condition shows the string-end condition, load communication variable.
-	BYTE* VarDat = NULL;
-	int VarDatSize = 0;
-	if (FinishCondition < 0) {
-		int VarId = -1 * FinishCondition;
-		VarDatSize = VarCon_GetCommunicationVariableSize(VarId);
-		if (VarDatSize != -1) {
-			VarDat = new BYTE[VarDatSize];
-			VarCon_GetCommunicationVariable(VarId, VarDat, VarDatSize);
-		} else {
-			return -1;
-		}
-	}
-
-	// データの受信
-	BYTE* Buf = new BYTE[10000000];
-	int ActSize = 0;
-	BOOL ForceStop = (StartStopFlag == TRUE)? FALSE : TRUE;
-	int RevisedFinishCondition = 0;
-	if (FinishCondition < 0) {
-		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_STRING;
-	} else if (FinishCondition == 0) {
-		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_UNCONDITIONAL;
-	} else if (FinishCondition == 1) {
-		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_TIMEOUT;
-	} else if (FinishCondition == 3) {
-		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_CONTENTLENGTH;
-	} else if (FinishCondition == 2) {
-		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_PEERCLOSURE;
-	} else if (FinishCondition >= 10000001 && FinishCondition <= 19999999) {
-		RevisedFinishCondition = FinishCondition - 10000000;
-	}
-	ActSize = StkSocket_Receive(TargetId, ElementId, Buf, 9999999, RevisedFinishCondition, FinishCondTimeout, VarDat, VarDatSize, ForceStop);
-	StkPropOutputLog();
-
-	// If the finish condition shows the string-end condition, release the allocated data area for communication variable.
-	if (FinishCondition < 0 && VarDat != NULL) {
-		delete VarDat;
-	}
-
-	// データ受信中エラー発生／ソケット切断
-	if (ActSize == SOCKET_ERROR || ActSize == -1) {
-		delete Buf;
-		return -1;
-	}
-	// 接続先ソケットがクローズされた
-	if (ActSize == 0) {
-		if (SpecType == 0 || SpecType == 2) {
-			StkSocket_CloseAccept(TargetId, TargetId, FALSE);
-		} else {
-			StkSocket_Disconnect(TargetId, ElementId, FALSE);
-		}
-		delete Buf;
-		StkPropOutputLog();
-		return -1;
-	}
-	// タイムアウト
-	if (ActSize == -2) {
-		TCHAR TmpBuf[256];
-		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpBuf, 2);
-		if (lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
-			BYTE* TmpVarDat = new BYTE[0];
-			SetDataLength(0);
-			SetData(TmpVarDat);
-			delete Buf;
-			return 0;
-		} else {
-			delete Buf;
-			return -1;
-		}
-	}
-
-	// データを適切なサイズの領域にコピーする
-	BYTE* TmpVarDat = new BYTE[ActSize];
-	memcpy((void*)TmpVarDat, (void*)Buf, ActSize);
-	SetDataLength(ActSize);
-	SetData(TmpVarDat);
-	delete Buf;
-
-	// 受信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
-	if (IsClose != 0) {
-		if (SpecType == 0 || SpecType == 2) {
-			StkSocket_CloseAccept(TargetId, TargetId, (IsClose == 2)? TRUE : FALSE);
-		} else {
-			StkSocket_Disconnect(TargetId, ElementId, (IsClose == 2)? TRUE : FALSE);
-		}
-	}
-	StkPropOutputLog();
-	return 0;
-}
-
 // Load Data
 int ExecElem::Type2Execution()
 {
@@ -391,47 +285,6 @@ int ExecElem::Type2Execution()
 	}
 	SetDataLength(VarDatSize);
 	SetData(VarDat); // サイズ0のデータでもnewした領域のポインタを指定する
-	return 0;
-}
-
-// Sender
-int ExecElem::Type4Execution()
-{
-	int TargetId;
-	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-	if (SpecType == 0) {
-		// ホスト名/IPアドレス，ポート番号直接指定の場合
-		TargetId = ElementId;
-		if (StkSocket_Connect(TargetId) == -1) {
-			StkPropOutputLog();
-			return -1;
-		}
-	} else {
-		// Receiverの接続対象指定の場合
-		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	}
-	StkPropOutputLog();
-
-	// データ送信
-	int DatSize = GetDataLength();
-	BYTE* Dat = (BYTE*)GetData();
-	int Ret = StkSocket_Send(TargetId, ElementId, Dat, DatSize);
-	StkPropOutputLog();
-
-	// 送信後ソケットをクローズする場合
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
-	if (IsClose != 0) {
-		if (SpecType == 0) {
-			StkSocket_Disconnect(TargetId, TargetId, (IsClose == 2)? TRUE : FALSE);
-		} else {
-			StkSocket_CloseAccept(TargetId, ElementId, (IsClose == 2)? TRUE : FALSE);
-		}
-	}
-	StkPropOutputLog();
-	if (Ret == 	SOCKET_ERROR) {
-		return -1;
-	}
-
 	return 0;
 }
 
@@ -1326,12 +1179,6 @@ int ExecElem::Type22Execution()
 // 戻り値: (0:Terminator以外の処理が正常終了, 1:Terminatorの処理が正常終了, 2:異常終了(処理を進めない))
 int ExecElem::Execute()
 {
-	if (ElementType == 1) { // Receiver
-		if (Type1Execution() == -1) {
-			return 2;
-		}
-		return 0;
-	}
 	if (ElementType == 2) { // Load data
 		if (Type2Execution() == -1) {
 			return 2;
@@ -1341,24 +1188,12 @@ int ExecElem::Execute()
 	if (ElementType == 3) {
 		return 0;
 	}
-	if (ElementType == 4) { // Sender
-		if (Type4Execution() == -1) {
-			return 2;
-		}
-		return 1;
-	}
 	if (ElementType == 5) { // Store data
 		Type5Execution();
 		return 1;
 	}
 	if (ElementType == 6) {
 		return 1;
-	}
-	if (ElementType == 7) { // Sender
-		if (Type4Execution() == -1) {
-			return 2;
-		}
-		return 0;
 	}
 	if (ElementType == 8) { // Store data
 		Type5Execution();

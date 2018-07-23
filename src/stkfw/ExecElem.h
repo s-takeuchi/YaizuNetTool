@@ -35,6 +35,9 @@ public:
 	static const int STATUS_DWAITING = 6; // 次のスレッドに処理が引き継がれた直後の状態
 	static const int STATUS_BWAITING = 7; // 実行結果がブロック状態(Ret==2)の場合
 
+	static const int RECEIVER  = 1;
+	static const int SENDER_R  = 4;
+	static const int SENDER    = 7;
 	static const int CHECKFLAG = 10;
 
 public:
@@ -43,7 +46,6 @@ public:
 	HANDLE StdInD, StdOutD;
 
 private:
-	int Type1Execution();
 	int Type2Execution();
 	int Type4Execution();
 	void Type5Execution();
