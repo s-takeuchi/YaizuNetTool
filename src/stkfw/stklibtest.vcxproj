@@ -103,13 +103,6 @@
     <ClCompile Include="CheckData.cpp" />
     <ClCompile Include="ChgData.cpp" />
     <ClCompile Include="CloseSock.cpp" />
-    <ClCompile Include="ExecElem.cpp" />
-    <ClCompile Include="ExecElem_ChangeFlag.cpp" />
-    <ClCompile Include="ExecElem_CheckFlag.cpp" />
-    <ClCompile Include="ExecElem_Receiver.cpp" />
-    <ClCompile Include="ExecElem_ReceiverUdp.cpp" />
-    <ClCompile Include="ExecElem_Sender.cpp" />
-    <ClCompile Include="ExecElem_SenderUdp.cpp" />
     <ClCompile Include="ExecProg.cpp" />
     <ClCompile Include="FileAccess.cpp" />
     <ClCompile Include="FlagView.cpp" />
@@ -120,6 +113,13 @@
     <ClCompile Include="NetGseEx.cpp" />
     <ClCompile Include="NetManagerAseEx.cpp" />
     <ClCompile Include="RecvInit.cpp" />
+    <ClCompile Include="server\ExecElem.cpp" />
+    <ClCompile Include="server\ExecElem_ChangeFlag.cpp" />
+    <ClCompile Include="server\ExecElem_CheckFlag.cpp" />
+    <ClCompile Include="server\ExecElem_Receiver.cpp" />
+    <ClCompile Include="server\ExecElem_ReceiverUdp.cpp" />
+    <ClCompile Include="server\ExecElem_Sender.cpp" />
+    <ClCompile Include="server\ExecElem_SenderUdp.cpp" />
     <ClCompile Include="stklibtest.cpp" />
     <ClCompile Include="stkprop.cpp" />
     <ClCompile Include="StkPropExecMgr.cpp" />
@@ -130,19 +130,19 @@
     <ClCompile Include="VarController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ExecElem.h" />
-    <ClInclude Include="ExecElem_ChangeFlag.h" />
-    <ClInclude Include="ExecElem_CheckFlag.h" />
-    <ClInclude Include="ExecElem_Receiver.h" />
-    <ClInclude Include="ExecElem_ReceiverUdp.h" />
-    <ClInclude Include="ExecElem_Sender.h" />
-    <ClInclude Include="ExecElem_SenderUdp.h" />
     <ClInclude Include="LowDbAccess.h" />
     <ClInclude Include="MyMsgProc.h" />
     <ClInclude Include="NetAseEx.h" />
     <ClInclude Include="NetGseEx.h" />
     <ClInclude Include="NetManagerAseEx.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="server\ExecElem.h" />
+    <ClInclude Include="server\ExecElem_ChangeFlag.h" />
+    <ClInclude Include="server\ExecElem_CheckFlag.h" />
+    <ClInclude Include="server\ExecElem_Receiver.h" />
+    <ClInclude Include="server\ExecElem_ReceiverUdp.h" />
+    <ClInclude Include="server\ExecElem_Sender.h" />
+    <ClInclude Include="server\ExecElem_SenderUdp.h" />
     <ClInclude Include="stklibtest.h" />
     <ClInclude Include="stkprop.h" />
     <ClInclude Include="StkPropExecMgr.h" />

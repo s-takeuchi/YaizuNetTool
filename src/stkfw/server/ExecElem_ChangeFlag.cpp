@@ -1,6 +1,6 @@
 #include "ExecElem_ChangeFlag.h"
-#include "VarController.h"
-#include "LowDbAccess.h"
+#include "..\VarController.h"
+#include "..\LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_ChangeFlag::ExecElem_ChangeFlag(int Id) : ExecElem(Id)

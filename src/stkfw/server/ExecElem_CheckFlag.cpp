@@ -1,6 +1,6 @@
 #include "ExecElem_CheckFlag.h"
-#include "VarController.h"
-#include "LowDbAccess.h"
+#include "..\VarController.h"
+#include "..\LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_CheckFlag::ExecElem_CheckFlag(int Id) : ExecElem(Id)

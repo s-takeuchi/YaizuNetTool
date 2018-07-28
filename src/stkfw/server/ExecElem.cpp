@@ -1,11 +1,11 @@
-#include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
+#include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem.h"
 #include <windows.h>
 #include <memory.h>
-#include "..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
-#include "VarController.h"
-#include "LowDbAccess.h"
-#include "MyMsgProc.h"
+#include "..\..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
+#include "..\VarController.h"
+#include "..\LowDbAccess.h"
+#include "..\MyMsgProc.h"
 #include "ExecElem_CheckFlag.h"
 #include "ExecElem_ChangeFlag.h"
 #include "ExecElem_Receiver.h"
