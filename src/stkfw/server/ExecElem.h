@@ -36,6 +36,7 @@ public:
 	static const int STATUS_BWAITING = 7; // 実行結果がブロック状態(Ret==2)の場合
 
 	static const int RECEIVER    = 1;
+	static const int LOADDATA    = 2;
 	static const int SENDER_R    = 4;
 	static const int STOREDATA_R = 5;
 	static const int SENDER      = 7;
@@ -54,7 +55,6 @@ public:
 	HANDLE StdInD, StdOutD;
 
 private:
-	int Type2Execution();
 	int Type12Execution();
 	int Type16Execution();
 	int Type17Execution();

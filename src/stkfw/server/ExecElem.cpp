@@ -11,6 +11,7 @@
 #include "ExecElem_ChangeFlag.h"
 #include "ExecElem_ChangeData.h"
 #include "ExecElem_StoreData.h"
+#include "ExecElem_LoadData.h"
 #include "ExecElem_Receiver.h"
 #include "ExecElem_ReceiverUdp.h"
 #include "ExecElem_Sender.h"
@@ -182,6 +183,10 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		ExecElem_ReceiverUdp* NewExecElem = new ExecElem_ReceiverUdp(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
+	} else if (Type == LOADDATA) {
+		ExecElem_LoadData* NewExecElem = new ExecElem_LoadData(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
 	} else if (Type == SENDER_R || Type == SENDER) {
 		ExecElem_Sender* NewExecElem = new ExecElem_Sender(Id);
 		NewExecElem->SetType(Type);
@@ -275,47 +280,6 @@ void ExecElem::SetData(void* Dt)
 void ExecElem::SetDataLength(int Len)
 {
 	DataLength = Len;
-}
-
-// Load Data
-int ExecElem::Type2Execution()
-{
-	int VarId;
-	BYTE* VarDat = NULL;
-	int VarDatSize = 0;
-	// 操作種別=0:"1つの変数から情報を取得", 1:"複数の変数から情報を取得"
-	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2) == 0) {
-		// コミュニケーション用変数のIDを取得する
-		VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-	} else {
-		TCHAR TmpVarName[256];
-		TCHAR TgtName[32];
-		int Counter = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
-		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpVarName, 1);
-		wsprintf(TmpVarName, _T("%s%05d"), TmpVarName, Counter);
-		lstrcpyn(TgtName, TmpVarName, 32);
-		VarId = VarCon_GetCommunicationVariableId(TgtName);
-		if (VarId == -1) {
-			SetDataLength(0);
-			SetData(NULL);
-			return -1;
-		}
-		Counter++;
-		LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, Counter, 5);
-	}
-
-	VarDatSize = VarCon_GetCommunicationVariableSize(VarId);
-	if (VarDatSize != -1) {
-		VarDat = new BYTE[VarDatSize];
-		VarCon_GetCommunicationVariable(VarId, VarDat, VarDatSize);
-	} else {
-		SetDataLength(0);
-		SetData(NULL);
-		return -1;
-	}
-	SetDataLength(VarDatSize);
-	SetData(VarDat); // サイズ0のデータでもnewした領域のポインタを指定する
-	return 0;
 }
 
 // Timer
@@ -751,12 +715,6 @@ int ExecElem::Type20Execution()
 // 戻り値: (0:Terminator以外の処理が正常終了, 1:Terminatorの処理が正常終了, 2:異常終了(処理を進めない))
 int ExecElem::Execute()
 {
-	if (ElementType == 2) { // Load data
-		if (Type2Execution() == -1) {
-			return 2;
-		}
-		return 0;
-	}
 	if (ElementType == 3) {
 		return 0;
 	}

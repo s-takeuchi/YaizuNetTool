@@ -118,6 +118,7 @@
     <ClCompile Include="server\ExecElem_ChangeFlag.cpp" />
     <ClCompile Include="server\ExecElem_CheckData.cpp" />
     <ClCompile Include="server\ExecElem_CheckFlag.cpp" />
+    <ClCompile Include="server\ExecElem_LoadData.cpp" />
     <ClCompile Include="server\ExecElem_Receiver.cpp" />
     <ClCompile Include="server\ExecElem_ReceiverUdp.cpp" />
     <ClCompile Include="server\ExecElem_Sender.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="server\ExecElem_ChangeFlag.h" />
     <ClInclude Include="server\ExecElem_CheckData.h" />
     <ClInclude Include="server\ExecElem_CheckFlag.h" />
+    <ClInclude Include="server\ExecElem_LoadData.h" />
     <ClInclude Include="server\ExecElem_Receiver.h" />
     <ClInclude Include="server\ExecElem_ReceiverUdp.h" />
     <ClInclude Include="server\ExecElem_Sender.h" />
