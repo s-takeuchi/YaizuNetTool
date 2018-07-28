@@ -7,6 +7,7 @@
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "ExecElem_CheckFlag.h"
+#include "ExecElem_ChangeFlag.h"
 #include "ExecElem_Receiver.h"
 #include "ExecElem_ReceiverUdp.h"
 #include "ExecElem_Sender.h"
@@ -156,6 +157,10 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 {
 	if (Type == CHECKFLAG) {
 		ExecElem_CheckFlag* NewExecElem = new ExecElem_CheckFlag(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
+	} else if (Type == CHANGEFLAG) {
+		ExecElem_ChangeFlag* NewExecElem = new ExecElem_ChangeFlag(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
 	} else if (Type == RECEIVER) {
@@ -499,22 +504,6 @@ int ExecElem::Type12Execution()
 		}
 	}
 	return 2;
-}
-
-// Change Flag
-int ExecElem::Type13Execution()
-{
-	int VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-	int VarValue = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	if (VarCon_CheckVariableExistence(VarId) == FALSE) {
-		return 0;
-	}
-	if (VarValue == 0) {
-		VarCon_ChangeFlagVariable(VarId, FALSE);
-	} else {
-		VarCon_ChangeFlagVariable(VarId, TRUE);
-	}
-	return 0;
 }
 
 // Change data
@@ -1127,9 +1116,6 @@ int ExecElem::Execute()
 	}
 	if (ElementType == 12) { // Timer
 		return Type12Execution();
-	}
-	if (ElementType == 13) { // Change Flag
-		return Type13Execution();
 	}
 	if (ElementType == 14) { // Change data
 		return Type14Execution();

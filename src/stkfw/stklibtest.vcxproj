@@ -104,6 +104,7 @@
     <ClCompile Include="ChgData.cpp" />
     <ClCompile Include="CloseSock.cpp" />
     <ClCompile Include="ExecElem.cpp" />
+    <ClCompile Include="ExecElem_ChangeFlag.cpp" />
     <ClCompile Include="ExecElem_CheckFlag.cpp" />
     <ClCompile Include="ExecElem_Receiver.cpp" />
     <ClCompile Include="ExecElem_ReceiverUdp.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExecElem.h" />
+    <ClInclude Include="ExecElem_ChangeFlag.h" />
     <ClInclude Include="ExecElem_CheckFlag.h" />
     <ClInclude Include="ExecElem_Receiver.h" />
     <ClInclude Include="ExecElem_ReceiverUdp.h" />

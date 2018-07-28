@@ -39,9 +39,10 @@ public:
 	static const int RECEIVERUDP = 21;
 	static const int SENDER_R    = 4;
 	static const int SENDER      = 7;
+	static const int CHECKFLAG   = 10;
+	static const int CHANGEFLAG  = 13;
 	static const int SENDERUDP_R = 22;
 	static const int SENDERUDP   = 23;
-	static const int CHECKFLAG   = 10;
 
 public:
 	// Attributes for the "Execute Program"
@@ -50,19 +51,15 @@ public:
 
 private:
 	int Type2Execution();
-	int Type4Execution();
 	void Type5Execution();
 	int Type11Execution();
 	int Type12Execution();
-	int Type13Execution();
 	int Type14Execution();
 	int Type16Execution();
 	int Type17Execution();
 	int Type18Execution();
 	int Type19Execution();
 	int Type20Execution();
-	int Type21Execution();
-	int Type22Execution();
 
 	void ErrorLog(int, TCHAR*, int);
 	void SendReceiveLog(int, int, TCHAR*);
