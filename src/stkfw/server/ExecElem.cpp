@@ -10,6 +10,7 @@
 #include "ExecElem_CheckData.h"
 #include "ExecElem_ChangeFlag.h"
 #include "ExecElem_ChangeData.h"
+#include "ExecElem_StoreData.h"
 #include "ExecElem_Receiver.h"
 #include "ExecElem_ReceiverUdp.h"
 #include "ExecElem_Sender.h"
@@ -189,6 +190,10 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		ExecElem_SenderUdp* NewExecElem = new ExecElem_SenderUdp(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
+	} else if (Type == STOREDATA_R || Type == STOREDATA) {
+		ExecElem_StoreData* NewExecElem = new ExecElem_StoreData(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
 	} else {
 		ExecElem* NewExecElem = new ExecElem(Id);
 		NewExecElem->SetType(Type);
@@ -311,68 +316,6 @@ int ExecElem::Type2Execution()
 	SetDataLength(VarDatSize);
 	SetData(VarDat); // サイズ0のデータでもnewした領域のポインタを指定する
 	return 0;
-}
-
-// Store Data
-void ExecElem::Type5Execution()
-{
-	int VarId;
-	BYTE* VarDat = (BYTE*)GetData();
-	int VarDatSize = GetDataLength();
-
-	// 操作種別=0:"1つの変数への情報の設定" ,1:"複数の変数への情報の設定"
-	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2) == 0) {
-		// コミュニケーション用変数のIDを取得する
-		VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-		// 変数が存在するかチェックする
-		if (VarCon_CheckVariableExistence(VarId) == FALSE) {
-			return;
-		}
-
-		// 登録済コミュニケーション変数のサイズチェック
-		int CurSize = VarCon_GetCommunicationVariableSize(VarId) + 10000; // 更新時のみ10000加算（理由はVarCon_CheckComm...参照）
-		if (VarCon_CheckCommunicationVariableSize(VarDatSize - CurSize) == FALSE) {
-			return;
-		}
-	} else {
-		// 登録済レコードの上限チェック
-		if (VarCon_CheckVariableCount() == FALSE) {
-			return;
-		}
-
-		TCHAR TmpVarName[256];
-		TCHAR TgtName[32];
-		TCHAR TgtDesc[64];
-		int Counter = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
-		if (Counter < 0 || Counter > 99999) {
-			Counter = 0;
-		}
-		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpVarName, 1);
-		wsprintf(TmpVarName, _T("%s%05d"), TmpVarName, Counter);
-		lstrcpyn(TgtName, TmpVarName, 32);
-		lstrcpyn(TgtDesc, TmpVarName, 64);
-		VarId = VarCon_GetCommunicationVariableId(TgtName);
-
-		// 登録済コミュニケーション変数のサイズチェック
-		int CurSize = 0;
-		if (VarId != -1) {
-			CurSize = VarCon_GetCommunicationVariableSize(VarId) + 10000; // 更新時のみ10000加算（理由はVarCon_CheckComm...参照）
-		}
-		if (VarCon_CheckCommunicationVariableSize(VarDatSize - CurSize) == FALSE) {
-			return;
-		}
-
-		if (VarId == -1) {
-			VarId = VarCon_AddVariableRecord(TgtName, TgtDesc, 0);
-		}
-		Counter++;
-		LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, Counter, 5);
-	}
-
-	BYTE* TmpVarDat = new BYTE[10000000];
-	memcpy((void*)TmpVarDat, (void*)VarDat, VarDatSize);
-	VarCon_UpdateCommunicationVariable(VarId, TmpVarDat, VarDatSize);
-	delete TmpVarDat;
 }
 
 // Timer
@@ -817,16 +760,8 @@ int ExecElem::Execute()
 	if (ElementType == 3) {
 		return 0;
 	}
-	if (ElementType == 5) { // Store data
-		Type5Execution();
-		return 1;
-	}
 	if (ElementType == 6) {
 		return 1;
-	}
-	if (ElementType == 8) { // Store data
-		Type5Execution();
-		return 0;
 	}
 	if (ElementType == 9) {
 		return 0;

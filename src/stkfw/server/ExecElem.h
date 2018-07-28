@@ -36,13 +36,15 @@ public:
 	static const int STATUS_BWAITING = 7; // 実行結果がブロック状態(Ret==2)の場合
 
 	static const int RECEIVER    = 1;
-	static const int RECEIVERUDP = 21;
 	static const int SENDER_R    = 4;
+	static const int STOREDATA_R = 5;
 	static const int SENDER      = 7;
+	static const int STOREDATA   = 8;
 	static const int CHECKFLAG   = 10;
 	static const int CHECKDATA   = 11;
 	static const int CHANGEFLAG  = 13;
 	static const int CHANGEDATA  = 14;
+	static const int RECEIVERUDP = 21;
 	static const int SENDERUDP_R = 22;
 	static const int SENDERUDP   = 23;
 
@@ -53,7 +55,6 @@ public:
 
 private:
 	int Type2Execution();
-	void Type5Execution();
 	int Type12Execution();
 	int Type16Execution();
 	int Type17Execution();

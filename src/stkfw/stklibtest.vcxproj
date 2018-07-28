@@ -122,6 +122,7 @@
     <ClCompile Include="server\ExecElem_ReceiverUdp.cpp" />
     <ClCompile Include="server\ExecElem_Sender.cpp" />
     <ClCompile Include="server\ExecElem_SenderUdp.cpp" />
+    <ClCompile Include="server\ExecElem_StoreData.cpp" />
     <ClCompile Include="stklibtest.cpp" />
     <ClCompile Include="stkprop.cpp" />
     <ClCompile Include="StkPropExecMgr.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="server\ExecElem_ReceiverUdp.h" />
     <ClInclude Include="server\ExecElem_Sender.h" />
     <ClInclude Include="server\ExecElem_SenderUdp.h" />
+    <ClInclude Include="server\ExecElem_StoreData.h" />
     <ClInclude Include="stklibtest.h" />
     <ClInclude Include="stkprop.h" />
     <ClInclude Include="StkPropExecMgr.h" />
