@@ -114,6 +114,7 @@
     <ClCompile Include="NetManagerAseEx.cpp" />
     <ClCompile Include="RecvInit.cpp" />
     <ClCompile Include="server\ExecElem.cpp" />
+    <ClCompile Include="server\ExecElem_ChangeData.cpp" />
     <ClCompile Include="server\ExecElem_ChangeFlag.cpp" />
     <ClCompile Include="server\ExecElem_CheckData.cpp" />
     <ClCompile Include="server\ExecElem_CheckFlag.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="NetManagerAseEx.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="server\ExecElem.h" />
+    <ClInclude Include="server\ExecElem_ChangeData.h" />
     <ClInclude Include="server\ExecElem_ChangeFlag.h" />
     <ClInclude Include="server\ExecElem_CheckData.h" />
     <ClInclude Include="server\ExecElem_CheckFlag.h" />

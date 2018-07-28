@@ -42,6 +42,7 @@ public:
 	static const int CHECKFLAG   = 10;
 	static const int CHECKDATA   = 11;
 	static const int CHANGEFLAG  = 13;
+	static const int CHANGEDATA  = 14;
 	static const int SENDERUDP_R = 22;
 	static const int SENDERUDP   = 23;
 
@@ -54,7 +55,6 @@ private:
 	int Type2Execution();
 	void Type5Execution();
 	int Type12Execution();
-	int Type14Execution();
 	int Type16Execution();
 	int Type17Execution();
 	int Type18Execution();
