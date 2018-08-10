@@ -17,6 +17,7 @@
 #include "ExecElem_Sender.h"
 #include "ExecElem_SenderUdp.h"
 #include "ExecElem_ReadFile.h"
+#include "ExecElem_WriteFile.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -202,6 +203,10 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		return (ExecElem*)NewExecElem;
 	} else if (Type == READFILE) {
 		ExecElem_ReadFile* NewExecElem = new ExecElem_ReadFile(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
+	} else if (Type == WRITEFILE) {
+		ExecElem_WriteFile* NewExecElem = new ExecElem_WriteFile(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
 	} else {
@@ -427,95 +432,6 @@ int ExecElem::Type17Execution()
 	return 0;
 }
 
-// Write file
-int ExecElem::Type18Execution()
-{
-	// 書き込み対象ファイルパスの取得
-	TCHAR BufPath[256];
-	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufPath, 1);
-	// アクセス種別の取得
-	int AccessType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-
-	// 入力データの取得
-	BYTE* InputDat = (BYTE*)GetData();
-	int InputDatLength = GetDataLength();
-
-	// 作業用領域
-	BYTE* WorkDat;
-	int WorkDatLength;
-	int WorkDatLenForFile;
-	int WorkDatLenForInput;
-	DWORD TmpSize = 0;
-
-	// 作業用領域へのデータの格納
-	if (AccessType == 0) {
-		WorkDat = InputDat;
-		WorkDatLength = InputDatLength;
-	} else {
-		HANDLE ReadFileHndl = CreateFile(BufPath, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-		if (ReadFileHndl != INVALID_HANDLE_VALUE) {
-			LARGE_INTEGER ExistingFileSize;
-			GetFileSizeEx(ReadFileHndl, &ExistingFileSize);
-			if (ExistingFileSize.QuadPart + InputDatLength >= 10000000) {
-					CloseHandle(ReadFileHndl);
-					return 2;
-			}
-
-			WorkDatLength = (int)(ExistingFileSize.QuadPart + InputDatLength);
-			WorkDat = new BYTE[WorkDatLength];
-
-			if (AccessType == 1) {
-				WorkDatLenForFile = (int)ExistingFileSize.QuadPart;
-				WorkDatLenForInput = WorkDatLength - WorkDatLenForFile;
-				memcpy(WorkDat, InputDat, WorkDatLenForInput);
-				if (ReadFile(ReadFileHndl, (LPVOID)(WorkDat + WorkDatLenForInput), WorkDatLenForFile, &TmpSize, NULL) == 0) {
-					delete WorkDat;
-					CloseHandle(ReadFileHndl);
-					return 2;
-				}
-			}
-			if (AccessType == 2) {
-				WorkDatLenForInput = InputDatLength;
-				WorkDatLenForFile = WorkDatLength - WorkDatLenForInput;
-				if (ReadFile(ReadFileHndl, (LPVOID)WorkDat, WorkDatLenForFile, &TmpSize, NULL) == 0) {
-					delete WorkDat;
-					CloseHandle(ReadFileHndl);
-					return 2;
-				}
-				memcpy(WorkDat + WorkDatLenForFile, InputDat, WorkDatLenForInput);
-			}
-
-			delete InputDat;
-			SetData((void*)WorkDat);
-			SetDataLength(WorkDatLength);
-
-			CloseHandle(ReadFileHndl);
-		} else {
-			// 既存のファイルが存在しない場合
-			WorkDat = InputDat;
-			WorkDatLength = InputDatLength;
-		}
-	}
-
-	// ファイルへの書き込み
-	HANDLE FileHndl = CreateFile(BufPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (FileHndl == INVALID_HANDLE_VALUE) {
-		delete WorkDat;
-		SetData(NULL);
-		SetDataLength(0);
-		return 2;
-	};
-	if (WriteFile(FileHndl, (LPCVOID)WorkDat, WorkDatLength, &TmpSize, NULL) == 0) {
-		delete WorkDat;
-		SetData(NULL);
-		SetDataLength(0);
-		CloseHandle(FileHndl);
-		return 2;
-	}
-	CloseHandle(FileHndl);
-	return 0;
-}
-
 // Execute program
 int ExecElem::Type20Execution()
 {
@@ -659,9 +575,6 @@ int ExecElem::Execute()
 	}
 	if (ElementType == 17) { // Mapper
 		return Type17Execution();
-	}
-	if (ElementType == 18) { // Write file
-		return Type18Execution();
 	}
 	if (ElementType == 20) { // Execute program
 		return Type20Execution();
