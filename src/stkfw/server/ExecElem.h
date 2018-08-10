@@ -43,6 +43,7 @@ public:
 	static const int STOREDATA   = 8;
 	static const int CHECKFLAG   = 10;
 	static const int CHECKDATA   = 11;
+	static const int TIMER       = 12;
 	static const int CHANGEFLAG  = 13;
 	static const int CHANGEDATA  = 14;
 	static const int CLOSESOCKET = 16;
@@ -58,7 +59,6 @@ public:
 	HANDLE StdInD, StdOutD;
 
 private:
-	int Type12Execution();
 	int Type17Execution();
 	int Type20Execution();
 

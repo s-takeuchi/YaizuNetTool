@@ -19,6 +19,7 @@
 #include "ExecElem_ReadFile.h"
 #include "ExecElem_WriteFile.h"
 #include "ExecElem_CloseSocket.h"
+#include "ExecElem_Timer.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -214,6 +215,10 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		ExecElem_CloseSocket* NewExecElem = new ExecElem_CloseSocket(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
+	} else if (Type == TIMER) {
+		ExecElem_Timer* NewExecElem = new ExecElem_Timer(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
 	} else {
 		ExecElem* NewExecElem = new ExecElem(Id);
 		NewExecElem->SetType(Type);
@@ -295,41 +300,6 @@ void ExecElem::SetData(void* Dt)
 void ExecElem::SetDataLength(int Len)
 {
 	DataLength = Len;
-}
-
-// Timer
-int ExecElem::Type12Execution()
-{
-	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4) == 0) {
-		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-		DWORD LowTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-		if (HighTm != 0 || LowTm != 0) {
-			FILETIME LocFileTm;
-			SYSTEMTIME SysTm;
-			GetLocalTime(&SysTm);
-			SystemTimeToFileTime(&SysTm, &LocFileTm);
-			if (LocFileTm.dwHighDateTime >= HighTm && LocFileTm.dwLowDateTime >= LowTm) {
-				return 0;
-			} else {
-				return 2;
-			}
-		}
-		return 0;
-	} else {
-		DWORD WorkTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
-		DWORD WaitTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 3);
-		DWORD CurrentTm = GetTickCount();
-		if (WorkTm == 0) {
-			int *TcInt = (int*)&CurrentTm;
-			LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, *TcInt, 5);
-		} else {
-			if (CurrentTm - WorkTm > (WaitTm * 1000)) {
-				LowDbAccess::GetInstance()->SetElementInfoParamInt(ElementId, 0, 5);
-				return 0;
-			}
-		}
-	}
-	return 2;
 }
 
 // Mapper
@@ -549,9 +519,6 @@ int ExecElem::Execute()
 	}
 	if (ElementType == 9) {
 		return 0;
-	}
-	if (ElementType == 12) { // Timer
-		return Type12Execution();
 	}
 	if (ElementType == 17) { // Mapper
 		return Type17Execution();
