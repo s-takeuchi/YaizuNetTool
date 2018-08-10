@@ -45,6 +45,7 @@ public:
 	static const int CHECKDATA   = 11;
 	static const int CHANGEFLAG  = 13;
 	static const int CHANGEDATA  = 14;
+	static const int READFILE    = 19;
 	static const int RECEIVERUDP = 21;
 	static const int SENDERUDP_R = 22;
 	static const int SENDERUDP   = 23;
@@ -59,7 +60,6 @@ private:
 	int Type16Execution();
 	int Type17Execution();
 	int Type18Execution();
-	int Type19Execution();
 	int Type20Execution();
 
 	void ErrorLog(int, TCHAR*, int);
