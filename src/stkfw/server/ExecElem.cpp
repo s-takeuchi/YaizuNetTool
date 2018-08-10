@@ -18,6 +18,7 @@
 #include "ExecElem_SenderUdp.h"
 #include "ExecElem_ReadFile.h"
 #include "ExecElem_WriteFile.h"
+#include "ExecElem_CloseSocket.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -209,6 +210,10 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		ExecElem_WriteFile* NewExecElem = new ExecElem_WriteFile(Id);
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
+	} else if (Type == CLOSESOCKET) {
+		ExecElem_CloseSocket* NewExecElem = new ExecElem_CloseSocket(Id);
+		NewExecElem->SetType(Type);
+		return (ExecElem*)NewExecElem;
 	} else {
 		ExecElem* NewExecElem = new ExecElem(Id);
 		NewExecElem->SetType(Type);
@@ -325,28 +330,6 @@ int ExecElem::Type12Execution()
 		}
 	}
 	return 2;
-}
-
-// Close port
-int ExecElem::Type16Execution()
-{
-	int TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-	int TargetType = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
-	if (TargetType == -1) {
-		return 0;
-	}
-	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
-	if (TargetType == 1) {
-		StkSocket_CloseAccept(TargetId, ElementId, (IsClose == 1)? TRUE : FALSE);
-	}
-	if (TargetType == 4 || TargetType == 7) {
-		StkSocket_Disconnect(TargetId, ElementId, (IsClose == 1)? TRUE : FALSE);
-	}
-	if (TargetType == 22 || TargetType == 23) {
-		StkSocket_Disconnect(TargetId, ElementId, FALSE);
-	}
-	StkPropOutputLog();
-	return 0;
 }
 
 // Mapper
@@ -569,9 +552,6 @@ int ExecElem::Execute()
 	}
 	if (ElementType == 12) { // Timer
 		return Type12Execution();
-	}
-	if (ElementType == 16) { // Close socket
-		return Type16Execution();
 	}
 	if (ElementType == 17) { // Mapper
 		return Type17Execution();

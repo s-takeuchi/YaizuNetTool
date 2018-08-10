@@ -1,5 +1,4 @@
 #include "ExecElem_WriteFile.h"
-#include "..\VarController.h"
 #include "..\LowDbAccess.h"
 #include <windows.h>
 
