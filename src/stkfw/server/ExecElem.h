@@ -47,6 +47,7 @@ public:
 	static const int CHANGEFLAG  = 13;
 	static const int CHANGEDATA  = 14;
 	static const int CLOSESOCKET = 16;
+	static const int MAPPER      = 17;
 	static const int WRITEFILE   = 18;
 	static const int READFILE    = 19;
 	static const int RECEIVERUDP = 21;
@@ -59,7 +60,6 @@ public:
 	HANDLE StdInD, StdOutD;
 
 private:
-	int Type17Execution();
 	int Type20Execution();
 
 	void ErrorLog(int, TCHAR*, int);
