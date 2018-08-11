@@ -68,9 +68,6 @@ public:
 	// Mapperのマップ済変数のIDを初期化する
 	void InitMappingIds(int);
 
-	// Initialization of execute program
-	void InitExecProgram(int Id);
-
 	// Timerの内部カウンターを初期化する
 	void InitTimer(int);
 

@@ -119,6 +119,7 @@
     <ClCompile Include="server\ExecElem_CheckData.cpp" />
     <ClCompile Include="server\ExecElem_CheckFlag.cpp" />
     <ClCompile Include="server\ExecElem_CloseSocket.cpp" />
+    <ClCompile Include="server\ExecElem_ExecProg.cpp" />
     <ClCompile Include="server\ExecElem_LoadData.cpp" />
     <ClCompile Include="server\ExecElem_Mapper.cpp" />
     <ClCompile Include="server\ExecElem_ReadFile.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="server\ExecElem_CheckData.h" />
     <ClInclude Include="server\ExecElem_CheckFlag.h" />
     <ClInclude Include="server\ExecElem_CloseSocket.h" />
+    <ClInclude Include="server\ExecElem_ExecProg.h" />
     <ClInclude Include="server\ExecElem_LoadData.h" />
     <ClInclude Include="server\ExecElem_Mapper.h" />
     <ClInclude Include="server\ExecElem_ReadFile.h" />

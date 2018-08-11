@@ -50,18 +50,12 @@ public:
 	static const int MAPPER      = 17;
 	static const int WRITEFILE   = 18;
 	static const int READFILE    = 19;
+	static const int EXECPROGRAM = 20;
 	static const int RECEIVERUDP = 21;
 	static const int SENDERUDP_R = 22;
 	static const int SENDERUDP   = 23;
 
-public:
-	// Attributes for the "Execute Program"
-	PROCESS_INFORMATION ExeProcInfo;
-	HANDLE StdInD, StdOutD;
-
 private:
-	int Type20Execution();
-
 	void ErrorLog(int, TCHAR*, int);
 	void SendReceiveLog(int, int, TCHAR*);
 

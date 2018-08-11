@@ -367,7 +367,6 @@ int ElemStkThreadInit(int Id)
 	ExecMgr->InitStoreAndLoadDataCounter(Id);
 	ExecMgr->InitTimer(Id);
 	ExecMgr->InitMappingIds(Id);
-	ExecMgr->InitExecProgram(Id);
 	ExecMgr->ThreadStatusChangedIntoStart(Id);
 
 	for (int Loop = 0; Loop < StkSocket_GetNumOfStkInfos(); Loop++) {

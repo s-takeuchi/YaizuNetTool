@@ -193,25 +193,6 @@ void StkPropExecMgr::InitMappingIds(int Id)
 	}
 }
 
-// Initialization of execute program
-void StkPropExecMgr::InitExecProgram(int Id)
-{
-	// Initialize attributes for the "Execute Program"
-	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		ExecElem* CurExecElem = ExecElems[Loop];
-		if (CurExecElem == NULL) {
-			continue;
-		}
-		if (CurExecElem->GetRootId() == Id) {
-			int TargetId = CurExecElem->GetElementId();
-			int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
-			if (Type == 20) {
-				CurExecElem->ExeProcInfo.dwProcessId = NULL;
-			}
-		}
-	}
-}
-
 // Thread status was changed into "Start"
 // Id [in] : Thread ID
 void StkPropExecMgr::ThreadStatusChangedIntoStart(int Id)
