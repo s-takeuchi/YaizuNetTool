@@ -131,68 +131,6 @@ void StkPropExecMgr::SetWaitForThreadEnd(int Id)
 	}
 }
 
-// Store DataまたはLoad Dataのカウンターを初期化する
-// [in] : Id : 実行系要素のID
-void StkPropExecMgr::InitStoreAndLoadDataCounter(int Id)
-{
-	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		ExecElem* CurExecElem = ExecElems[Loop];
-		if (CurExecElem == NULL) {
-			continue;
-		}
-		if (CurExecElem->GetRootId() == Id) {
-			int TargetId = CurExecElem->GetElementId();
-			int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
-			if (Type == 2 || Type == 5 || Type == 8) {
-				int InitCounter = LowDbAccess::GetInstance()->GetElementInfoParamInt(TargetId, 4);
-				LowDbAccess::GetInstance()->SetElementInfoParamInt(TargetId, InitCounter, 5);
-			}
-		}
-	}
-}
-
-// Timerの内部カウンターを初期化する
-// [in] : Id : 実行系要素のID
-void StkPropExecMgr::InitTimer(int Id)
-{
-	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		ExecElem* CurExecElem = ExecElems[Loop];
-		if (CurExecElem == NULL) {
-			continue;
-		}
-		if (CurExecElem->GetRootId() == Id) {
-			int TargetId = CurExecElem->GetElementId();
-			int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
-			if (Type == 12) {
-				LowDbAccess::GetInstance()->SetElementInfoParamInt(TargetId, 0, 5);
-			}
-		}
-	}
-}
-
-// Mapperのマップ済変数のIDを初期化する
-void StkPropExecMgr::InitMappingIds(int Id)
-{
-	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
-		ExecElem* CurExecElem = ExecElems[Loop];
-		if (CurExecElem == NULL) {
-			continue;
-		}
-		if (CurExecElem->GetRootId() == Id) {
-			BYTE TmpDat[4096];
-			INT16* TmpDatInt = (INT16*)TmpDat;
-			for (int Loop = 0; Loop < 2048; Loop++) {
-				TmpDatInt[Loop] = (INT16)-1;
-			}
-			int TargetId = CurExecElem->GetElementId();
-			int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(TargetId);
-			if (Type == 17) {
-				LowDbAccess::GetInstance()->SetElementInfoBin(TargetId, TmpDat);
-			}
-		}
-	}
-}
-
 // Thread status was changed into "Start"
 // Id [in] : Thread ID
 void StkPropExecMgr::ThreadStatusChangedIntoStart(int Id)

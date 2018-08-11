@@ -4,6 +4,7 @@
 
 ExecElem_Timer::ExecElem_Timer(int Id) : ExecElem(Id)
 {
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(Id, 0, 5);
 }
 
 // Destructor

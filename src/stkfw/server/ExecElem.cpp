@@ -166,75 +166,44 @@ ExecElem::~ExecElem()
 // Type [in] : Type of newly created ExecElem
 ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 {
+	ExecElem* NewExecElem = NULL;
 	if (Type == CHECKFLAG) {
-		ExecElem_CheckFlag* NewExecElem = new ExecElem_CheckFlag(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_CheckFlag(Id);
 	} if (Type == CHECKDATA) {
-		ExecElem_CheckData* NewExecElem = new ExecElem_CheckData(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_CheckData(Id);
 	} else if (Type == CHANGEFLAG) {
-		ExecElem_ChangeFlag* NewExecElem = new ExecElem_ChangeFlag(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_ChangeFlag(Id);
 	} else if (Type == CHANGEDATA) {
-		ExecElem_ChangeData* NewExecElem = new ExecElem_ChangeData(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_ChangeData(Id);
 	}  else if (Type == RECEIVER) {
-		ExecElem_Receiver* NewExecElem = new ExecElem_Receiver(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_Receiver(Id);
 	} else if (Type == RECEIVERUDP) {
-		ExecElem_ReceiverUdp* NewExecElem = new ExecElem_ReceiverUdp(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_ReceiverUdp(Id);
 	} else if (Type == LOADDATA) {
-		ExecElem_LoadData* NewExecElem = new ExecElem_LoadData(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_LoadData(Id);
 	} else if (Type == SENDER_R || Type == SENDER) {
-		ExecElem_Sender* NewExecElem = new ExecElem_Sender(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_Sender(Id);
 	} else if (Type == SENDERUDP_R || Type == SENDERUDP) {
-		ExecElem_SenderUdp* NewExecElem = new ExecElem_SenderUdp(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_SenderUdp(Id);
 	} else if (Type == STOREDATA_R || Type == STOREDATA) {
-		ExecElem_StoreData* NewExecElem = new ExecElem_StoreData(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_StoreData(Id);
 	} else if (Type == READFILE) {
-		ExecElem_ReadFile* NewExecElem = new ExecElem_ReadFile(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_ReadFile(Id);
 	} else if (Type == WRITEFILE) {
-		ExecElem_WriteFile* NewExecElem = new ExecElem_WriteFile(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_WriteFile(Id);
 	} else if (Type == CLOSESOCKET) {
-		ExecElem_CloseSocket* NewExecElem = new ExecElem_CloseSocket(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_CloseSocket(Id);
 	} else if (Type == TIMER) {
-		ExecElem_Timer* NewExecElem = new ExecElem_Timer(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_Timer(Id);
 	} else if (Type == MAPPER) {
-		ExecElem_Mapper* NewExecElem = new ExecElem_Mapper(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_Mapper(Id);
 	} else if (Type == EXECPROGRAM) {
-		ExecElem_ExecProg* NewExecElem = new ExecElem_ExecProg(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_ExecProg(Id);
 	} else {
-		ExecElem_NothingToDo* NewExecElem = new ExecElem_NothingToDo(Id);
-		NewExecElem->SetType(Type);
-		return (ExecElem*)NewExecElem;
+		NewExecElem = new ExecElem_NothingToDo(Id);
 	}
+	NewExecElem->SetType(Type);
+	return NewExecElem;
 }
 
 // —v‘f‚ÌŽí•Ê‚ðŽæ“¾‚·‚é

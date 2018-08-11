@@ -6,6 +6,13 @@
 
 ExecElem_Mapper::ExecElem_Mapper(int Id) : ExecElem(Id)
 {
+	//Mapper‚Ìƒ}ƒbƒvÏ•Ï”‚ÌID‚ğ‰Šú‰»‚·‚é
+	BYTE TmpDat[4096];
+	INT16* TmpDatInt = (INT16*)TmpDat;
+	for (int Loop = 0; Loop < 2048; Loop++) {
+		TmpDatInt[Loop] = (INT16)-1;
+	}
+	LowDbAccess::GetInstance()->SetElementInfoBin(Id, TmpDat);
 }
 
 // Destructor

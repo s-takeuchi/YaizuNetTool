@@ -62,13 +62,4 @@ public:
 	// リンクの種別をクリアする
 	void ClearLineType(int );
 
-	// Store DataまたはLoad Dataのカウンターを初期化する
-	void InitStoreAndLoadDataCounter(int);
-
-	// Mapperのマップ済変数のIDを初期化する
-	void InitMappingIds(int);
-
-	// Timerの内部カウンターを初期化する
-	void InitTimer(int);
-
 };

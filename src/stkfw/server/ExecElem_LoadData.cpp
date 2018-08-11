@@ -5,6 +5,9 @@
 
 ExecElem_LoadData::ExecElem_LoadData(int Id) : ExecElem(Id)
 {
+	//Initialize counter
+	int InitCounter = LowDbAccess::GetInstance()->GetElementInfoParamInt(Id, 4);
+	LowDbAccess::GetInstance()->SetElementInfoParamInt(Id, InitCounter, 5);
 }
 
 // Destructor
