@@ -122,6 +122,7 @@
     <ClCompile Include="server\ExecElem_ExecProg.cpp" />
     <ClCompile Include="server\ExecElem_LoadData.cpp" />
     <ClCompile Include="server\ExecElem_Mapper.cpp" />
+    <ClCompile Include="server\ExecElem_NothingToDo.cpp" />
     <ClCompile Include="server\ExecElem_ReadFile.cpp" />
     <ClCompile Include="server\ExecElem_Receiver.cpp" />
     <ClCompile Include="server\ExecElem_ReceiverUdp.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="server\ExecElem_ExecProg.h" />
     <ClInclude Include="server\ExecElem_LoadData.h" />
     <ClInclude Include="server\ExecElem_Mapper.h" />
+    <ClInclude Include="server\ExecElem_NothingToDo.h" />
     <ClInclude Include="server\ExecElem_ReadFile.h" />
     <ClInclude Include="server\ExecElem_Receiver.h" />
     <ClInclude Include="server\ExecElem_ReceiverUdp.h" />

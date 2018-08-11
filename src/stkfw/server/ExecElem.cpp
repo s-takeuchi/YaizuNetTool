@@ -22,6 +22,7 @@
 #include "ExecElem_Timer.h"
 #include "ExecElem_Mapper.h"
 #include "ExecElem_ExecProg.h"
+#include "ExecElem_NothingToDo.h"
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
@@ -230,9 +231,9 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		NewExecElem->SetType(Type);
 		return (ExecElem*)NewExecElem;
 	} else {
-		ExecElem* NewExecElem = new ExecElem(Id);
+		ExecElem_NothingToDo* NewExecElem = new ExecElem_NothingToDo(Id);
 		NewExecElem->SetType(Type);
-		return NewExecElem;
+		return (ExecElem*)NewExecElem;
 	}
 }
 
@@ -310,23 +311,6 @@ void ExecElem::SetData(void* Dt)
 void ExecElem::SetDataLength(int Len)
 {
 	DataLength = Len;
-}
-
-// 要素の処理を実行する
-// 戻り値: (0:Terminator以外の処理が正常終了, 1:Terminatorの処理が正常終了, 2:異常終了(処理を進めない))
-int ExecElem::Execute()
-{
-	if (ElementType == 3) {
-		return 0;
-	}
-	if (ElementType == 6) {
-		return 1;
-	}
-	if (ElementType == 9) {
-		return 0;
-	}
-
-	return 0;
 }
 
 // Thread status was changed into "Start"

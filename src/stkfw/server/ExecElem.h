@@ -37,10 +37,13 @@ public:
 
 	static const int RECEIVER    = 1;
 	static const int LOADDATA    = 2;
+	static const int NOTHING_I   = 3;
 	static const int SENDER_R    = 4;
 	static const int STOREDATA_R = 5;
+	static const int NOTHING_R   = 6;
 	static const int SENDER      = 7;
 	static const int STOREDATA   = 8;
+	static const int NOTHING     = 9;
 	static const int CHECKFLAG   = 10;
 	static const int CHECKDATA   = 11;
 	static const int TIMER       = 12;
@@ -99,7 +102,8 @@ public:
 	int GetElementId();
 
 	// 要素の処理を実行する
-	virtual int Execute();
+	// 戻り値: (0:Terminator以外の処理が正常終了, 1:Terminatorの処理が正常終了, 2:異常終了(処理を進めない))
+	virtual int Execute() = 0;
 
 	// Thread status was changed into "Start"
 	void ThreadStatusChangedIntoStart();
