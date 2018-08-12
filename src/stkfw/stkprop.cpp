@@ -5,8 +5,7 @@
 #include <stdio.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "ExecElemMgr.h"
-#include "server\ExecElem.h"
+#include "server\ExecElemMgr.h"
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "StkProp.h"

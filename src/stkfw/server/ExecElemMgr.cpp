@@ -2,8 +2,8 @@
 #include <tchar.h>
 #include <memory.h>
 #include "ExecElemMgr.h"
-#include "server\ExecElem.h"
-#include "LowDbAccess.h"
+#include "ExecElem.h"
+#include "..\LowDbAccess.h"
 
 ExecElemMgr* ExecElemMgr::ThisInstance;
 CRITICAL_SECTION ExecElemMgr::CritSect;
