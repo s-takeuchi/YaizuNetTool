@@ -103,6 +103,7 @@
     <ClCompile Include="CheckData.cpp" />
     <ClCompile Include="ChgData.cpp" />
     <ClCompile Include="CloseSock.cpp" />
+    <ClCompile Include="ExecElemMgr.cpp" />
     <ClCompile Include="ExecProg.cpp" />
     <ClCompile Include="FileAccess.cpp" />
     <ClCompile Include="FlagView.cpp" />
@@ -133,7 +134,6 @@
     <ClCompile Include="server\ExecElem_WriteFile.cpp" />
     <ClCompile Include="stklibtest.cpp" />
     <ClCompile Include="stkprop.cpp" />
-    <ClCompile Include="StkPropExecMgr.cpp" />
     <ClCompile Include="StoreData.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UdpRecvSend.cpp" />
@@ -141,6 +141,7 @@
     <ClCompile Include="VarController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExecElemMgr.h" />
     <ClInclude Include="LowDbAccess.h" />
     <ClInclude Include="MyMsgProc.h" />
     <ClInclude Include="NetAseEx.h" />
@@ -167,7 +168,6 @@
     <ClInclude Include="server\ExecElem_WriteFile.h" />
     <ClInclude Include="stklibtest.h" />
     <ClInclude Include="stkprop.h" />
-    <ClInclude Include="StkPropExecMgr.h" />
     <ClInclude Include="VarCon.h" />
     <ClInclude Include="VarController.h" />
   </ItemGroup>

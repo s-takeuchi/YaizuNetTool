@@ -2,11 +2,11 @@
 #include <windows.h>
 #include "server\ExecElem.h"
 
-class StkPropExecMgr
+class ExecElemMgr
 {
 private:
 	// This instance
-	static StkPropExecMgr* ThisInstance;
+	static ExecElemMgr* ThisInstance;
 
 	// 各実行系要素，データ系要素の実行実体
 	ExecElem* ExecElems[1000];
@@ -18,9 +18,9 @@ private:
 
 private:
 	// Constructor
-	StkPropExecMgr();
+	ExecElemMgr();
 	// Destructor
-	~StkPropExecMgr();
+	~ExecElemMgr();
 
 	// 指定したIDの要素とリンクしている全ての要素(ExecElem)取得する
 	void GetLinkedElementIds(int, int, int, int);
@@ -36,7 +36,7 @@ private:
 
 public:
 	// Get this instance
-	static StkPropExecMgr* GetInstance();
+	static ExecElemMgr* GetInstance();
 
 	// 指定したIDのExecElemをExecElems配列から取得する
 	ExecElem* GetExecElem(int);

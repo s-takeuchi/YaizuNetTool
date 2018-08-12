@@ -1,16 +1,16 @@
 #include <windows.h>
 #include <tchar.h>
 #include <memory.h>
-#include "StkPropExecMgr.h"
+#include "ExecElemMgr.h"
 #include "server\ExecElem.h"
 #include "LowDbAccess.h"
 
-StkPropExecMgr* StkPropExecMgr::ThisInstance;
-CRITICAL_SECTION StkPropExecMgr::CritSect;
-CRITICAL_SECTION StkPropExecMgr::CritSectExe; //#10084
+ExecElemMgr* ExecElemMgr::ThisInstance;
+CRITICAL_SECTION ExecElemMgr::CritSect;
+CRITICAL_SECTION ExecElemMgr::CritSectExe; //#10084
 
 // Constructor
-StkPropExecMgr::StkPropExecMgr()
+ExecElemMgr::ExecElemMgr()
 {
 	InitializeCriticalSection(&CritSect);
 	InitializeCriticalSection(&CritSectExe); //#10084
@@ -18,16 +18,16 @@ StkPropExecMgr::StkPropExecMgr()
 }
 
 // Destructor
-StkPropExecMgr::~StkPropExecMgr()
+ExecElemMgr::~ExecElemMgr()
 {
 }
 
 // Get this instance
-StkPropExecMgr* StkPropExecMgr::GetInstance()
+ExecElemMgr* ExecElemMgr::GetInstance()
 {
 	static int Init = 1;
 	if (Init == 1) {
-		ThisInstance = new StkPropExecMgr();
+		ThisInstance = new ExecElemMgr();
 		Init = 0;
 	}
 	return ThisInstance;
@@ -36,7 +36,7 @@ StkPropExecMgr* StkPropExecMgr::GetInstance()
 // 指定したIDのExecElemをExecElems配列から取得する
 // [in] : Id : 取得対象のExecElemのID
 // return : ExecElemインスタンス。見つからなかった場合NULL。
-ExecElem* StkPropExecMgr::GetExecElem(int Id)
+ExecElem* ExecElemMgr::GetExecElem(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
 		ExecElem* CurExecElem = ExecElems[Loop];
@@ -53,7 +53,7 @@ ExecElem* StkPropExecMgr::GetExecElem(int Id)
 // ExecElems配列のIndex番目にあるExecElemを取得する
 // [in] : Index : 0からはじまる通し番号
 // return : ExecElemインスタンス。見つからなかった場合NULL。
-ExecElem* StkPropExecMgr::GetExecElemByIndex(int Index)
+ExecElem* ExecElemMgr::GetExecElemByIndex(int Index)
 {
 	if (Index < 0 || Index >= NumOfExecElem) {
 		return NULL;
@@ -63,7 +63,7 @@ ExecElem* StkPropExecMgr::GetExecElemByIndex(int Index)
 
 // ExecElems配列に存在するExecElemインスタンスの数を取得する
 // return : ExecElemインスタンスの数
-int StkPropExecMgr::GetExecElemCount()
+int ExecElemMgr::GetExecElemCount()
 {
 	return NumOfExecElem;
 }
@@ -73,7 +73,7 @@ int StkPropExecMgr::GetExecElemCount()
 // [in] : OrgId : リンクの根となるID
 // [in] : PrevId : リンク元の要素のID
 // [in] : Counter : 再帰的な呼び出し回数
-void StkPropExecMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Counter)
+void ExecElemMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Counter)
 {
 	int LinkId[10];
 	int LinkType[10];
@@ -109,7 +109,7 @@ void StkPropExecMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Coun
 
 // 実行依存Idの設定（指定したIdをリンク元とする要素のWaitForExecIdを設定する）
 // [in] : Id : リンク元の要素のID
-void StkPropExecMgr::SetWaitForThreadEnd(int Id)
+void ExecElemMgr::SetWaitForThreadEnd(int Id)
 {
 	int LinkOrgId;
 	int LinkType;
@@ -133,7 +133,7 @@ void StkPropExecMgr::SetWaitForThreadEnd(int Id)
 
 // Thread status was changed into "Start"
 // Id [in] : Thread ID
-void StkPropExecMgr::ThreadStatusChangedIntoStart(int Id)
+void ExecElemMgr::ThreadStatusChangedIntoStart(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
 		ExecElem* CurExecElem = ExecElems[Loop];
@@ -148,7 +148,7 @@ void StkPropExecMgr::ThreadStatusChangedIntoStart(int Id)
 
 // Thread status was changed into "Stop"
 // Id [in] : Thread ID
-void StkPropExecMgr::ThreadStatusChangedIntoStop(int Id)
+void ExecElemMgr::ThreadStatusChangedIntoStop(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
 		ExecElem* CurExecElem = ExecElems[Loop];
@@ -163,7 +163,7 @@ void StkPropExecMgr::ThreadStatusChangedIntoStop(int Id)
 
 // Idと関連付く全ての実行系要素，データ系要素をExecElemに展開
 // [in] : Id : 実行系要素のID
-void StkPropExecMgr::AddExecElem(int Id)
+void ExecElemMgr::AddExecElem(int Id)
 {
 	EnterCriticalSection(&CritSect);
 	GetLinkedElementIds(Id, Id, -1, 1);
@@ -173,7 +173,7 @@ void StkPropExecMgr::AddExecElem(int Id)
 
 // 全てのExecElemを削除する
 // [in] : Id : 実行系要素のID
-void StkPropExecMgr::DeleteExecElem(int Id)
+void ExecElemMgr::DeleteExecElem(int Id)
 {
 	EnterCriticalSection(&CritSect);
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
@@ -197,7 +197,7 @@ void StkPropExecMgr::DeleteExecElem(int Id)
 }
 
 // 次の処理のステータスをNotInScopeからWaiting/DWaitingに変更する
-void StkPropExecMgr::ChangeNotInScopeToWaiting(int Id, int RootId)
+void ExecElemMgr::ChangeNotInScopeToWaiting(int Id, int RootId)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
 		ExecElem* CurExecElem = ExecElems[Loop];
@@ -216,7 +216,7 @@ void StkPropExecMgr::ChangeNotInScopeToWaiting(int Id, int RootId)
 
 // リンクの種別を変更する
 // [in] : LkTp : リンク種別 (LkTp == -5 : 101→111, LkTp == +5 : 111→101)
-void StkPropExecMgr::ChangeLineType(int From, int To, int LkTp)
+void ExecElemMgr::ChangeLineType(int From, int To, int LkTp)
 {
 	BOOL FndFlag;
 	int Loop;
@@ -236,7 +236,7 @@ void StkPropExecMgr::ChangeLineType(int From, int To, int LkTp)
 	}
 }
 
-void StkPropExecMgr::ClearLineType(int Id)
+void ExecElemMgr::ClearLineType(int Id)
 {
 	EnterCriticalSection(&CritSect);
 	for (int LoopClr = 0; LoopClr < NumOfExecElem; LoopClr++) {
@@ -251,7 +251,7 @@ void StkPropExecMgr::ClearLineType(int Id)
 }
 
 // 各要素の処理を実行する
-void StkPropExecMgr::ExecuteElement(int Id)
+void ExecElemMgr::ExecuteElement(int Id)
 {
 	// STATUS_CLEARの処理
 	EnterCriticalSection(&CritSect);

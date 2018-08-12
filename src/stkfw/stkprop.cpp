@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "StkPropExecMgr.h"
+#include "ExecElemMgr.h"
 #include "server\ExecElem.h"
 #include "LowDbAccess.h"
 #include "MyMsgProc.h"
@@ -287,7 +287,7 @@ void AddAllSocketInfo()
 {
 	SyncElementInfoAndViewElement();
 
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
 	// StkSocketMgr‰Šú‰»
 	// 0: Receiver, 1: Sender-Stopper, 2: Sender-Terminator, 21: UDP-Receiver, 22: UDP-Sender-Terminator, 23: UDP-Sender-Stopper
@@ -332,7 +332,7 @@ void AddAllSocketInfo()
 
 void DeleteAllSocketInfo()
 {
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
 	// StkSocketMgrI—¹ˆ—
 	// 0: Receiver, 1: Sender-Stopper, 2: Sender-Terminator
@@ -361,8 +361,8 @@ int ElemStkThreadInit(int Id)
 {
 	SyncElementInfoAndViewElement();
 
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
-	// StkPropExecMgr‰Šú‰»
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
+	// ExecElemMgr‰Šú‰»
 	ExecMgr->AddExecElem(Id);
 	ExecMgr->ThreadStatusChangedIntoStart(Id);
 
@@ -393,7 +393,7 @@ int ElemStkThreadInit(int Id)
 
 int ElemStkThreadFinal(int Id)
 {
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
 	for (int Loop = 0; Loop < StkSocket_GetNumOfStkInfos(); Loop++) {
 		int TargetId = 0;
@@ -417,7 +417,7 @@ int ElemStkThreadFinal(int Id)
 		}
 	}
 
-	// StkPropExecMgrÅIˆ—
+	// ExecElemMgrÅIˆ—
 	ExecMgr->ThreadStatusChangedIntoStop(Id);
 	ExecMgr->ClearLineType(Id);
 	ExecMgr->DeleteExecElem(Id);
@@ -436,21 +436,21 @@ int ElemStkThreadMain(int Id)
 		}
 	} while(Num);
 
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 	ExecMgr->ExecuteElement(Id);
 	return 0;
 }
 
 int ElemStkThreadStart(int Id)
 {
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 	ExecMgr->ThreadStatusChangedIntoStart(Id);
 	return 0;
 }
 
 int ElemStkThreadStop(int Id)
 {
-	StkPropExecMgr* ExecMgr = StkPropExecMgr::GetInstance();
+	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 	ExecMgr->ThreadStatusChangedIntoStop(Id);
 	return 0;
 }
