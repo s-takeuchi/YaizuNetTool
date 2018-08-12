@@ -1,6 +1,6 @@
 #include "ExecElem_CheckData.h"
-#include "..\VarController.h"
-#include "..\LowDbAccess.h"
+#include "VarController.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_CheckData::ExecElem_CheckData(int Id) : ExecElem(Id)

@@ -1,6 +1,6 @@
 #include "ExecElem_StoreData.h"
-#include "..\VarController.h"
-#include "..\LowDbAccess.h"
+#include "VarController.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_StoreData::ExecElem_StoreData(int Id) : ExecElem(Id)

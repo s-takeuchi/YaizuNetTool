@@ -3,9 +3,9 @@
 #include <shlwapi.h>
 #include <commctrl.h>
 #include "resource.h"
-#include "VarController.h"
+#include "server\VarController.h"
 #include "MyMsgProc.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 void ChangeOperationType(int Type, HWND RdoBtn1, HWND RdoBtn2, HWND IpHndl, HWND PortHndl, HWND TgtHndl)
 {

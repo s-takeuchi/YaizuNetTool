@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <memory.h>
 #include "VarController.h"
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
+#include "..\..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
+#include "..\..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
 
 // 指定されたIdと一致するVariableテーブルのUdTime属性を更新する
 // Variableテーブルに対し予めロックを掛けておく必要がある

@@ -1,7 +1,7 @@
 #include <shlwapi.h>
 #include "LowDbAccess.h"
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
+#include "..\..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
+#include "..\..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
 
 LowDbAccess* LowDbAccess::ThisInstance;
 

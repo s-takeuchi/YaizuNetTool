@@ -3,7 +3,7 @@
 #include "NetManagerAseEx.h"
 #include "stklibtest.h"
 #include "MyMsgProc.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 
 NetManagerAseEx::NetManagerAseEx()

@@ -1,8 +1,8 @@
 #include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_Mapper.h"
-#include "..\VarController.h"
-#include "..\LowDbAccess.h"
+#include "VarController.h"
+#include "LowDbAccess.h"
 
 ExecElem_Mapper::ExecElem_Mapper(int Id) : ExecElem(Id)
 {

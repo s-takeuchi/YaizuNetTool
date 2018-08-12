@@ -1,6 +1,6 @@
 #include "ExecElem_LoadData.h"
-#include "..\VarController.h"
-#include "..\LowDbAccess.h"
+#include "VarController.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_LoadData::ExecElem_LoadData(int Id) : ExecElem(Id)

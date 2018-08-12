@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_SenderUdp.h"
-#include "..\LowDbAccess.h"
+#include "LowDbAccess.h"
 
 ExecElem_SenderUdp::ExecElem_SenderUdp(int Id) : ExecElem(Id)
 {

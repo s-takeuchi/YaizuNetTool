@@ -2,9 +2,9 @@
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "VarController.h"
+#include "server\VarController.h"
 #include "MyMsgProc.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 HWND StDtVarHndl;
 HWND StDtPrefixHndl;

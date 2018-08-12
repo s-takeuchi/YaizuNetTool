@@ -1,5 +1,5 @@
 #include "ExecElem_WriteFile.h"
-#include "..\LowDbAccess.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_WriteFile::ExecElem_WriteFile(int Id) : ExecElem(Id)

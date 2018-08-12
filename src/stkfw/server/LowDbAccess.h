@@ -1,6 +1,6 @@
 #pragma once
 #include <tchar.h>
-#include "..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
+#include "..\..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
 
 class LowDbAccess
 {

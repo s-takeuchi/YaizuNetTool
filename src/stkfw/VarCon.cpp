@@ -8,7 +8,7 @@
 
 #include "resource.h"
 #include "VarCon.h"
-#include "VarController.h"
+#include "server\VarController.h"
 #include "MyMsgProc.h"
 
 HINSTANCE InstHndl;

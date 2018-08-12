@@ -1,5 +1,5 @@
 #include "ExecElem_ExecProg.h"
-#include "..\LowDbAccess.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_ExecProg::ExecElem_ExecProg(int Id) : ExecElem(Id)

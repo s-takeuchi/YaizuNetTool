@@ -1,9 +1,9 @@
 #include <windows.h>
 #include <tchar.h>
 #include "resource.h"
-#include "VarController.h"
+#include "server\VarController.h"
 #include "MyMsgProc.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 HWND ChgDatStart;
 HWND ChgDatEnd;

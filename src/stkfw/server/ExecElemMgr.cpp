@@ -3,7 +3,7 @@
 #include <memory.h>
 #include "ExecElemMgr.h"
 #include "ExecElem.h"
-#include "..\LowDbAccess.h"
+#include "LowDbAccess.h"
 
 ExecElemMgr* ExecElemMgr::ThisInstance;
 CRITICAL_SECTION ExecElemMgr::CritSect;

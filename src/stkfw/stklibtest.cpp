@@ -32,7 +32,7 @@
 
 #include "stklibtest.h"
 #include "stkprop.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 #include "MyMsgProc.h"
 
 #define DB_VERSION 5

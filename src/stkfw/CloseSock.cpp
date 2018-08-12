@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "MyMsgProc.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 int GetTargetTcpUdpNameArray(TCHAR Name[256][32], int Id[256], int UdpFlag)
 {

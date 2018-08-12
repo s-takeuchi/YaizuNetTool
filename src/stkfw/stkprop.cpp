@@ -6,7 +6,7 @@
 #include <shlwapi.h>
 #include "resource.h"
 #include "server\ExecElemMgr.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "StkProp.h"
 #include "..\..\..\YaizuComLib\src\\stkthread\stkthread.h"

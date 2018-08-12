@@ -1,5 +1,5 @@
 #include "ExecElem_ReadFile.h"
-#include "..\LowDbAccess.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_ReadFile::ExecElem_ReadFile(int Id) : ExecElem(Id)

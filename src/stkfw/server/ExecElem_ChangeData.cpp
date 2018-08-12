@@ -1,6 +1,6 @@
 #include "ExecElem_ChangeData.h"
-#include "..\VarController.h"
-#include "..\LowDbAccess.h"
+#include "VarController.h"
+#include "LowDbAccess.h"
 #include <windows.h>
 
 ExecElem_ChangeData::ExecElem_ChangeData(int Id) : ExecElem(Id)

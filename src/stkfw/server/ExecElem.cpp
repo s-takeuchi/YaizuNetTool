@@ -3,8 +3,8 @@
 #include <windows.h>
 #include <memory.h>
 #include "..\..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
-#include "..\VarController.h"
-#include "..\LowDbAccess.h"
+#include "VarController.h"
+#include "LowDbAccess.h"
 #include "..\MyMsgProc.h"
 #include "ExecElem_CheckFlag.h"
 #include "ExecElem_CheckData.h"

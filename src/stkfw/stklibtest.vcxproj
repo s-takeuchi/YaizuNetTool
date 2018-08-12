@@ -106,7 +106,6 @@
     <ClCompile Include="ExecProg.cpp" />
     <ClCompile Include="FileAccess.cpp" />
     <ClCompile Include="FlagView.cpp" />
-    <ClCompile Include="LowDbAccess.cpp" />
     <ClCompile Include="Mapper.cpp" />
     <ClCompile Include="MyMsgProc.cpp" />
     <ClCompile Include="NetAseEx.cpp" />
@@ -132,16 +131,16 @@
     <ClCompile Include="server\ExecElem_StoreData.cpp" />
     <ClCompile Include="server\ExecElem_Timer.cpp" />
     <ClCompile Include="server\ExecElem_WriteFile.cpp" />
+    <ClCompile Include="server\LowDbAccess.cpp" />
+    <ClCompile Include="server\VarController.cpp" />
     <ClCompile Include="stklibtest.cpp" />
     <ClCompile Include="stkprop.cpp" />
     <ClCompile Include="StoreData.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UdpRecvSend.cpp" />
     <ClCompile Include="VarCon.cpp" />
-    <ClCompile Include="VarController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LowDbAccess.h" />
     <ClInclude Include="MyMsgProc.h" />
     <ClInclude Include="NetAseEx.h" />
     <ClInclude Include="NetGseEx.h" />
@@ -166,10 +165,11 @@
     <ClInclude Include="server\ExecElem_StoreData.h" />
     <ClInclude Include="server\ExecElem_Timer.h" />
     <ClInclude Include="server\ExecElem_WriteFile.h" />
+    <ClInclude Include="server\LowDbAccess.h" />
+    <ClInclude Include="server\VarController.h" />
     <ClInclude Include="stklibtest.h" />
     <ClInclude Include="stkprop.h" />
     <ClInclude Include="VarCon.h" />
-    <ClInclude Include="VarController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="image\back.bmp" />

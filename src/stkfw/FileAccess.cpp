@@ -2,9 +2,9 @@
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "VarController.h"
+#include "server\VarController.h"
 #include "MyMsgProc.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 // アクセス種別に関するラジオボタンのチェックを切り替える
 // Type: in: アクセス種別(0: 上書き, 1:挿入, 2:連結)

@@ -4,7 +4,7 @@
 #include "stklibtest.h"
 #include "MyMsgProc.h"
 #include "stkprop.h"
-#include "LowDbAccess.h"
+#include "server\LowDbAccess.h"
 
 NetAseEx::NetAseEx()
 {
