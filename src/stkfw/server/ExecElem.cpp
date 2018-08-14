@@ -5,7 +5,7 @@
 #include "..\..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
-#include "..\MyMsgProc.h"
+#include "ServerMsg.h"
 #include "ExecElem_CheckFlag.h"
 #include "ExecElem_CheckData.h"
 #include "ExecElem_ChangeFlag.h"
@@ -64,80 +64,80 @@ void ExecElem::StkPropOutputLog()
 		TCHAR DummyBuf[128];
 		switch (Msg) {
 		case STKSOCKET_LOG_NAMESOLVEERR:
-			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_NAMESOLVEERR), ParamInt2);
+			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_NAMESOLVEERR), ParamInt2);
 			break;
 		case STKSOCKET_LOG_CONNERROR:
-			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_CONNERROR), ParamInt2);
+			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CONNERROR), ParamInt2);
 			break;
 		case STKSOCKET_LOG_SUCCESSCSC:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_SUCCESSCSC), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSC), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SOCKCLOSE:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_SOCKCLOSE), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SOCKCLOSE), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDLISTENERR:
-			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_BINDLISTENERR), ParamInt2);
+			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_BINDLISTENERR), ParamInt2);
 			break;
 		case STKSOCKET_LOG_SUCCESSCSBNLS:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_SUCCESSCSBNLS), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSBNLS), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_CLOSEACCEPTSOCK:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_CLOSEACCEPTSOCK), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CLOSEACCEPTSOCK), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_CREATEACCEPTSOCK:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_CREATEACCEPTSOCK), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CREATEACCEPTSOCK), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_ACPTRECV:
-			SendReceiveLog(Id, ParamInt1, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_ACPTRECV));
+			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_ACPTRECV));
 			break;
 		case STKSOCKET_LOG_CNCTRECV:
-			SendReceiveLog(Id, ParamInt1, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_ACPTRECV));
+			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_ACPTRECV));
 			break;
 		case STKSOCKET_LOG_RECVERROR:
-			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_RECVERROR), ParamInt2);
+			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_RECVERROR), ParamInt2);
 			break;
 		case STKSOCKET_LOG_SENDERROR:
-			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_SENDERROR), ParamInt2);
+			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SENDERROR), ParamInt2);
 			break;
 		case STKSOCKET_LOG_ACPTSEND:
-			SendReceiveLog(Id, ParamInt1, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_ACPTSEND));
+			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_ACPTSEND));
 			break;
 		case STKSOCKET_LOG_CNCTSEND:
-			SendReceiveLog(Id, ParamInt1, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_CNCTSEND));
+			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CNCTSEND));
 			break;
 		case STKSOCKET_LOG_CLOSEACCLISNSOCK:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_CLOSELISTENACCEPTSOCK), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CLOSELISTENACCEPTSOCK), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPRECV:
-			SendReceiveLog(Id, ParamInt1, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_UDPRECV));
+			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPRECV));
 			break;
 		case STKSOCKET_LOG_UDPSEND:
-			SendReceiveLog(Id, ParamInt1, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_UDPSEND));
+			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPSEND));
 			break;
 		case STKSOCKET_LOG_SUCCESSCSBN:
-			wsprintf(DummyBuf, _T("%s  <%s:%d> Max-message-length=%d\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_SUCCESSCSBN), ParamStr1, ParamInt1, ParamInt2);
+			wsprintf(DummyBuf, _T("%s  <%s:%d> Max-message-length=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSBN), ParamStr1, ParamInt1, ParamInt2);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SUCCESSCS:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_SUCCESSCS), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCS), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPSOCKCLOSE:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_UDPSOCKCLOSE), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPSOCKCLOSE), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDERR:
-			ErrorLog(Id, MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_BINDERR), ParamInt2);
+			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_BINDERR), ParamInt2);
 			break;
 		default:
-			wsprintf(DummyBuf, _T("%s Msg=%d\r\n"),  MyMsgProc::GetMsg(MyMsgProc::COMMON_UNKNOWN), Msg);
-			AddStkThreadLogWithThreadInfo(MyMsgProc::GetMsg(MyMsgProc::COMMON_UNKNOWN), DummyBuf);
+			wsprintf(DummyBuf, _T("%s Msg=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), Msg);
+			AddStkThreadLogWithThreadInfo(ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), DummyBuf);
 			break;
 		}
 	}

@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include <memory.h>
+#include "ServerMsg.h"
 #include "ExecElemMgr.h"
 #include "ExecElem.h"
 #include "LowDbAccess.h"
@@ -27,8 +28,9 @@ ExecElemMgr* ExecElemMgr::GetInstance()
 {
 	static int Init = 1;
 	if (Init == 1) {
-		ThisInstance = new ExecElemMgr();
 		Init = 0;
+		ThisInstance = new ExecElemMgr();
+		ServerMsg::AddMsg();
 	}
 	return ThisInstance;
 }

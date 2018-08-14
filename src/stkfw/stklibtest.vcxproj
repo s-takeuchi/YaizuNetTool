@@ -132,6 +132,7 @@
     <ClCompile Include="server\ExecElem_Timer.cpp" />
     <ClCompile Include="server\ExecElem_WriteFile.cpp" />
     <ClCompile Include="server\LowDbAccess.cpp" />
+    <ClCompile Include="server\ServerMsg.cpp" />
     <ClCompile Include="server\VarController.cpp" />
     <ClCompile Include="stklibtest.cpp" />
     <ClCompile Include="stkprop.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="server\ExecElem_Timer.h" />
     <ClInclude Include="server\ExecElem_WriteFile.h" />
     <ClInclude Include="server\LowDbAccess.h" />
+    <ClInclude Include="server\ServerMsg.h" />
     <ClInclude Include="server\VarController.h" />
     <ClInclude Include="stklibtest.h" />
     <ClInclude Include="stkprop.h" />
