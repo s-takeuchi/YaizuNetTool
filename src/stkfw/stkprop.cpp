@@ -361,31 +361,10 @@ int ElemStkThreadInit(int Id)
 	SyncElementInfoAndViewElement();
 
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
+
 	// ExecElemMgr‰Šú‰»
 	ExecMgr->AddExecElem(Id);
 	ExecMgr->ThreadStatusChangedIntoStart(Id);
-
-	for (int Loop = 0; Loop < StkSocket_GetNumOfStkInfos(); Loop++) {
-		int TargetId = 0;
-		int SockType = 0;
-		int ActionType = 0;
-		TCHAR TargetAddr[256] = _T("");
-		int TargetPort = 0;
-		BOOL CopiedFlag = FALSE;
-		if (StkSocket_GetInfo(Loop, &TargetId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == -1) {
-			continue;
-		}
-		ExecElem* ExecElemTgt = ExecMgr->GetExecElem(TargetId);
-		if (ExecElemTgt == NULL) {
-			continue;
-		}
-		if (ExecElemTgt->GetRootId() == Id) {
-			if (CopiedFlag == FALSE) {
-				StkSocket_Open(TargetId);
-				ExecElemTgt->StkPropOutputLog();
-			}
-		}
-	}
 
 	return 0;
 }
@@ -393,28 +372,6 @@ int ElemStkThreadInit(int Id)
 int ElemStkThreadFinal(int Id)
 {
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
-
-	for (int Loop = 0; Loop < StkSocket_GetNumOfStkInfos(); Loop++) {
-		int TargetId = 0;
-		int SockType = 0;
-		int ActionType = 0;
-		TCHAR TargetAddr[256] = _T("");
-		int TargetPort = 0;
-		BOOL CopiedFlag = FALSE;
-		if (StkSocket_GetInfo(Loop, &TargetId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == -1) {
-			continue;
-		}
-		ExecElem* ExecElemTgt = ExecMgr->GetExecElem(TargetId);
-		if (ExecElemTgt == NULL) {
-			continue;
-		}
-		if (ExecElemTgt->GetRootId() == Id) {
-			if (CopiedFlag == FALSE) {
-				StkSocket_Close(TargetId, FALSE);
-				ExecElemTgt->StkPropOutputLog();
-			}
-		}
-	}
 
 	// ExecElemMgrÅIˆ—
 	ExecMgr->ThreadStatusChangedIntoStop(Id);
