@@ -5,11 +5,33 @@
 
 ExecElem_ReceiverUdp::ExecElem_ReceiverUdp(int Id) : ExecElem(Id)
 {
+	int SockType = 0;
+	int ActionType = 0;
+	TCHAR TargetAddr[256] = _T("");
+	int TargetPort = 0;
+	BOOL CopiedFlag = FALSE;
+	if (StkSocket_GetInfo(Id, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == 0) {
+		if (CopiedFlag == FALSE) {
+			StkSocket_Open(Id);
+			StkPropOutputLog();
+		}
+	}
 }
 
 // Destructor
 ExecElem_ReceiverUdp::~ExecElem_ReceiverUdp()
 {
+	int SockType = 0;
+	int ActionType = 0;
+	TCHAR TargetAddr[256] = _T("");
+	int TargetPort = 0;
+	BOOL CopiedFlag = FALSE;
+	if (StkSocket_GetInfo(ElementId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == 0) {
+		if (CopiedFlag == FALSE) {
+			StkSocket_Close(ElementId, FALSE);
+			StkPropOutputLog();
+		}
+	}
 }
 
 int ExecElem_ReceiverUdp::Execute()

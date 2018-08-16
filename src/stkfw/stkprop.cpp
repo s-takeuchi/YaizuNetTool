@@ -366,7 +366,7 @@ int ElemStkThreadInit(int Id)
 
 	// ExecElemMgr‰Šú‰»
 	ExecMgr->AddExecElem(Id);
-	ExecMgr->ThreadStatusChangedIntoStart(Id);
+	ElemStkThreadStart(Id); // This line is required for appropriate running.
 
 	return 0;
 }
@@ -376,7 +376,7 @@ int ElemStkThreadFinal(int Id)
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
 	// ExecElemMgrÅIˆ—
-	ExecMgr->ThreadStatusChangedIntoStop(Id);
+	ElemStkThreadStop(Id);
 	ExecMgr->ClearLineType(Id);
 	ExecMgr->DeleteExecElem(Id);
 
