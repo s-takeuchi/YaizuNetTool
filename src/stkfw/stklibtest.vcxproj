@@ -64,6 +64,8 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <LanguageStandard>
+      </LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;Psapi.lib;shell32.lib;Debug\stklib.lib;Debug\stkdata.lib;Debug\stk_about.lib;Debug\stkthread.lib;Debug\stkthreadgui.lib;Debug\commonfunc.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -85,6 +87,8 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>
+      </LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;shell32.lib;Psapi.lib;Release\stklib.lib;Release\stkdata.lib;Release\stk_about.lib;Release\stkthread.lib;Release\stkthreadgui.lib;Release\commonfunc.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -112,6 +116,8 @@
     <ClCompile Include="NetGseEx.cpp" />
     <ClCompile Include="NetManagerAseEx.cpp" />
     <ClCompile Include="RecvInit.cpp" />
+    <ClCompile Include="server\ApiObj.cpp" />
+    <ClCompile Include="server\ApiObj_Thread.cpp" />
     <ClCompile Include="server\ExecElem.cpp" />
     <ClCompile Include="server\ExecElemMgr.cpp" />
     <ClCompile Include="server\ExecElem_ChangeData.cpp" />
@@ -147,6 +153,8 @@
     <ClInclude Include="NetGseEx.h" />
     <ClInclude Include="NetManagerAseEx.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="server\ApiObj.h" />
+    <ClInclude Include="server\ApiObj_Thread.h" />
     <ClInclude Include="server\ExecElem.h" />
     <ClInclude Include="server\ExecElemMgr.h" />
     <ClInclude Include="server\ExecElem_ChangeData.h" />

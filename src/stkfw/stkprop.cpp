@@ -5,12 +5,14 @@
 #include <stdio.h>
 #include <shlwapi.h>
 #include "resource.h"
+#include "server\ApiObj.h"
 #include "server\ExecElemMgr.h"
 #include "server\LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "StkProp.h"
 #include "..\..\..\YaizuComLib\src\\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\\stkthreadgui\stkthreadgui.h"
+#include "..\..\..\YaizuComLib\src\\commonfunc\StkObject.h"
 
 
 void RecvInit(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
@@ -399,14 +401,30 @@ int ElemStkThreadMain(int Id)
 
 int ElemStkThreadStart(int Id)
 {
-	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
-	ExecMgr->ThreadStatusChangedIntoStart(Id);
+	StkObject* ReqObj = new StkObject(L"");
+	StkObject* ReqObjTs = new StkObject(L"threadStatus", L"start");
+	StkObject* ReqObjId = new StkObject(L"id", Id);
+	ReqObj->AppendChildElement(ReqObjId);
+	ReqObj->AppendChildElement(ReqObjTs);
+	ApiObj* Obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/thread/");
+	int StatusCode = 0;
+	Obj->Execute(ReqObj, ApiObj::METHOD_POST, L"/api/thread/", &StatusCode);
+	delete Obj;
+	delete ReqObj;
 	return 0;
 }
 
 int ElemStkThreadStop(int Id)
 {
-	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
-	ExecMgr->ThreadStatusChangedIntoStop(Id);
+	StkObject* ReqObj = new StkObject(L"");
+	StkObject* ReqObjTs = new StkObject(L"threadStatus", L"stop");
+	StkObject* ReqObjId = new StkObject(L"id", Id);
+	ReqObj->AppendChildElement(ReqObjId);
+	ReqObj->AppendChildElement(ReqObjTs);
+	ApiObj* Obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/thread/");
+	int StatusCode = 0;
+	Obj->Execute(ReqObj, ApiObj::METHOD_POST, L"/api/thread/", &StatusCode);
+	delete Obj;
+	delete ReqObj;
 	return 0;
 }
