@@ -22,6 +22,8 @@
 #include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
 #include "..\..\..\YaizuComLib\src\commonfunc\StkGeneric.h"
+#include "..\..\..\YaizuComLib\src\\commonfunc\StkObject.h"
+
 #include "VarCon.h"
 
 #include "NetGseEx.h"
@@ -33,6 +35,8 @@
 #include "stklibtest.h"
 #include "stkprop.h"
 #include "server\LowDbAccess.h"
+#include "server\ApiObj.h"
+
 #include "MyMsgProc.h"
 
 #define DB_VERSION 5
@@ -308,79 +312,24 @@ BOOL IsActorStatusUpdated(int OpType)
 	return FALSE;
 }
 
-int ResetThreadController(BOOL DelAll)
+int ResetThreadController(bool DeleteAllFlag)
 {
-	int Type[100];
-	int ExecFlag[100];
-	TCHAR Desc[100][256];
-	int Count = 0;
-
-	static int RegThId[256];
-	static int RegThCnt = 0;
-	int RegThIdTmp[256];
-	TCHAR RegThNameTmp[100][256];
-	TCHAR RegThDescTmp[100][256];
-	int RegThCntTmp = 0;
-
-	Count = LowDbAccess::GetInstance()->GetViewElementBasicInfoFromProperty(Type, ExecFlag, Desc);
-
-	for (int Loop = 0; Loop < As.GetActorStatusElementCount(); Loop++) {
-		ActorStatusElement* Ase = As.GetActorStatusElement(Loop);
-		if (Ase->GetId() == 0) {
-			continue;
-		}
-		NetAseEx* Nase = reinterpret_cast<NetAseEx*>(Ase);
-		for (int LoopVe = 0; LoopVe < Count; LoopVe++) {
-			if (Type[LoopVe] == Nase->GetType() && ExecFlag[LoopVe] == 1) {
-				if (RegThCntTmp < 100) {
-					RegThIdTmp[RegThCntTmp] = Nase->GetId();
-					lstrcpy(RegThNameTmp[RegThCntTmp], Nase->GetName());
-					lstrcpy(RegThDescTmp[RegThCntTmp], Desc[LoopVe]);
-					RegThCntTmp++;
-				}
-			}
-		}
+	// Reset thread information
+	StkObject* ReqObj = new StkObject(L"");
+	StkObject* ReqObjTs = new StkObject(L"threadStatus", L"refresh");
+	StkObject* ReqDelAll = NULL;
+	if (DeleteAllFlag == true) {
+		ReqDelAll = new StkObject(L"deleteAll", L"yes");
+	} else {
+		ReqDelAll = new StkObject(L"deleteAll", L"no");
 	}
-
-	// Unregister all threads if DelAll flag is true.
-	if (DelAll == TRUE) {
-		for (int Loop = 0; Loop < RegThCnt; Loop++) {
-			DeleteStkThreadForGui(RegThId[Loop]);
-		}
-		RegThCnt = 0;
-	}
-
-	// Register thread information if the thread has not been registered into ThreadController.
-	for (int LoopTmp = 0; LoopTmp < RegThCntTmp; LoopTmp++) {
-		int FndIdx = -1;
-		for (int Loop = 0; Loop < RegThCnt; Loop++) {
-			if (RegThIdTmp[LoopTmp] == RegThId[Loop]) {
-				FndIdx = Loop;
-			}
-		}
-		if (FndIdx == -1 && RegThCnt < 100) {
-			RegThId[RegThCnt] = RegThIdTmp[LoopTmp];
-			RegThCnt++;
-			AddStkThreadForGui(RegThIdTmp[LoopTmp], RegThNameTmp[LoopTmp], RegThDescTmp[LoopTmp], ElemStkThreadInit, ElemStkThreadFinal, ElemStkThreadMain, ElemStkThreadStart, ElemStkThreadStop);
-		}
-	}
-
-	// Unregister theread information if the view element which are associating to the thread does not exist.
-	for (int Loop = 0; Loop < RegThCnt; Loop++) {
-		int FndIdx = -1;
-		for (int LoopTmp = 0; LoopTmp < RegThCntTmp; LoopTmp++) {
-			if (RegThIdTmp[LoopTmp] == RegThId[Loop]) {
-				FndIdx = Loop;
-			}
-		}
-		if (FndIdx == -1) {
-			DeleteStkThreadForGui(RegThId[Loop]);
-			RegThId[Loop] = RegThId[RegThCnt - 1];
-			RegThCnt--;
-			Loop--;
-		}
-	}
-
+	ReqObj->AppendChildElement(ReqObjTs);
+	ReqObj->AppendChildElement(ReqDelAll);
+	ApiObj* Obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/thread/");
+	int StatusCode = 0;
+	Obj->Execute(ReqObj, ApiObj::METHOD_POST, L"/api/thread/", &StatusCode);
+	delete Obj;
+	delete ReqObj;
 	return 0;
 }
 

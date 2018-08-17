@@ -1,5 +1,5 @@
 int ResetWorkspace(int);
-int ResetThreadController(BOOL);
+int ResetThreadController(bool);
 int SetViewToDb();
 int GetViewFromDb();
 int GetMouseAction();

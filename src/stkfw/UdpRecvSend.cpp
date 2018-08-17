@@ -130,11 +130,11 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 		int TargetId[256];
 		int MaxNum;
 		if (Type == 21) {
-			int TmpMaxNum1 = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromType(TargetName, TargetId, 22);
-			int TmpMaxNum2 = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromType(&TargetName[TmpMaxNum1], &TargetId[TmpMaxNum1], 23);
+			int TmpMaxNum1 = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromUdpType(TargetName, TargetId, 22);
+			int TmpMaxNum2 = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromUdpType(&TargetName[TmpMaxNum1], &TargetId[TmpMaxNum1], 23);
 			MaxNum = TmpMaxNum1 + TmpMaxNum2;
 		} else {
-			MaxNum = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromType(TargetName, TargetId, 21);
+			MaxNum = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromUdpType(TargetName, TargetId, 21);
 		}
 		for (int Loop = 0; Loop < MaxNum; Loop++) {
 			SendMessage(TgtHndl, CB_ADDSTRING, 0, (LPARAM)TargetName[Loop]);
@@ -171,10 +171,10 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 				TCHAR TgtName[256][32];
 				int TgtId[256];
 				if (Type == 21) {
-					int TmpMaxNum = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromType(TgtName, TgtId, 22);
-					LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromType(&TgtName[TmpMaxNum], &TgtId[TmpMaxNum], 23);
+					int TmpMaxNum = LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromUdpType(TgtName, TgtId, 22);
+					LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromUdpType(&TgtName[TmpMaxNum], &TgtId[TmpMaxNum], 23);
 				} else {
-					LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromType(TgtName, TgtId, 21);
+					LowDbAccess::GetInstance()->GetViewElementNamesAndIdsFromUdpType(TgtName, TgtId, 21);
 				}
 				int TmpIndex = (int)SendMessage(TgtHndl, CB_GETCURSEL, 0, 0);
 				SelectedTargetId = TgtId[TmpIndex];

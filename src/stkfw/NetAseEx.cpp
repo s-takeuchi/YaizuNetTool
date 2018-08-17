@@ -359,6 +359,7 @@ void NetAseEx::PopupMenuAction(int MenuId, int x, int y, ActorStatusElement* Ase
 				Loop--;
 			}
 		}
+		SetViewToDb();
 		ResetThreadController(FALSE);
 	} else if (MenuId == 4) {
 		//////////////////////////////////////////////////////////////////

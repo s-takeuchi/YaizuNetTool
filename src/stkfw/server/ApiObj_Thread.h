@@ -15,6 +15,14 @@ public:
 
 	static const int URL_PATH_LENGTH = 1024;
 
+private:
+	static int ElemStkThreadInit(int);
+	static int ElemStkThreadFinal(int);
+	static int ElemStkThreadMain(int);
+	static int ElemStkThreadStart(int);
+	static int ElemStkThreadStop(int);
+
 public:
 	virtual StkObject* Execute(StkObject*, int, TCHAR[ApiObj::URL_PATH_LENGTH], int*);
+	int ResetThreadController(bool DelAll);
 };

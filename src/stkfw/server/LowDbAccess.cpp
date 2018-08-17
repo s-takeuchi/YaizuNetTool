@@ -408,12 +408,12 @@ int LowDbAccess::GetViewElementIds(int Ids[256], int Type)
 	return Index;
 }
 
-// This function acquires array of name and array of ID from the specified type.
+// This function acquires array of name and array of ID from the specified type. This method can adapt to UDP element only.
 // Name [out] : Acquired array of name. Maximum 256 elements can be acquired
 // Id [out] : Acquired array of ID. Maximum 256 elements can be acquired
 // Type [in] : Acquisition target type of ViewElement
 // Return : Number of acquired names and IDs
-int LowDbAccess::GetViewElementNamesAndIdsFromType(TCHAR Name[256][32], int Id[256], int Type)
+int LowDbAccess::GetViewElementNamesAndIdsFromUdpType(TCHAR Name[256][32], int Id[256], int Type)
 {
 	int MaxNumOfName = 0;
 	ColumnData* ColSch[1];
@@ -442,6 +442,47 @@ int LowDbAccess::GetViewElementNamesAndIdsFromType(TCHAR Name[256][32], int Id[2
 				lstrcpyn(Name[MaxNumOfName], CurName, 32);
 				MaxNumOfName++;
 			}
+		}
+		RetRec = RetRec->GetNextRecord();
+	}
+	delete RecSch;
+	delete HeadRec;
+
+	return MaxNumOfName;
+}
+
+// This function acquires array of name and array of ID from the specified type.
+// Name [out] : Acquired array of name. Maximum 256 elements can be acquired
+// Id [out] : Acquired array of ID. Maximum 256 elements can be acquired
+// Type [in] : Acquisition target type of ViewElement
+// Return : Number of acquired names and IDs
+int LowDbAccess::GetViewElementNamesAndIdsFromType(TCHAR Name[256][32], int Id[256], int Type)
+{
+	int MaxNumOfName = 0;
+	ColumnData* ColSch[1];
+	ColSch[0] = new ColumnDataInt(_T("Type"), Type);
+	RecordData* RecSch = new RecordData(_T("ViewElement"), ColSch, 1);
+	LockTable(_T("ViewElement"), 1);
+	RecordData* RetRec = GetRecord(RecSch);
+	RecordData* HeadRec = RetRec;
+	UnlockTable(_T("ViewElement"));
+
+	while (RetRec) {
+		ColumnDataInt* RetColId = (ColumnDataInt*)RetRec->GetColumn(0);
+		ColumnDataWStr* RetColName = (ColumnDataWStr*)RetRec->GetColumn(1);
+		int CurId = RetColId->GetValue();
+		TCHAR* CurName = RetColName->GetValue();
+		BOOL FndFlag = FALSE;
+		for (int Loop = 0; Loop < MaxNumOfName; Loop++) {
+			if (Id[Loop] == CurId) {
+				FndFlag = TRUE;
+				break;
+			}
+		}
+		if (FndFlag == FALSE && MaxNumOfName < 256) {
+			Id[MaxNumOfName] = CurId;
+			lstrcpyn(Name[MaxNumOfName], CurName, 32);
+			MaxNumOfName++;
 		}
 		RetRec = RetRec->GetNextRecord();
 	}

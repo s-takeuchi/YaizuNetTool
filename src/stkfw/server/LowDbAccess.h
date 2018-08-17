@@ -31,6 +31,7 @@ public:
 	// ViewElementÉeÅ[ÉuÉã
 	int GetViewElementIdsFromType(int*, int, int);
 	int GetViewElementIds(int[256], int);
+	int GetViewElementNamesAndIdsFromUdpType(TCHAR[256][32], int[256], int);
 	int GetViewElementNamesAndIdsFromType(TCHAR[256][32], int[256], int);
 	int GetViewElementTypeFromId(int);
 	void GetViewElementNameFromId(int, TCHAR[32]);

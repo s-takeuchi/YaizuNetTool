@@ -116,6 +116,7 @@ void NetManagerAseEx::PopupMenuAction(int MenuId, int x, int y, ActorStatusEleme
 		(*ElementCount)++;
 		MaxId++;
 		LowDbAccess::GetInstance()->SetPropertyInteger(_T("MaxId"), 1, MaxId);
+		SetViewToDb();
 		ResetThreadController(FALSE);
 	} else {
 		delete NewNetAseEx;
