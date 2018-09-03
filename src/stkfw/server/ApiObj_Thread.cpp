@@ -139,6 +139,8 @@ StkObject* ApiObj_Thread::Execute(StkObject* ReqObj, int Method, wchar_t Url[Api
 {
 	bool ThreadRefreshFlag = false;
 	bool DeleteAllFlag = false;
+	bool StartAllFlag = false;
+	bool StopAllFlag = false;
 
 	if (ReqObj != NULL) {
 		StkObject* ChildObj = ReqObj->GetFirstChildElement();
@@ -147,6 +149,12 @@ StkObject* ApiObj_Thread::Execute(StkObject* ReqObj, int Method, wchar_t Url[Api
 				TCHAR* Val = ChildObj->GetStringValue();
 				if (wcscmp(Val, L"refresh") == 0) {
 					ThreadRefreshFlag = true;
+				}
+				if (wcscmp(Val, L"startAll") == 0) {
+					StartAllFlag = true;
+				}
+				if (wcscmp(Val, L"stopAll") == 0) {
+					StopAllFlag = true;
 				}
 			}
 			if (wcscmp(ChildObj->GetName(), L"deleteAll") == 0) {

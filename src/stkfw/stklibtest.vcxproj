@@ -117,6 +117,7 @@
     <ClCompile Include="NetManagerAseEx.cpp" />
     <ClCompile Include="RecvInit.cpp" />
     <ClCompile Include="server\ApiObj.cpp" />
+    <ClCompile Include="server\ApiObj_Log.cpp" />
     <ClCompile Include="server\ApiObj_Thread.cpp" />
     <ClCompile Include="server\ExecElem.cpp" />
     <ClCompile Include="server\ExecElemMgr.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="NetManagerAseEx.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="server\ApiObj.h" />
+    <ClInclude Include="server\ApiObj_Log.h" />
     <ClInclude Include="server\ApiObj_Thread.h" />
     <ClInclude Include="server\ExecElem.h" />
     <ClInclude Include="server\ExecElemMgr.h" />

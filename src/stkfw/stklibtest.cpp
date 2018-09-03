@@ -685,8 +685,14 @@ void SetMouseAction(int Flag)
 	}
 }
 
+VOID CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
+{
+	MessageBox(hwnd, L"hello", L"hello", MB_OK);
+}
+
 void StartProc(void)
 {
+	//SetTimer(hWnd, 100, 4000, TimerProc);
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
 
 	StkSocket_ClearLog();

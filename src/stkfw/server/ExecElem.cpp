@@ -2,6 +2,9 @@
 #include "ExecElem.h"
 #include <windows.h>
 #include <memory.h>
+#include <mutex>
+#include <cwchar>
+#include <ctime>
 #include "..\..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
@@ -24,6 +27,69 @@
 #include "ExecElem_ExecProg.h"
 #include "ExecElem_NothingToDo.h"
 
+wchar_t *ExecElem::log;
+std::mutex ExecElem::log_mutex;
+int ExecElem::max_log_size;
+int ExecElem::log_update_version;
+
+void ExecElem::init_log()
+{
+	max_log_size = 1000;
+	log = new wchar_t[max_log_size];
+	log[0] = L'\0';
+	log_update_version = 0;
+}
+
+void ExecElem::add_log(const wchar_t* name, const wchar_t* msg)
+{
+	log_mutex.lock();
+
+	int tmp_buf_len = max_log_size + wcslen(msg) + 100;
+	wchar_t *tmp_buf = new TCHAR[tmp_buf_len];
+
+	time_t now;
+	tm local_now;
+	time(&now);
+	localtime_s(&local_now, &now);
+	if (name) {
+		swprintf(tmp_buf, tmp_buf_len, L"%02d:%02d:%02d [%s]  %s", local_now.tm_hour, local_now.tm_min, local_now.tm_sec, name, msg);
+	} else {
+		wcscpy_s(tmp_buf, tmp_buf_len, msg);
+	}
+	wcscat_s(tmp_buf, tmp_buf_len, log);
+	wcsncpy_s(log, max_log_size, tmp_buf, max_log_size);
+	delete tmp_buf;
+
+	log_update_version++;
+
+	log_mutex.unlock();
+}
+
+void ExecElem::clear_log()
+{
+	log_mutex.lock();
+	log[0] = L'\0';
+	log_update_version = 0;
+	log_mutex.unlock();
+}
+
+void ExecElem::get_log(wchar_t* log_data, const int log_data_len)
+{
+	if (log_data_len > max_log_size) {
+		log_data[0] = L'\0';
+		return;
+	}
+	lstrcpyn(log_data, log, log_data_len);
+
+	return;
+
+}
+
+int ExecElem::get_log_size()
+{
+	return wcslen(log);
+}
+
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 {
 	TCHAR Name[32];
@@ -31,6 +97,7 @@ void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 	TCHAR DummyBuf[128];
 	wsprintf(DummyBuf, _T("*** Error *** %s (%d)\r\n"), Msg, Error);
 	AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+	add_log(Name, DummyBuf);
 }
 
 void ExecElem::SendReceiveLog(int LogId, int Size, TCHAR* Msg)
@@ -40,6 +107,7 @@ void ExecElem::SendReceiveLog(int LogId, int Size, TCHAR* Msg)
 	TCHAR DummyBuf[128];
 	wsprintf(DummyBuf, _T("%s  <%d bytes>\r\n"), Msg, Size);
 	AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+	add_log(Name, DummyBuf);
 }
 
 void ExecElem::StkPropOutputLog()
@@ -72,10 +140,12 @@ void ExecElem::StkPropOutputLog()
 		case STKSOCKET_LOG_SUCCESSCSC:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSC), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SOCKCLOSE:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SOCKCLOSE), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDLISTENERR:
 			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_BINDLISTENERR), ParamInt2);
@@ -83,14 +153,17 @@ void ExecElem::StkPropOutputLog()
 		case STKSOCKET_LOG_SUCCESSCSBNLS:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSBNLS), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_CLOSEACCEPTSOCK:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CLOSEACCEPTSOCK), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_CREATEACCEPTSOCK:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CREATEACCEPTSOCK), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_ACPTRECV:
 			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_ACPTRECV));
@@ -113,6 +186,7 @@ void ExecElem::StkPropOutputLog()
 		case STKSOCKET_LOG_CLOSEACCLISNSOCK:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CLOSELISTENACCEPTSOCK), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPRECV:
 			SendReceiveLog(Id, ParamInt1, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPRECV));
@@ -123,14 +197,17 @@ void ExecElem::StkPropOutputLog()
 		case STKSOCKET_LOG_SUCCESSCSBN:
 			wsprintf(DummyBuf, _T("%s  <%s:%d> Max-message-length=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSBN), ParamStr1, ParamInt1, ParamInt2);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SUCCESSCS:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCS), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPSOCKCLOSE:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPSOCKCLOSE), ParamStr1, ParamInt1);
 			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDERR:
 			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_BINDERR), ParamInt2);
@@ -138,6 +215,7 @@ void ExecElem::StkPropOutputLog()
 		default:
 			wsprintf(DummyBuf, _T("%s Msg=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), Msg);
 			AddStkThreadLogWithThreadInfo(ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), DummyBuf);
+			add_log(Name, DummyBuf);
 			break;
 		}
 	}
@@ -154,6 +232,8 @@ ExecElem::ExecElem(int Id)
 	Data = NULL;
 	DataLength = 0;
 	StartStopFlag = FALSE;
+	static std::once_flag flag;
+	std::call_once(flag, &ExecElem::init_log);
 }
 
 // Destructor

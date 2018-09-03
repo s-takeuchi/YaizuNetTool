@@ -5,15 +5,11 @@
 #include <stdio.h>
 #include <shlwapi.h>
 #include "resource.h"
-#include "server\ApiObj.h"
 #include "server\ExecElemMgr.h"
 #include "server\LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "StkProp.h"
-#include "..\..\..\YaizuComLib\src\\stkthread\stkthread.h"
-#include "..\..\..\YaizuComLib\src\\stkthreadgui\stkthreadgui.h"
 #include "..\..\..\YaizuComLib\src\\commonfunc\StkObject.h"
-
 
 void RecvInit(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
 void StoreData(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
