@@ -1,6 +1,7 @@
 #include "ApiObj_Thread.h"
 #include "ExecElemMgr.h"
 #include "LowDbAccess.h"
+#include "..\..\..\..\YaizuComLib\src\commonfunc\StkObject.h"
 #include "..\..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
 #include "..\..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 

@@ -63,17 +63,20 @@ private:
 	void ErrorLog(int, TCHAR*, int);
 	void SendReceiveLog(int, int, TCHAR*);
 
-	// Logging functions start
+// Logging functions start
+private:
 	static wchar_t *log;
 	static std::mutex log_mutex;
 	static int max_log_size;
 	static int log_update_version;
 	static void init_log();
+
+public:
 	static void add_log(const wchar_t*, const wchar_t*);
 	static void clear_log();
 	static void get_log(wchar_t*, const int);
 	static int get_log_size();
-	// Logging functions end
+// Logging functions end
 
 public:
 	// Constructor

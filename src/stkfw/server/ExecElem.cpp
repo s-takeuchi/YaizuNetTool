@@ -1,14 +1,13 @@
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
-#include "ExecElem.h"
 #include <windows.h>
 #include <memory.h>
 #include <mutex>
 #include <cwchar>
 #include <ctime>
-#include "..\..\..\..\YaizuComLib\src\\\stkthreadgui\stkthreadgui.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
 #include "ServerMsg.h"
+#include "ExecElem.h"
 #include "ExecElem_CheckFlag.h"
 #include "ExecElem_CheckData.h"
 #include "ExecElem_ChangeFlag.h"
@@ -96,7 +95,6 @@ void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
 	LowDbAccess::GetInstance()->GetViewElementNameFromId(LogId, Name);
 	TCHAR DummyBuf[128];
 	wsprintf(DummyBuf, _T("*** Error *** %s (%d)\r\n"), Msg, Error);
-	AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 	add_log(Name, DummyBuf);
 }
 
@@ -106,7 +104,6 @@ void ExecElem::SendReceiveLog(int LogId, int Size, TCHAR* Msg)
 	LowDbAccess::GetInstance()->GetViewElementNameFromId(LogId, Name);
 	TCHAR DummyBuf[128];
 	wsprintf(DummyBuf, _T("%s  <%d bytes>\r\n"), Msg, Size);
-	AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 	add_log(Name, DummyBuf);
 }
 
@@ -139,12 +136,10 @@ void ExecElem::StkPropOutputLog()
 			break;
 		case STKSOCKET_LOG_SUCCESSCSC:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSC), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SOCKCLOSE:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SOCKCLOSE), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDLISTENERR:
@@ -152,17 +147,14 @@ void ExecElem::StkPropOutputLog()
 			break;
 		case STKSOCKET_LOG_SUCCESSCSBNLS:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSBNLS), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_CLOSEACCEPTSOCK:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CLOSEACCEPTSOCK), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_CREATEACCEPTSOCK:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CREATEACCEPTSOCK), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_ACPTRECV:
@@ -185,7 +177,6 @@ void ExecElem::StkPropOutputLog()
 			break;
 		case STKSOCKET_LOG_CLOSEACCLISNSOCK:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CLOSELISTENACCEPTSOCK), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPRECV:
@@ -196,17 +187,14 @@ void ExecElem::StkPropOutputLog()
 			break;
 		case STKSOCKET_LOG_SUCCESSCSBN:
 			wsprintf(DummyBuf, _T("%s  <%s:%d> Max-message-length=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCSBN), ParamStr1, ParamInt1, ParamInt2);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SUCCESSCS:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCS), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPSOCKCLOSE:
 			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPSOCKCLOSE), ParamStr1, ParamInt1);
-			AddStkThreadLogWithThreadInfo(Name, DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDERR:
@@ -214,7 +202,6 @@ void ExecElem::StkPropOutputLog()
 			break;
 		default:
 			wsprintf(DummyBuf, _T("%s Msg=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), Msg);
-			AddStkThreadLogWithThreadInfo(ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), DummyBuf);
 			add_log(Name, DummyBuf);
 			break;
 		}

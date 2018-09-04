@@ -685,17 +685,40 @@ void SetMouseAction(int Flag)
 	}
 }
 
+void output_log()
+{
+	int StatusCode = 0;
+	ApiObj* obj = NULL;
+	// Acquire log
+	obj = ApiObj::CreateObject(ApiObj::METHOD_GET, L"/api/log/");
+	StkObject* res_obj = obj->Execute(NULL, ApiObj::METHOD_GET, L"/api/log/", &StatusCode);
+	if (res_obj != NULL) {
+		StkObject* child_obj = res_obj->GetFirstChildElement();
+		if (child_obj != NULL) {
+			AddStkThreadLog(child_obj->GetStringValue());
+		}
+		delete res_obj;
+	}
+
+	// Clear log
+	obj = ApiObj::CreateObject(ApiObj::METHOD_GET, L"/api/log/");
+	StkObject* req_obj = new StkObject(L"operation", L"clearLog");
+	obj->Execute(req_obj, ApiObj::METHOD_POST, L"/api/log/", &StatusCode);
+	delete req_obj;
+	delete obj;
+}
+
 VOID CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
-	MessageBox(hwnd, L"hello", L"hello", MB_OK);
+	output_log();
 }
 
 void StartProc(void)
 {
-	//SetTimer(hWnd, 100, 4000, TimerProc);
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
 
 	StkSocket_ClearLog();
+	SetTimer(hWnd, 100, 500, TimerProc);
 
 	// スレッド実行前にElementInfoが更新されているかチェック
 	IsUdtElemInfo = LowDbAccess::GetInstance()->IsUpdated(2);
@@ -753,6 +776,8 @@ void StopProc(void)
 		LowDbAccess::GetInstance()->IsUpdated(3);
 	}
 
+	KillTimer(hWnd, 100);
+	output_log();
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_STOP));
 }
 
