@@ -316,20 +316,25 @@ int ResetThreadController(bool DeleteAllFlag)
 {
 	// Reset thread information
 	StkObject* ReqObj = new StkObject(L"");
-	StkObject* ReqObjTs = new StkObject(L"threadStatus", L"refresh");
-	StkObject* ReqDelAll = NULL;
+	StkObject* ReqObjTs;
+	int StatusCode = 0;
+
 	if (DeleteAllFlag == true) {
-		ReqDelAll = new StkObject(L"deleteAll", L"yes");
+		ReqObjTs = new StkObject(L"threadStatus", L"refreshWithDelete");
 	} else {
-		ReqDelAll = new StkObject(L"deleteAll", L"no");
+		ReqObjTs = new StkObject(L"threadStatus", L"refresh");
 	}
 	ReqObj->AppendChildElement(ReqObjTs);
-	ReqObj->AppendChildElement(ReqDelAll);
 	ApiObj* Obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/thread/");
-	int StatusCode = 0;
 	Obj->Execute(ReqObj, ApiObj::METHOD_POST, L"/api/thread/", &StatusCode);
 	delete Obj;
 	delete ReqObj;
+
+	ApiObj* get_obj = ApiObj::CreateObject(ApiObj::METHOD_GET, L"/api/thread/");
+	StkObject* res_obj = get_obj->Execute(NULL, ApiObj::METHOD_GET, L"/api/thread/", &StatusCode);
+	delete get_obj;
+	delete res_obj;
+
 	return 0;
 }
 

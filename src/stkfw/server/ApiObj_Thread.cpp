@@ -1,3 +1,4 @@
+#include <cwchar>
 #include "ApiObj_Thread.h"
 #include "ExecElemMgr.h"
 #include "LowDbAccess.h"
@@ -138,45 +139,75 @@ int ApiObj_Thread::ResetThreadController(bool DelAll)
 
 StkObject* ApiObj_Thread::Execute(StkObject* ReqObj, int Method, wchar_t Url[ApiObj::URL_PATH_LENGTH], int* ResultCode)
 {
-	bool ThreadRefreshFlag = false;
-	bool DeleteAllFlag = false;
-	bool StartAllFlag = false;
-	bool StopAllFlag = false;
+	if (Method & ApiObj::METHOD_POST) {
+		bool RefreshFlag = false;
+		bool RefreshWithDelFlag = false;
+		bool StartAllFlag = false;
+		bool StopAllFlag = false;
 
-	if (ReqObj != NULL) {
-		StkObject* ChildObj = ReqObj->GetFirstChildElement();
-		while (ChildObj != NULL) {
-			if (wcscmp(ChildObj->GetName(), L"threadStatus") == 0) {
-				TCHAR* Val = ChildObj->GetStringValue();
-				if (wcscmp(Val, L"refresh") == 0) {
-					ThreadRefreshFlag = true;
+		if (ReqObj != NULL) {
+			StkObject* ChildObj = ReqObj->GetFirstChildElement();
+			while (ChildObj != NULL) {
+				if (wcscmp(ChildObj->GetName(), L"threadStatus") == 0) {
+					TCHAR* Val = ChildObj->GetStringValue();
+					if (wcscmp(Val, L"refresh") == 0) {
+						RefreshFlag = true;
+					}
+					if (wcscmp(Val, L"refreshWithDelete") == 0) {
+						RefreshWithDelFlag = true;
+					}
+					if (wcscmp(Val, L"startAll") == 0) {
+						StartAllFlag = true;
+					}
+					if (wcscmp(Val, L"stopAll") == 0) {
+						StopAllFlag = true;
+					}
 				}
-				if (wcscmp(Val, L"startAll") == 0) {
-					StartAllFlag = true;
-				}
-				if (wcscmp(Val, L"stopAll") == 0) {
-					StopAllFlag = true;
-				}
+				ChildObj = ChildObj->GetNext();
 			}
-			if (wcscmp(ChildObj->GetName(), L"deleteAll") == 0) {
-				TCHAR* Val = ChildObj->GetStringValue();
-				if (wcscmp(Val, L"yes") == 0) {
-					DeleteAllFlag = true;
-				}
-			}
-			ChildObj = ChildObj->GetNext();
-		}
 
-		ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
-		if (ThreadRefreshFlag == true) {
-			if (DeleteAllFlag == true) {
+			ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
+			if (RefreshFlag == true) {
 				ResetThreadController(true);
-			} else {
-				ResetThreadController(false);
+			}
+			if (RefreshWithDelFlag == true) {
+				ResetThreadController(true);
 			}
 			*ResultCode = 200;
 			return NULL;
 		}
+	}
+	if (Method & ApiObj::METHOD_GET) {
+		StkObject* obj = new StkObject(L"");
+		for (int i = 0; i < GetNumOfStkThread(); i++) {
+			int thread_id = GetStkThreadIdByIndex(i);
+			int thread_status_type = GetStkThreadStatusByIndex(i);
+			wchar_t thread_status[32];
+			if (thread_status_type == STKTHREAD_STATUS_READY) {
+				wcscpy_s(thread_status, 32, L"ready");
+			}
+			if (thread_status_type == STKTHREAD_STATUS_STARTING) {
+				wcscpy_s(thread_status, 32, L"starting");
+			}
+			if (thread_status_type == STKTHREAD_STATUS_RUNNING) {
+				wcscpy_s(thread_status, 32, L"running");
+			}
+			if (thread_status_type == STKTHREAD_STATUS_STOPPING) {
+				wcscpy_s(thread_status, 32, L"stopping");
+			}
+			wchar_t thread_name[MAX_LENGTH_OF_STKTHREAD_NAME];
+			GetStkThreadNameByIndex(i, thread_name);
+			wchar_t thread_desc[MAX_LENGTH_OF_STKTHREAD_DESCRIPTION];
+			GetStkThreadDescriptionByIndex(i, thread_desc);
+			StkObject* thread_obj = new StkObject(L"threadInfo");
+			thread_obj->AppendChildElement(new StkObject(L"id", thread_id));
+			thread_obj->AppendChildElement(new StkObject(L"status", thread_status));
+			thread_obj->AppendChildElement(new StkObject(L"name", thread_name));
+			thread_obj->AppendChildElement(new StkObject(L"description", thread_desc));
+			obj->AppendChildElement(thread_obj);
+		}
+		*ResultCode = 200;
+		return obj;
 	}
 	*ResultCode = 400;
 	return NULL;

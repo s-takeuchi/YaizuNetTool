@@ -1,3 +1,4 @@
+#include <cwchar>
 #include "ApiObj_Log.h"
 #include "ExecElem.h"
 #include "..\..\..\..\YaizuComLib\src\commonfunc\StkObject.h"
