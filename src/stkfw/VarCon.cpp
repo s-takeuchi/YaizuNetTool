@@ -122,7 +122,7 @@ void ChangeMenuCheckStatus(int Type)
 // [out] : 変数のID
 int GetSelectedVariableId(HWND WndHndl, int LvIndex)
 {
-	TCHAR IdBuf[11];
+	TCHAR IdBuf[11] = L"\0";
 	ListView_GetItemText(WndHndl, LvIndex, 0, IdBuf, 10);
 	int Ret = StrToInt(IdBuf);
 	return Ret;
@@ -409,7 +409,7 @@ int GetSelectedVlItem(HWND LstViwHndl)
 // [in] : Operation (0:FALSE, 1:TRUE, 2:Delete)
 void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 {
-	TCHAR IdBuf[10];
+	TCHAR IdBuf[10] = L"\0";
 	int FoundCount = 0;
 	UINT ret;
 
@@ -461,9 +461,9 @@ void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 // [out] : 変更対象となった変数のIDを返す
 int SetNameAndDescription(HWND LstViwHndl, int Row, HWND OwnerHndl, int NameEbxId, int DescEbxId)
 {
-	TCHAR IdBuf[10];
-	TCHAR Name[32];
-	TCHAR Description[64];
+	wchar_t IdBuf[10] = L"";
+	wchar_t Name[32] = L"";
+	wchar_t Description[64] = L"";
 
 	ListView_GetItemText(LstViwHndl, Row, 0, IdBuf, 10);
 	ListView_GetItemText(LstViwHndl, Row, 1, Name, 32);
@@ -514,7 +514,7 @@ void ChangeWindowTitle(HWND TargetWndHndl, int Id, int Operation)
 	if (Id != -1) {
 		wsprintf(ChgBuf, _T("%s %s  (ID=%d)"), Ope, OrgBuf, Id);
 	} else {
-		wsprintf(ChgBuf, _T("%s %s"), Ope, OrgBuf, Id);
+		wsprintf(ChgBuf, _T("%s %s"), Ope, OrgBuf);
 	}
 	SetWindowText(TargetWndHndl, ChgBuf);
 }
@@ -573,7 +573,7 @@ void ReplaceCommVariable(HWND EdBxHndl, int Type)
 			MyMsgProc::StkErr(MyMsgProc::VAR_BUFOVERFLOW, WndHndl);
 			WorkDatActSize = 9999999; // エラーが発生したときにWorkDatの内容が変わらないことを期待。取り合えず問題なさそう。
 		}
-		delete WcBuf;
+		delete [] WcBuf;
 	}
 }
 
@@ -601,7 +601,7 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 				SelOutMode = 0;
 				ChangeMenuCheckStatus(0);
 			}
-			delete OutDat;
+			delete [] OutDat;
 		}
 	}
 
@@ -633,7 +633,7 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 		SendMessage(EdBxHndl, EM_SETREADONLY, (WPARAM)TRUE, (LPARAM)0);
 		SendMessage(EdBxHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)OutDat);
 		RedrawWindow(CommWndHndl, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME | RDW_ALLCHILDREN);
-		delete OutDat;
+		delete [] OutDat;
 	}
 }
 
@@ -643,7 +643,7 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 int OpenFileX(HWND WinHndl)
 {
 	TCHAR InitPath[MAX_PATH];
-	GetCurrentDirectory(sizeof(InitPath), InitPath);
+	GetCurrentDirectory(MAX_PATH, InitPath);
 
 	TCHAR File[32768] = _T("");
 	File[0] = 0;
@@ -699,7 +699,7 @@ int OpenFileX(HWND WinHndl)
 int SaveFileX(HWND WinHndl)
 {
 	TCHAR InitPath[MAX_PATH];
-	GetCurrentDirectory(sizeof(InitPath), InitPath);
+	GetCurrentDirectory(MAX_PATH, InitPath);
 
 	TCHAR File[32768] = _T("");
 	File[0] = 0;
@@ -778,7 +778,7 @@ void VarConEdit_Export(HWND LstViwHndl)
 	}
 
 	int SelCnt = 0;
-	TCHAR IdBuf[10];
+	TCHAR IdBuf[10] = L"";
 	for (int RowLoop = 0; RowLoop < ListView_GetItemCount(LstViwHndl); RowLoop++) {
 		if (ListView_GetItemState(LstViwHndl, RowLoop, LVIS_SELECTED) == LVIS_SELECTED) {
 			ListView_GetItemText(LstViwHndl, RowLoop, 0, IdBuf, 10);
@@ -803,18 +803,18 @@ void VarConEdit_Export(HWND LstViwHndl)
 			HANDLE FileHndl = CreateFile(TmpPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 			if (FileHndl == INVALID_HANDLE_VALUE) {
 				MyMsgProc::StkErr(MyMsgProc::VAR_EXPERR, TmpPath, WndHndl);
-				delete CommDat;
+				delete [] CommDat;
 				return;
 			};
 			DWORD TmpSize = 0;
 			if (WriteFile(FileHndl, (LPCVOID)CommDat, CommDatLength, &TmpSize, NULL) == 0) {
 				MyMsgProc::StkErr(MyMsgProc::VAR_EXPERR, TmpPath, WndHndl);
 				CloseHandle(FileHndl);
-				delete CommDat;
+				delete [] CommDat;
 				return;
 			}
 			CloseHandle(FileHndl);
-			delete CommDat;
+			delete [] CommDat;
 			SelCnt++;
 		}
 	}
@@ -879,7 +879,7 @@ void VarConEdit_Import()
 		if (ReadFile(FileHndl, (LPVOID)CommDat, LowSize, &TmpSize, NULL) == 0) {
 			MyMsgProc::StkErr(MyMsgProc::VAR_IMPERR, TmpPath, WndHndl);
 			CloseHandle(FileHndl);
-			delete CommDat;
+			delete [] CommDat;
 			FindClose(FileNameHndl);
 			return;
 		}
@@ -887,13 +887,13 @@ void VarConEdit_Import()
 
 		if (VarCon_CheckCommunicationVariableSize(LowSize) == FALSE || VarCon_CheckVariableCount() == FALSE) {
 			MyMsgProc::StkErr(MyMsgProc::VAR_MAXVARSIZE, WndHndl);
-			delete CommDat;
+			delete [] CommDat;
 			FindClose(FileNameHndl);
 			return;
 		}
 		int NewId = VarCon_AddVariableRecord(VarName, _T(""), 0);
 		VarCon_UpdateCommunicationVariable(NewId, CommDat, LowSize);
-		delete CommDat;
+		delete [] CommDat;
 	} while (FindNextFile(FileNameHndl, &Fd));
 	FindClose(FileNameHndl);
 }
@@ -996,7 +996,7 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		SetFontCourier(CommEdit);
 
 		if (OpType != 1) {
-			TCHAR IdBuf[10];
+			TCHAR IdBuf[10] = L"";
 			ListView_GetItemText(ComListWndHndl, GetSelectedVlItem(ComListWndHndl), 0, IdBuf, 10);
 			SelVarId = StrToInt(IdBuf);
 			WorkDatActSize = VarCon_GetCommunicationVariableSize(SelVarId);
@@ -1211,7 +1211,7 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		} else if (wParam == IDC_VARFLAGLV) {
 			int SelItem = ListViewDoubleClicked(FlgListWndHndl, lParam);
 			if (SelItem != -1) {
-				TCHAR Flag[10];
+				TCHAR Flag[10] = L"";
 				ListView_GetItemText(FlgListWndHndl, SelItem, 3, Flag, 10);
 				if (lstrcmp(Flag, _T("True")) == 0) {
 					CommonProcedureAboutMultiItemsSelection(FlgListWndHndl, 0);
@@ -1344,7 +1344,7 @@ COMMEDIT:
 		}
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	case WM_DESTROY:
-		delete WorkDat; // 作業領域開放
+		delete [] WorkDat; // 作業領域開放
 		RunFlag = FALSE;
 		PostQuitMessage(0);
 		break;

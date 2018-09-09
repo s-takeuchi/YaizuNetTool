@@ -196,7 +196,7 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 				SendMessage(IpHndl, WM_GETTEXT, (WPARAM)256, (LPARAM)IpAddrHostname);
 				LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, IpAddrHostname, 1);
 				// Set port number
-				TCHAR PortNum[10];
+				TCHAR PortNum[10] = L"";
 				SendMessage(PortHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)PortNum);
 				int PortNumber = StrToInt(PortNum);
 				if (PortNumber < 0) {

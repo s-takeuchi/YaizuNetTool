@@ -1128,7 +1128,7 @@ void ShowRunTimeInformation(void)
 	lstrcat(RunTimeInfo, Buf);
 	
 	TCHAR InitPath[MAX_PATH];
-	GetCurrentDirectory(sizeof(InitPath), InitPath);
+	GetCurrentDirectory(MAX_PATH, InitPath);
 	wsprintf(Buf, _T("Current folder : \"%s\"\r\n"), InitPath);
 	lstrcat(RunTimeInfo, Buf);
 	wsprintf(Buf, _T("EXE folder : \"%s\"\r\n"), StartDir);
