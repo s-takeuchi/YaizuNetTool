@@ -6,6 +6,7 @@ echo Build YaizuNetTool
 echo =========================================
 
 set CURRENTPATH=%cd%
+set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
 set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.exe"
 set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
 set LCOUNTER="C:\Program Files (x86)\lcounter\lcounter.exe"
@@ -16,6 +17,7 @@ echo (1) Microsoft Visual Studio 2017
 echo (2) 7-Zip 9.20
 echo (3) Line Counter
 
+if not exist %MSBUILD% exit
 if not exist %DEVENV% exit
 if not exist %SEVENZIP% exit
 if not exist %LCOUNTER% exit
@@ -31,18 +33,18 @@ if exist deployment rmdir /S /Q deployment
 rem ########## Building ##########
 echo;
 echo Building stkdatagui.sln...
-%DEVENV% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /rebuild Release 
+%MSBUILD% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
 echo Building fwadd.sln...
-%DEVENV% "..\src\fwadd\fwadd.sln" /rebuild Release
+%MSBUILD% "..\src\fwadd\fwadd.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
 echo Building fwdel.sln...
-%DEVENV% "..\src\fwdel\fwdel.sln" /rebuild Release
+%MSBUILD% "..\src\fwdel\fwdel.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
 echo Building lbadpt.sln...
-%DEVENV% "..\src\lbadpt\lbadpt.sln" /rebuild Release
+%MSBUILD% "..\src\lbadpt\lbadpt.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
 echo Building stk_ip_dlg.sln...
-%DEVENV% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /rebuild Release
-%DEVENV% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /rebuild Release_win2k
+%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
+%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release_win2k /p:RunCodeAnalysis=true
 echo Building stklibtest.sln...
-%DEVENV% "..\src\stkfw\stklibtest.sln" /rebuild Release
+%MSBUILD% "..\src\stkfw\stklibtest.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
 
 
 rem ########## Checking file existence ##########
