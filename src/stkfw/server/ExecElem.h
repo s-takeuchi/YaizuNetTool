@@ -69,6 +69,7 @@ private:
 	static std::mutex log_mutex;
 	static int max_log_size;
 	static int log_update_version;
+	static std::once_flag init_log_flag;
 	static void init_log();
 
 public:
@@ -76,6 +77,8 @@ public:
 	static void clear_log();
 	static void get_log(wchar_t*, const int);
 	static int get_log_size();
+	static int get_max_log_size();
+	static void change_size(const int);
 // Logging functions end
 
 public:

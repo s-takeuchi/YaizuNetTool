@@ -30,6 +30,7 @@ wchar_t *ExecElem::log;
 std::mutex ExecElem::log_mutex;
 int ExecElem::max_log_size;
 int ExecElem::log_update_version;
+std::once_flag ExecElem::init_log_flag;
 
 void ExecElem::init_log()
 {
@@ -41,6 +42,8 @@ void ExecElem::init_log()
 
 void ExecElem::add_log(const wchar_t* name, const wchar_t* msg)
 {
+	std::call_once(init_log_flag, &init_log);
+
 	log_mutex.lock();
 
 	int tmp_buf_len = max_log_size + wcslen(msg) + 100;
@@ -56,7 +59,7 @@ void ExecElem::add_log(const wchar_t* name, const wchar_t* msg)
 		wcscpy_s(tmp_buf, tmp_buf_len, msg);
 	}
 	wcscat_s(tmp_buf, tmp_buf_len, log);
-	wcsncpy_s(log, max_log_size, tmp_buf, max_log_size);
+	wcsncpy_s(log, max_log_size, tmp_buf, _TRUNCATE);
 	delete tmp_buf;
 
 	log_update_version++;
@@ -66,6 +69,8 @@ void ExecElem::add_log(const wchar_t* name, const wchar_t* msg)
 
 void ExecElem::clear_log()
 {
+	std::call_once(init_log_flag, &init_log);
+
 	log_mutex.lock();
 	log[0] = L'\0';
 	log_update_version = 0;
@@ -74,19 +79,41 @@ void ExecElem::clear_log()
 
 void ExecElem::get_log(wchar_t* log_data, const int log_data_len)
 {
-	if (log_data_len > max_log_size) {
-		log_data[0] = L'\0';
-		return;
-	}
-	lstrcpyn(log_data, log, log_data_len);
+	std::call_once(init_log_flag, &init_log);
 
+	wcsncpy_s(log_data, log_data_len, log, _TRUNCATE);
 	return;
 
 }
 
 int ExecElem::get_log_size()
 {
+	std::call_once(init_log_flag, &init_log);
+
 	return wcslen(log);
+}
+
+int ExecElem::get_max_log_size()
+{
+	std::call_once(init_log_flag, &init_log);
+
+	return max_log_size;
+}
+
+void ExecElem::change_size(const int size)
+{
+	std::call_once(init_log_flag, &init_log);
+
+	log_mutex.lock();
+	if (size < 100) {
+		max_log_size = 100;
+	} else {
+		max_log_size = size;
+	}
+	delete [] log;
+	log = new wchar_t[max_log_size];
+	log[0] = L'\0';
+	log_mutex.unlock();
 }
 
 void ExecElem::ErrorLog(int LogId, TCHAR* Msg, int Error)
@@ -219,8 +246,6 @@ ExecElem::ExecElem(int Id)
 	Data = NULL;
 	DataLength = 0;
 	StartStopFlag = FALSE;
-	static std::once_flag flag;
-	std::call_once(flag, &ExecElem::init_log);
 }
 
 // Destructor

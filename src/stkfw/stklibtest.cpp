@@ -330,10 +330,12 @@ int ResetThreadController(bool DeleteAllFlag)
 	delete Obj;
 	delete ReqObj;
 
-	ApiObj* get_obj = ApiObj::CreateObject(ApiObj::METHOD_GET, L"/api/thread/");
-	StkObject* res_obj = get_obj->Execute(NULL, ApiObj::METHOD_GET, L"/api/thread/", &StatusCode);
-	delete get_obj;
-	delete res_obj;
+	// Experimental code begin
+	// ApiObj* get_obj = ApiObj::CreateObject(ApiObj::METHOD_GET, L"/api/thread/");
+	// StkObject* res_obj = get_obj->Execute(NULL, ApiObj::METHOD_GET, L"/api/thread/", &StatusCode);
+	// delete get_obj;
+	// delete res_obj;
+	// Experimental code end
 
 	return 0;
 }
@@ -473,6 +475,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	// Define messages
 	MyMsgProc::AddMsg();
 
+	// Change log size
+	int StatusCode = 0;
+	ApiObj* obj = NULL;
+	obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/log/");
+	StkObject* req_obj = new StkObject(L"changeSize", 4096);
+	obj->Execute(req_obj, ApiObj::METHOD_POST, L"/api/log/", &StatusCode);
+	delete req_obj;
+	delete obj;
 
 	// コマンド・パラメータを解析する
 	TCHAR CmdParam[1024];
@@ -706,8 +716,8 @@ void output_log()
 	}
 
 	// Clear log
-	obj = ApiObj::CreateObject(ApiObj::METHOD_GET, L"/api/log/");
-	StkObject* req_obj = new StkObject(L"operation", L"clearLog");
+	obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/log/");
+	StkObject* req_obj = new StkObject(L"clearLog", L"yes");
 	obj->Execute(req_obj, ApiObj::METHOD_POST, L"/api/log/", &StatusCode);
 	delete req_obj;
 	delete obj;
@@ -723,7 +733,7 @@ void StartProc(void)
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
 
 	StkSocket_ClearLog();
-	SetTimer(hWnd, 100, 500, TimerProc);
+	SetTimer(hWnd, 100, 200, TimerProc);
 
 	// スレッド実行前にElementInfoが更新されているかチェック
 	IsUdtElemInfo = LowDbAccess::GetInstance()->IsUpdated(2);
