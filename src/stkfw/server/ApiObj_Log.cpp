@@ -9,9 +9,12 @@ StkObject* ApiObj_Log::Execute(StkObject* ReqObj, int Method, wchar_t Url[ApiObj
 		int max_log_size = ExecElem::get_max_log_size();
 		wchar_t* acquired_log = new wchar_t[max_log_size];
 		ExecElem::get_log(acquired_log, max_log_size);
-		StkObject* obj = new StkObject(L"");
-		obj->AppendChildElement(new StkObject(L"log", acquired_log));
-		delete [] acquired_log;
+		StkObject* obj = NULL;
+		if (wcscmp(acquired_log, L"") != NULL) {
+			obj = new StkObject(L"");
+			obj->AppendChildElement(new StkObject(L"log", acquired_log));
+			delete[] acquired_log;
+		}
 		*ResultCode = 200;
 		return obj;
 	}

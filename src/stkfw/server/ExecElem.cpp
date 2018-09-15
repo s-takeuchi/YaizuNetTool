@@ -113,6 +113,7 @@ void ExecElem::change_size(const int size)
 	delete [] log;
 	log = new wchar_t[max_log_size];
 	log[0] = L'\0';
+	log_update_version = 0;
 	log_mutex.unlock();
 }
 
