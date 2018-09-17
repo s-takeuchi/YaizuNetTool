@@ -262,13 +262,13 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 	ExecElem* NewExecElem = NULL;
 	if (Type == CHECKFLAG) {
 		NewExecElem = new ExecElem_CheckFlag(Id);
-	} if (Type == CHECKDATA) {
+	} else if (Type == CHECKDATA) {
 		NewExecElem = new ExecElem_CheckData(Id);
 	} else if (Type == CHANGEFLAG) {
 		NewExecElem = new ExecElem_ChangeFlag(Id);
 	} else if (Type == CHANGEDATA) {
 		NewExecElem = new ExecElem_ChangeData(Id);
-	}  else if (Type == RECEIVER) {
+	} else if (Type == RECEIVER) {
 		NewExecElem = new ExecElem_Receiver(Id);
 	} else if (Type == RECEIVERUDP) {
 		NewExecElem = new ExecElem_ReceiverUdp(Id);
