@@ -184,6 +184,8 @@ IDI_ICON72              ICON                    "image\\icon72.ico"
 
 IDI_ICON73              ICON                    "image\\icon73.ico"
 
+IDI_ICON74              ICON                    "image\\icon74.ico"
+
 IDI_VARICON1            ICON                    "image\\varicon1.ico"
 
 IDI_VARICON2            ICON                    "image\\varicon2.ico"

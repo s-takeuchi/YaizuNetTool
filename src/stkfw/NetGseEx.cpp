@@ -159,6 +159,7 @@ void NetGseEx::DrawOfficeASE(HINSTANCE hinst, HWND hwnd, HDC hdc, ActorRequest* 
 		IconHndl[71] = LoadIcon(hinst, MAKEINTRESOURCE(IDI_ICON71));
 		IconHndl[72] = LoadIcon(hinst, MAKEINTRESOURCE(IDI_ICON72));
 		IconHndl[73] = LoadIcon(hinst, MAKEINTRESOURCE(IDI_ICON73));
+		IconHndl[74] = LoadIcon(hinst, MAKEINTRESOURCE(IDI_ICON74));
 	}
 
 	int r = ActReq->GetRequest();

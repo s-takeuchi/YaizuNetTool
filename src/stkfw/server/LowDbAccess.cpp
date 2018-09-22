@@ -1588,6 +1588,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("ViewElement"), 21, 72, 1, _T("UDP receiver"), _T(""), _T("Initiator"));
 	InsertProperty(_T("ViewElement"), 22, 73, 0, _T("UDP sender"), _T(""), _T("Terminator"));
 	InsertProperty(_T("ViewElement"), 23, 71, 0, _T("UDP sender"), _T(""), _T("Stopper"));
+	InsertProperty(_T("ViewElement"), 24, 74, 0, _T("HTTP header"), _T(""), _T("Action"));
 
 	DeleteProperty(_T("LinkInfo"));
 	InsertProperty(_T("LinkInfo"), 1, 4, 1, _T("101"), _T(""), _T(""));

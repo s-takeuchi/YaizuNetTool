@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by stklibtest.rc
+// Microsoft Visual C++ で生成されたインクルード ファイル。
+// stklibtest.rc で使用
 //
 #define IDC_BTNOK                       2001
 #define IDC_BTNCANCEL                   2002
@@ -125,6 +125,7 @@
 #define IDI_ICON71                      15171
 #define IDI_ICON72                      15172
 #define IDI_ICON73                      15173
+#define IDI_ICON74                      15174
 #define IDI_VARICON1                    15401
 #define IDI_VARICON2                    15402
 #define IDI_VARICON3                    15403
@@ -188,7 +189,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        168
+#define _APS_NEXT_RESOURCE_VALUE        169
 #define _APS_NEXT_COMMAND_VALUE         40060
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101
