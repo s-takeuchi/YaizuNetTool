@@ -1610,6 +1610,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 1, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 1, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 1, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 1, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 2, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 2, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 2, 6, 1, _T("101"), _T(""), _T(""));
@@ -1629,6 +1630,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 2, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 2, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 2, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 2, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 3, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 3, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 3, 6, 1, _T("101"), _T(""), _T(""));
@@ -1648,6 +1650,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 3, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 3, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 3, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 3, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 4, 1, 1, _T("122"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 4, 2, 1, _T("122"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 4, 3, 1, _T("122"), _T(""), _T(""));
@@ -1679,6 +1682,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 10, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 10, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 10, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 10, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 11, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 11, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 11, 6, 1, _T("101"), _T(""), _T(""));
@@ -1698,6 +1702,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 11, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 11, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 11, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 11, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 12, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 12, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 12, 6, 1, _T("101"), _T(""), _T(""));
@@ -1717,6 +1722,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 12, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 12, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 12, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 12, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 13, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 13, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 13, 6, 1, _T("101"), _T(""), _T(""));
@@ -1736,6 +1742,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 13, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 13, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 13, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 13, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 14, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 14, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 14, 6, 1, _T("101"), _T(""), _T(""));
@@ -1755,6 +1762,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 14, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 14, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 14, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 14, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 15, 4, 10, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 15, 5, 10, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 15, 6, 10, _T("101"), _T(""), _T(""));
@@ -1774,6 +1782,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 15, 20, 10, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 15, 22, 10, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 15, 23, 10, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 15, 24, 10, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 16, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 16, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 16, 6, 1, _T("101"), _T(""), _T(""));
@@ -1791,6 +1800,9 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 16, 18, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 16, 19, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 16, 20, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 16, 22, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 16, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 16, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 17, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 17, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 17, 6, 1, _T("101"), _T(""), _T(""));
@@ -1810,6 +1822,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 17, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 17, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 17, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 17, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 18, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 18, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 18, 6, 1, _T("101"), _T(""), _T(""));
@@ -1829,6 +1842,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 18, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 18, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 18, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 18, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 19, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 19, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 19, 6, 1, _T("101"), _T(""), _T(""));
@@ -1848,6 +1862,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 19, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 19, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 19, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 19, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 20, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 20, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 20, 6, 1, _T("101"), _T(""), _T(""));
@@ -1867,6 +1882,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 20, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 20, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 20, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 20, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 21, 4, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 21, 5, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 21, 6, 1, _T("101"), _T(""), _T(""));
@@ -1886,10 +1902,31 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("LinkInfo"), 21, 20, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 21, 22, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 21, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 21, 24, 1, _T("101"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 22, 1, 1, _T("122"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 22, 2, 1, _T("122"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 22, 3, 1, _T("122"), _T(""), _T(""));
 	InsertProperty(_T("LinkInfo"), 22, 21, 1, _T("122"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 4, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 5, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 6, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 7, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 8, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 9, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 10, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 11, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 12, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 13, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 14, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 15, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 16, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 17, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 18, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 19, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 20, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 22, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 23, 1, _T("101"), _T(""), _T(""));
+	InsertProperty(_T("LinkInfo"), 24, 24, 1, _T("101"), _T(""), _T(""));
 
 	DeleteProperty(_T("MaxLink"));
 	InsertProperty(_T("MaxLink"), 1, 1, 1, _T(""), _T(""), _T(""));
@@ -1915,6 +1952,7 @@ int LowDbAccess::StkFwRepositoryInitialize(int CurrentDbVersion)
 	InsertProperty(_T("MaxLink"), 21, 1, 1, _T(""), _T(""), _T(""));
 	InsertProperty(_T("MaxLink"), 22, 1, 1, _T(""), _T(""), _T(""));
 	InsertProperty(_T("MaxLink"), 23, 1, 1, _T(""), _T(""), _T(""));
+	InsertProperty(_T("MaxLink"), 24, 1, 1, _T(""), _T(""), _T(""));
 
 	DeleteProperty(_T("Workspace"));
 	InsertProperty(_T("Workspace"), 512, 400, 8, _T(""), _T(""), _T(""));

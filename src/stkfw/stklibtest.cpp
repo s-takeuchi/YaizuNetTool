@@ -213,7 +213,27 @@ int DbMigration_04_05()
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
 	// Set 4 to DbVersion of Property table.
 	Lda->SetPropertyInteger(_T("DbVersion"), 1, 5);
+	// Upgrade ElementInfo
 	Lda->ModifyElementInfoScheme();
+	// Add VIewElement record
+	Lda->InsertProperty(_T("ViewElement"), 24, 74, 0, _T("HTTP header"), _T(""), _T("Action"));
+	// Add LinkInfo records
+	for (int LoopTgt = 4; LoopTgt <= 20; LoopTgt++) {
+		Lda->InsertProperty(_T("LinkInfo"), 24, LoopTgt, 1, _T("101"), _T(""), _T(""));
+	}
+	for (int LoopOrg = 1; LoopOrg <= 3; LoopOrg++) {
+		Lda->InsertProperty(_T("LinkInfo"), LoopOrg, 24, 1, _T("101"), _T(""), _T(""));
+	}
+	for (int LoopOrg = 10; LoopOrg <= 24; LoopOrg++) {
+		if (LoopOrg == 15 || LoopOrg == 22 || LoopOrg == 23) {
+			continue;
+		}
+		Lda->InsertProperty(_T("LinkInfo"), LoopOrg, 24, 1, _T("101"), _T(""), _T(""));
+	}
+	Lda->InsertProperty(_T("LinkInfo"), 24, 22, 1, _T("101"), _T(""), _T(""));
+	Lda->InsertProperty(_T("LinkInfo"), 24, 23, 1, _T("101"), _T(""), _T(""));
+	// Add MaxLink records
+	Lda->InsertProperty(_T("MaxLink"), 24, 1, 1, _T(""), _T(""), _T(""));
 	return 5;
 }
 
