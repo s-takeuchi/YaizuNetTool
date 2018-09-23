@@ -122,6 +122,31 @@ void LowDbAccess::DeleteProperty(TCHAR* Name)
 	delete DeleteRd;
 }
 
+// Delete record user specified from Property table
+// Name: in: Value of Name
+// ValInt1: in: Value of ValueInt1
+// ValInt2: in: Value of ValueInt2
+// ValInt3: in: Value of ValueInt3
+// ValStr1: in: Value of ValueStr1
+// ValStr2: in: Value of ValueStr2
+// ValStr3: in: Value of ValueStr3
+void LowDbAccess::DeleteProperty(TCHAR* Name, int ValInt1, int ValInt2, int ValInt3, TCHAR* ValStr1, TCHAR* ValStr2, TCHAR* ValStr3)
+{
+	ColumnData* ColDat[7];
+	ColDat[0] = new ColumnDataWStr(_T("Name"), Name);
+	ColDat[1] = new ColumnDataInt(_T("ValueInt1"), ValInt1);
+	ColDat[2] = new ColumnDataInt(_T("ValueInt2"), ValInt2);
+	ColDat[3] = new ColumnDataInt(_T("ValueInt3"), ValInt3);
+	ColDat[4] = new ColumnDataWStr(_T("ValueStr1"), ValStr1);
+	ColDat[5] = new ColumnDataWStr(_T("ValueStr2"), ValStr2);
+	ColDat[6] = new ColumnDataWStr(_T("ValueStr3"), ValStr3);
+	RecordData* DeleteRd = new RecordData(_T("Property"), ColDat, 7);
+	LockTable(_T("Property"), 2);
+	DeleteRecord(DeleteRd);
+	UnlockTable(_T("Property"));
+	delete DeleteRd;
+}
+
 // ワークスペースサイズおよびグリッド状態を返却する
 // Width : out : 現在ワークスペースの幅(pixel)
 // Height : out : 現在のワークスペースの高さ(pixel)

@@ -23,6 +23,7 @@ public:
 	void SetPropertyInteger(TCHAR*, int, int);
 	void InsertProperty(TCHAR*, int, int, int, TCHAR*, TCHAR*, TCHAR*);
 	void DeleteProperty(TCHAR*);
+	void DeleteProperty(TCHAR*, int, int, int, TCHAR*, TCHAR*, TCHAR*);
 	int GetIconTypeByViewElementType(int);
 	int GetViewElementBasicInfoFromProperty(int[100], int[100], TCHAR[100][256]);
 	int GetAllLinkInfos(int[500], int[500], int[500], int[500]);

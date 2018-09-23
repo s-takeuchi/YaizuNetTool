@@ -230,8 +230,15 @@ int DbMigration_04_05()
 		}
 		Lda->InsertProperty(_T("LinkInfo"), LoopOrg, 24, 1, _T("101"), _T(""), _T(""));
 	}
+	Lda->InsertProperty(_T("LinkInfo"), 15, 24, 10, _T("101"), _T(""), _T(""));
 	Lda->InsertProperty(_T("LinkInfo"), 24, 22, 1, _T("101"), _T(""), _T(""));
 	Lda->InsertProperty(_T("LinkInfo"), 24, 23, 1, _T("101"), _T(""), _T(""));
+	// Bug fix of DbMigration_02_03()
+	Lda->DeleteProperty(_T("LinkInfo"), 15, 22, 1, _T("101"), _T(""), _T(""));
+	Lda->DeleteProperty(_T("LinkInfo"), 15, 23, 1, _T("101"), _T(""), _T(""));
+	Lda->InsertProperty(_T("LinkInfo"), 15, 22, 10, _T("101"), _T(""), _T(""));
+	Lda->InsertProperty(_T("LinkInfo"), 15, 23, 10, _T("101"), _T(""), _T(""));
+
 	// Add MaxLink records
 	Lda->InsertProperty(_T("MaxLink"), 24, 1, 1, _T(""), _T(""), _T(""));
 	return 5;
