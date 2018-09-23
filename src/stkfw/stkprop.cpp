@@ -23,13 +23,14 @@ void ChangeFlag(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
 void FileAccess(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
 void ExecProg(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
 void UdpRecvSend(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
+void HttpHeader(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
 
 HINSTANCE StkPropInstHndl;
 int CurrentId;
 
 void GetTypeName(int Type, TCHAR TypeName[64])
 {
-	TCHAR TypeNames[23][64] = {
+	TCHAR TypeNames[24][64] = {
 		_T("TCP receiver [Initiator]"),
 		_T("Load data [Initiator]"),
 		_T("Empty box [Initiator]"),
@@ -52,7 +53,8 @@ void GetTypeName(int Type, TCHAR TypeName[64])
 		_T("Execute program [Action]"),
 		_T("UDP receiver [Initiator]"),
 		_T("UDP sender [Terminator]"),
-		_T("UDP sender [Stopper]")
+		_T("UDP sender [Stopper]"),
+		_T("HTTP header [Action]")
 	};
 	lstrcpy(TypeName, TypeNames[Type]);
 }
@@ -114,6 +116,10 @@ void PropTypeProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lParam)
 	// UDP Sender または UDP Receiver のディスパッチ処理
 	if (Type == 21 || Type == 22 || Type == 23) {
 		UdpRecvSend(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
+	}
+	// HTTP Header
+	if (Type == 24) {
+		HttpHeader(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
 
 	if (message == WM_CREATE) {

@@ -112,6 +112,7 @@
     <ClCompile Include="ExecProg.cpp" />
     <ClCompile Include="FileAccess.cpp" />
     <ClCompile Include="FlagView.cpp" />
+    <ClCompile Include="HttpHeader.cpp" />
     <ClCompile Include="Mapper.cpp" />
     <ClCompile Include="MyMsgProc.cpp" />
     <ClCompile Include="NetAseEx.cpp" />
