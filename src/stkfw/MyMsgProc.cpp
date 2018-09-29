@@ -418,6 +418,14 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_TIMEOUTINTERVAL, _T("タイムアウト(msec)"));
 	MessageProc::AddEng(PROP_NET_TIMEOUTINTERVAL, _T("Timeout(msec)"));
 
+	// 2387 (★)
+	MessageProc::AddJpn(PROP_HTTPHEADER_DELETEFROM, _T("入力データからHTTPヘッダを取り除く"));
+	MessageProc::AddEng(PROP_HTTPHEADER_DELETEFROM, _T("Delete HTTP header from input data"));
+
+	// 2387 (★)
+	MessageProc::AddJpn(PROP_HTTPHEADER_INSERTINTO, _T("出力データにHTTPヘッダを挿入する"));
+	MessageProc::AddEng(PROP_HTTPHEADER_INSERTINTO, _T("Insert HTTP header into output data"));
+
 	// =====================================================================================================
 	// 2400 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));
