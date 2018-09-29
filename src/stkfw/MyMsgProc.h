@@ -110,6 +110,10 @@ public:
 	static const int PROP_NET_TIMEOUTINTERVAL = 2386;
 	static const int PROP_HTTPHEADER_DELETEFROM = 2387;
 	static const int PROP_HTTPHEADER_INSERTINTO = 2388;
+	static const int PROP_HTTPHEADER_CONTLEN = 2389;
+	static const int PROP_HTTPHEADER_DATE = 2390;
+	static const int PROP_HTTPHEADER_REQUEST = 2391;
+	static const int PROP_HTTPHEADER_RESPONSE = 2392;
 
 	static const int STKFW_LOG_TITLE = 2400;
 	static const int STKFW_LOG_START = 2401;

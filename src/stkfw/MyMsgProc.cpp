@@ -422,9 +422,25 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_HTTPHEADER_DELETEFROM, _T("入力データからHTTPヘッダを取り除く"));
 	MessageProc::AddEng(PROP_HTTPHEADER_DELETEFROM, _T("Delete HTTP header from input data"));
 
-	// 2387 (★)
+	// 2388 (★)
 	MessageProc::AddJpn(PROP_HTTPHEADER_INSERTINTO, _T("出力データにHTTPヘッダを挿入する"));
 	MessageProc::AddEng(PROP_HTTPHEADER_INSERTINTO, _T("Insert HTTP header into output data"));
+
+	// 2389 (★)
+	MessageProc::AddJpn(PROP_HTTPHEADER_CONTLEN, _T("Content-Length"));
+	MessageProc::AddEng(PROP_HTTPHEADER_CONTLEN, _T("Content-Length"));
+
+	// 2390 (★)
+	MessageProc::AddJpn(PROP_HTTPHEADER_DATE, _T("Date"));
+	MessageProc::AddEng(PROP_HTTPHEADER_DATE, _T("Date"));
+
+	// 2391 (★)
+	MessageProc::AddJpn(PROP_HTTPHEADER_REQUEST, _T("Request"));
+	MessageProc::AddEng(PROP_HTTPHEADER_REQUEST, _T("Request"));
+
+	// 2392 (★)
+	MessageProc::AddJpn(PROP_HTTPHEADER_RESPONSE, _T("Response"));
+	MessageProc::AddEng(PROP_HTTPHEADER_RESPONSE, _T("Response"));
 
 	// =====================================================================================================
 	// 2400 (---)
