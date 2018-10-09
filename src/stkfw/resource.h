@@ -62,6 +62,12 @@
 #define IDC_EXECPROG_STDOUT             2121
 #define IDC_EXECPROG_STDERR             2122
 #define IDC_EXECPROG_STDIN              2123
+#define IDC_HTTPHD_CONTLEN              2130
+#define IDC_HTTPHD_DATE                 2131
+#define IDC_HTTPHD_REQUEST              2132
+#define IDC_HTTPHD_RESPONSE             2133
+#define IDC_HTTPHD_DELETE               2134
+#define IDC_HTTPHD_ADD                  2135
 #define IDB_BITMAP1                     14001
 #define IDI_ICON0                       15100
 #define IDI_ICON1                       15101
