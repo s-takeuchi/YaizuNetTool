@@ -13,9 +13,13 @@ bool HttpHdDelHttpFlag = false;
 HWND HttpHdAddHttp = NULL;
 bool HttpHdAddHttpFlag = false;
 HWND HttpHdContentLen = NULL;
+bool HttpHdContentLenFlag = false;
 HWND HttpHdDate = NULL;
+bool HttpHdDateFlag = false;
 HWND HttpHdRequest = NULL;
+bool HttpHdRequestFlag = false;
 HWND HttpHdResponse = NULL;
+bool HttpHdResponseFlag = false;
 HWND HttpHttpHeaderEd = NULL;
 
 void ChangeHttpHeader()
@@ -35,6 +39,10 @@ void ChangeHttpHeader()
 	EnableWindow(HttpHdRequest, HttpHdFlag);
 	EnableWindow(HttpHdResponse, HttpHdFlag);
 	EnableWindow(HttpHttpHeaderEd, HttpHdFlag);
+	SendMessage(HttpHdContentLen, BM_SETCHECK, (HttpHdContentLenFlag == false) ? BST_UNCHECKED : BST_CHECKED, 0L);
+	SendMessage(HttpHdDate, BM_SETCHECK, (HttpHdDateFlag == false) ? BST_UNCHECKED : BST_CHECKED, 0L);
+	SendMessage(HttpHdRequest, BM_SETCHECK, (HttpHdRequestFlag == false) ? BST_UNCHECKED : BST_CHECKED, 0L);
+	SendMessage(HttpHdResponse, BM_SETCHECK, (HttpHdResponseFlag == false) ? BST_UNCHECKED : BST_CHECKED, 0L);
 }
 
 void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT message, WPARAM wParam, LPARAM lParam)
@@ -86,12 +94,39 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 			if (LOWORD(wParam) == IDC_HTTPHD_ADD) {
 				if (HttpHdAddHttpFlag == false) {
 					HttpHdAddHttpFlag = true;
-					ChangeHttpHeader();
 				} else {
 					HttpHdAddHttpFlag = false;
-					ChangeHttpHeader();
 				}
 			}
+			if (LOWORD(wParam) == IDC_HTTPHD_CONTLEN) {
+				if (HttpHdContentLenFlag == false) {
+					HttpHdContentLenFlag = true;
+				} else {
+					HttpHdContentLenFlag = false;
+				}
+			}
+			if (LOWORD(wParam) == IDC_HTTPHD_DATE) {
+				if (HttpHdDateFlag == false) {
+					HttpHdDateFlag = true;
+				} else {
+					HttpHdDateFlag = false;
+				}
+			}
+			if (LOWORD(wParam) == IDC_HTTPHD_REQUEST) {
+				if (HttpHdRequestFlag == false) {
+					HttpHdRequestFlag = true;
+				} else {
+					HttpHdRequestFlag = false;
+				}
+			}
+			if (LOWORD(wParam) == IDC_HTTPHD_RESPONSE) {
+				if (HttpHdResponseFlag == false) {
+					HttpHdResponseFlag = true;
+				} else {
+					HttpHdResponseFlag = false;
+				}
+			}
+			ChangeHttpHeader();
 		}
 	}
 }
