@@ -1,9 +1,12 @@
 #include <windows.h>
 #include <tchar.h>
+#include <cwchar>
+#include <cstring>
 #include "resource.h"
 #include "MyMsgProc.h"
 #include "server\LowDbAccess.h"
 #include "server\VarController.h"
+
 
 int GetMsgWidth(HWND WndHndl, TCHAR* Msg);
 int GetMsgHeight(HWND WndHndl, TCHAR* Msg);
@@ -21,7 +24,7 @@ bool HttpHdRequestFlag = false;
 HWND HttpHdResponse = NULL;
 HWND HttpHeaderEd = NULL;
 
-wchar_t HttpHeaderEdBox[1024] = L"";
+wchar_t HttpHeaderEdBox[1024] = L"hello";
 
 void ChangeHttpHeader()
 {
@@ -51,6 +54,31 @@ void ChangeHttpHeader()
 	SendMessage(HttpHdDate, BM_SETCHECK, (HttpHdDateFlag == false) ? BST_UNCHECKED : BST_CHECKED, 0L);
 	SendMessage(HttpHdRequest, BM_SETCHECK, (HttpHdRequestFlag == false) ? BST_UNCHECKED : BST_CHECKED, 0L);
 	SendMessage(HttpHdResponse, BM_SETCHECK, (HttpHdRequestFlag == true) ? BST_UNCHECKED : BST_CHECKED, 0L);
+}
+
+void UpdateHttpHeaderEdBoxForDate(bool Enable)
+{
+	wchar_t HttpHeaderEdBoxTmp[1024] = L"";
+	wchar_t* tmp_ptr = HttpHeaderEdBoxTmp;
+	wchar_t* begin_ptr = NULL;
+	wchar_t* end_ptr = NULL;
+	SendMessage(HttpHeaderEd, WM_GETTEXT, (WPARAM)1024, (LPARAM)HttpHeaderEdBox);
+	begin_ptr = wcsstr(HttpHeaderEdBox, L"Date");
+	if (begin_ptr) {
+		end_ptr = wcsstr(begin_ptr, L"\r\n");
+	}
+	if (begin_ptr && end_ptr) {
+		//memcpy((char*)HttpHeaderEdBoxTmp, (char*)HttpHeaderEdBox, (char*)begin_ptr - (char*)HttpHeaderEdBox);
+		for (wchar_t* i = HttpHeaderEdBox; i < begin_ptr; i++) {
+			*tmp_ptr = *i;
+			tmp_ptr++;
+		}
+		for (wchar_t* i = end_ptr + 2; *i != '\0'; i++) {
+			*tmp_ptr = *i;
+			tmp_ptr++;
+		}
+		SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBoxTmp);
+	}
 }
 
 void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT message, WPARAM wParam, LPARAM lParam)
@@ -83,7 +111,7 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 			GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_HTTPHEADER_RESPONSE)) + 30,
 			GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_HTTPHEADER_RESPONSE)),
 			WndHndl, (HMENU)IDC_HTTPHD_RESPONSE, InstHndl, NULL);
-		HttpHeaderEd = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, Rect.left + 40, 280, Rect.right - 50, 210, WndHndl, NULL, InstHndl, NULL);
+		HttpHeaderEd = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | WS_HSCROLL | WS_VSCROLL | ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_MULTILINE, Rect.left + 40, 280, Rect.right - 50, 210, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(HttpHeaderEd, EM_SETLIMITTEXT, (WPARAM)1024, (LPARAM)0);
 		SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBox);
 
@@ -118,6 +146,7 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 				} else {
 					HttpHdDateFlag = false;
 				}
+				UpdateHttpHeaderEdBoxForDate(HttpHdDateFlag);
 			}
 			if (LOWORD(wParam) == IDC_HTTPHD_REQUEST) {
 				HttpHdRequestFlag = true;
