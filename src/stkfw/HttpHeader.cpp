@@ -9,6 +9,8 @@
 
 #define HTTPHD_TARGET_DATE 1
 #define HTTPHD_TARGET_CONTLEN 2
+#define HTTPHD_TARGET_REQUEST 3
+#define HTTPHD_TARGET_RESPONSE 4
 
 int GetMsgWidth(HWND WndHndl, TCHAR* Msg);
 int GetMsgHeight(HWND WndHndl, TCHAR* Msg);
@@ -26,7 +28,7 @@ bool HttpHdRequestFlag = false;
 HWND HttpHdResponse = NULL;
 HWND HttpHeaderEd = NULL;
 
-wchar_t HttpHeaderEdBox[1024] = L"hello";
+wchar_t HttpHeaderEdBox[1024] = L"HTTP/1.1 200 OK\r\n";
 
 void ChangeHttpHeader()
 {
@@ -77,7 +79,31 @@ void UpdateHttpHeaderEdBox(int target, bool Enable)
 		wcscpy_s(replace_target, 64, L"Content-Length: <automatically replaced>\r\n");
 	}
 
-	begin_ptr = wcsstr(HttpHeaderEdBox, search_target);
+	if (target == HTTPHD_TARGET_REQUEST) {
+		wcscpy_s(search_target, 32, L"");
+		wcscpy_s(replace_target, 64, L"GET / HTTP/1.1\r\n");
+
+		if (wcsncmp(HttpHeaderEdBox, L"GET", 3) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"HEAD", 4) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"POST", 4) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"PUT", 3) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"DELETE", 5) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"CONNECT", 6) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"OPTIONS", 6) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"TRACE", 5) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"PATCH", 5) == 0) {
+			begin_ptr = HttpHeaderEdBox;
+		}
+	} else if (target == HTTPHD_TARGET_RESPONSE) {
+		wcscpy_s(search_target, 32, L"");
+		wcscpy_s(replace_target, 64, L"HTTP/1.1 200 OK\r\n");
+
+		if (wcsncmp(HttpHeaderEdBox, L"HTTP/", 5) == 0) {
+			begin_ptr = HttpHeaderEdBox;
+		}
+	} else {
+		begin_ptr = wcsstr(HttpHeaderEdBox, search_target);
+	}
 	if (begin_ptr) {
 		end_ptr = wcsstr(begin_ptr, L"\r\n");
 	}
@@ -95,10 +121,14 @@ void UpdateHttpHeaderEdBox(int target, bool Enable)
 			tmp_ptr++;
 		}
 	} else {
-		if (Enable) {
-			wcscpy_s(tmp_ptr, 1024, HttpHeaderEdBox);
-			tmp_ptr += wcslen(HttpHeaderEdBox);
-			wcscpy_s(tmp_ptr, wcslen(replace_target) + 1, replace_target);
+		if (Enable && target != HTTPHD_TARGET_REQUEST && target != HTTPHD_TARGET_RESPONSE) {
+			wcscpy_s(HttpHeaderEdBoxTmp, 1024, HttpHeaderEdBox);
+			wcscat_s(HttpHeaderEdBoxTmp, 1024, replace_target);
+		} else if (Enable && (target == HTTPHD_TARGET_REQUEST || target == HTTPHD_TARGET_RESPONSE)) {
+			wcscpy_s(HttpHeaderEdBoxTmp, replace_target);
+			wcscat_s(HttpHeaderEdBoxTmp, 1024, HttpHeaderEdBox);
+		} else {
+			wcscat_s(HttpHeaderEdBoxTmp, 1024, HttpHeaderEdBox);
 		}
 	}
 	SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBoxTmp);
@@ -173,10 +203,18 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 				UpdateHttpHeaderEdBox(HTTPHD_TARGET_DATE, HttpHdDateFlag);
 			}
 			if (LOWORD(wParam) == IDC_HTTPHD_REQUEST) {
-				HttpHdRequestFlag = true;
+				if (!HttpHdRequestFlag) {
+					UpdateHttpHeaderEdBox(HTTPHD_TARGET_RESPONSE, false);
+					UpdateHttpHeaderEdBox(HTTPHD_TARGET_REQUEST, true);
+					HttpHdRequestFlag = true;
+				}
 			}
 			if (LOWORD(wParam) == IDC_HTTPHD_RESPONSE) {
-				HttpHdRequestFlag = false;
+				if (HttpHdRequestFlag) {
+					UpdateHttpHeaderEdBox(HTTPHD_TARGET_REQUEST, false);
+					UpdateHttpHeaderEdBox(HTTPHD_TARGET_RESPONSE, true);
+					HttpHdRequestFlag = false;
+				}
 			}
 			ChangeHttpHeader();
 		}
