@@ -89,9 +89,9 @@ void UpdateHttpHeaderEdBox(int target, bool Enable)
 			wcsncmp(HttpHeaderEdBox, L"HEAD", 4) == 0 ||
 			wcsncmp(HttpHeaderEdBox, L"POST", 4) == 0 ||
 			wcsncmp(HttpHeaderEdBox, L"PUT", 3) == 0 ||
-			wcsncmp(HttpHeaderEdBox, L"DELETE", 5) == 0 ||
-			wcsncmp(HttpHeaderEdBox, L"CONNECT", 6) == 0 ||
-			wcsncmp(HttpHeaderEdBox, L"OPTIONS", 6) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"DELETE", 6) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"CONNECT", 7) == 0 ||
+			wcsncmp(HttpHeaderEdBox, L"OPTIONS", 7) == 0 ||
 			wcsncmp(HttpHeaderEdBox, L"TRACE", 5) == 0 ||
 			wcsncmp(HttpHeaderEdBox, L"PATCH", 5) == 0) {
 			begin_ptr = HttpHeaderEdBox;
