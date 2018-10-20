@@ -63,6 +63,8 @@ public:
 	int GetTcpRecvCorrespodingIdInElementInfo(int);
 	void SetTcpRecvCorrespodingIdInElementInfo(int, int);
 	void ModifyElementInfoScheme();
+	void UpdateHttpHeaderInfo(int, int, wchar_t[1024]);
+	void GetHttpHeaderInfo(int, int*, wchar_t[1024]);
 
 	// Delete all records of specified table
 	int DeleteAllRecords(TCHAR[TABLE_NAME_SIZE]);

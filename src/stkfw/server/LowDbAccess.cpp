@@ -1221,6 +1221,44 @@ void LowDbAccess::ModifyElementInfoScheme()
 	RenameTable(_T("NewElementInfo"), _T("ElementInfo"));
 }
 
+void LowDbAccess::UpdateHttpHeaderInfo(int target_id, int input_bin, wchar_t http_header[1024])
+{
+	ColumnData* ColSch[1];
+	ColSch[0] = new ColumnDataInt(L"Id", target_id);
+	RecordData* RecSch = new RecordData(_T("ElementInfo"), ColSch, 1);
+
+	ColumnData* ColUpd[2];
+	ColUpd[0] = new ColumnDataInt(L"ParamInt1", input_bin);
+	ColUpd[1] = new ColumnDataBin(_T("ParamBin"), (BYTE*)http_header, 1024);
+	RecordData* RecUpd = new RecordData(_T("ElementInfo"), ColUpd, 2);
+	LockTable(L"ElementInfo", LOCK_EXCLUSIVE);
+	UpdateRecord(RecSch, RecUpd);
+	UnlockTable(L"ElementInfo");
+	delete RecSch;
+	delete RecUpd;
+}
+
+void LowDbAccess::GetHttpHeaderInfo(int target_id, int* input_bin, wchar_t http_header[1024])
+{
+	int ResultCode = 0;
+	int IntValue = 0;
+	ColumnData* ColSch[1];
+	ColSch[0] = new ColumnDataInt(_T("Id"), target_id);
+	RecordData* RecSch = new RecordData(_T("ElementInfo"), ColSch, 1);
+	LockTable(_T("ElementInfo"), LOCK_SHARE);
+	RecordData* RetRec = GetRecord(RecSch);
+	UnlockTable(_T("ElementInfo"));
+	if (RetRec != NULL) {
+		ColumnDataInt* RetCol1 = (ColumnDataInt*)RetRec->GetColumn(L"ParamInt1");
+		*input_bin = RetCol1->GetValue();
+		ColumnDataBin* RetCol2 = (ColumnDataBin*)RetRec->GetColumn(L"ParamBin");
+		BYTE* bin_http_header = RetCol2->GetValue();
+		wcsncpy(http_header, (wchar_t*)bin_http_header, 1024 - 1);
+	}
+	delete RecSch;
+	delete RetRec;
+}
+
 
 
 

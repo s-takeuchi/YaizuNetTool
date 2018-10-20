@@ -12,6 +12,8 @@
 #define HTTPHD_TARGET_REQUEST 3
 #define HTTPHD_TARGET_RESPONSE 4
 
+#define HTTPHD_LEN 1024
+
 int GetMsgWidth(HWND WndHndl, TCHAR* Msg);
 int GetMsgHeight(HWND WndHndl, TCHAR* Msg);
 
@@ -28,7 +30,7 @@ bool HttpHdRequestFlag = false;
 HWND HttpHdResponse = NULL;
 HWND HttpHeaderEd = NULL;
 
-wchar_t HttpHeaderEdBox[1024] = L"HTTP/1.1 200 OK\r\n";
+wchar_t HttpHeaderEdBox[HTTPHD_LEN] = L"HTTP/1.1 200 OK\r\n";
 
 void ChangeHttpHeader()
 {
@@ -62,11 +64,11 @@ void ChangeHttpHeader()
 
 void UpdateHttpHeaderEdBox(int target, bool Enable)
 {
-	wchar_t HttpHeaderEdBoxTmp[1024] = L"";
+	wchar_t HttpHeaderEdBoxTmp[HTTPHD_LEN] = L"";
 	wchar_t* tmp_ptr = HttpHeaderEdBoxTmp;
 	wchar_t* begin_ptr = NULL;
 	wchar_t* end_ptr = NULL;
-	SendMessage(HttpHeaderEd, WM_GETTEXT, (WPARAM)1024, (LPARAM)HttpHeaderEdBox);
+	SendMessage(HttpHeaderEd, WM_GETTEXT, (WPARAM)HTTPHD_LEN, (LPARAM)HttpHeaderEdBox);
 
 	wchar_t search_target[32] = L"";
 	wchar_t replace_target[64] = L"";
@@ -110,25 +112,39 @@ void UpdateHttpHeaderEdBox(int target, bool Enable)
 	if (begin_ptr && end_ptr) {
 		for (wchar_t* i = HttpHeaderEdBox; i < begin_ptr; i++) {
 			*tmp_ptr = *i;
-			tmp_ptr++;
+			if (tmp_ptr - HttpHeaderEdBoxTmp == HTTPHD_LEN - 1) {
+				*tmp_ptr = L'\0';
+			} else {
+				tmp_ptr++;
+			}
 		}
 		if (Enable) {
-			wcscpy_s(tmp_ptr, wcslen(replace_target) + 1, replace_target);
-			tmp_ptr += wcslen(replace_target);
+			if (tmp_ptr - HttpHeaderEdBoxTmp + wcslen(replace_target) + 1 <= HTTPHD_LEN - 1) {
+				wcscpy_s(tmp_ptr, wcslen(replace_target) + 1, replace_target);
+				tmp_ptr += wcslen(replace_target);
+			}
 		}
 		for (wchar_t* i = end_ptr + 2; *i != '\0'; i++) {
 			*tmp_ptr = *i;
-			tmp_ptr++;
+			if (tmp_ptr - HttpHeaderEdBoxTmp == HTTPHD_LEN - 1) {
+				*tmp_ptr = L'\0';
+			} else {
+				tmp_ptr++;
+			}
 		}
 	} else {
 		if (Enable && target != HTTPHD_TARGET_REQUEST && target != HTTPHD_TARGET_RESPONSE) {
-			wcscpy_s(HttpHeaderEdBoxTmp, 1024, HttpHeaderEdBox);
-			wcscat_s(HttpHeaderEdBoxTmp, 1024, replace_target);
+			wcsncpy(HttpHeaderEdBoxTmp, HttpHeaderEdBox, HTTPHD_LEN - 1);
+			if (wcslen(HttpHeaderEdBoxTmp) + wcslen(replace_target) < HTTPHD_LEN) {
+				wcscat(HttpHeaderEdBoxTmp, replace_target);
+			}
 		} else if (Enable && (target == HTTPHD_TARGET_REQUEST || target == HTTPHD_TARGET_RESPONSE)) {
-			wcscpy_s(HttpHeaderEdBoxTmp, replace_target);
-			wcscat_s(HttpHeaderEdBoxTmp, 1024, HttpHeaderEdBox);
+			wcsncpy(HttpHeaderEdBoxTmp, replace_target, HTTPHD_LEN - 1);
+			if (wcslen(HttpHeaderEdBoxTmp) + wcslen(HttpHeaderEdBox) < HTTPHD_LEN) {
+				wcscat(HttpHeaderEdBoxTmp, HttpHeaderEdBox);
+			}
 		} else {
-			wcscat_s(HttpHeaderEdBoxTmp, 1024, HttpHeaderEdBox);
+			wcsncpy(HttpHeaderEdBoxTmp, HttpHeaderEdBox, HTTPHD_LEN - 1);
 		}
 	}
 	SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBoxTmp);
@@ -165,7 +181,25 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 			GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_HTTPHEADER_RESPONSE)),
 			WndHndl, (HMENU)IDC_HTTPHD_RESPONSE, InstHndl, NULL);
 		HttpHeaderEd = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | WS_HSCROLL | WS_VSCROLL | ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_MULTILINE, Rect.left + 40, 280, Rect.right - 50, 210, WndHndl, NULL, InstHndl, NULL);
-		SendMessage(HttpHeaderEd, EM_SETLIMITTEXT, (WPARAM)1024, (LPARAM)0);
+		SendMessage(HttpHeaderEd, EM_SETLIMITTEXT, (WPARAM)HTTPHD_LEN - 1, (LPARAM)0);
+		int intput_bin = 0;
+		LowDbAccess::GetInstance()->GetHttpHeaderInfo(CurrentId, &intput_bin, HttpHeaderEdBox);
+		if (intput_bin & 0x01) {
+			HttpHdDelHttpFlag = true;
+		}
+		if (intput_bin & 0x02) {
+			HttpHdAddHttpFlag = true;
+		}
+		if (intput_bin & 0x04) {
+			HttpHdContentLenFlag = true;
+		}
+		if (intput_bin & 0x08) {
+			HttpHdDateFlag = true;
+		}
+		if (intput_bin & 0x10) {
+			HttpHdRequestFlag = true;
+		}
+		ChangeHttpHeader();
 		SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBox);
 
 		ChangeHttpHeader();
@@ -217,6 +251,16 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 				}
 			}
 			ChangeHttpHeader();
+			if (LOWORD(wParam) == IDC_BTNOK) {
+				int input_bin = 0;
+				input_bin += (HttpHdDelHttpFlag ? 0x01 : 0);
+				input_bin += (HttpHdAddHttpFlag ? 0x02 : 0);
+				input_bin += (HttpHdContentLenFlag ? 0x04 : 0);
+				input_bin += (HttpHdDateFlag ? 0x08 : 0);
+				input_bin += (HttpHdRequestFlag ? 0x10 : 0);
+				SendMessage(HttpHeaderEd, WM_GETTEXT, (WPARAM)HTTPHD_LEN, (LPARAM)HttpHeaderEdBox);
+				LowDbAccess::GetInstance()->UpdateHttpHeaderInfo(CurrentId, input_bin, HttpHeaderEdBox);
+			}
 		}
 	}
 }
