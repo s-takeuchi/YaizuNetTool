@@ -24,6 +24,7 @@
 #include "ExecElem_Timer.h"
 #include "ExecElem_Mapper.h"
 #include "ExecElem_ExecProg.h"
+#include "ExecElem_HttpHeader.h"
 #include "ExecElem_NothingToDo.h"
 
 wchar_t *ExecElem::log;
@@ -292,6 +293,8 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 		NewExecElem = new ExecElem_Mapper(Id);
 	} else if (Type == EXECPROGRAM) {
 		NewExecElem = new ExecElem_ExecProg(Id);
+	} else if (Type == HTTPHEADER) {
+		NewExecElem = new ExecElem_HttpHeader(Id);
 	} else {
 		NewExecElem = new ExecElem_NothingToDo(Id);
 	}

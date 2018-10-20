@@ -58,6 +58,7 @@ public:
 	static const int RECEIVERUDP = 21;
 	static const int SENDERUDP_R = 22;
 	static const int SENDERUDP   = 23;
+	static const int HTTPHEADER  = 24;
 
 private:
 	void ErrorLog(int, TCHAR*, int);
