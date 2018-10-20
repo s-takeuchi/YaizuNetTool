@@ -68,11 +68,34 @@ int ExecElem_HttpHeader::Execute()
 		while (tmp_ptr) {
 			tmp_ptr += 2;
 			if (strncmp(presented_http_header_ptr, "Date: <automatically replaced>\r\n", 32) == 0) {
-				strncpy(new_data_ptr, "Date: 111\r\n", 11);
-				new_data_ptr += 11;
+				char date_work[128] = "";
+				int date_work_len = 0;
+				/***** Make time string begin *****/
+				struct tm GmtTime;
+				__int64 Ltime;
+				_time64(&Ltime);
+				_gmtime64_s(&GmtTime, &Ltime);
+				char MonStr[12][4] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+				char WdayStr[7][4] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+				sprintf(date_work, "Date: %s, %02d %s %d %02d:%02d:%02d GMT\r\n",
+					WdayStr[GmtTime.tm_wday],
+					GmtTime.tm_mday,
+					MonStr[GmtTime.tm_mon],
+					GmtTime.tm_year + 1900,
+					GmtTime.tm_hour,
+					GmtTime.tm_min,
+					GmtTime.tm_sec);
+				/***** Make time string end *****/
+				date_work_len = strlen(date_work);
+				strncpy(new_data_ptr, date_work, date_work_len);
+				new_data_ptr += date_work_len;
 			} else if (strncmp(presented_http_header_ptr, "Content-Length: <automatically replaced>\r\n", 42) == 0) {
-				strncpy(new_data_ptr, "Content-Length: 111\r\n", 21);
-				new_data_ptr += 21;
+				char cont_len_work[128] = "";
+				int cont_len_work_len = 0;
+				sprintf(cont_len_work, "Content-Length: %d\r\n", data_end_ptr - data_ptr);
+				cont_len_work_len = strlen(cont_len_work);
+				strncpy(new_data_ptr, cont_len_work, cont_len_work_len);
+				new_data_ptr += cont_len_work_len;
 			} else {
 				for (char* i = presented_http_header_ptr; i < tmp_ptr; i++) {
 					*new_data_ptr = *i;
@@ -90,9 +113,8 @@ int ExecElem_HttpHeader::Execute()
 		*new_data_ptr = *i;
 		new_data_ptr++;
 	}
-	*new_data_ptr = '\0';
 	delete data;
 	SetData(new_data);
-	SetDataLength(new_data_ptr - new_data + 1);
+	SetDataLength(new_data_ptr - new_data);
 	return 0;
 }
