@@ -7,6 +7,8 @@
 #include "server\LowDbAccess.h"
 #include "server\VarController.h"
 
+#define HTTPHD_TARGET_DATE 1
+#define HTTPHD_TARGET_CONTLEN 2
 
 int GetMsgWidth(HWND WndHndl, TCHAR* Msg);
 int GetMsgHeight(HWND WndHndl, TCHAR* Msg);
@@ -56,29 +58,50 @@ void ChangeHttpHeader()
 	SendMessage(HttpHdResponse, BM_SETCHECK, (HttpHdRequestFlag == true) ? BST_UNCHECKED : BST_CHECKED, 0L);
 }
 
-void UpdateHttpHeaderEdBoxForDate(bool Enable)
+void UpdateHttpHeaderEdBox(int target, bool Enable)
 {
 	wchar_t HttpHeaderEdBoxTmp[1024] = L"";
 	wchar_t* tmp_ptr = HttpHeaderEdBoxTmp;
 	wchar_t* begin_ptr = NULL;
 	wchar_t* end_ptr = NULL;
 	SendMessage(HttpHeaderEd, WM_GETTEXT, (WPARAM)1024, (LPARAM)HttpHeaderEdBox);
-	begin_ptr = wcsstr(HttpHeaderEdBox, L"Date");
+
+	wchar_t search_target[32] = L"";
+	wchar_t replace_target[64] = L"";
+	if (target == HTTPHD_TARGET_DATE) {
+		wcscpy_s(search_target, 32, L"Date: ");
+		wcscpy_s(replace_target, 64, L"Date: <automatically replaced>\r\n");
+	}
+	if (target == HTTPHD_TARGET_CONTLEN) {
+		wcscpy_s(search_target, 32, L"Content-Length: ");
+		wcscpy_s(replace_target, 64, L"Content-Length: <automatically replaced>\r\n");
+	}
+
+	begin_ptr = wcsstr(HttpHeaderEdBox, search_target);
 	if (begin_ptr) {
 		end_ptr = wcsstr(begin_ptr, L"\r\n");
 	}
 	if (begin_ptr && end_ptr) {
-		//memcpy((char*)HttpHeaderEdBoxTmp, (char*)HttpHeaderEdBox, (char*)begin_ptr - (char*)HttpHeaderEdBox);
 		for (wchar_t* i = HttpHeaderEdBox; i < begin_ptr; i++) {
 			*tmp_ptr = *i;
 			tmp_ptr++;
+		}
+		if (Enable) {
+			wcscpy_s(tmp_ptr, wcslen(replace_target) + 1, replace_target);
+			tmp_ptr += wcslen(replace_target);
 		}
 		for (wchar_t* i = end_ptr + 2; *i != '\0'; i++) {
 			*tmp_ptr = *i;
 			tmp_ptr++;
 		}
-		SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBoxTmp);
+	} else {
+		if (Enable) {
+			wcscpy_s(tmp_ptr, 1024, HttpHeaderEdBox);
+			tmp_ptr += wcslen(HttpHeaderEdBox);
+			wcscpy_s(tmp_ptr, wcslen(replace_target) + 1, replace_target);
+		}
 	}
+	SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBoxTmp);
 }
 
 void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT message, WPARAM wParam, LPARAM lParam)
@@ -139,6 +162,7 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 				} else {
 					HttpHdContentLenFlag = false;
 				}
+				UpdateHttpHeaderEdBox(HTTPHD_TARGET_CONTLEN, HttpHdContentLenFlag);
 			}
 			if (LOWORD(wParam) == IDC_HTTPHD_DATE) {
 				if (HttpHdDateFlag == false) {
@@ -146,7 +170,7 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 				} else {
 					HttpHdDateFlag = false;
 				}
-				UpdateHttpHeaderEdBoxForDate(HttpHdDateFlag);
+				UpdateHttpHeaderEdBox(HTTPHD_TARGET_DATE, HttpHdDateFlag);
 			}
 			if (LOWORD(wParam) == IDC_HTTPHD_REQUEST) {
 				HttpHdRequestFlag = true;
