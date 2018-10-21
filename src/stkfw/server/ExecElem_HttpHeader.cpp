@@ -33,7 +33,7 @@ int ExecElem_HttpHeader::Execute()
 	}
 
 	char* data = (char*)GetData();
-	char* data_ptr = NULL;
+	char* data_ptr = data;
 	char* data_end_ptr = (char*)data + GetDataLength();
 
 	char* new_data = new char[10000000];
@@ -87,31 +87,41 @@ int ExecElem_HttpHeader::Execute()
 					GmtTime.tm_sec);
 				/***** Make time string end *****/
 				date_work_len = strlen(date_work);
-				strncpy(new_data_ptr, date_work, date_work_len);
-				new_data_ptr += date_work_len;
+				if (new_data_ptr + date_work_len - new_data < 10000000 - 1) {
+					strncpy(new_data_ptr, date_work, date_work_len);
+					new_data_ptr += date_work_len;
+				}
 			} else if (strncmp(presented_http_header_ptr, "Content-Length: <automatically replaced>\r\n", 42) == 0) {
 				char cont_len_work[128] = "";
 				int cont_len_work_len = 0;
 				sprintf(cont_len_work, "Content-Length: %d\r\n", data_end_ptr - data_ptr);
 				cont_len_work_len = strlen(cont_len_work);
-				strncpy(new_data_ptr, cont_len_work, cont_len_work_len);
-				new_data_ptr += cont_len_work_len;
+				if (new_data_ptr + cont_len_work_len - new_data < 10000000 - 1) {
+					strncpy(new_data_ptr, cont_len_work, cont_len_work_len);
+					new_data_ptr += cont_len_work_len;
+				}
 			} else {
 				for (char* i = presented_http_header_ptr; i < tmp_ptr; i++) {
-					*new_data_ptr = *i;
-					*new_data_ptr++;
+					if (new_data_ptr - new_data + 1 < 10000000 - 1) {
+						*new_data_ptr = *i;
+						*new_data_ptr++;
+					}
 				}
 			}
 
 			presented_http_header_ptr = tmp_ptr;
 			tmp_ptr = strstr(presented_http_header_ptr, "\r\n");
 		}
-		strncpy(new_data_ptr, "\r\n", 2);
-		new_data_ptr += 2;
+		if (new_data_ptr - new_data + 2 < 10000000 - 1) {
+			strncpy(new_data_ptr, "\r\n", 2);
+			new_data_ptr += 2;
+		}
 	}
 	for (char* i = (char*)data_ptr; i < data_end_ptr; i++) {
-		*new_data_ptr = *i;
-		new_data_ptr++;
+		if (new_data_ptr - new_data + 1 < 10000000 - 1) {
+			*new_data_ptr = *i;
+			new_data_ptr++;
+		}
 	}
 	delete data;
 	SetData(new_data);
