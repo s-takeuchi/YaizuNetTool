@@ -110,6 +110,8 @@ Windows Server 2012 R2 Standard
 * Version 1.5.0 ---> 1.6.0
 (1) Support enabled for data reception which the specified size of
     Content-Length in HTTP header as a new terminate condition of TCP receiver.
+(2) Support enabled for removal and addition of HTTP header as a new processing
+    element.
 
 =================================================
 4.License Agreement

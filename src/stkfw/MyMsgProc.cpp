@@ -633,8 +633,12 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(SFW_140_150_6, _T("Support enabled for Windows 8.1, Windows 10 and Windows Server 2012 R2."));
 
 	//9131 (★)
-	MessageProc::AddJpn(SFW_150_160_1, _T("TCP receiverの終了条件として，HTTPヘッダのContent-Lengthに指定されたサイズのデータを受信するケースを新たにサポートした。"));
+	MessageProc::AddJpn(SFW_150_160_1, _T("TCP receiverの終了条件として，HTTPヘッダのContent-Lengthに指定されたサイズのデータ受信を新たにサポートした。"));
 	MessageProc::AddEng(SFW_150_160_1, _T("Support enabled for data reception which the specified size of Content-Length in HTTP header as a new terminate condition of TCP receiver."));
+
+	//9132 (★)
+	MessageProc::AddJpn(SFW_150_160_2, _T("HTTPヘッダの追加および削除を可能にする処理要素を新たにサポートした。"));
+	MessageProc::AddEng(SFW_150_160_2, _T("Support enabled for removal and addition of HTTP header as a new processing element."));
 
 	// =====================================================================================================
 }
