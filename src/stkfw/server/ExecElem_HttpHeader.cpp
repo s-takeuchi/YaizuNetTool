@@ -48,8 +48,7 @@ int ExecElem_HttpHeader::Execute()
 			strncmp(data, "CONNECT", 7) == 0 ||
 			strncmp(data, "OPTIONS", 7) == 0 ||
 			strncmp(data, "TRACE", 5) == 0 ||
-			strncmp(data, "PATCH", 5) == 0 ||
-			strncmp(data, "HTTP/", 5) == 0) {
+			strncmp(data, "PATCH", 5) == 0) {
 			for (data_ptr = data; data_ptr < data_end_ptr && strncmp(data_ptr, "\r\n\r\n", 4); data_ptr++);
 			if (data_ptr == data_end_ptr) {
 				for (data_ptr = data; data_ptr < data_end_ptr && strncmp(data_ptr, "\n\n", 2); data_ptr++);

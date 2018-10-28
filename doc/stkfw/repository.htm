@@ -443,6 +443,18 @@ ViewElementが何も存在しない場合，
 <TR><TD>ParamStr1</TD><TD>ホスト名/IPアドレス</TD></TR>
 </TABLE>
 <P>
+<H3>(17) 対応する要素の種別が"HTTP header"の場合</H3>
+<TABLE BORDER="1">
+<TR><TD>ParamInt1</TD><TD>GUIの設定<br/>
+1ビット目=入力データからHTTPヘッダを取り除く<br/>
+2ビット目=出力データにHTTPヘッダを挿入する<br/>
+3ビット目=Content-Length<br/>
+4ビット目=Date<br/>
+5ビット目=Request<br>
+</TD></TR>
+<TR><TD>ParamBin</TD><TD>挿入するHTTPヘッダ</TD></TR>
+</TABLE>
+<P>
 
 
 
