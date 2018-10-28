@@ -118,7 +118,7 @@ int ExecElem_HttpHeader::Execute()
 		}
 	}
 	for (char* i = (char*)data_ptr; i < data_end_ptr; i++) {
-		if (new_data_ptr - new_data + 1 < 10000000 - 1) {
+		if (new_data_ptr - new_data + 1 < 10000000) {
 			*new_data_ptr = *i;
 			new_data_ptr++;
 		}
