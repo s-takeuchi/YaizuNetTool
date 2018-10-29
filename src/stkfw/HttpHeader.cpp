@@ -30,7 +30,7 @@ bool HttpHdRequestFlag = false;
 HWND HttpHdResponse = NULL;
 HWND HttpHeaderEd = NULL;
 
-wchar_t HttpHeaderEdBox[HTTPHD_LEN] = L"HTTP/1.1 200 OK\r\n";
+wchar_t HttpHeaderEdBox[HTTPHD_LEN] = L"";
 
 void ChangeHttpHeader()
 {
@@ -186,18 +186,28 @@ void HttpHeader(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 		LowDbAccess::GetInstance()->GetHttpHeaderInfo(CurrentId, &intput_bin, HttpHeaderEdBox);
 		if (intput_bin & 0x01) {
 			HttpHdDelHttpFlag = true;
+		} else {
+			HttpHdDelHttpFlag = false;
 		}
 		if (intput_bin & 0x02) {
 			HttpHdAddHttpFlag = true;
+		} else {
+			HttpHdAddHttpFlag = false;
 		}
 		if (intput_bin & 0x04) {
 			HttpHdContentLenFlag = true;
+		} else {
+			HttpHdContentLenFlag = false;
 		}
 		if (intput_bin & 0x08) {
 			HttpHdDateFlag = true;
+		} else {
+			HttpHdDateFlag = false;
 		}
 		if (intput_bin & 0x10) {
 			HttpHdRequestFlag = true;
+		} else {
+			HttpHdRequestFlag = false;
 		}
 		ChangeHttpHeader();
 		SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBox);

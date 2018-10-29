@@ -1320,6 +1320,10 @@ void LowDbAccess::UpdateElementInfoFromViewElement()
 			ColDatIns[13] = new ColumnDataWStr(_T("ParamStr6"), _T(""));
 			ColDatIns[14] = new ColumnDataWStr(_T("ParamStr7"), _T(""));
 			BYTE DummyBin[4096];
+			DummyBin[0] = '\0';
+			DummyBin[1] = '\0';
+			DummyBin[2] = '\0';
+			DummyBin[3] = '\0';
 			ColDatIns[15] = new ColumnDataBin(_T("ParamBin"), DummyBin, 4096);
 			RecordData* NewRdElemIf = new RecordData(_T("ElementInfo"), ColDatIns, 16);
 			InsertRecord(NewRdElemIf);
