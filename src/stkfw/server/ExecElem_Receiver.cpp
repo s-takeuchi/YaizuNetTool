@@ -75,7 +75,6 @@ int ExecElem_Receiver::Execute()
 	// データの受信
 	BYTE* Buf = new BYTE[10000000];
 	int ActSize = 0;
-	BOOL ForceStop = (StartStopFlag == TRUE) ? FALSE : TRUE;
 	int RevisedFinishCondition = 0;
 	if (FinishCondition < 0) {
 		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_STRING;
@@ -90,7 +89,7 @@ int ExecElem_Receiver::Execute()
 	} else if (FinishCondition >= 10000001 && FinishCondition <= 19999999) {
 		RevisedFinishCondition = FinishCondition - 10000000;
 	}
-	ActSize = StkSocket_Receive(TargetId, ElementId, Buf, 9999999, RevisedFinishCondition, FinishCondTimeout, VarDat, VarDatSize, ForceStop);
+	ActSize = StkSocket_Receive(TargetId, ElementId, Buf, 9999999, RevisedFinishCondition, FinishCondTimeout, VarDat, VarDatSize, FALSE);
 	StkPropOutputLog();
 
 	// If the finish condition shows the string-end condition, release the allocated data area for communication variable.

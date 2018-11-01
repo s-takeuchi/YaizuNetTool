@@ -24,9 +24,6 @@ protected:
 	void* Data;
 	int DataLength;
 
-	// Thread start/stop flag
-	BOOL StartStopFlag;
-
 public:
 	static const int STATUS_DONE = 1; // Šù‚ÉÀsÏ‚Ìó‘Ô
 	static const int STATUS_TRIED = 2; // Às‚µ‚½‚ªŸ‚Ìˆ—‚ÉˆÚ‚ê‚¸

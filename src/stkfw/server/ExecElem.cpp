@@ -247,7 +247,6 @@ ExecElem::ExecElem(int Id)
 	RootId = -1;
 	Data = NULL;
 	DataLength = 0;
-	StartStopFlag = FALSE;
 }
 
 // Destructor
@@ -381,11 +380,10 @@ void ExecElem::SetDataLength(int Len)
 // Thread status was changed into "Start"
 void ExecElem::ThreadStatusChangedIntoStart()
 {
-	StartStopFlag = TRUE;
 }
 
 // Thread status was changed into "Stop"
 void ExecElem::ThreadStatusChangedIntoStop()
 {
-	StartStopFlag = FALSE;
+	StkSocket_ForceStop(ElementId);
 }
