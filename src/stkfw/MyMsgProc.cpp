@@ -640,6 +640,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_150_160_2, _T("HTTPヘッダの追加および削除を可能にする処理要素を新たにサポートした。"));
 	MessageProc::AddEng(SFW_150_160_2, _T("Support enabled for removal and addition of HTTP header as a new processing element."));
 
+	//9133 (★)
+	MessageProc::AddJpn(SFW_150_160_3, _T("Windows Server 2016をサポートした。"));
+	MessageProc::AddEng(SFW_150_160_3, _T("Support enabled for Windows Server 2016"));
+
 	// =====================================================================================================
 }
 

@@ -167,6 +167,7 @@ public:
 	static const int SFW_140_150_6 = 9130;
 	static const int SFW_150_160_1 = 9131;
 	static const int SFW_150_160_2 = 9132;
+	static const int SFW_150_160_3 = 9133;
 
 	static void AddMsg();
 	static TCHAR* GetMsg(int);

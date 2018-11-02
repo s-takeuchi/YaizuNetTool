@@ -34,12 +34,10 @@ Free disk space: 20 MB or more
 
 Operating systems/editions supported:
 Windows 7 Professional/Ultimate SP1
-Windows 8 Pro
-Windows 8.1 Pro
 Windows 10 Pro
-Windows Server 2008 R2 Standard
 Windows Server 2012 Standard
 Windows Server 2012 R2 Standard
+Windows Server 2016 Standard
 
 
 =================================================
