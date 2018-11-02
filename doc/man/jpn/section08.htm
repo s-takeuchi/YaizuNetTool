@@ -24,11 +24,6 @@ DummyWebServer<BR>
 処理要素を連結してWebサーバを構築しています。
 </div><P>
 
-TELNET-Server<BR>
-<div class=spc>
-処理要素を連結してTELNETサーバを構築しています。
-</div><P>
-
 TunnelPage<BR>
 <div class=spc>
 任意のWebサーバへの通信データを保存し，StkFwにシミュレートさせます。
@@ -52,16 +47,7 @@ GetDateAndTime<br>
 StkFwで実現されたWebサーバに接続することができます。<BR>
 ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のWebサーバが動作していないことを確認してください。<P>
 
-<H2 ID="8.3">8.3 TELNET-Server</H2>
-処理要素を連結してTELNETサーバを構築しています。<BR>
-スレッド開始後，同じローカルコンピュータのコマンドプロンプトから"telnet localhost"を実行することにより，
-StkFwで実現されたTELNETサーバに接続することができます。<BR>
-TELNETサーバとの接続を切断するときは，[3]キーを押下してください。<BR>
-ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のTELNETサーバが動作していないことを確認してください。<BR>
-オペレーティングシステムによっては（例：Windows Vista）事前にTELNETクライアントを有効化しておく必要があります。
-<P>
-
-<H2 ID="8.4">8.4 TunnelPage</H2>
+<H2 ID="8.3">8.3 TunnelPage</H2>
 任意のWebサーバへの通信データを保存し，StkFwにシミュレートさせます。<BR>
 TunnelPage.stdを開いたあと，ワークスペース上の処理要素"Target web server"のプロパティを開き，
 接続先Webサーバのアドレスを指定してください。<BR>
@@ -79,14 +65,14 @@ StkFwがWebブラウザとの通信をシミュレートします。<BR>
 </UL>
 <P>
 
-<H2 ID="8.5">8.5 _Sender/_Receiver</H2>
+<H2 ID="8.4">8.4 _Sender/_Receiver</H2>
 データの送信を行うサンプルとデータの受信を行うサンプルです。<br>
 _Receiverのスレッドを開始したあと，_Senderのスレッドを開始することで，_Senderで定義されたスレッドから_Receiverで定義
 されたスレッドにデータを送信します。デフォルトでは送信側と受信側のIPアドレス/ホスト名は"localhost"になっています。
 IPアドレス/ホスト名を変更することにより，異なるノード間でデータの送受信を行うことができます。
 <P>
 
-<H2 ID="8.6">8.6 GetDateAndTime</H2>
+<H2 ID="8.5">8.5 GetDateAndTime</H2>
 現在の年月日と時刻をHTTPで返却します。<br>
 Webブラウザで"http://localhost/"に接続することにより，ブラウザ上に年月日と時刻が表示されます。<br>
 ポートのバッティングを防ぐため，事前にローカルコンピュータ上で他のWebサーバが動作していないことを確認してください。
