@@ -110,6 +110,8 @@ Windows Server 2016 Standard
     Content-Length in HTTP header as a new terminate condition of TCP receiver.
 (2) Support enabled for removal and addition of HTTP header as a new processing
     element.
+(3) Support enabled for Windows Server 2016.
+
 
 =================================================
 4.License Agreement

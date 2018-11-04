@@ -642,7 +642,7 @@ void MyMsgProc::AddMsg()
 
 	//9133 (★)
 	MessageProc::AddJpn(SFW_150_160_3, _T("Windows Server 2016をサポートした。"));
-	MessageProc::AddEng(SFW_150_160_3, _T("Support enabled for Windows Server 2016"));
+	MessageProc::AddEng(SFW_150_160_3, _T("Support enabled for Windows Server 2016."));
 
 	// =====================================================================================================
 }
