@@ -1253,7 +1253,7 @@ void LowDbAccess::GetHttpHeaderInfo(int target_id, int* input_bin, wchar_t http_
 		*input_bin = RetCol1->GetValue();
 		ColumnDataBin* RetCol2 = (ColumnDataBin*)RetRec->GetColumn(L"ParamBin");
 		BYTE* bin_http_header = RetCol2->GetValue();
-		wcsncpy(http_header, (wchar_t*)bin_http_header, 1024 - 1);
+		wcsncpy_s(http_header, 1024, (wchar_t*)bin_http_header, 1024 - 1);
 	}
 	delete RecSch;
 	delete RetRec;

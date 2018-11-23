@@ -134,17 +134,17 @@ void UpdateHttpHeaderEdBox(int target, bool Enable)
 		}
 	} else {
 		if (Enable && target != HTTPHD_TARGET_REQUEST && target != HTTPHD_TARGET_RESPONSE) {
-			wcsncpy(HttpHeaderEdBoxTmp, HttpHeaderEdBox, HTTPHD_LEN - 1);
+			wcsncpy_s(HttpHeaderEdBoxTmp, HTTPHD_LEN, HttpHeaderEdBox, HTTPHD_LEN - 1);
 			if (wcslen(HttpHeaderEdBoxTmp) + wcslen(replace_target) < HTTPHD_LEN) {
-				wcscat(HttpHeaderEdBoxTmp, replace_target);
+				wcscat_s(HttpHeaderEdBoxTmp, HTTPHD_LEN, replace_target);
 			}
 		} else if (Enable && (target == HTTPHD_TARGET_REQUEST || target == HTTPHD_TARGET_RESPONSE)) {
-			wcsncpy(HttpHeaderEdBoxTmp, replace_target, HTTPHD_LEN - 1);
+			wcsncpy_s(HttpHeaderEdBoxTmp, HTTPHD_LEN, replace_target, HTTPHD_LEN - 1);
 			if (wcslen(HttpHeaderEdBoxTmp) + wcslen(HttpHeaderEdBox) < HTTPHD_LEN) {
-				wcscat(HttpHeaderEdBoxTmp, HttpHeaderEdBox);
+				wcscat_s(HttpHeaderEdBoxTmp, HTTPHD_LEN, HttpHeaderEdBox);
 			}
 		} else {
-			wcsncpy(HttpHeaderEdBoxTmp, HttpHeaderEdBox, HTTPHD_LEN - 1);
+			wcsncpy_s(HttpHeaderEdBoxTmp, HTTPHD_LEN, HttpHeaderEdBox, HTTPHD_LEN - 1);
 		}
 	}
 	SendMessage(HttpHeaderEd, WM_SETTEXT, (WPARAM)0, (LPARAM)HttpHeaderEdBoxTmp);

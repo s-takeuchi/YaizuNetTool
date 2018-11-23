@@ -23,8 +23,9 @@ int ExecElem_HttpHeader::Execute()
 	int intput_bin = 0;
 	bool http_header_del = false;
 	bool http_header_add = false;
+	size_t Result;
 	LowDbAccess::GetInstance()->GetHttpHeaderInfo(ElementId, &intput_bin, tmp_http_header);
-	wcstombs(presented_http_header, tmp_http_header, 1024 - 1);
+	wcstombs_s(&Result, presented_http_header, 1024,  tmp_http_header, 1024 - 1);
 	if (intput_bin & 0x01) {
 		http_header_del = true;
 	}
@@ -76,7 +77,7 @@ int ExecElem_HttpHeader::Execute()
 				_gmtime64_s(&GmtTime, &Ltime);
 				char MonStr[12][4] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 				char WdayStr[7][4] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-				sprintf(date_work, "Date: %s, %02d %s %d %02d:%02d:%02d GMT\r\n",
+				sprintf_s(date_work, 128, "Date: %s, %02d %s %d %02d:%02d:%02d GMT\r\n",
 					WdayStr[GmtTime.tm_wday],
 					GmtTime.tm_mday,
 					MonStr[GmtTime.tm_mon],
@@ -87,16 +88,16 @@ int ExecElem_HttpHeader::Execute()
 				/***** Make time string end *****/
 				date_work_len = strlen(date_work);
 				if (new_data_ptr + date_work_len - new_data < 10000000 - 1) {
-					strncpy(new_data_ptr, date_work, date_work_len);
+					strncpy_s(new_data_ptr, 10000000 - (new_data_ptr - new_data), date_work, date_work_len);
 					new_data_ptr += date_work_len;
 				}
 			} else if (strncmp(presented_http_header_ptr, "Content-Length: <automatically replaced>\r\n", 42) == 0) {
 				char cont_len_work[128] = "";
 				int cont_len_work_len = 0;
-				sprintf(cont_len_work, "Content-Length: %d\r\n", data_end_ptr - data_ptr);
+				sprintf_s(cont_len_work, 128, "Content-Length: %d\r\n", data_end_ptr - data_ptr);
 				cont_len_work_len = strlen(cont_len_work);
 				if (new_data_ptr + cont_len_work_len - new_data < 10000000 - 1) {
-					strncpy(new_data_ptr, cont_len_work, cont_len_work_len);
+					strncpy_s(new_data_ptr, 10000000 - (new_data_ptr - new_data), cont_len_work, cont_len_work_len);
 					new_data_ptr += cont_len_work_len;
 				}
 			} else {
@@ -112,7 +113,7 @@ int ExecElem_HttpHeader::Execute()
 			tmp_ptr = strstr(presented_http_header_ptr, "\r\n");
 		}
 		if (new_data_ptr - new_data + 2 < 10000000 - 1) {
-			strncpy(new_data_ptr, "\r\n", 2);
+			strncpy_s(new_data_ptr, 10000000 - (new_data_ptr - new_data), "\r\n", 2);
 			new_data_ptr += 2;
 		}
 	}
