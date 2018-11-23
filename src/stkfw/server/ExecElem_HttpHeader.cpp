@@ -25,7 +25,7 @@ int ExecElem_HttpHeader::Execute()
 	bool http_header_add = false;
 	size_t Result;
 	LowDbAccess::GetInstance()->GetHttpHeaderInfo(ElementId, &intput_bin, tmp_http_header);
-	wcstombs_s(&Result, presented_http_header, 1024,  tmp_http_header, 1024 - 1);
+	wcstombs_s(&Result, presented_http_header, 1024,  tmp_http_header, 1024);
 	if (intput_bin & 0x01) {
 		http_header_del = true;
 	}

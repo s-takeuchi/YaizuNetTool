@@ -1229,7 +1229,7 @@ void LowDbAccess::UpdateHttpHeaderInfo(int target_id, int input_bin, wchar_t htt
 
 	ColumnData* ColUpd[2];
 	ColUpd[0] = new ColumnDataInt(L"ParamInt1", input_bin);
-	ColUpd[1] = new ColumnDataBin(_T("ParamBin"), (BYTE*)http_header, 1024);
+	ColUpd[1] = new ColumnDataBin(_T("ParamBin"), (BYTE*)http_header, 2048);
 	RecordData* RecUpd = new RecordData(_T("ElementInfo"), ColUpd, 2);
 	LockTable(L"ElementInfo", LOCK_EXCLUSIVE);
 	UpdateRecord(RecSch, RecUpd);
@@ -1253,7 +1253,8 @@ void LowDbAccess::GetHttpHeaderInfo(int target_id, int* input_bin, wchar_t http_
 		*input_bin = RetCol1->GetValue();
 		ColumnDataBin* RetCol2 = (ColumnDataBin*)RetRec->GetColumn(L"ParamBin");
 		BYTE* bin_http_header = RetCol2->GetValue();
-		wcsncpy_s(http_header, 1024, (wchar_t*)bin_http_header, 1024 - 1);
+		wcsncpy_s(http_header, 1024, (wchar_t*)bin_http_header, 2048);
+		http_header[1023] = L'\0';
 	}
 	delete RecSch;
 	delete RetRec;
