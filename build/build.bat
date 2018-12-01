@@ -33,18 +33,18 @@ if exist deployment rmdir /S /Q deployment
 rem ########## Building ##########
 echo;
 echo Building stkdatagui.sln...
-%MSBUILD% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
+%MSBUILD% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /t:clean;build /p:Configuration=Release
 echo Building fwadd.sln...
-%MSBUILD% "..\src\fwadd\fwadd.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
+%MSBUILD% "..\src\fwadd\fwadd.sln" /t:clean;build /p:Configuration=Release
 echo Building fwdel.sln...
-%MSBUILD% "..\src\fwdel\fwdel.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
+%MSBUILD% "..\src\fwdel\fwdel.sln" /t:clean;build /p:Configuration=Release
 echo Building lbadpt.sln...
-%MSBUILD% "..\src\lbadpt\lbadpt.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
+%MSBUILD% "..\src\lbadpt\lbadpt.sln" /t:clean;build /p:Configuration=Release
 echo Building stk_ip_dlg.sln...
-%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
-%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release_win2k /p:RunCodeAnalysis=true
+%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release
+%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release_win2k
 echo Building stklibtest.sln...
-%MSBUILD% "..\src\stkfw\stklibtest.sln" /t:clean;build /p:Configuration=Release /p:RunCodeAnalysis=true
+%MSBUILD% "..\src\stkfw\stklibtest.sln" /t:clean;build /p:Configuration=Release
 
 
 rem ########## Checking file existence ##########
