@@ -1,3 +1,4 @@
+#include <tchar.h>
 #include "..\..\..\YaizuComLib\src\\commonfunc\msgproc.h"
 #include "MyMsgProc.h"
 

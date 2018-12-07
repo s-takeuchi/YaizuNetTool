@@ -10,9 +10,9 @@ ExecElem_Receiver::ExecElem_Receiver(int Id) : ExecElem(Id)
 	int ActionType = 0;
 	TCHAR TargetAddr[256] = _T("");
 	int TargetPort = 0;
-	BOOL CopiedFlag = FALSE;
+	bool CopiedFlag = false;
 	if (StkSocket_GetInfo(Id, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == 0) {
-		if (CopiedFlag == FALSE) {
+		if (CopiedFlag == false) {
 			StkSocket_Open(Id);
 			StkPropOutputLog();
 		}
@@ -26,10 +26,10 @@ ExecElem_Receiver::~ExecElem_Receiver()
 	int ActionType = 0;
 	TCHAR TargetAddr[256] = _T("");
 	int TargetPort = 0;
-	BOOL CopiedFlag = FALSE;
+	bool CopiedFlag = false;
 	if (StkSocket_GetInfo(ElementId, &SockType, &ActionType, TargetAddr, &TargetPort, &CopiedFlag) == 0) {
-		if (CopiedFlag == FALSE) {
-			StkSocket_Close(ElementId, FALSE);
+		if (CopiedFlag == false) {
+			StkSocket_Close(ElementId, false);
 			StkPropOutputLog();
 		}
 	}
