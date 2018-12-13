@@ -112,6 +112,10 @@ Windows Server 2016 Standard
     element.
 (3) Support enabled for Windows Server 2016.
 
+* Version 1.6.0 ---> 1.7.0
+(1) Fixed a bug which a part of HTTP header string is inappropriately deleted
+    when user edits the string on property dialog box of HTTP Header.
+
 
 =================================================
 4.License Agreement
