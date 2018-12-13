@@ -645,6 +645,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_150_160_3, _T("Windows Server 2016をサポートした。"));
 	MessageProc::AddEng(SFW_150_160_3, _T("Support enabled for Windows Server 2016."));
 
+	//9134 (★)
+	MessageProc::AddJpn(SFW_160_170_1, _T("プロパティダイアログボックスでHTTPヘッダを編集中に，HTTPヘッダの一部が不正に削除される不具合を修正した。"));
+	MessageProc::AddEng(SFW_160_170_1, _T("Fixed a bug which a part of HTTP header string is inappropriately deleted when user edits the string on property dialog box of HTTP Header."));
+
 	// =====================================================================================================
 }
 
