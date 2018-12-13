@@ -649,6 +649,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_160_170_1, _T("プロパティダイアログボックスでHTTPヘッダを編集中に，HTTPヘッダの一部が不正に削除される不具合を修正した。"));
 	MessageProc::AddEng(SFW_160_170_1, _T("Fixed a bug which a part of HTTP header string is inappropriately deleted when user edits the string on property dialog box of HTTP Header."));
 
+	//9135 (★)
+	MessageProc::AddJpn(SFW_160_170_2, _T("レスポンスデータ内のHTTPヘッダ部をHTTP header処理要素が削除できない不具合を修正した。"));
+	MessageProc::AddEng(SFW_160_170_2, _T("Fixed a bug which HTTP header processing element cannot delete a HTTP header part in response data."));
+
 	// =====================================================================================================
 }
 
