@@ -880,6 +880,7 @@ int SetAboutInfo()
 	AddHistoryItem(1, _T("2038"), _T("1.6.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_150_160_3));
 	AddHistoryItem(1, _T("2041"), _T("1.6.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_150_160_2));
 	AddHistoryItem(0, _T("2049"), _T("1.7.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_160_170_1));
+	AddHistoryItem(1, _T("2052"), _T("1.7.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_160_170_3));
 	AddHistoryItem(0, _T("2053"), _T("1.7.0"), MyMsgProc::GetMsg(MyMsgProc::SFW_160_170_2));
 
 	return 0;

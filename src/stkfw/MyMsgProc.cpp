@@ -412,8 +412,8 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(PROP_NET_RECVMULTI, _T("Receive data from the specified receiver element."));
 
 	// 2385 (★)
-	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTPヘッダのContent-Lengthで指定したサイズのデータを受信した"));
-	MessageProc::AddEng(PROP_NET_HTTPCONTLEN, _T("Data which size specified in Content-Length in HTTP header received."));
+	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTPヘッダのContent-Lengthまたは\"Transfer-Encoding: chunked\"にしたがう"));
+	MessageProc::AddEng(PROP_NET_HTTPCONTLEN, _T("Depend on Content-Length or \"Transfer-Encoding: chunked\" in HTTP header."));
 
 	// 2386 (★)
 	MessageProc::AddJpn(PROP_NET_TIMEOUTINTERVAL, _T("タイムアウト(msec)"));
@@ -635,7 +635,7 @@ void MyMsgProc::AddMsg()
 
 	//9131 (★)
 	MessageProc::AddJpn(SFW_150_160_1, _T("TCP receiverの終了条件として，HTTPヘッダのContent-Lengthに指定されたサイズのデータ受信を新たにサポートした。"));
-	MessageProc::AddEng(SFW_150_160_1, _T("Support enabled for data reception which the specified size of Content-Length in HTTP header as a new terminate condition of TCP receiver."));
+	MessageProc::AddEng(SFW_150_160_1, _T("Support enabled for data reception which the specified size of Content-Length in HTTP header as a new termination condition of TCP receiver."));
 
 	//9132 (★)
 	MessageProc::AddJpn(SFW_150_160_2, _T("HTTPヘッダの追加および削除を可能にする処理要素を新たにサポートした。"));
@@ -652,6 +652,10 @@ void MyMsgProc::AddMsg()
 	//9135 (★)
 	MessageProc::AddJpn(SFW_160_170_2, _T("レスポンスデータ内のHTTPヘッダ部をHTTP header処理要素が削除できない不具合を修正した。"));
 	MessageProc::AddEng(SFW_160_170_2, _T("Fixed a bug which HTTP header processing element cannot delete a HTTP header part in response data."));
+
+	//9136 (★)
+	MessageProc::AddJpn(SFW_160_170_3, _T("TCP receiverの終了条件として，HTTPヘッダの\"Transfer-Encoding: chunked\"の指定を新たにサポートした。"));
+	MessageProc::AddEng(SFW_160_170_3, _T("Support enabled for \"Transfer-Encoding: chunked\" specification in HTTP header as a new termination condition of TCP receiver."));
 
 	// =====================================================================================================
 }

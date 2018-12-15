@@ -103,7 +103,9 @@ Windows Server 2016 Standard
 * バージョン 1.6.0 ---> 1.7.0
 (1) プロパティダイアログボックスでHTTPヘッダを編集中に，HTTPヘッダの一部が不
     正に削除される不具合を修正した。
-(2) レスポンスデータ内のHTTPヘッダ部をHTTP header処理要素が削除できない不具
+(2) TCP receiverの終了条件として，HTTPヘッダの"Transfer-Encoding: chunked"の
+    指定を新たにサポートした。
+(3) レスポンスデータ内のHTTPヘッダ部をHTTP header処理要素が削除できない不具
     合を修正した。
 
 
