@@ -5,22 +5,37 @@ echo =========================================
 echo Build YaizuNetTool
 echo =========================================
 
-set CURRENTPATH=%cd%
-set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
-set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.exe"
-set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
-set LCOUNTER="C:\Program Files (x86)\lcounter\lcounter.exe"
+if defined APPVEYOR (
+  set MSBUILD="msbuild.exe"
+  set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.exe"
+  set SEVENZIP="7z.exe"
+  set LCOUNTER=""
+)
 
-echo;
-echo This batch file requires softwares shown below.
-echo (1) Microsoft Visual Studio 2017
-echo (2) 7-Zip 9.20
-echo (3) Line Counter
+if not defined APPVEYOR (
+  set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
+  set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.exe"
+  set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
+  set LCOUNTER="C:\Program Files (x86)\lcounter\lcounter.exe"
+)
 
-if not exist %MSBUILD% exit
-if not exist %DEVENV% exit
-if not exist %SEVENZIP% exit
-if not exist %LCOUNTER% exit
+if not defined APPVEYOR (
+  echo;
+  echo This batch file requires softwares shown below.
+  echo 1. Microsoft Visual Studio 2017
+  echo 2. 7-Zip 9.20
+  echo 3. Line Counter
+
+  if not exist %MSBUILD% (
+    exit
+  ) else if not exist %DEVENV% (
+    exit
+  ) else if not exist %SEVENZIP% (
+    exit
+  ) else if not exist %LCOUNTER% (
+    exit
+  )
+)
 
 
 rem ########## Initializing ##########
