@@ -49,41 +49,48 @@ rem ########## Building ##########
 echo;
 echo Building stkdatagui.sln...
 %MSBUILD% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /t:clean;build /p:Configuration=Release
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building fwadd.sln...
 %MSBUILD% "..\src\fwadd\fwadd.sln" /t:clean;build /p:Configuration=Release
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building fwdel.sln...
 %MSBUILD% "..\src\fwdel\fwdel.sln" /t:clean;build /p:Configuration=Release
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building lbadpt.sln...
 %MSBUILD% "..\src\lbadpt\lbadpt.sln" /t:clean;build /p:Configuration=Release
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building stk_ip_dlg.sln...
 %MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 %MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release_win2k
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building stklibtest.sln...
 %MSBUILD% "..\src\stkfw\stklibtest.sln" /t:clean;build /p:Configuration=Release
+IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 
 
 rem ########## Checking file existence ##########
 echo;
 echo Checking "stkdatagui.exe" existence...
-if not exist "..\..\YaizuComLib\src\stkdatagui\Release\stkdatagui.exe" goto FILENOTEXIST
+if not exist "..\..\YaizuComLib\src\stkdatagui\Release\stkdatagui.exe" goto ERRORRAISED
 echo Checking "fwadd.exe" existence...
-if not exist "..\src\fwadd\Release\fwadd.exe" goto FILENOTEXIST
+if not exist "..\src\fwadd\Release\fwadd.exe" goto ERRORRAISED
 echo Checking "fwdel.exe" existence...
-if not exist "..\src\fwdel\Release\fwdel.exe" goto FILENOTEXIST
+if not exist "..\src\fwdel\Release\fwdel.exe" goto ERRORRAISED
 echo Checking "lbadpt.exe, lbadpt32.exe, lbadpt64.exe" existence...
-if not exist "..\src\lbadpt\Release\lbadpt.exe" goto FILENOTEXIST
-if not exist "..\src\lbadpt\devcon\lbadpt32.exe" goto FILENOTEXIST
-if not exist "..\src\lbadpt\devcon\lbadpt64.exe" goto FILENOTEXIST
+if not exist "..\src\lbadpt\Release\lbadpt.exe" goto ERRORRAISED
+if not exist "..\src\lbadpt\devcon\lbadpt32.exe" goto ERRORRAISED
+if not exist "..\src\lbadpt\devcon\lbadpt64.exe" goto ERRORRAISED
 echo Checking "stk_ip_dlg.exe, stk_ip_dlg_win2k.exe" existence...
-if not exist "..\src\stk_ip_dlg\Release_win2k\stk_ip_dlg_win2k.exe" goto FILENOTEXIST
-if not exist "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" goto FILENOTEXIST
+if not exist "..\src\stk_ip_dlg\Release_win2k\stk_ip_dlg_win2k.exe" goto ERRORRAISED
+if not exist "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" goto ERRORRAISED
 echo Checking "stkfw.exe" existence...
-if not exist "..\src\stkfw\Release\stkfw.exe" goto FILENOTEXIST
+if not exist "..\src\stkfw\Release\stkfw.exe" goto ERRORRAISED
 echo Checking sample data folder existence...
-if not exist "..\src\sample\." goto FILENOTEXIST
+if not exist "..\src\sample\." goto ERRORRAISED
 echo Checking manual folder existence...
-if not exist "..\doc\man\eng\." goto FILENOTEXIST
-if not exist "..\doc\man\jpn\." goto FILENOTEXIST
+if not exist "..\doc\man\eng\." goto ERRORRAISED
+if not exist "..\doc\man\jpn\." goto ERRORRAISED
 
 
 rem ########## Deployment of files and folders ##########
@@ -134,18 +141,23 @@ cd..
 
 
 rem ########## build complete ##########
-echo;
-%LCOUNTER% ..\src /subdir
+if not defined APPVEYOR (
+  echo;
+  %LCOUNTER% ..\src /subdir
+)
 echo;
 echo All building processes of StkFw have been successfully finished.
-pause
-exit /B
+if not defined APPVEYOR (
+  pause
+)
+exit /B %ERRORLEVEL%
 
 
 rem ########## Error ##########
-:FILENOTEXIST
+:ERRORRAISED
 echo;
 echo Build error occurred because some build target files do not exist.
-pause
-exit /B
-
+if not defined APPVEYOR (
+  pause
+)
+exit /B 1
