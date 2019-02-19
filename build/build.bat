@@ -156,7 +156,7 @@ exit /B %ERRORLEVEL%
 rem ########## Error ##########
 :ERRORRAISED
 echo;
-echo Build error occurred because some build target files do not exist.
+echo Build error occurred.
 if not defined APPVEYOR (
   pause
 )
