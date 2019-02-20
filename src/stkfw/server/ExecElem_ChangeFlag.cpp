@@ -1,4 +1,4 @@
-#include "ExecElem_ChangeFlag.h"
+﻿#include "ExecElem_ChangeFlag.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
 #include <windows.h>

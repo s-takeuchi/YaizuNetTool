@@ -1,37 +1,37 @@
-#pragma once
+ï»¿#pragma once
 #include <windows.h>
 #include <mutex>
 
 class ExecElem
 {
 protected:
-	// ƒGƒŒƒƒ“ƒgID
+	// ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆID
 	int ElementId;
 
-	// ª‚Æ‚È‚é—v‘f‚ÌID
+	// æ ¹ã¨ãªã‚‹è¦ç´ ã®ID
 	int RootId;
 
-	// —v‘f‚Ìí•Ê
+	// è¦ç´ ã®ç¨®åˆ¥
 	int ElementType;
 
-	// ƒGƒŒƒƒ“ƒg‚Ìó‘Ô
+	// ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã®çŠ¶æ…‹
 	int Status;
 
-	// ÀsˆË‘¶Id
+	// å®Ÿè¡Œä¾å­˜Id
 	int WaitForExecId;
 
-	// ˆ—‚·‚éƒf[ƒ^
+	// å‡¦ç†ã™ã‚‹ãƒ‡ãƒ¼ã‚¿
 	void* Data;
 	int DataLength;
 
 public:
-	static const int STATUS_DONE = 1; // Šù‚ÉÀsÏ‚Ìó‘Ô
-	static const int STATUS_TRIED = 2; // Às‚µ‚½‚ªŸ‚Ìˆ—‚ÉˆÚ‚ê‚¸
-	static const int STATUS_WAITING = 3; // ˆ—‘Ò‚¿
-	static const int STATUS_NOTINSCOPE = 4; // ‘ÎÛŠO
-	static const int STATUS_CLEAR = 5; // Œ»İ‚ÌƒXƒŒƒbƒh‚ğƒNƒŠƒA‚·‚éiI’[ˆ—‚ªŠ®—¹‚µ‚½ó‘Ôj
-	static const int STATUS_DWAITING = 6; // Ÿ‚ÌƒXƒŒƒbƒh‚Éˆ—‚ªˆø‚«Œp‚ª‚ê‚½’¼Œã‚Ìó‘Ô
-	static const int STATUS_BWAITING = 7; // ÀsŒ‹‰Ê‚ªƒuƒƒbƒNó‘Ô(Ret==2)‚Ìê‡
+	static const int STATUS_DONE = 1; // æ—¢ã«å®Ÿè¡Œæ¸ˆã®çŠ¶æ…‹
+	static const int STATUS_TRIED = 2; // å®Ÿè¡Œã—ãŸãŒæ¬¡ã®å‡¦ç†ã«ç§»ã‚Œãš
+	static const int STATUS_WAITING = 3; // å‡¦ç†å¾…ã¡
+	static const int STATUS_NOTINSCOPE = 4; // å¯¾è±¡å¤–
+	static const int STATUS_CLEAR = 5; // ç¾åœ¨ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ï¼ˆçµ‚ç«¯å‡¦ç†ãŒå®Œäº†ã—ãŸçŠ¶æ…‹ï¼‰
+	static const int STATUS_DWAITING = 6; // æ¬¡ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã«å‡¦ç†ãŒå¼•ãç¶™ãŒã‚ŒãŸç›´å¾Œã®çŠ¶æ…‹
+	static const int STATUS_BWAITING = 7; // å®Ÿè¡ŒçµæœãŒãƒ–ãƒ­ãƒƒã‚¯çŠ¶æ…‹(Ret==2)ã®å ´åˆ
 
 	static const int RECEIVER    = 1;
 	static const int LOADDATA    = 2;
@@ -88,38 +88,38 @@ public:
 	// Create ExecElem instance
 	static ExecElem* CreateExecElem(int, int);
 
-	// ƒGƒŒƒƒ“ƒg‚Ìó‘Ô‚ğæ“¾‚·‚é
+	// ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 	int GetStatus();
-	// ƒGƒŒƒƒ“ƒg‚Ìó‘Ô‚ğİ’è‚·‚é
+	// ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã®çŠ¶æ…‹ã‚’è¨­å®šã™ã‚‹
 	void SetStatus(int);
 
-	// ÀsˆË‘¶Id‚ğæ“¾‚·‚é
+	// å®Ÿè¡Œä¾å­˜Idã‚’å–å¾—ã™ã‚‹
 	int GetWaitForExecId();
-	// ÀsˆË‘¶Id‚ğİ’è‚·‚é
+	// å®Ÿè¡Œä¾å­˜Idã‚’è¨­å®šã™ã‚‹
 	void SetWaitForExecId(int);
 
-	// ª‚Æ‚È‚é—v‘f‚ÌID‚ğæ“¾‚·‚é
+	// æ ¹ã¨ãªã‚‹è¦ç´ ã®IDã‚’å–å¾—ã™ã‚‹
 	int GetRootId();
-	// ª‚Æ‚È‚é—v‘f‚ÌID‚ğİ’è‚·‚é
+	// æ ¹ã¨ãªã‚‹è¦ç´ ã®IDã‚’è¨­å®šã™ã‚‹
 	void SetRootId(int);
 
-	// —v‘f‚Ìí•Ê‚ğæ“¾‚·‚é
+	// è¦ç´ ã®ç¨®åˆ¥ã‚’å–å¾—ã™ã‚‹
 	int GetType();
-	// —v‘f‚Ìí•Ê‚ğİ’è‚·‚é
+	// è¦ç´ ã®ç¨®åˆ¥ã‚’è¨­å®šã™ã‚‹
 	void SetType(int);
 
-	// ƒf[ƒ^‚ğæ“¾‚·‚é
+	// ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
 	void* GetData();
 	int GetDataLength();
-	// ƒf[ƒ^‚ğİ’è‚·‚é
+	// ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
 	void SetData(void*);
 	void SetDataLength(int);
 
-	// ElementId‚ğæ“¾‚·‚é
+	// ElementIdã‚’å–å¾—ã™ã‚‹
 	int GetElementId();
 
-	// —v‘f‚Ìˆ—‚ğÀs‚·‚é
-	// –ß‚è’l: (0:TerminatorˆÈŠO‚Ìˆ—‚ª³íI—¹, 1:Terminator‚Ìˆ—‚ª³íI—¹, 2:ˆÙíI—¹(ˆ—‚ği‚ß‚È‚¢))
+	// è¦ç´ ã®å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹
+	// æˆ»ã‚Šå€¤: (0:Terminatorä»¥å¤–ã®å‡¦ç†ãŒæ­£å¸¸çµ‚äº†, 1:Terminatorã®å‡¦ç†ãŒæ­£å¸¸çµ‚äº†, 2:ç•°å¸¸çµ‚äº†(å‡¦ç†ã‚’é€²ã‚ãªã„))
 	virtual int Execute() = 0;
 
 	// Thread status was changed into "Start"

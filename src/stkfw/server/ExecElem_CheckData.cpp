@@ -1,4 +1,4 @@
-#include "ExecElem_CheckData.h"
+﻿#include "ExecElem_CheckData.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
 #include <windows.h>
@@ -30,11 +30,11 @@ int ExecElem_CheckData::Execute()
 	SrcVarDatSize = GetDataLength();
 	SrcVarDat = (BYTE*)GetData();
 
-	// �����̓f�[�^�T�C�Y��0�̂Ƃ����]�����ׂ�
+	// ※入力データサイズが0のときも評価すべき
 
-	int RetCode = 2; // ���̊֐��̖߂�l�i���FOpType���s���̂Ƃ��͂��̒l�������l��ԋp�j
+	int RetCode = 2; // この関数の戻り値（注：OpTypeが不正のときはこの値を初期値を返却）
 
-	if (OpType == 0) { // ���̓f�[�^�͎w�肵���ϐ��̒l����J�n����B
+	if (OpType == 0) { // 入力データは指定した変数の値から開始する。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 2;
 		} else if (memcmp(SrcVarDat, VarDat, VarDatSize) == 0) {
@@ -43,7 +43,7 @@ int ExecElem_CheckData::Execute()
 			RetCode = 2;
 		}
 	}
-	if (OpType == 1) { // ���̓f�[�^�͎w�肵���ϐ��̒l����J�n���Ȃ��B
+	if (OpType == 1) { // 入力データは指定した変数の値から開始しない。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 0;
 		} else if (memcmp(SrcVarDat, VarDat, VarDatSize) == 0) {
@@ -52,7 +52,7 @@ int ExecElem_CheckData::Execute()
 			RetCode = 0;
 		}
 	}
-	if (OpType == 2) { // ���̓f�[�^�͎w�肵���ϐ��̒l�ŏI������B
+	if (OpType == 2) { // 入力データは指定した変数の値で終了する。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 2;
 		} else if (memcmp(SrcVarDat + SrcVarDatSize - VarDatSize, VarDat, VarDatSize) == 0) {
@@ -61,7 +61,7 @@ int ExecElem_CheckData::Execute()
 			RetCode = 2;
 		}
 	}
-	if (OpType == 3) { // ���̓f�[�^�͎w�肵���ϐ��̒l�ŏI�����Ȃ��B
+	if (OpType == 3) { // 入力データは指定した変数の値で終了しない。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 0;
 		} else if (memcmp(SrcVarDat + SrcVarDatSize - VarDatSize, VarDat, VarDatSize) == 0) {
@@ -70,7 +70,7 @@ int ExecElem_CheckData::Execute()
 			RetCode = 0;
 		}
 	}
-	if (OpType == 4) { // ���̓f�[�^�͎w�肵���ϐ��̒l���܂ށB
+	if (OpType == 4) { // 入力データは指定した変数の値を含む。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 2;
 		} else {
@@ -82,7 +82,7 @@ int ExecElem_CheckData::Execute()
 			}
 		}
 	}
-	if (OpType == 5) { // ���̓f�[�^�͎w�肵���ϐ��̒l���܂܂Ȃ��B
+	if (OpType == 5) { // 入力データは指定した変数の値を含まない。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 0;
 		} else {
@@ -94,7 +94,7 @@ int ExecElem_CheckData::Execute()
 			}
 		}
 	}
-	if (OpType == 6) { // ���̓f�[�^�͎w�肵���ϐ��̒l�Ɗ��S��v����B
+	if (OpType == 6) { // 入力データは指定した変数の値と完全一致する。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 2;
 		} else if (memcmp(SrcVarDat, VarDat, VarDatSize) == 0 && SrcVarDatSize == VarDatSize) {
@@ -103,7 +103,7 @@ int ExecElem_CheckData::Execute()
 			RetCode = 2;
 		}
 	}
-	if (OpType == 7) { // ���̓f�[�^�͎w�肵���ϐ��̒l�Ɗ��S��v���Ȃ��B
+	if (OpType == 7) { // 入力データは指定した変数の値と完全一致しない。
 		if (SrcVarDatSize < VarDatSize) {
 			RetCode = 0;
 		} else if (memcmp(SrcVarDat, VarDat, VarDatSize) == 0 && SrcVarDatSize == VarDatSize) {

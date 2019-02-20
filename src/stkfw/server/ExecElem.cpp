@@ -1,4 +1,4 @@
-#include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
+ï»¿#include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include <windows.h>
 #include <memory.h>
 #include <mutex>
@@ -301,61 +301,61 @@ ExecElem* ExecElem::CreateExecElem(int Id, int Type)
 	return NewExecElem;
 }
 
-// —v‘f‚Ìí•Ê‚ğæ“¾‚·‚é
+// è¦ç´ ã®ç¨®åˆ¥ã‚’å–å¾—ã™ã‚‹
 int ExecElem::GetType()
 {
 	return ElementType;
 }
 
-// —v‘f‚Ìí•Ê‚ğİ’è‚·‚é
+// è¦ç´ ã®ç¨®åˆ¥ã‚’è¨­å®šã™ã‚‹
 void ExecElem::SetType(int Tp)
 {
 	ElementType = Tp;
 }
 
-// ƒGƒŒƒƒ“ƒg‚Ìó‘Ô‚ğæ“¾‚·‚é
+// ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 int ExecElem::GetStatus()
 {
 	return Status;
 }
 
-// ƒGƒŒƒƒ“ƒg‚Ìó‘Ô‚ğİ’è‚·‚é
+// ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã®çŠ¶æ…‹ã‚’è¨­å®šã™ã‚‹
 void ExecElem::SetStatus(int St)
 {
 	Status = St;
 }
 
-// ÀsˆË‘¶Id‚ğæ“¾‚·‚é
+// å®Ÿè¡Œä¾å­˜Idã‚’å–å¾—ã™ã‚‹
 int ExecElem::GetWaitForExecId()
 {
 	return WaitForExecId;
 }
 
-// ÀsˆË‘¶Id‚ğİ’è‚·‚é
+// å®Ÿè¡Œä¾å­˜Idã‚’è¨­å®šã™ã‚‹
 void ExecElem::SetWaitForExecId(int ExecId)
 {
 	WaitForExecId = ExecId;
 }
 
-// ElementId‚ğæ“¾‚·‚é
+// ElementIdã‚’å–å¾—ã™ã‚‹
 int ExecElem::GetElementId()
 {
 	return ElementId;
 }
 
-// ª‚Æ‚È‚é—v‘f‚ÌID‚ğæ“¾‚·‚é
+// æ ¹ã¨ãªã‚‹è¦ç´ ã®IDã‚’å–å¾—ã™ã‚‹
 int ExecElem::GetRootId()
 {
 	return RootId;
 }
 
-// ª‚Æ‚È‚é—v‘f‚ÌID‚ğİ’è‚·‚é
+// æ ¹ã¨ãªã‚‹è¦ç´ ã®IDã‚’è¨­å®šã™ã‚‹
 void ExecElem::SetRootId(int Id)
 {
 	RootId = Id;
 }
 
-// ƒf[ƒ^‚ğæ“¾‚·‚é
+// ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
 void* ExecElem::GetData()
 {
 	return Data;
@@ -366,7 +366,7 @@ int ExecElem::GetDataLength()
 	return DataLength;
 }
 
-// ƒf[ƒ^‚ğİ’è‚·‚é
+// ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
 void ExecElem::SetData(void* Dt)
 {
 	Data = Dt;

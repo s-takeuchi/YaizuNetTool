@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <memory.h>
 #include "ServerMsg.h"
@@ -35,9 +35,9 @@ ExecElemMgr* ExecElemMgr::GetInstance()
 	return ThisInstance;
 }
 
-// w’è‚µ‚½ID‚ÌExecElem‚ğExecElems”z—ñ‚©‚çæ“¾‚·‚é
-// [in] : Id : æ“¾‘ÎÛ‚ÌExecElem‚ÌID
-// return : ExecElemƒCƒ“ƒXƒ^ƒ“ƒXBŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡NULLB
+// æŒ‡å®šã—ãŸIDã®ExecElemã‚’ExecElemsé…åˆ—ã‹ã‚‰å–å¾—ã™ã‚‹
+// [in] : Id : å–å¾—å¯¾è±¡ã®ExecElemã®ID
+// return : ExecElemã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã€‚è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆNULLã€‚
 ExecElem* ExecElemMgr::GetExecElem(int Id)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
@@ -52,9 +52,9 @@ ExecElem* ExecElemMgr::GetExecElem(int Id)
 	return NULL;
 }
 
-// ExecElems”z—ñ‚ÌIndex”Ô–Ú‚É‚ ‚éExecElem‚ğæ“¾‚·‚é
-// [in] : Index : 0‚©‚ç‚Í‚¶‚Ü‚é’Ê‚µ”Ô†
-// return : ExecElemƒCƒ“ƒXƒ^ƒ“ƒXBŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡NULLB
+// ExecElemsé…åˆ—ã®Indexç•ªç›®ã«ã‚ã‚‹ExecElemã‚’å–å¾—ã™ã‚‹
+// [in] : Index : 0ã‹ã‚‰ã¯ã˜ã¾ã‚‹é€šã—ç•ªå·
+// return : ExecElemã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã€‚è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆNULLã€‚
 ExecElem* ExecElemMgr::GetExecElemByIndex(int Index)
 {
 	if (Index < 0 || Index >= NumOfExecElem) {
@@ -63,18 +63,18 @@ ExecElem* ExecElemMgr::GetExecElemByIndex(int Index)
 	return ExecElems[Index];
 }
 
-// ExecElems”z—ñ‚É‘¶İ‚·‚éExecElemƒCƒ“ƒXƒ^ƒ“ƒX‚Ì”‚ğæ“¾‚·‚é
-// return : ExecElemƒCƒ“ƒXƒ^ƒ“ƒX‚Ì”
+// ExecElemsé…åˆ—ã«å­˜åœ¨ã™ã‚‹ExecElemã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ•°ã‚’å–å¾—ã™ã‚‹
+// return : ExecElemã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ•°
 int ExecElemMgr::GetExecElemCount()
 {
 	return NumOfExecElem;
 }
 
-// w’è‚µ‚½ID‚Ì—v‘f‚ÆƒŠƒ“ƒN‚µ‚Ä‚¢‚é‘S‚Ä‚Ì—v‘f(ExecElem)‚ğæ“¾‚·‚é
-// [in] : Id : ƒŠƒ“ƒN‘ÎÛ‚Ì—v‘f‚ÌID
-// [in] : OrgId : ƒŠƒ“ƒN‚Ìª‚Æ‚È‚éID
-// [in] : PrevId : ƒŠƒ“ƒNŒ³‚Ì—v‘f‚ÌID
-// [in] : Counter : Ä‹A“I‚ÈŒÄ‚Ño‚µ‰ñ”
+// æŒ‡å®šã—ãŸIDã®è¦ç´ ã¨ãƒªãƒ³ã‚¯ã—ã¦ã„ã‚‹å…¨ã¦ã®è¦ç´ (ExecElem)ã‚’å–å¾—ã™ã‚‹
+// [in] : Id : ãƒªãƒ³ã‚¯å¯¾è±¡ã®è¦ç´ ã®ID
+// [in] : OrgId : ãƒªãƒ³ã‚¯ã®æ ¹ã¨ãªã‚‹ID
+// [in] : PrevId : ãƒªãƒ³ã‚¯å…ƒã®è¦ç´ ã®ID
+// [in] : Counter : å†å¸°çš„ãªå‘¼ã³å‡ºã—å›æ•°
 void ExecElemMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Counter)
 {
 	int LinkId[10];
@@ -93,7 +93,7 @@ void ExecElemMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Counter
 				GetLinkedElementIds(LinkId[Loop], OrgId, Id, Counter);
 			}
 		}
-		/////// “¯‚¶Id, OrgId, PrevId‚ªŠù‚ÉExecElems‚É“o˜^‚³‚ê‚Ä‚¢‚éê‡CÄ“o˜^‚µ‚È‚¢
+		/////// åŒã˜Id, OrgId, PrevIdãŒæ—¢ã«ExecElemsã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹å ´åˆï¼Œå†ç™»éŒ²ã—ãªã„
 		for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
 			ExecElem* CmpExecElem = ExecElems[Loop];
 			if (CmpExecElem->GetRootId() == OrgId && CmpExecElem->GetElementId() == Id && CmpExecElem->GetWaitForExecId() == PrevId) {
@@ -109,8 +109,8 @@ void ExecElemMgr::GetLinkedElementIds(int Id, int OrgId, int PrevId, int Counter
 	}
 }
 
-// ÀsˆË‘¶Id‚Ìİ’èiw’è‚µ‚½Id‚ğƒŠƒ“ƒNŒ³‚Æ‚·‚é—v‘f‚ÌWaitForExecId‚ğİ’è‚·‚éj
-// [in] : Id : ƒŠƒ“ƒNŒ³‚Ì—v‘f‚ÌID
+// å®Ÿè¡Œä¾å­˜Idã®è¨­å®šï¼ˆæŒ‡å®šã—ãŸIdã‚’ãƒªãƒ³ã‚¯å…ƒã¨ã™ã‚‹è¦ç´ ã®WaitForExecIdã‚’è¨­å®šã™ã‚‹ï¼‰
+// [in] : Id : ãƒªãƒ³ã‚¯å…ƒã®è¦ç´ ã®ID
 void ExecElemMgr::SetWaitForThreadEnd(int Id)
 {
 	int LinkOrgId;
@@ -163,8 +163,8 @@ void ExecElemMgr::ThreadStatusChangedIntoStop(int Id)
 	}
 }
 
-// Id‚ÆŠÖ˜A•t‚­‘S‚Ä‚ÌÀsŒn—v‘fCƒf[ƒ^Œn—v‘f‚ğExecElem‚É“WŠJ
-// [in] : Id : ÀsŒn—v‘f‚ÌID
+// Idã¨é–¢é€£ä»˜ãå…¨ã¦ã®å®Ÿè¡Œç³»è¦ç´ ï¼Œãƒ‡ãƒ¼ã‚¿ç³»è¦ç´ ã‚’ExecElemã«å±•é–‹
+// [in] : Id : å®Ÿè¡Œç³»è¦ç´ ã®ID
 void ExecElemMgr::AddExecElem(int Id)
 {
 	EnterCriticalSection(&CritSect);
@@ -173,8 +173,8 @@ void ExecElemMgr::AddExecElem(int Id)
 	LeaveCriticalSection(&CritSect);
 }
 
-// ‘S‚Ä‚ÌExecElem‚ğíœ‚·‚é
-// [in] : Id : ÀsŒn—v‘f‚ÌID
+// å…¨ã¦ã®ExecElemã‚’å‰Šé™¤ã™ã‚‹
+// [in] : Id : å®Ÿè¡Œç³»è¦ç´ ã®ID
 void ExecElemMgr::DeleteExecElem(int Id)
 {
 	EnterCriticalSection(&CritSect);
@@ -198,7 +198,7 @@ void ExecElemMgr::DeleteExecElem(int Id)
 	LeaveCriticalSection(&CritSect);
 }
 
-// Ÿ‚Ìˆ—‚ÌƒXƒe[ƒ^ƒX‚ğNotInScope‚©‚çWaiting/DWaiting‚É•ÏX‚·‚é
+// æ¬¡ã®å‡¦ç†ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’NotInScopeã‹ã‚‰Waiting/DWaitingã«å¤‰æ›´ã™ã‚‹
 void ExecElemMgr::ChangeNotInScopeToWaiting(int Id, int RootId)
 {
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
@@ -216,8 +216,8 @@ void ExecElemMgr::ChangeNotInScopeToWaiting(int Id, int RootId)
 	}
 }
 
-// ƒŠƒ“ƒN‚Ìí•Ê‚ğ•ÏX‚·‚é
-// [in] : LkTp : ƒŠƒ“ƒNí•Ê (LkTp == -5 : 101¨111, LkTp == +5 : 111¨101)
+// ãƒªãƒ³ã‚¯ã®ç¨®åˆ¥ã‚’å¤‰æ›´ã™ã‚‹
+// [in] : LkTp : ãƒªãƒ³ã‚¯ç¨®åˆ¥ (LkTp == -5 : 101â†’111, LkTp == +5 : 111â†’101)
 void ExecElemMgr::ChangeLineType(int From, int To, int LkTp)
 {
 	BOOL FndFlag;
@@ -252,10 +252,10 @@ void ExecElemMgr::ClearLineType(int Id)
 	LeaveCriticalSection(&CritSect);
 }
 
-// Še—v‘f‚Ìˆ—‚ğÀs‚·‚é
+// å„è¦ç´ ã®å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹
 void ExecElemMgr::ExecuteElement(int Id)
 {
-	// STATUS_CLEAR‚Ìˆ—
+	// STATUS_CLEARã®å‡¦ç†
 	EnterCriticalSection(&CritSect);
 	for (int Loop = 0; Loop < NumOfExecElem; Loop++) {
 		ExecElem* CurExecElem = ExecElems[Loop];
@@ -263,12 +263,12 @@ void ExecElemMgr::ExecuteElement(int Id)
 			for (int LoopClr = 0; LoopClr < NumOfExecElem; LoopClr++) {
 				ExecElem* ExecElemClr = ExecElems[LoopClr];
 
-				// Timer‚ğƒNƒŠƒA
+				// Timerã‚’ã‚¯ãƒªã‚¢
 				if (ExecElemClr->GetRootId() == Id && ExecElemClr->GetType() == 12) {
 					LowDbAccess::GetInstance()->SetElementInfoParamInt(ExecElemClr->GetElementId(), 0, 5);
 				}
 
-				// STATUS_CLEAR‚ğI’[‚Ìó‘Ô‚Æ‚·‚éƒXƒŒƒbƒh‚ÉŠÖ‚µ‚ÄƒŠƒ“ƒNí•Ê‚ÌƒNƒŠƒA‚Æƒf[ƒ^—Ìˆæ‚ÌŠJ•ú
+				// STATUS_CLEARã‚’çµ‚ç«¯ã®çŠ¶æ…‹ã¨ã™ã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰ã«é–¢ã—ã¦ãƒªãƒ³ã‚¯ç¨®åˆ¥ã®ã‚¯ãƒªã‚¢ã¨ãƒ‡ãƒ¼ã‚¿é ˜åŸŸã®é–‹æ”¾
 				if (ExecElemClr->GetRootId() == Id) {
 					if (ExecElemClr->GetWaitForExecId() != -1) {
 						ChangeLineType(ExecElemClr->GetWaitForExecId(), ExecElemClr->GetElementId(), 5);
@@ -282,12 +282,12 @@ void ExecElemMgr::ExecuteElement(int Id)
 					}
 				}
 
-				// w’è‚µ‚½ID‚ğ‚ÂƒXƒŒƒbƒhŠJn—v‘f‚ÅC’¼‘O‚ÌƒXƒŒƒbƒh‚Í‘¶İ‚µ‚È‚¢
+				// æŒ‡å®šã—ãŸIDã‚’æŒã¤ã‚¹ãƒ¬ãƒƒãƒ‰é–‹å§‹è¦ç´ ã§ï¼Œç›´å‰ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã¯å­˜åœ¨ã—ãªã„
 				if (ExecElemClr->GetElementId() == Id && ExecElemClr->GetWaitForExecId() == -1) {
 					ExecElemClr->SetStatus(ExecElem::STATUS_WAITING);
 				}
 
-				// w’è‚µ‚½ID‚ğ‚ÂƒXƒŒƒbƒhŠJn—v‘f‚ÅC’¼‘O‚ÌƒXƒŒƒbƒh‚©‚ç˜A½‚µ‚Ä‚¢‚é
+				// æŒ‡å®šã—ãŸIDã‚’æŒã¤ã‚¹ãƒ¬ãƒƒãƒ‰é–‹å§‹è¦ç´ ã§ï¼Œç›´å‰ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‹ã‚‰é€£é–ã—ã¦ã„ã‚‹
 				if (ExecElemClr->GetElementId() == Id && ExecElemClr->GetWaitForExecId() != -1) {
 					for (int LoopClr2 = 0; LoopClr2 < NumOfExecElem; LoopClr2++) {
 						ExecElem* ExecElemClr2 = ExecElems[LoopClr2];
@@ -313,10 +313,10 @@ void ExecElemMgr::ExecuteElement(int Id)
 			int PrevId = CurExecElem->GetWaitForExecId();
 			if (PrevId != -1 && CurExecElem->GetStatus() != ExecElem::STATUS_BWAITING) {
 				ChangeLineType(PrevId, CurExecElem->GetElementId(), -5);
-				// ƒf[ƒ^‚ğ‘O‚Ì—v‘f‚©‚çˆø‚«Œp‚®
+				// ãƒ‡ãƒ¼ã‚¿ã‚’å‰ã®è¦ç´ ã‹ã‚‰å¼•ãç¶™ã
 				for (int LoopDt = 0; LoopDt < NumOfExecElem; LoopDt++) {
 					ExecElem* ExecElemDt = ExecElems[LoopDt];
-					// ‘O‚Ì—v‘f‚ªAggregation/Destribution‚Å‚È‚¯‚ê‚Îƒ|ƒCƒ“ƒ^‚ğˆÚ“®
+					// å‰ã®è¦ç´ ãŒAggregation/Destributionã§ãªã‘ã‚Œã°ãƒã‚¤ãƒ³ã‚¿ã‚’ç§»å‹•
 					if (ExecElemDt->GetRootId() == CurExecElem->GetRootId() && ExecElemDt->GetElementId() == PrevId && ExecElemDt->GetType() != 15) {
 						if (CurExecElem->GetData() == NULL) {
 							CurExecElem->SetData(ExecElemDt->GetData());
@@ -326,7 +326,7 @@ void ExecElemMgr::ExecuteElement(int Id)
 							break;
 						}
 					}
-					// ‘O‚Ì—v‘f‚ªAggregation/Destribution‚È‚ç‚Îƒf[ƒ^‚ğƒRƒs[
+					// å‰ã®è¦ç´ ãŒAggregation/Destributionãªã‚‰ã°ãƒ‡ãƒ¼ã‚¿ã‚’ã‚³ãƒ”ãƒ¼
 					if (ExecElemDt->GetRootId() == CurExecElem->GetRootId() && ExecElemDt->GetElementId() == PrevId && ExecElemDt->GetType() == 15) {
 						if (CurExecElem->GetData() == NULL) {
 							int TargetDatLen = ExecElemDt->GetDataLength();
@@ -347,7 +347,7 @@ void ExecElemMgr::ExecuteElement(int Id)
 			LeaveCriticalSection(&CritSect);
 
 			// ##10084 begin
-			// ƒf[ƒ^‚ªã‘‚«‚³‚ê‚é‚±‚Æ‚Ö‚Ì‘Îˆ
+			// ãƒ‡ãƒ¼ã‚¿ãŒä¸Šæ›¸ãã•ã‚Œã‚‹ã“ã¨ã¸ã®å¯¾å‡¦
 			TCHAR Buf[MAX_PATH];
 			wsprintf(Buf, _T("%d-%d"), GetCurrentProcessId(), CurExecElem->GetElementId());
 			HANDLE Mutx = OpenMutex(SYNCHRONIZE, FALSE, Buf);
@@ -358,11 +358,11 @@ void ExecElemMgr::ExecuteElement(int Id)
 			WaitForSingleObject(Mutx, INFINITE);
 			// ##10084 end
 
-			// Še—v‘f‚Ìˆ—‚ğÀs‚·‚é
+			// å„è¦ç´ ã®å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹
 			int Ret = CurExecElem->Execute();
 
 			// ##10084 begin
-			// ƒf[ƒ^‚ªã‘‚«‚³‚ê‚é‚±‚Æ‚Ö‚Ì‘Îˆ
+			// ãƒ‡ãƒ¼ã‚¿ãŒä¸Šæ›¸ãã•ã‚Œã‚‹ã“ã¨ã¸ã®å¯¾å‡¦
 			ReleaseMutex(Mutx);
 			CloseHandle(Mutx);
 			// ##10084 end
@@ -375,21 +375,21 @@ void ExecElemMgr::ExecuteElement(int Id)
 
 			if (Ret == 0 || Ret == 1) {
 				ChangeNotInScopeToWaiting(CurExecElem->GetElementId(), CurExecElem->GetRootId());
-				// Terminator‚©
+				// Terminatorã‹
 				if (Ret == 1) {
-					// ExecElem‚ÌŸ‚Ì—v‘f‚ªDWAITING‚È‚ç‚ÎExecElem‚Ìó‘Ô‚ğDONE‚É‚·‚é
+					// ExecElemã®æ¬¡ã®è¦ç´ ãŒDWAITINGãªã‚‰ã°ExecElemã®çŠ¶æ…‹ã‚’DONEã«ã™ã‚‹
 					int LoopWt;
 					for (LoopWt = 0; LoopWt < NumOfExecElem; LoopWt++) {
 						ExecElem* ExecElemWt = ExecElems[LoopWt];
 						if (ExecElemWt->GetWaitForExecId() == CurExecElem->GetElementId()) {
 							// ##10084 if (ExecElemWt->GetStatus() == ExecElem::STATUS_DWAITING) {
-							// ƒf[ƒ^‚ª—]•ª‚Éˆ—‚³‚ê‚é‚±‚Æ‚Ö‚Ì‘Îˆ
+							// ãƒ‡ãƒ¼ã‚¿ãŒä½™åˆ†ã«å‡¦ç†ã•ã‚Œã‚‹ã“ã¨ã¸ã®å¯¾å‡¦
 							CurExecElem->SetStatus(ExecElem::STATUS_DONE);
 							// ##10084 }
 							break;
 						}
 					}
-					// ExecElem‚ÌŸ‚Ì—v‘f‚ª‘¶İ‚µ‚È‚¯‚ê‚Îó‘Ô‚ğCLEAR‚É‚·‚é
+					// ExecElemã®æ¬¡ã®è¦ç´ ãŒå­˜åœ¨ã—ãªã‘ã‚Œã°çŠ¶æ…‹ã‚’CLEARã«ã™ã‚‹
 					if (LoopWt == NumOfExecElem) {
 						CurExecElem->SetStatus(ExecElem::STATUS_CLEAR);
 					}

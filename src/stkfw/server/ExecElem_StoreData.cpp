@@ -1,4 +1,4 @@
-#include "ExecElem_StoreData.h"
+ï»¿#include "ExecElem_StoreData.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
 #include <windows.h>
@@ -26,22 +26,22 @@ int ExecElem_StoreData::Execute()
 		Ret = 1;
 	}
 
-	// ‘€ìí•Ê=0:"1‚Â‚Ì•Ï”‚Ö‚Ìî•ñ‚Ìİ’è" ,1:"•¡”‚Ì•Ï”‚Ö‚Ìî•ñ‚Ìİ’è"
+	// æ“ä½œç¨®åˆ¥=0:"1ã¤ã®å¤‰æ•°ã¸ã®æƒ…å ±ã®è¨­å®š" ,1:"è¤‡æ•°ã®å¤‰æ•°ã¸ã®æƒ…å ±ã®è¨­å®š"
 	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2) == 0) {
-		// ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ÌID‚ğæ“¾‚·‚é
+		// ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®IDã‚’å–å¾—ã™ã‚‹
 		VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
-		// •Ï”‚ª‘¶İ‚·‚é‚©ƒ`ƒFƒbƒN‚·‚é
+		// å¤‰æ•°ãŒå­˜åœ¨ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 		if (VarCon_CheckVariableExistence(VarId) == FALSE) {
 			return Ret;
 		}
 
-		// “o˜^ÏƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“•Ï”‚ÌƒTƒCƒYƒ`ƒFƒbƒN
-		int CurSize = VarCon_GetCommunicationVariableSize(VarId) + 10000; // XV‚Ì‚İ10000‰ÁZi——R‚ÍVarCon_CheckComm...QÆj
+		// ç™»éŒ²æ¸ˆã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³å¤‰æ•°ã®ã‚µã‚¤ã‚ºãƒã‚§ãƒƒã‚¯
+		int CurSize = VarCon_GetCommunicationVariableSize(VarId) + 10000; // æ›´æ–°æ™‚ã®ã¿10000åŠ ç®—ï¼ˆç†ç”±ã¯VarCon_CheckComm...å‚ç…§ï¼‰
 		if (VarCon_CheckCommunicationVariableSize(VarDatSize - CurSize) == FALSE) {
 			return Ret;
 		}
 	} else {
-		// “o˜^ÏƒŒƒR[ƒh‚ÌãŒÀƒ`ƒFƒbƒN
+		// ç™»éŒ²æ¸ˆãƒ¬ã‚³ãƒ¼ãƒ‰ã®ä¸Šé™ãƒã‚§ãƒƒã‚¯
 		if (VarCon_CheckVariableCount() == FALSE) {
 			return Ret;
 		}
@@ -59,10 +59,10 @@ int ExecElem_StoreData::Execute()
 		lstrcpyn(TgtDesc, TmpVarName, 64);
 		VarId = VarCon_GetCommunicationVariableId(TgtName);
 
-		// “o˜^ÏƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“•Ï”‚ÌƒTƒCƒYƒ`ƒFƒbƒN
+		// ç™»éŒ²æ¸ˆã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³å¤‰æ•°ã®ã‚µã‚¤ã‚ºãƒã‚§ãƒƒã‚¯
 		int CurSize = 0;
 		if (VarId != -1) {
-			CurSize = VarCon_GetCommunicationVariableSize(VarId) + 10000; // XV‚Ì‚İ10000‰ÁZi——R‚ÍVarCon_CheckComm...QÆj
+			CurSize = VarCon_GetCommunicationVariableSize(VarId) + 10000; // æ›´æ–°æ™‚ã®ã¿10000åŠ ç®—ï¼ˆç†ç”±ã¯VarCon_CheckComm...å‚ç…§ï¼‰
 		}
 		if (VarCon_CheckCommunicationVariableSize(VarDatSize - CurSize) == FALSE) {
 			return Ret;

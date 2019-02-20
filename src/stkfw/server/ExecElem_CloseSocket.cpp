@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_CloseSocket.h"
 #include "LowDbAccess.h"

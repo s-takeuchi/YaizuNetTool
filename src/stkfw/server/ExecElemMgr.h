@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <windows.h>
 #include "ExecElem.h"
 
@@ -8,11 +8,11 @@ private:
 	// This instance
 	static ExecElemMgr* ThisInstance;
 
-	// ŠeÀsŒn—v‘fCƒf[ƒ^Œn—v‘f‚ÌÀsÀ‘Ì
+	// å„å®Ÿè¡Œç³»è¦ç´ ï¼Œãƒ‡ãƒ¼ã‚¿ç³»è¦ç´ ã®å®Ÿè¡Œå®Ÿä½“
 	ExecElem* ExecElems[1000];
 	int NumOfExecElem;
 
-	// ƒNƒŠƒeƒBƒJƒ‹ƒZƒNƒVƒ‡ƒ“
+	// ã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«ã‚»ã‚¯ã‚·ãƒ§ãƒ³
 	static CRITICAL_SECTION CritSect;
 	static CRITICAL_SECTION CritSectExe; //#10084
 
@@ -22,35 +22,35 @@ private:
 	// Destructor
 	~ExecElemMgr();
 
-	// w’è‚µ‚½ID‚Ì—v‘f‚ÆƒŠƒ“ƒN‚µ‚Ä‚¢‚é‘S‚Ä‚Ì—v‘f(ExecElem)æ“¾‚·‚é
+	// æŒ‡å®šã—ãŸIDã®è¦ç´ ã¨ãƒªãƒ³ã‚¯ã—ã¦ã„ã‚‹å…¨ã¦ã®è¦ç´ (ExecElem)å–å¾—ã™ã‚‹
 	void GetLinkedElementIds(int, int, int, int);
 
-	// ÀsˆË‘¶Id‚Ìİ’è
+	// å®Ÿè¡Œä¾å­˜Idã®è¨­å®š
 	void SetWaitForThreadEnd(int);
 
-	// Ÿ‚Ìˆ—‚ÌƒXƒe[ƒ^ƒX‚ğNotInScope‚©‚çWaiting‚É•ÏX‚·‚é
+	// æ¬¡ã®å‡¦ç†ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’NotInScopeã‹ã‚‰Waitingã«å¤‰æ›´ã™ã‚‹
 	void ChangeNotInScopeToWaiting(int, int);
 
-	// ƒŠƒ“ƒN‚Ìí•Ê‚ğ•ÏX‚·‚é
+	// ãƒªãƒ³ã‚¯ã®ç¨®åˆ¥ã‚’å¤‰æ›´ã™ã‚‹
 	void ChangeLineType(int, int, int);
 
 public:
 	// Get this instance
 	static ExecElemMgr* GetInstance();
 
-	// w’è‚µ‚½ID‚ÌExecElem‚ğExecElems”z—ñ‚©‚çæ“¾‚·‚é
+	// æŒ‡å®šã—ãŸIDã®ExecElemã‚’ExecElemsé…åˆ—ã‹ã‚‰å–å¾—ã™ã‚‹
 	ExecElem* GetExecElem(int);
-	// ExecElems”z—ñ‚ÌX”Ô–Ú‚É‚ ‚éExecElem‚ğæ“¾‚·‚é
+	// ExecElemsé…åˆ—ã®Xç•ªç›®ã«ã‚ã‚‹ExecElemã‚’å–å¾—ã™ã‚‹
 	ExecElem* GetExecElemByIndex(int);
-	// ExecElems”z—ñ‚É‘¶İ‚·‚éExecElemƒCƒ“ƒXƒ^ƒ“ƒX‚Ì”‚ğæ“¾‚·‚é
+	// ExecElemsé…åˆ—ã«å­˜åœ¨ã™ã‚‹ExecElemã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ•°ã‚’å–å¾—ã™ã‚‹
 	int GetExecElemCount();
 
-	// ‘S‚Ä‚ÌÀsŒn—v‘fCƒf[ƒ^Œn—v‘f‚ğExecElem‚É“WŠJ
+	// å…¨ã¦ã®å®Ÿè¡Œç³»è¦ç´ ï¼Œãƒ‡ãƒ¼ã‚¿ç³»è¦ç´ ã‚’ExecElemã«å±•é–‹
 	void AddExecElem(int);
-	// ‘S‚Ä‚ÌExecElem‚ğíœ‚·‚é
+	// å…¨ã¦ã®ExecElemã‚’å‰Šé™¤ã™ã‚‹
 	void DeleteExecElem(int);
 
-	// Še—v‘f‚Ìˆ—‚ğÀs‚·‚é
+	// å„è¦ç´ ã®å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹
 	void ExecuteElement(int);
 
 	// Thread status was changed into "Start"
@@ -59,7 +59,7 @@ public:
 	// Thread status was changed into "Stop"
 	void ThreadStatusChangedIntoStop(int);
 
-	// ƒŠƒ“ƒN‚Ìí•Ê‚ğƒNƒŠƒA‚·‚é
+	// ãƒªãƒ³ã‚¯ã®ç¨®åˆ¥ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 	void ClearLineType(int );
 
 };

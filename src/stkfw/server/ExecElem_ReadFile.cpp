@@ -1,4 +1,4 @@
-#include "ExecElem_ReadFile.h"
+ï»¿#include "ExecElem_ReadFile.h"
 #include "LowDbAccess.h"
 #include <windows.h>
 
@@ -13,28 +13,28 @@ ExecElem_ReadFile::~ExecElem_ReadFile()
 
 int ExecElem_ReadFile::Execute()
 {
-	// “Ç‚İ‚İ‘ÎÛƒtƒ@ƒCƒ‹ƒpƒX‚Ìæ“¾
+	// èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®å–å¾—
 	TCHAR BufPath[256];
 	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufPath, 1);
-	// ƒAƒNƒZƒXí•Ê‚Ìæ“¾
+	// ã‚¢ã‚¯ã‚»ã‚¹ç¨®åˆ¥ã®å–å¾—
 	int AccessType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
-	// “ü—Íƒf[ƒ^‚Ìæ“¾
+	// å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	BYTE* InputDat = (BYTE*)GetData();
 	int InputDatLength = GetDataLength();
 
-	// ì‹Æ—p—Ìˆæ
+	// ä½œæ¥­ç”¨é ˜åŸŸ
 	BYTE* WorkDat;
 	int WorkDatLength;
 	DWORD TmpSize = 0;
 
-	// “Ç‚İ‚İ‘ÎÛƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“
+	// èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³
 	HANDLE ReadFileHndl = CreateFile(BufPath, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (ReadFileHndl == INVALID_HANDLE_VALUE) {
 		return 2;
 	}
 
-	// ƒTƒCƒY‚Ìƒ`ƒFƒbƒN
+	// ã‚µã‚¤ã‚ºã®ãƒã‚§ãƒƒã‚¯
 	LARGE_INTEGER ExistingFileSize;
 	GetFileSizeEx(ReadFileHndl, &ExistingFileSize);
 

@@ -1,4 +1,4 @@
-#include "ExecElem_LoadData.h"
+ï»¿#include "ExecElem_LoadData.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
 #include <windows.h>
@@ -20,9 +20,9 @@ int ExecElem_LoadData::Execute()
 	int VarId;
 	BYTE* VarDat = NULL;
 	int VarDatSize = 0;
-	// ‘€ìí•Ê=0:"1‚Â‚Ì•Ï”‚©‚çî•ñ‚ğæ“¾", 1:"•¡”‚Ì•Ï”‚©‚çî•ñ‚ğæ“¾"
+	// æ“ä½œç¨®åˆ¥=0:"1ã¤ã®å¤‰æ•°ã‹ã‚‰æƒ…å ±ã‚’å–å¾—", 1:"è¤‡æ•°ã®å¤‰æ•°ã‹ã‚‰æƒ…å ±ã‚’å–å¾—"
 	if (LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2) == 0) {
-		// ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ÌID‚ğæ“¾‚·‚é
+		// ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®IDã‚’å–å¾—ã™ã‚‹
 		VarId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	} else {
 		TCHAR TmpVarName[256];
@@ -51,6 +51,6 @@ int ExecElem_LoadData::Execute()
 		return 2;
 	}
 	SetDataLength(VarDatSize);
-	SetData(VarDat); // ƒTƒCƒY0‚Ìƒf[ƒ^‚Å‚ànew‚µ‚½—Ìˆæ‚Ìƒ|ƒCƒ“ƒ^‚ğw’è‚·‚é
+	SetData(VarDat); // ã‚µã‚¤ã‚º0ã®ãƒ‡ãƒ¼ã‚¿ã§ã‚‚newã—ãŸé ˜åŸŸã®ãƒã‚¤ãƒ³ã‚¿ã‚’æŒ‡å®šã™ã‚‹
 	return 0;
 }

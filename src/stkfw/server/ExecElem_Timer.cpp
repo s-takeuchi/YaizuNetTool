@@ -1,4 +1,4 @@
-#include "ExecElem_Timer.h"
+﻿#include "ExecElem_Timer.h"
 #include "LowDbAccess.h"
 #include <windows.h>
 

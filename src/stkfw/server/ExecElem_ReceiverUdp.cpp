@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_ReceiverUdp.h"
 #include "LowDbAccess.h"
@@ -39,36 +39,36 @@ int ExecElem_ReceiverUdp::Execute()
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1); // Specified type
 
-																					 // ƒzƒXƒg–¼/IPƒAƒhƒŒƒXCƒ|[ƒg”Ô†’¼ÚŽw’è‚Ìê‡
+																					 // ãƒ›ã‚¹ãƒˆå/IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Œãƒãƒ¼ãƒˆç•ªå·ç›´æŽ¥æŒ‡å®šã®å ´åˆ
 	if (SpecType == 0) {
-		// ƒzƒXƒg–¼/IPƒAƒhƒŒƒXCƒ|[ƒg”Ô†’¼ÚŽw’è‚Ìê‡
+		// ãƒ›ã‚¹ãƒˆå/IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Œãƒãƒ¼ãƒˆç•ªå·ç›´æŽ¥æŒ‡å®šã®å ´åˆ
 		TargetId = ElementId;
 	} else {
-		// Sender‚ÌÚ‘±‘ÎÛŽw’è‚Ìê‡
+		// Senderã®æŽ¥ç¶šå¯¾è±¡æŒ‡å®šã®å ´åˆ
 		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
-	// ƒf[ƒ^‚ÌŽóM
+	// ãƒ‡ãƒ¼ã‚¿ã®å—ä¿¡
 	BYTE* Buf = new BYTE[10000000];
 	int ActSize = 0;
 	ActSize = StkSocket_ReceiveUdp(TargetId, ElementId, Buf, 9999999);
 	StkPropOutputLog();
 
-	// ƒf[ƒ^ŽóM’†ƒGƒ‰[”­¶^ƒ\ƒPƒbƒgØ’f
+	// ãƒ‡ãƒ¼ã‚¿å—ä¿¡ä¸­ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿï¼ã‚½ã‚±ãƒƒãƒˆåˆ‡æ–­
 	if (ActSize == SOCKET_ERROR || ActSize == -1 || ActSize == -2) {
 		delete Buf;
 		return 2;
 	}
 
-	// ƒf[ƒ^‚ð“KØ‚ÈƒTƒCƒY‚Ì—Ìˆæ‚ÉƒRƒs[‚·‚é
+	// ãƒ‡ãƒ¼ã‚¿ã‚’é©åˆ‡ãªã‚µã‚¤ã‚ºã®é ˜åŸŸã«ã‚³ãƒ”ãƒ¼ã™ã‚‹
 	BYTE* TmpVarDat = new BYTE[ActSize];
 	memcpy((void*)TmpVarDat, (void*)Buf, ActSize);
 	SetDataLength(ActSize);
 	SetData(TmpVarDat);
 	delete Buf;
 
-	// ŽóMŒãƒ\ƒPƒbƒg‚ðƒNƒ[ƒY‚·‚éê‡
+	// å—ä¿¡å¾Œã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹å ´åˆ
 	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0) {

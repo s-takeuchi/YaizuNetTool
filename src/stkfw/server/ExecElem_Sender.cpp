@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_Sender.h"
 #include "LowDbAccess.h"
@@ -17,25 +17,25 @@ int ExecElem_Sender::Execute()
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 	if (SpecType == 0) {
-		// ƒzƒXƒg–¼/IPƒAƒhƒŒƒXCƒ|[ƒg”Ô†’¼ÚŽw’è‚Ìê‡
+		// ãƒ›ã‚¹ãƒˆå/IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Œãƒãƒ¼ãƒˆç•ªå·ç›´æŽ¥æŒ‡å®šã®å ´åˆ
 		TargetId = ElementId;
 		if (StkSocket_Connect(TargetId) == -1) {
 			StkPropOutputLog();
 			return 2;
 		}
 	} else {
-		// Receiver‚ÌÚ‘±‘ÎÛŽw’è‚Ìê‡
+		// Receiverã®æŽ¥ç¶šå¯¾è±¡æŒ‡å®šã®å ´åˆ
 		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
-	// ƒf[ƒ^‘—M
+	// ãƒ‡ãƒ¼ã‚¿é€ä¿¡
 	int DatSize = GetDataLength();
 	BYTE* Dat = (BYTE*)GetData();
 	int Ret = StkSocket_Send(TargetId, ElementId, Dat, DatSize);
 	StkPropOutputLog();
 
-	// ‘—MŒãƒ\ƒPƒbƒg‚ðƒNƒ[ƒY‚·‚éê‡
+	// é€ä¿¡å¾Œã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹å ´åˆ
 	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0) {

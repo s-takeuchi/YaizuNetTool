@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_Receiver.h"
 #include "VarController.h"
@@ -40,21 +40,21 @@ int ExecElem_Receiver::Execute()
 	int TargetId;
 	int SpecType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
-	// ƒzƒXƒg–¼/IPƒAƒhƒŒƒXCƒ|[ƒg”Ô†’¼ÚŽw’è‚Ü‚½‚ÍMulti Accept‚Ìê‡
+	// ãƒ›ã‚¹ãƒˆå/IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Œãƒãƒ¼ãƒˆç•ªå·ç›´æŽ¥æŒ‡å®šã¾ãŸã¯Multi Acceptã®å ´åˆ
 	if (SpecType == 0 || SpecType == 2) {
-		// ƒzƒXƒg–¼/IPƒAƒhƒŒƒXCƒ|[ƒg”Ô†’¼ÚŽw’è‚Ü‚½‚ÍMulti Accept‚Ìê‡
+		// ãƒ›ã‚¹ãƒˆå/IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Œãƒãƒ¼ãƒˆç•ªå·ç›´æŽ¥æŒ‡å®šã¾ãŸã¯Multi Acceptã®å ´åˆ
 		TargetId = ElementId;
 		if (StkSocket_Accept(TargetId) == -1) {
 			StkPropOutputLog();
 			return 2;
 		}
 	} else {
-		// Sender‚ÌÚ‘±‘ÎÛŽw’è‚Ìê‡
+		// Senderã®æŽ¥ç¶šå¯¾è±¡æŒ‡å®šã®å ´åˆ
 		TargetId = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
 	}
 	StkPropOutputLog();
 
-	// I—¹ðŒÝ’è
+	// çµ‚äº†æ¡ä»¶è¨­å®š
 	int FinishCondition = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
 	int FinishCondTimeout = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 6);
 
@@ -72,7 +72,7 @@ int ExecElem_Receiver::Execute()
 		}
 	}
 
-	// ƒf[ƒ^‚ÌŽóM
+	// ãƒ‡ãƒ¼ã‚¿ã®å—ä¿¡
 	BYTE* Buf = new BYTE[10000000];
 	int ActSize = 0;
 	int RevisedFinishCondition = 0;
@@ -97,12 +97,12 @@ int ExecElem_Receiver::Execute()
 		delete VarDat;
 	}
 
-	// ƒf[ƒ^ŽóM’†ƒGƒ‰[”­¶^ƒ\ƒPƒbƒgØ’f
+	// ãƒ‡ãƒ¼ã‚¿å—ä¿¡ä¸­ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿï¼ã‚½ã‚±ãƒƒãƒˆåˆ‡æ–­
 	if (ActSize == SOCKET_ERROR || ActSize == -1) {
 		delete Buf;
 		return 2;
 	}
-	// Ú‘±æƒ\ƒPƒbƒg‚ªƒNƒ[ƒY‚³‚ê‚½
+	// æŽ¥ç¶šå…ˆã‚½ã‚±ãƒƒãƒˆãŒã‚¯ãƒ­ãƒ¼ã‚ºã•ã‚ŒãŸ
 	if (ActSize == 0) {
 		if (SpecType == 0 || SpecType == 2) {
 			StkSocket_CloseAccept(TargetId, TargetId, FALSE);
@@ -113,7 +113,7 @@ int ExecElem_Receiver::Execute()
 		StkPropOutputLog();
 		return 2;
 	}
-	// ƒ^ƒCƒ€ƒAƒEƒg
+	// ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ
 	if (ActSize == -2) {
 		TCHAR TmpBuf[256];
 		LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, TmpBuf, 2);
@@ -129,14 +129,14 @@ int ExecElem_Receiver::Execute()
 		}
 	}
 
-	// ƒf[ƒ^‚ð“KØ‚ÈƒTƒCƒY‚Ì—Ìˆæ‚ÉƒRƒs[‚·‚é
+	// ãƒ‡ãƒ¼ã‚¿ã‚’é©åˆ‡ãªã‚µã‚¤ã‚ºã®é ˜åŸŸã«ã‚³ãƒ”ãƒ¼ã™ã‚‹
 	BYTE* TmpVarDat = new BYTE[ActSize];
 	memcpy((void*)TmpVarDat, (void*)Buf, ActSize);
 	SetDataLength(ActSize);
 	SetData(TmpVarDat);
 	delete Buf;
 
-	// ŽóMŒãƒ\ƒPƒbƒg‚ðƒNƒ[ƒY‚·‚éê‡
+	// å—ä¿¡å¾Œã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹å ´åˆ
 	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
 		if (SpecType == 0 || SpecType == 2) {

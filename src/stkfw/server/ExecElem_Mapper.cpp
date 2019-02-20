@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include "ExecElem_Mapper.h"
 #include "VarController.h"
@@ -6,7 +6,7 @@
 
 ExecElem_Mapper::ExecElem_Mapper(int Id) : ExecElem(Id)
 {
-	//Mapper‚Ìƒ}ƒbƒvÏ•Ï”‚ÌID‚ğ‰Šú‰»‚·‚é
+	//Mapperã®ãƒãƒƒãƒ—æ¸ˆå¤‰æ•°ã®IDã‚’åˆæœŸåŒ–ã™ã‚‹
 	BYTE TmpDat[4096];
 	INT16* TmpDatInt = (INT16*)TmpDat;
 	for (int Loop = 0; Loop < 2048; Loop++) {
@@ -51,7 +51,7 @@ int ExecElem_Mapper::Execute()
 			return 2;
 		}
 
-		// ‚à‚µUse Only OnceƒIƒvƒVƒ‡ƒ“‚ªİ’è‚³‚ê‚Ä‚¢‚½‚ç
+		// ã‚‚ã—Use Only Onceã‚ªãƒ—ã‚·ãƒ§ãƒ³ãŒè¨­å®šã•ã‚Œã¦ã„ãŸã‚‰
 		int TailOfTmpDatInt = 0;
 		if (ChkUseOnce == 1) {
 			LowDbAccess::GetInstance()->GetElementInfoBin(ElementId, TmpDat);
@@ -88,7 +88,7 @@ int ExecElem_Mapper::Execute()
 				delete SearchVarDat;
 				SetData((void*)ReplaceVarDat);
 				SetDataLength(ReplaceVarDatSize);
-				// ‚à‚µUse Only OnceƒIƒvƒVƒ‡ƒ“‚ªİ’è‚³‚ê‚Ä‚¢‚½‚ç
+				// ã‚‚ã—Use Only Onceã‚ªãƒ—ã‚·ãƒ§ãƒ³ãŒè¨­å®šã•ã‚Œã¦ã„ãŸã‚‰
 				if (ChkUseOnce == 1) {
 					TmpDatInt[TailOfTmpDatInt] = (INT16)Counter;
 					LowDbAccess::GetInstance()->SetElementInfoBin(ElementId, TmpDat);

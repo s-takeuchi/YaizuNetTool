@@ -1,4 +1,4 @@
-#include "ExecElem_ChangeData.h"
+ï»¿#include "ExecElem_ChangeData.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
 #include <windows.h>
@@ -24,7 +24,7 @@ int ExecElem_ChangeData::Execute()
 	int InputVarDatSize = GetDataLength();
 
 	int OpType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
-	// í•Ê‚ª•s³‚Ì‚Æ‚«‚ÍC‰½‚à‚¹‚¸Ÿ‚Ì—v‘f‚ÉˆÚs
+	// ç¨®åˆ¥ãŒä¸æ­£ã®ã¨ãã¯ï¼Œä½•ã‚‚ã›ãšæ¬¡ã®è¦ç´ ã«ç§»è¡Œ
 	if (OpType < 0 || OpType > 5) {
 		return 0;
 	}
@@ -38,7 +38,7 @@ int ExecElem_ChangeData::Execute()
 			VarDatA = new BYTE[VarDatSizeA];
 			VarCon_GetCommunicationVariable(VarIdA, VarDatA, VarDatSizeA);
 		} else {
-			// •Ï”(A)‚ª•s³‚Ì‚Æ‚«‚Í‰½‚à‚¹‚¸Ÿ‚Ì—v‘f‚ÉˆÚ‚é
+			// å¤‰æ•°(A)ãŒä¸æ­£ã®ã¨ãã¯ä½•ã‚‚ã›ãšæ¬¡ã®è¦ç´ ã«ç§»ã‚‹
 			return 0;
 		}
 		if ((InputVarDatSize + VarDatSizeA) > 9999999) {
@@ -70,12 +70,12 @@ int ExecElem_ChangeData::Execute()
 			VarCon_GetCommunicationVariable(VarIdA, VarDatA, VarDatSizeA);
 			VarCon_GetCommunicationVariable(VarIdB, VarDatB, VarDatSizeB);
 		} else {
-			// •Ï”(A)‚Ü‚½‚Í(B)‚ª•s³‚Ì‚Æ‚«‚Í‰½‚à‚¹‚¸Ÿ‚Ì—v‘f‚ÉˆÚ‚é
+			// å¤‰æ•°(A)ã¾ãŸã¯(B)ãŒä¸æ­£ã®ã¨ãã¯ä½•ã‚‚ã›ãšæ¬¡ã®è¦ç´ ã«ç§»ã‚‹
 			return 0;
 		}
-		int DiffSize = VarDatSizeB - VarDatSizeA; // 1‰ñ‚Ì’u‚«Š·‚¦‚É‚¨‚¯‚éƒf[ƒ^ƒTƒCƒY‚Ì·•ª
-												  // “ü—Íƒf[ƒ^‚É‘¶İ‚·‚éŒŸõ‘ÎÛ•¶š—ñ‚ÌŒÂ”‚ğ‹‚ß‚é
-		int FndCount = 0; // “ü—Íƒf[ƒ^‚É‘¶İ‚·‚éŒŸõ‘ÎÛ•¶š—ñ‚ÌŒÂ”
+		int DiffSize = VarDatSizeB - VarDatSizeA; // 1å›ã®ç½®ãæ›ãˆã«ãŠã‘ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã®å·®åˆ†
+												  // å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã«å­˜åœ¨ã™ã‚‹æ¤œç´¢å¯¾è±¡æ–‡å­—åˆ—ã®å€‹æ•°ã‚’æ±‚ã‚ã‚‹
+		int FndCount = 0; // å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã«å­˜åœ¨ã™ã‚‹æ¤œç´¢å¯¾è±¡æ–‡å­—åˆ—ã®å€‹æ•°
 		for (int Loop = 0; Loop < InputVarDatSize - VarDatSizeA + 1; Loop++) {
 			if (memcmp(InputVarDat + Loop, VarDatA, VarDatSizeA) == 0) {
 				FndCount++;
@@ -83,7 +83,7 @@ int ExecElem_ChangeData::Execute()
 			}
 		}
 
-		// o—Íƒf[ƒ^—Ìˆæ‚ÌŠm•Û
+		// å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿é ˜åŸŸã®ç¢ºä¿
 		int NewDatSize = InputVarDatSize + DiffSize * FndCount;
 		if (NewDatSize > 9999999) {
 			delete VarDatA;
@@ -92,7 +92,7 @@ int ExecElem_ChangeData::Execute()
 		}
 		BYTE* NewDat = new BYTE[NewDatSize];
 
-		// ’uŠ·ˆ—
+		// ç½®æ›å‡¦ç†
 		BOOL LastOp = 0;
 		BYTE* NewDatPtr = NewDat;
 		for (int Loop = 0; Loop < InputVarDatSize - VarDatSizeA + 1; Loop++) {
@@ -165,7 +165,7 @@ int ExecElem_ChangeData::Execute()
 			SetDataLength(NewDatSize);
 			return 0;
 		} else {
-			// •Ï”(A)‚Ü‚½‚Í(B)‚ª•s³‚Ì‚Æ‚«‚Í‰½‚à‚¹‚¸Ÿ‚Ì—v‘f‚ÉˆÚ‚é
+			// å¤‰æ•°(A)ã¾ãŸã¯(B)ãŒä¸æ­£ã®ã¨ãã¯ä½•ã‚‚ã›ãšæ¬¡ã®è¦ç´ ã«ç§»ã‚‹
 			return 0;
 		}
 	}
@@ -184,7 +184,7 @@ int ExecElem_ChangeData::Execute()
 			VarDatA = new BYTE[VarDatSizeA];
 			VarCon_GetCommunicationVariable(VarIdA, VarDatA, VarDatSizeA);
 		} else {
-			// •Ï”(A)‚ª•s³‚Ì‚Æ‚«‚Í‰½‚à‚¹‚¸Ÿ‚Ì—v‘f‚ÉˆÚ‚é
+			// å¤‰æ•°(A)ãŒä¸æ­£ã®ã¨ãã¯ä½•ã‚‚ã›ãšæ¬¡ã®è¦ç´ ã«ç§»ã‚‹
 			return 0;
 		}
 		delete InputVarDat;

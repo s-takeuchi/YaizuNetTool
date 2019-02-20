@@ -1,4 +1,4 @@
-#include "ExecElem_WriteFile.h"
+ï»¿#include "ExecElem_WriteFile.h"
 #include "LowDbAccess.h"
 #include <windows.h>
 
@@ -13,24 +13,24 @@ ExecElem_WriteFile::~ExecElem_WriteFile()
 
 int ExecElem_WriteFile::Execute()
 {
-	// ‘‚«‚İ‘ÎÛƒtƒ@ƒCƒ‹ƒpƒX‚Ìæ“¾
+	// æ›¸ãè¾¼ã¿å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®å–å¾—
 	TCHAR BufPath[256];
 	LowDbAccess::GetInstance()->GetElementInfoParamStr(ElementId, BufPath, 1);
-	// ƒAƒNƒZƒXí•Ê‚Ìæ“¾
+	// ã‚¢ã‚¯ã‚»ã‚¹ç¨®åˆ¥ã®å–å¾—
 	int AccessType = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 1);
 
-	// “ü—Íƒf[ƒ^‚Ìæ“¾
+	// å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	BYTE* InputDat = (BYTE*)GetData();
 	int InputDatLength = GetDataLength();
 
-	// ì‹Æ—p—Ìˆæ
+	// ä½œæ¥­ç”¨é ˜åŸŸ
 	BYTE* WorkDat;
 	int WorkDatLength;
 	int WorkDatLenForFile;
 	int WorkDatLenForInput;
 	DWORD TmpSize = 0;
 
-	// ì‹Æ—p—Ìˆæ‚Ö‚Ìƒf[ƒ^‚ÌŠi”[
+	// ä½œæ¥­ç”¨é ˜åŸŸã¸ã®ãƒ‡ãƒ¼ã‚¿ã®æ ¼ç´
 	if (AccessType == 0) {
 		WorkDat = InputDat;
 		WorkDatLength = InputDatLength;
@@ -74,13 +74,13 @@ int ExecElem_WriteFile::Execute()
 
 			CloseHandle(ReadFileHndl);
 		} else {
-			// Šù‘¶‚Ìƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢ê‡
+			// æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆ
 			WorkDat = InputDat;
 			WorkDatLength = InputDatLength;
 		}
 	}
 
-	// ƒtƒ@ƒCƒ‹‚Ö‚Ì‘‚«‚İ
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã¸ã®æ›¸ãè¾¼ã¿
 	HANDLE FileHndl = CreateFile(BufPath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (FileHndl == INVALID_HANDLE_VALUE) {
 		delete WorkDat;
