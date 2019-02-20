@@ -1,4 +1,4 @@
-#include <stdlib.h>
+ï»¿#include <stdlib.h>
 #include <shlwapi.h>
 #include "NetAseEx.h"
 #include "stklibtest.h"
@@ -114,7 +114,7 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 		/////////////////////////////////////////////////////////////
 		// Check LinkCond and show "Add Link" menu item.
 
-		// ƒŠƒ|ƒWƒgƒŠ‚©‚çProperty.LinkInfo‚ğ“Ç‚İCLinkCond‚ğ‰Šú‰»‚·‚éB
+		// ãƒªãƒã‚¸ãƒˆãƒªã‹ã‚‰Property.LinkInfoã‚’èª­è¾¼ã¿ï¼ŒLinkCondã‚’åˆæœŸåŒ–ã™ã‚‹ã€‚
 		int TmpLinkFm[500];
 		int TmpLinkTo[500];
 		int TmpLinkCt[500];
@@ -127,12 +127,12 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 			LinkCond[Loop].LinkType = TmpLinkTp[Loop];
 		}
 
-		// MaxLinkTo‚¨‚æ‚ÑMaxLinkFrom”z—ñ‚Ì’l‚ğ"MaxLink"Property‚©‚ç“Ç‚Ş
-		int MaxLinkTo[100]; //ViewElement‚Ìí•Ê–ˆ‚ÌƒŠƒ“ƒNÚ‘±æÅ‘å”
-		int MaxLinkFrom[100]; //ViewElement‚Ìí•Ê–ˆ‚ÌƒŠƒ“ƒNÚ‘±Œ³Å‘å”
+		// MaxLinkToãŠã‚ˆã³MaxLinkFromé…åˆ—ã®å€¤ã‚’"MaxLink"Propertyã‹ã‚‰èª­è¾¼ã‚€
+		int MaxLinkTo[100]; //ViewElementã®ç¨®åˆ¥æ¯ã®ãƒªãƒ³ã‚¯æ¥ç¶šå…ˆæœ€å¤§æ•°
+		int MaxLinkFrom[100]; //ViewElementã®ç¨®åˆ¥æ¯ã®ãƒªãƒ³ã‚¯æ¥ç¶šå…ƒæœ€å¤§æ•°
 		LowDbAccess::GetInstance()->GetMaxLinkInfo(MaxLinkTo, MaxLinkFrom);
 
-		// ViewElement(ƒAƒCƒRƒ“)‚Ìí•Ê–ˆCŒ»İ‘I‘ğ‚³‚ê‚Ä‚¢‚éŒ”‚ğTypeAry”z—ñ‚ÉŠi”[‚µ‚Ü‚·B
+		// ViewElement(ã‚¢ã‚¤ã‚³ãƒ³)ã®ç¨®åˆ¥æ¯ï¼Œç¾åœ¨é¸æŠã•ã‚Œã¦ã„ã‚‹ä»¶æ•°ã‚’TypeAryé…åˆ—ã«æ ¼ç´ã—ã¾ã™ã€‚
 		int TypeAry[100];
 		for (int Loop = 0; Loop < 100; Loop++) {
 			TypeAry[Loop] = 0;
@@ -158,8 +158,8 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 			TypeAry[MyType]--;
 		}
 
-		// ‘€ì‘ÎÛ—v‘f‚Æ‚ ‚éí•Ê‚Ì—v‘f‚Ì‘Î‚ÉŠÖ‚µ‚ÄCŠù‚Éİ’è‚³‚ê‚Ä‚¢‚éƒŠƒ“ƒN”‚ÉŒ»İ‘I‘ğ‚³‚ê‚Ä‚¢‚éƒŠƒ“ƒN”‚ğ‰ÁZ‚µ‚½
-		// ‚¤‚¦‚ÅC‰ÁZ‚µ‚½ƒŠƒ“ƒN”‚ªãŒÀ‚ğ’´‚¦‚Ä‚¢‚È‚¢‚©ƒ`ƒFƒbƒN‚·‚éBãŒÀ‚ğ’´‚¦‚Ä‚¢‚éê‡Cƒƒjƒ…[‚ÍƒOƒŒƒCƒAƒEƒg‚·‚éB
+		// æ“ä½œå¯¾è±¡è¦ç´ ã¨ã‚ã‚‹ç¨®åˆ¥ã®è¦ç´ ã®å¯¾ã«é–¢ã—ã¦ï¼Œæ—¢ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹ãƒªãƒ³ã‚¯æ•°ã«ç¾åœ¨é¸æŠã•ã‚Œã¦ã„ã‚‹ãƒªãƒ³ã‚¯æ•°ã‚’åŠ ç®—ã—ãŸ
+		// ã†ãˆã§ï¼ŒåŠ ç®—ã—ãŸãƒªãƒ³ã‚¯æ•°ãŒä¸Šé™ã‚’è¶…ãˆã¦ã„ãªã„ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã€‚ä¸Šé™ã‚’è¶…ãˆã¦ã„ã‚‹å ´åˆï¼Œãƒ¡ãƒ‹ãƒ¥ãƒ¼ã¯ã‚°ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã™ã‚‹ã€‚
 		int DummyTypeAry[100];
 		for (int Loop = 0; Loop < 100; Loop++) {
 			DummyTypeAry[Loop] = TypeAry[Loop];
@@ -184,7 +184,7 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 		}
 
 		if ((AddLinkMenuType & MF_GRAYED) != MF_GRAYED) {
-			// ‘€ì‘ÎÛ‚Ì—v‘f‚©‚ç‚Í‚ç‚ê‚Ä‚¢‚éƒŠƒ“ƒN‚Ì‘Œv‚ğ‹‚ß‚é
+			// æ“ä½œå¯¾è±¡ã®è¦ç´ ã‹ã‚‰ã¯ã‚‰ã‚Œã¦ã„ã‚‹ãƒªãƒ³ã‚¯ã®ç·è¨ˆã‚’æ±‚ã‚ã‚‹
 			int Total = 0;
 			for (int Loop = 0; Loop < LinkCondCount; Loop++) {
 				if (LinkCond[Loop].LinkFrom == MyType) {
@@ -192,7 +192,7 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 					TypeAry[LinkCond[Loop].LinkTo] = 0;
 				}
 			}
-			// ƒŠƒ“ƒNÚ‘±æ‚Ì”‚ªMaxLinkTo‚ğ’´‚¦‚éê‡‚Íƒƒjƒ…[‚ğƒOƒŒƒCƒAƒEƒg‚·‚é
+			// ãƒªãƒ³ã‚¯æ¥ç¶šå…ˆã®æ•°ãŒMaxLinkToã‚’è¶…ãˆã‚‹å ´åˆã¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ã‚°ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã™ã‚‹
 			int MxLkTo = MaxLinkTo[GetType()];
 			if (MxLkTo < 0) {
 				MxLkTo = 0;
@@ -203,7 +203,7 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 			if (Total > MxLkTo - LinkCount) {
 				AddLinkMenuType |= MF_GRAYED;
 			} else {
-				// LinkCond‚Å’è‹`‚³‚ê‚Ä‚¢‚È‚¢í•Ê‚ÌViewElement‚ª‘I‘ğ‚³‚ê‚Ä‚¢‚éê‡Cƒƒjƒ…[‚ÍƒOƒŒƒCƒAƒEƒg‚·‚é
+				// LinkCondã§å®šç¾©ã•ã‚Œã¦ã„ãªã„ç¨®åˆ¥ã®ViewElementãŒé¸æŠã•ã‚Œã¦ã„ã‚‹å ´åˆï¼Œãƒ¡ãƒ‹ãƒ¥ãƒ¼ã¯ã‚°ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã™ã‚‹
 				Total = 0;
 				for (int Loop = 0; Loop < 100; Loop++) {
 					Total += TypeAry[Loop];
@@ -214,7 +214,7 @@ void NetAseEx::PopupMenuInit(HMENU MenuHndlTop, ActorStatusElement* Ase[], int* 
 			}
 		}
 
-		// ƒŠƒ“ƒNÚ‘±Œ³‚Ì”‚ªMaxLinkFrom‚ğ’´‚¦‚éê‡‚Íƒƒjƒ…[‚ğƒOƒŒƒCƒAƒEƒg‚·‚é
+		// ãƒªãƒ³ã‚¯æ¥ç¶šå…ƒã®æ•°ãŒMaxLinkFromã‚’è¶…ãˆã‚‹å ´åˆã¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ã‚°ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã™ã‚‹
 		if ((AddLinkMenuType & MF_GRAYED) != MF_GRAYED) {
 			for (int LoopEle = 0; LoopEle < *ElementCount; LoopEle++) {
 				int AseId = Ase[LoopEle]->GetId();

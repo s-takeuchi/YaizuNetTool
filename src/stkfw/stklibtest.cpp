@@ -1,4 +1,4 @@
-#include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
+ï»¿#include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include <windows.h>
 #include <shlwapi.h>
 #include <tchar.h>
@@ -58,12 +58,12 @@ int NewHeight;
 
 int MouseActionStatus = 0;
 
-// ƒXƒŒƒbƒhÀs’†‚ÉStkFw‚Í“à•”“I‚Ég—p‚·‚éƒf[ƒ^‚ğElementInfo‚É‘‚«‚ŞB
-// ‚±‚Ì‚½‚ßCƒ†[ƒU[‚©‚çŒ©‚¦‚éƒf[ƒ^‚ªÀÛ‚É‚Í‰½‚àXV‚³‚ê‚Ä‚¢‚È‚¢‚É‚à
-// ‚©‚©‚í‚ç‚¸CƒXƒŒƒbƒhÀsŒã‚Éƒtƒ@ƒCƒ‹Open‚âNew‚ğ‘I‘ğ‚·‚é‚ÆCƒf[ƒ^‚ª
-// XV‚³‚ê‚Ä‚¢‚é‚Æ‚¢‚¤ƒ_ƒCƒAƒƒO‚ª•\¦‚³‚ê‚Ä‚µ‚Ü‚¤B
-// IsUdtElemInfo‚Í‚±‚Ì–â‘è‚ğ‰ñ”ğ‚·‚é‚½‚ß‚Ìƒtƒ‰ƒO‚ÅCƒXƒŒƒbƒhÀs‘O‚ÉŠù‚É
-// ElementInfo‚ªXV‚³‚ê‚Ä‚¢‚ê‚ÎTRUE‚É‚È‚éB
+// ã‚¹ãƒ¬ãƒƒãƒ‰å®Ÿè¡Œä¸­ã«StkFwã¯å†…éƒ¨çš„ã«ä½¿ç”¨ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’ElementInfoã«æ›¸ãè¾¼ã‚€ã€‚
+// ã“ã®ãŸã‚ï¼Œãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰è¦‹ãˆã‚‹ãƒ‡ãƒ¼ã‚¿ãŒå®Ÿéš›ã«ã¯ä½•ã‚‚æ›´æ–°ã•ã‚Œã¦ã„ãªã„ã«ã‚‚
+// ã‹ã‹ã‚ã‚‰ãšï¼Œã‚¹ãƒ¬ãƒƒãƒ‰å®Ÿè¡Œå¾Œã«ãƒ•ã‚¡ã‚¤ãƒ«Openã‚„Newã‚’é¸æŠã™ã‚‹ã¨ï¼Œãƒ‡ãƒ¼ã‚¿ãŒ
+// æ›´æ–°ã•ã‚Œã¦ã„ã‚‹ã¨ã„ã†ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãŒè¡¨ç¤ºã•ã‚Œã¦ã—ã¾ã†ã€‚
+// IsUdtElemInfoã¯ã“ã®å•é¡Œã‚’å›é¿ã™ã‚‹ãŸã‚ã®ãƒ•ãƒ©ã‚°ã§ï¼Œã‚¹ãƒ¬ãƒƒãƒ‰å®Ÿè¡Œå‰ã«æ—¢ã«
+// ElementInfoãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚Œã°TRUEã«ãªã‚‹ã€‚
 BOOL IsUdtElemInfo;
 
 void SetWindowTitle(TCHAR[1024]);
@@ -82,13 +82,13 @@ void StopProcForCmd(void);
 void CheckExecutorLocalGroup(void);
 void ShowRunTimeInformation(void);
 
-// Version 1.1.0 ¨ Version 1.2.0
+// Version 1.1.0 â†’ Version 1.2.0
 int DbMigration_00_01()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
 	// Set 1 to DbVersion of Property table.
 	Lda->InsertProperty(_T("DbVersion"), 1, 0, 0, _T(""), _T(""), _T(""));
-	// Mapper‚ÌUseOnlyOnce‘®«‚ğİ’è‚·‚é
+	// Mapperã®UseOnlyOnceå±æ€§ã‚’è¨­å®šã™ã‚‹
 	int AcquiredIds[ActorStatus::ACTOR_STATUS_COUNT];
 	int IdCnt = Lda->GetViewElementIdsFromType(AcquiredIds, ActorStatus::ACTOR_STATUS_COUNT, 17);
 	for (int Loop = 0; Loop < IdCnt; Loop++) {
@@ -97,17 +97,17 @@ int DbMigration_00_01()
 	return 1;
 }
 
-// Version 1.2.0 ¨ Version 1.3.0
+// Version 1.2.0 â†’ Version 1.3.0
 int DbMigration_01_02()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
 	// Set 2 to DbVersion of Property table.
 	Lda->SetPropertyInteger(_T("DbVersion"), 1, 2);
-	// Propertyƒe[ƒuƒ‹:ViewElement‚ğ’Ç‰Á
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«:ViewElementã‚’è¿½åŠ 
 	Lda->InsertProperty(_T("ViewElement"), 18, 46, 0, _T("Write file [Action]"), _T(""), _T("Menu"));
 	Lda->InsertProperty(_T("ViewElement"), 19, 47, 0, _T("Read file [Action]"), _T(""), _T("Menu"));
 	Lda->InsertProperty(_T("ViewElement"), 20, 48, 0, _T("Execute program [Action]"), _T(""), _T("Menu"));
-	// Propertyƒe[ƒuƒ‹:LinkInfo‚ğ’Ç‰Á
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«:LinkInfoã‚’è¿½åŠ 
 	for (int LoopOrg = 1; LoopOrg <= 3; LoopOrg++) {
 		for (int LoopTgt = 18; LoopTgt <= 20; LoopTgt++) {
 			Lda->InsertProperty(_T("LinkInfo"), LoopOrg, LoopTgt, 1, _T("101"), _T(""), _T(""));
@@ -123,7 +123,7 @@ int DbMigration_01_02()
 			Lda->InsertProperty(_T("LinkInfo"), LoopOrg, LoopTgt, 1, _T("101"), _T(""), _T(""));
 		}
 	}
-	// Propertyƒe[ƒuƒ‹:MaxLink‚ğ’Ç‰Á
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«:MaxLinkã‚’è¿½åŠ 
 	Lda->InsertProperty(_T("MaxLink"), 18, 1, 1, _T(""), _T(""), _T(""));
 	Lda->InsertProperty(_T("MaxLink"), 19, 1, 1, _T(""), _T(""), _T(""));
 	Lda->InsertProperty(_T("MaxLink"), 20, 1, 1, _T(""), _T(""), _T(""));
@@ -131,7 +131,7 @@ int DbMigration_01_02()
 	return 2;
 }
 
-// Version 1.3.0 ¨ Version 1.4.0
+// Version 1.3.0 â†’ Version 1.4.0
 int DbMigration_02_03()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
@@ -159,11 +159,11 @@ int DbMigration_02_03()
 	Lda->InsertProperty(_T("ViewElement"), 18, 46, 0, _T("Write file"), _T(""), _T("Action"));
 	Lda->InsertProperty(_T("ViewElement"), 19, 47, 0, _T("Read file"), _T(""), _T("Action"));
 	Lda->InsertProperty(_T("ViewElement"), 20, 48, 0, _T("Execute program"), _T(""), _T("Action"));
-	// Propertyƒe[ƒuƒ‹:ViewElement‚ğ’Ç‰Á
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«:ViewElementã‚’è¿½åŠ 
 	Lda->InsertProperty(_T("ViewElement"), 21, 72, 1, _T("UDP receiver"), _T(""), _T("Initiator"));
 	Lda->InsertProperty(_T("ViewElement"), 22, 73, 0, _T("UDP sender"), _T(""), _T("Terminator"));
 	Lda->InsertProperty(_T("ViewElement"), 23, 71, 0, _T("UDP sender"), _T(""), _T("Stopper"));
-	// Propertyƒe[ƒuƒ‹:LinkInfo‚ğ’Ç‰Á
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«:LinkInfoã‚’è¿½åŠ 
 	Lda->InsertProperty(_T("LinkInfo"), 4, 21, 1, _T("122"), _T(""), _T(""));
 	Lda->InsertProperty(_T("LinkInfo"), 5, 21, 1, _T("122"), _T(""), _T(""));
 	Lda->InsertProperty(_T("LinkInfo"), 6, 21, 1, _T("122"), _T(""), _T(""));
@@ -189,7 +189,7 @@ int DbMigration_02_03()
 	}
 	Lda->InsertProperty(_T("LinkInfo"), 15, 22, 1, _T("101"), _T(""), _T(""));
 	Lda->InsertProperty(_T("LinkInfo"), 15, 23, 1, _T("101"), _T(""), _T(""));
-	// Propertyƒe[ƒuƒ‹:MaxLink‚ğ’Ç‰Á
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«:MaxLinkã‚’è¿½åŠ 
 	Lda->InsertProperty(_T("MaxLink"), 21, 1, 1, _T(""), _T(""), _T(""));
 	Lda->InsertProperty(_T("MaxLink"), 22, 1, 1, _T(""), _T(""), _T(""));
 	Lda->InsertProperty(_T("MaxLink"), 23, 1, 1, _T(""), _T(""), _T(""));
@@ -197,7 +197,7 @@ int DbMigration_02_03()
 	return 3;
 }
 
-// Version 1.4.0 ¨ Version 1.5.0
+// Version 1.4.0 â†’ Version 1.5.0
 int DbMigration_03_04()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
@@ -207,7 +207,7 @@ int DbMigration_03_04()
 	return 4;
 }
 
-// Version 1.5.0 ¨ Version 1.6.0
+// Version 1.5.0 â†’ Version 1.6.0
 int DbMigration_04_05()
 {
 	LowDbAccess* Lda = LowDbAccess::GetInstance();
@@ -282,9 +282,9 @@ int DbMigration()
 	return 1;
 }
 
-// ActorStatus‚ªXV‚³‚ê‚Ä‚¢‚éê‡TRUE‚ğ•Ô‚·
-// OpType : in : ‘€ìí•Ê (0:æ“¾, 1:XV)
-// –ß‚è’l : out : ‰½‚©•ÏX‚³‚ê‚Ä‚¢‚ê‚ÎTRUE
+// ActorStatusãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚‹å ´åˆTRUEã‚’è¿”ã™
+// OpType : in : æ“ä½œç¨®åˆ¥ (0:å–å¾—, 1:æ›´æ–°)
+// æˆ»ã‚Šå€¤ : out : ä½•ã‹å¤‰æ›´ã•ã‚Œã¦ã„ã‚Œã°TRUE
 BOOL IsActorStatusUpdated(int OpType)
 {
 	static int UpdAceCnt = -1;
@@ -432,7 +432,7 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 		break;
 	case 1:
 	case 2:
-		// ƒpƒ‰ƒ[ƒ^•¶š—ñ‚Ì’¼Œã‚ÉƒXƒy[ƒX‚ª–³‚¯‚ê‚ÎƒGƒ‰[o—Í&ƒvƒƒZƒX’â~
+		// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ–‡å­—åˆ—ã®ç›´å¾Œã«ã‚¹ãƒšãƒ¼ã‚¹ãŒç„¡ã‘ã‚Œã°ã‚¨ãƒ©ãƒ¼å‡ºåŠ›&ãƒ—ãƒ­ã‚»ã‚¹åœæ­¢
 		if (CmdParam[Ptr] != ' ') {
 			MyMsgProc::StkErr(MyMsgProc::STKFW_COMPARAM_NOFILE, CmdParam, NULL);
 			ExitProcess(0);
@@ -449,12 +449,12 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 		lstrcpyn(FileName, &CmdParam[Ptr], 1024);
 		break;
 	case 4:
-		// ƒpƒ‰ƒ[ƒ^•¶š—ñ‚Ì’¼Œã‚ÉƒXƒy[ƒX‚Ü‚½‚Í\0‚ª–³‚¯‚ê‚ÎƒGƒ‰[o—Í&ƒvƒƒZƒX’â~
+		// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ–‡å­—åˆ—ã®ç›´å¾Œã«ã‚¹ãƒšãƒ¼ã‚¹ã¾ãŸã¯\0ãŒç„¡ã‘ã‚Œã°ã‚¨ãƒ©ãƒ¼å‡ºåŠ›&ãƒ—ãƒ­ã‚»ã‚¹åœæ­¢
 		if (CmdParam[Ptr] != ' ' && CmdParam[Ptr] != 0) {
 			MyMsgProc::StkErr(MyMsgProc::STKFW_COMPARAM_INVALID, CmdParam, NULL);
 			ExitProcess(0);
 		}
-		// stkfw‚ÌƒvƒƒZƒX‚ğŒŸõ‚µCƒvƒƒZƒX‚ğ’â~‚·‚é
+		// stkfwã®ãƒ—ãƒ­ã‚»ã‚¹ã‚’æ¤œç´¢ã—ï¼Œãƒ—ãƒ­ã‚»ã‚¹ã‚’åœæ­¢ã™ã‚‹
 		{
 			DWORD ProcessIds[2048];
 			DWORD Size;
@@ -468,12 +468,12 @@ int AnalizeCommandParameter(TCHAR CmdParam[1024], TCHAR FileName[1024])
 			ProcCnt = Size / sizeof(DWORD);
 			for (int i = 0; i < ProcCnt; i++) {
 				if ((ProcHndl = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_TERMINATE, FALSE, ProcessIds[i])) != NULL) {
-					// ‘ÎÛ‚ÌƒvƒƒZƒX‚ª©•ª©g‚È‚ç‚ÎŸ‚ÌƒvƒƒZƒX‚ÉˆÚ‚é
+					// å¯¾è±¡ã®ãƒ—ãƒ­ã‚»ã‚¹ãŒè‡ªåˆ†è‡ªèº«ãªã‚‰ã°æ¬¡ã®ãƒ—ãƒ­ã‚»ã‚¹ã«ç§»ã‚‹
 					if (ProcessIds[i] == GetCurrentProcessId()) {
 						CloseHandle(ProcHndl);
 						continue;
 					}
-					// ƒvƒƒZƒX‚Éƒ}ƒbƒv‚µ‚Ä‚¢‚éƒtƒ@ƒCƒ‹ƒpƒX‚ª©ƒvƒƒZƒX‚Ì‚à‚Ì‚Æˆê’v‚·‚éê‡‚»‚ê‚ğI—¹‚³‚¹‚é
+					// ãƒ—ãƒ­ã‚»ã‚¹ã«ãƒãƒƒãƒ—ã—ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ãŒè‡ªãƒ—ãƒ­ã‚»ã‚¹ã®ã‚‚ã®ã¨ä¸€è‡´ã™ã‚‹å ´åˆãã‚Œã‚’çµ‚äº†ã•ã›ã‚‹
 					if (EnumProcessModules(ProcHndl, Module, sizeof(Module), &Size) != FALSE) {
 						if (GetModuleFileNameEx(ProcHndl, Module[0], Name, MAX_PATH) > 0) {
 							TCHAR ThisFile[MAX_PATH];
@@ -511,13 +511,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	delete req_obj;
 	delete obj;
 
-	// ƒRƒ}ƒ“ƒhEƒpƒ‰ƒ[ƒ^‚ğ‰ğÍ‚·‚é
+	// ã‚³ãƒãƒ³ãƒ‰ãƒ»ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è§£æã™ã‚‹
 	TCHAR CmdParam[1024];
 	wsprintf(CmdParam, _T("%S"), lpCmdLine);
 	int OpeType = AnalizeCommandParameter(CmdParam, CurrentStdFileName);
 
 
-	// ƒoƒbƒNƒOƒ‰ƒEƒ“ƒhÀs
+	// ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰å®Ÿè¡Œ
 	if (OpeType == 2) {
 		;
 		if (LowDbAccess::GetInstance()->LoadStdFile(CurrentStdFileName) != 0) {
@@ -541,7 +541,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 
 
-	// EXEƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚éƒpƒX‚ğæ“¾‚·‚é
+	// EXEãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
 	GetModuleFileName(NULL, StartDir, MAX_PATH);
 	for (int Loop = lstrlen(StartDir) - 1; Loop > 0; Loop--) {
 		if (StartDir[Loop] == '\\') {
@@ -554,7 +554,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	// Initialize random generator
 	srand((unsigned int)time(NULL));
 
-	// ƒEƒBƒ“ƒhƒEŠî–{î•ñİ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åŸºæœ¬æƒ…å ±è¨­å®š
 	lstrcpy(szTitle, _T("StkFw"));
 	lstrcpy(szWindowClass, _T("StkFw"));
 	Inst = hInstance;
@@ -590,7 +590,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	LowDbAccess::GetInstance()->StkFwRepositoryCreateTable();
 	ResetWorkspace(0);
 
-	// /openƒpƒ‰ƒ[ƒ^‚ªw’è‚³‚ê‚Ä‚¢‚½ê‡C.stdƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
+	// /openãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒæŒ‡å®šã•ã‚Œã¦ã„ãŸå ´åˆï¼Œ.stdãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€
 	if (lstrcmp(CurrentStdFileName, _T("")) != 0) {
 		if (LowDbAccess::GetInstance()->LoadStdFile(CurrentStdFileName) != 0) {
 			MyMsgProc::StkErr(MyMsgProc::STKFW_FILEINVALID, CurrentStdFileName, hWnd);
@@ -762,7 +762,7 @@ void StartProc(void)
 	StkSocket_ClearLog();
 	SetTimer(hWnd, 100, 200, TimerProc);
 
-	// ƒXƒŒƒbƒhÀs‘O‚ÉElementInfo‚ªXV‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+	// ã‚¹ãƒ¬ãƒƒãƒ‰å®Ÿè¡Œå‰ã«ElementInfoãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 	IsUdtElemInfo = LowDbAccess::GetInstance()->IsUpdated(2);
 
 	EnterCriticalSection(&NetGseEx::CritSect);
@@ -795,8 +795,8 @@ void StopProc(void)
 	ResetThreadController(FALSE);
 
 	////////////////////////////////////////
-	// ‚±‚ÌŠÖ”ŒÄ‚Ño‚µ‚ÌˆÊ’u‚ğVar_RefreshVariables()‚æ‚è‚à‘O‚É’u‚­‚ÆƒfƒoƒbƒOÀs‚Å"o—Í"ƒRƒ“ƒ\[ƒ‹‚ÉƒGƒ‰[‚ª
-	// o—Í‚³‚ê‚é‚±‚Æ‚ª‚ ‚éBŒ´ˆö•s–¾‚¾‚ªCƒRƒR‚ÌˆÊ’u‚É’u‚­‚ÆƒGƒ‰[‚Ío—Í‚³‚ê‚È‚­‚È‚éB
+	// ã“ã®é–¢æ•°å‘¼ã³å‡ºã—ã®ä½ç½®ã‚’Var_RefreshVariables()ã‚ˆã‚Šã‚‚å‰ã«ç½®ãã¨ãƒ‡ãƒãƒƒã‚°å®Ÿè¡Œã§"å‡ºåŠ›"ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã«ã‚¨ãƒ©ãƒ¼ãŒ
+	// å‡ºåŠ›ã•ã‚Œã‚‹ã“ã¨ãŒã‚ã‚‹ã€‚åŸå› ä¸æ˜ã ãŒï¼Œã‚³ã‚³ã®ä½ç½®ã«ç½®ãã¨ã‚¨ãƒ©ãƒ¼ã¯å‡ºåŠ›ã•ã‚Œãªããªã‚‹ã€‚
 	ResetWorkspace(3);//
 	GetViewFromDb();//
 	////////////////////////////////////////
@@ -813,7 +813,7 @@ void StopProc(void)
 
 	LeaveCriticalSection(&NetGseEx::CritSect);
 
-	// ƒXƒŒƒbƒhÀs‘O‚ÉElementInfo‚ªXV‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎƒŠƒZƒbƒg
+	// ã‚¹ãƒ¬ãƒƒãƒ‰å®Ÿè¡Œå‰ã«ElementInfoãŒæ›´æ–°ã•ã‚Œã¦ã„ãªã‘ã‚Œã°ãƒªã‚»ãƒƒãƒˆ
 	if (!IsUdtElemInfo) {
 		LowDbAccess::GetInstance()->IsUpdated(3);
 	}

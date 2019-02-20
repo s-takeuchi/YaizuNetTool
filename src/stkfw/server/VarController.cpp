@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
 #include <memory.h>
@@ -6,9 +6,9 @@
 #include "..\..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
 #include "..\..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
 
-// Žw’è‚³‚ê‚½Id‚Æˆê’v‚·‚éVariableƒe[ƒuƒ‹‚ÌUdTime‘®«‚ðXV‚·‚é
-// Variableƒe[ƒuƒ‹‚É‘Î‚µ—\‚ßƒƒbƒN‚ðŠ|‚¯‚Ä‚¨‚­•K—v‚ª‚ ‚é
-// [in] : Id : XV‘ÎÛ‚Æ‚È‚éƒŒƒR[ƒh‚ÌID
+// æŒ‡å®šã•ã‚ŒãŸIdã¨ä¸€è‡´ã™ã‚‹Variableãƒ†ãƒ¼ãƒ–ãƒ«ã®UdTimeå±žæ€§ã‚’æ›´æ–°ã™ã‚‹
+// Variableãƒ†ãƒ¼ãƒ–ãƒ«ã«å¯¾ã—äºˆã‚ãƒ­ãƒƒã‚¯ã‚’æŽ›ã‘ã¦ãŠãå¿…è¦ãŒã‚ã‚‹
+// [in] : Id : æ›´æ–°å¯¾è±¡ã¨ãªã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ã®ID
 void LastUpdateTime(int Id)
 {
 	ColumnData* ColId = new ColumnDataInt(_T("ID"), Id);
@@ -26,9 +26,9 @@ void LastUpdateTime(int Id)
 	delete UpdRec;
 }
 
-// Žw’è‚µ‚½Id‚Æˆê’v‚·‚éƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ÌƒTƒCƒY‚ð•Ô‹p‚·‚é
-// [in] : Id : ‘ÎÛ‚ÌƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”
-// return : ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ÌƒTƒCƒY (-1:Žw’è‚µ‚½•Ï”‚ª‘¶Ý‚µ‚È‚¢, ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚Å‚Í‚È‚¢)
+// æŒ‡å®šã—ãŸIdã¨ä¸€è‡´ã™ã‚‹ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®ã‚µã‚¤ã‚ºã‚’è¿”å´ã™ã‚‹
+// [in] : Id : å¯¾è±¡ã®ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°
+// return : ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®ã‚µã‚¤ã‚º (-1:æŒ‡å®šã—ãŸå¤‰æ•°ãŒå­˜åœ¨ã—ãªã„, ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã§ã¯ãªã„)
 int VarCon_GetCommunicationVariableSize(int Id)
 {
 	ColumnData* ColSz = new ColumnDataInt(_T("ID"), Id);
@@ -54,9 +54,9 @@ int VarCon_GetCommunicationVariableSize(int Id)
 	return Size;
 }
 
-// Žw’è‚µ‚½ID‚ðŽ‚ÂVariableƒe[ƒuƒ‹“à‚ÌƒŒƒR[ƒh‚ðŽæ“¾‚·‚é
-// [in] : Id : Žæ“¾‚·‚é•Ï”‚ÌID
-// [out] : RecordDataƒCƒ“ƒXƒ^ƒ“ƒX
+// æŒ‡å®šã—ãŸIDã‚’æŒã¤Variableãƒ†ãƒ¼ãƒ–ãƒ«å†…ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
+// [in] : Id : å–å¾—ã™ã‚‹å¤‰æ•°ã®ID
+// [out] : RecordDataã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 RecordData* VarCon_GetVariableRecord(int Id)
 {
 	ColumnData* ColId = new ColumnDataInt(_T("ID"), Id);
@@ -68,11 +68,11 @@ RecordData* VarCon_GetVariableRecord(int Id)
 	return RtRecDat;
 }
 
-// Žw’è‚µ‚½ID‚ðŽ‚ÂVariableƒe[ƒuƒ‹“à‚ÌƒŒƒR[ƒh‚ðŒŸõ‚µCName‚¨‚æ‚ÑDescription‚ð•Ô‹p‚·‚é
-// [in] Id : Žæ“¾‘ÎÛ‚Ì•Ï”‚ÌID
-// [out] VarName : •Ï”‚ÌName‚ª•Ô‹p‚³‚ê‚é
-// [out] VarDesc : •Ï”‚ÌDescription‚ª•Ô‹p‚³‚ê‚é
-// Return (-1: Žw’è‚µ‚½ID‚ðŽ‚Â•Ï”‚Í‘¶Ý‚µ‚È‚¢, 0: ³íI—¹)
+// æŒ‡å®šã—ãŸIDã‚’æŒã¤Variableãƒ†ãƒ¼ãƒ–ãƒ«å†…ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’æ¤œç´¢ã—ï¼ŒNameãŠã‚ˆã³Descriptionã‚’è¿”å´ã™ã‚‹
+// [in] Id : å–å¾—å¯¾è±¡ã®å¤‰æ•°ã®ID
+// [out] VarName : å¤‰æ•°ã®NameãŒè¿”å´ã•ã‚Œã‚‹
+// [out] VarDesc : å¤‰æ•°ã®DescriptionãŒè¿”å´ã•ã‚Œã‚‹
+// Return (-1: æŒ‡å®šã—ãŸIDã‚’æŒã¤å¤‰æ•°ã¯å­˜åœ¨ã—ãªã„, 0: æ­£å¸¸çµ‚äº†)
 int VarCon_GetVariableNameAndDesc(int Id, TCHAR VarName[32], TCHAR VarDesc[64])
 {
 	ColumnData* ColId = new ColumnDataInt(_T("ID"), Id);
@@ -95,9 +95,9 @@ int VarCon_GetVariableNameAndDesc(int Id, TCHAR VarName[32], TCHAR VarDesc[64])
 	return 0;
 }
 
-// Žw’è‚µ‚½ID‚ðŽ‚Â•Ï”‚ª‘¶Ý‚·‚é‚©ƒ`ƒFƒbƒN‚·‚é
-// [in] : Id : ƒ`ƒFƒbƒN‚·‚é•Ï”‚ÌID
-// [out] : ƒ`ƒFƒbƒNŒ‹‰Ê (TRUE:‘¶Ý‚·‚é, FALSE:‘¶Ý‚µ‚È‚¢)
+// æŒ‡å®šã—ãŸIDã‚’æŒã¤å¤‰æ•°ãŒå­˜åœ¨ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
+// [in] : Id : ãƒã‚§ãƒƒã‚¯ã™ã‚‹å¤‰æ•°ã®ID
+// [out] : ãƒã‚§ãƒƒã‚¯çµæžœ (TRUE:å­˜åœ¨ã™ã‚‹, FALSE:å­˜åœ¨ã—ãªã„)
 BOOL VarCon_CheckVariableExistence(int Id)
 {
 	ColumnData* ColId = new ColumnDataInt(_T("ID"), Id);
@@ -115,12 +115,12 @@ BOOL VarCon_CheckVariableExistence(int Id)
 	return Ret;
 }
 
-// Žw’è‚µ‚½•Ï”–¼‚Æˆê’v‚·‚éƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ÌID‚ðŽæ“¾‚·‚é
-// [in] : Name : ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚Ì–¼Ì
-// [out] : ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ÌID (-1:•Ï”‚ªŒ©‚Â‚©‚ç‚È‚¢, ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚Å‚Í‚È‚¢)
+// æŒ‡å®šã—ãŸå¤‰æ•°åã¨ä¸€è‡´ã™ã‚‹ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®IDã‚’å–å¾—ã™ã‚‹
+// [in] : Name : ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®åç§°
+// [out] : ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã®ID (-1:å¤‰æ•°ãŒè¦‹ã¤ã‹ã‚‰ãªã„, ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã§ã¯ãªã„)
 int VarCon_GetCommunicationVariableId(TCHAR Name[32])
 {
-	// ƒGƒ‰[ƒ`ƒFƒbƒN
+	// ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯
 	if (Name == NULL) {
 		return -1;
 	}
@@ -128,7 +128,7 @@ int VarCon_GetCommunicationVariableId(TCHAR Name[32])
 		return -1;
 	}
 
-	// ƒŒƒR[ƒh‚ðŽæ“¾‚·‚é
+	// ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
 	ColumnData* GetColDat[1];
 	GetColDat[0] = new ColumnDataWStr(_T("Name"), Name);
 	RecordData* RecDat = new RecordData(_T("Variable"), GetColDat, 1);
@@ -145,8 +145,8 @@ int VarCon_GetCommunicationVariableId(TCHAR Name[32])
 	return FndId;
 }
 
-// Variableƒe[ƒuƒ‹“à‚Ì‘SƒŒƒR[ƒh‚ðŽæ“¾‚·‚é
-// [out] : ˜AŒ‹‚³‚ê‚½RecordDataƒCƒ“ƒXƒ^ƒ“ƒX
+// Variableãƒ†ãƒ¼ãƒ–ãƒ«å†…ã®å…¨ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
+// [out] : é€£çµã•ã‚ŒãŸRecordDataã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 RecordData* VarCon_GetVariableRecords()
 {
 	LockTable(_T("Variable"), 1);
@@ -155,14 +155,14 @@ RecordData* VarCon_GetVariableRecords()
 	return RtRecDat;
 }
 
-// Žw’è‚³‚ê‚½Id‚Æˆê’v‚·‚éVariableƒŒƒR[ƒh‚ÌName‚ÆDesc‘®«‚ð•ÏX‚·‚é
-// [in] : Id : XV‘ÎÛ‚Æ‚È‚éƒŒƒR[ƒh‚ÌID
-// [in] : Name : •ÏX‚·‚é’l
-// [in] : Description : •ÏX‚·‚é’l
-// [out] : XV‘ÎÛ‚Æ‚È‚éƒŒƒR[ƒh‚ÌID
+// æŒ‡å®šã•ã‚ŒãŸIdã¨ä¸€è‡´ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã®Nameã¨Descå±žæ€§ã‚’å¤‰æ›´ã™ã‚‹
+// [in] : Id : æ›´æ–°å¯¾è±¡ã¨ãªã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ã®ID
+// [in] : Name : å¤‰æ›´ã™ã‚‹å€¤
+// [in] : Description : å¤‰æ›´ã™ã‚‹å€¤
+// [out] : æ›´æ–°å¯¾è±¡ã¨ãªã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ã®ID
 int VarCon_ChangeNameAndDescription(int Id, TCHAR Name[32], TCHAR Description[64])
 {
-	// ƒGƒ‰[ƒ`ƒFƒbƒN
+	// ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯
 	if (Name == NULL || Description == NULL) {
 		return -1;
 	}
@@ -185,14 +185,14 @@ int VarCon_ChangeNameAndDescription(int Id, TCHAR Name[32], TCHAR Description[64
 	return Id;
 }
 
-// ƒŠƒ|ƒWƒgƒŠ‚ÌVariableƒe[ƒuƒ‹‚ÉƒŒƒR[ƒh‚ð’Ç‰Á‚·‚é
-// [in] : Name : ’Ç‰Á‚·‚éƒŒƒR[ƒh‚ÌNameƒJƒ‰ƒ€‚Ì’l
-// [in] : Description : ’Ç‰Á‚·‚éƒŒƒR[ƒh‚ÌDescƒJƒ‰ƒ€‚Ì’l
-// [in] : Type : •Ï”‚ÌŽí•Ê (0:ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”, 1:ƒtƒ‰ƒO—p•Ï”)
-// [out] : (-1ˆÈŠO:’Ç‰Á‚µ‚½ƒŒƒR[ƒh‚ÌID’l, -1:ƒGƒ‰[‚ª”­¶)
+// ãƒªãƒã‚¸ãƒˆãƒªã®Variableãƒ†ãƒ¼ãƒ–ãƒ«ã«ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã™ã‚‹
+// [in] : Name : è¿½åŠ ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ã®Nameã‚«ãƒ©ãƒ ã®å€¤
+// [in] : Description : è¿½åŠ ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ‰ã®Descã‚«ãƒ©ãƒ ã®å€¤
+// [in] : Type : å¤‰æ•°ã®ç¨®åˆ¥ (0:ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°, 1:ãƒ•ãƒ©ã‚°ç”¨å¤‰æ•°)
+// [out] : (-1ä»¥å¤–:è¿½åŠ ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã®IDå€¤, -1:ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿ)
 int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 {
-	// ƒGƒ‰[ƒ`ƒFƒbƒN
+	// ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯
 	if (Name == NULL || Description == NULL || (Type > 1 || Type < 0)) {
 		return -1;
 	}
@@ -204,7 +204,7 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	LockTable(_T("Property"), 2);
 	LockTable(_T("Variable"), 2);
 
-	// Propertyƒe[ƒuƒ‹‚ÌName=MaxVarId‚Æ‚È‚é’l‚ðŽæ“¾‚·‚é
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«ã®Name=MaxVarIdã¨ãªã‚‹å€¤ã‚’å–å¾—ã™ã‚‹
 	ColumnData* FndColDat = new ColumnDataWStr(_T("Name"), _T("MaxVarId"));
 	RecordData* FndRecDat = new RecordData(_T("Property"), &FndColDat, 1);
 	RecordData* RetRecDat = GetRecord(FndRecDat);
@@ -214,7 +214,7 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	delete RetRecDat;
 	delete FndRecDat;
 
-	// ƒŒƒR[ƒh‚ð’Ç‰Á‚·‚é
+	// ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã™ã‚‹
 	ColumnData* AddColDat[7];
 	AddColDat[0] = new ColumnDataInt(_T("ID"), MaxId);
 	AddColDat[1] = new ColumnDataWStr(_T("Name"), Name);
@@ -231,7 +231,7 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	InsertRecord(AddRecDat);
 	delete AddRecDat;
 
-	// Propertyƒe[ƒuƒ‹‚ÌName=MaxVarId‚Æ‚È‚é’l‚ðXV‚·‚é
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«ã®Name=MaxVarIdã¨ãªã‚‹å€¤ã‚’æ›´æ–°ã™ã‚‹
 	ColumnData* FndCol = new ColumnDataWStr(_T("Name"), _T("MaxVarId"));
 	RecordData* FndRec = new RecordData(_T("Property"), &FndCol, 1);
 	ColumnData* UpdCol = new ColumnDataInt(_T("ValueInt1"), MaxId);
@@ -246,8 +246,8 @@ int VarCon_AddVariableRecord(TCHAR Name[32], TCHAR Description[64], int Type)
 	return MaxId;
 }
 
-// Žw’è‚³‚ê‚½Id‚Æˆê’v‚·‚éVariableƒŒƒR[ƒh‚ðíœ‚·‚é
-// [in] : Id : íœ‚·‚éVariableƒŒƒR[ƒh‚ÌID
+// æŒ‡å®šã•ã‚ŒãŸIdã¨ä¸€è‡´ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å‰Šé™¤ã™ã‚‹
+// [in] : Id : å‰Šé™¤ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã®ID
 void VarCon_DeleteVariableRecord(int Id)
 {
 	LockTable(_T("Variable"), 2);
@@ -269,9 +269,9 @@ void VarCon_DeleteVariableRecord(int Id)
 	UnlockTable(_T("Variable"));
 }
 
-// Žw’è‚µ‚½Id‚Æˆê’v‚·‚éVariableƒŒƒR[ƒh‚ÌFlag‘®«‚ð•ÏX‚·‚é
-// [in] : Id : Flag‚ð•ÏX‚·‚éVariableƒŒƒR[ƒh‚ÌID
-// [in] : Flag : ƒtƒ‰ƒO‚Ì’l (0:FALSE, 1:TRUE)
+// æŒ‡å®šã—ãŸIdã¨ä¸€è‡´ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã®Flagå±žæ€§ã‚’å¤‰æ›´ã™ã‚‹
+// [in] : Id : Flagã‚’å¤‰æ›´ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã®ID
+// [in] : Flag : ãƒ•ãƒ©ã‚°ã®å€¤ (0:FALSE, 1:TRUE)
 void VarCon_ChangeFlagVariable(int Id, BOOL Flag)
 {
 	LockTable(_T("Variable"), 2);
@@ -286,9 +286,9 @@ void VarCon_ChangeFlagVariable(int Id, BOOL Flag)
 	UnlockTable(_T("Variable"));
 }
 
-// Žw’è‚µ‚½Id‚Æˆê’v‚·‚éVariableƒŒƒR[ƒh‚ÌFlag‘®«‚Ì’l‚ðŽæ“¾‚·‚é
-// [in] : Id : Flag‚ð•ÏX‚·‚éVariableƒŒƒR[ƒh‚ÌID
-// [out] : Flag‘®«‚Ì’l
+// æŒ‡å®šã—ãŸIdã¨ä¸€è‡´ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã®Flagå±žæ€§ã®å€¤ã‚’å–å¾—ã™ã‚‹
+// [in] : Id : Flagã‚’å¤‰æ›´ã™ã‚‹Variableãƒ¬ã‚³ãƒ¼ãƒ‰ã®ID
+// [out] : Flagå±žæ€§ã®å€¤
 int VarCon_GetFlagVariable(int Id)
 {
 	LockTable(_T("Variable"), 1);

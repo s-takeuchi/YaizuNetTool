@@ -1,6 +1,6 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ‚Å¶¬‚³‚ê‚½ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹B
-// stklibtest.rc ‚Åg—p
+ï»¿//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ ã§ç”Ÿæˆã•ã‚ŒãŸã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ ãƒ•ã‚¡ã‚¤ãƒ«ã€‚
+// stklibtest.rc ã§ä½¿ç”¨
 //
 #define IDC_BTNOK                       2001
 #define IDC_BTNCANCEL                   2002

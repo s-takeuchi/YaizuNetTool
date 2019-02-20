@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
 #include <tchar.h>
 #include <commctrl.h>
 #include <shlwapi.h>
@@ -30,7 +30,7 @@ HWND ButtonFlagFalseWndHndl;
 HWND ComListWndHndl;
 HWND FlgListWndHndl;
 
-// �����ڂɊւ���f�ނ̃n���h��
+// 見た目に関する素材のハンドル
 HWND BkGndWndHndl;
 HWND BtmGndWndHndl;
 HWND RadioButton1;
@@ -39,7 +39,7 @@ HWND IconWndHndl;
 HWND TextWndHndl;
 HWND ButtonRefWndHndl;
 
-// �R�~���j�P�[�V�����p�ݒ�_�C�A���O�Ɋ֌W����n���h��
+// コミュニケーション用設定ダイアログに関係するハンドル
 HWND CommWndHndl;
 HWND CommBkGndWndHndl;
 HWND CommIconWndHndl;
@@ -51,26 +51,26 @@ HWND CommButtonOK;
 HWND CommButtonCancel;
 HWND CommEdit;
 
-// �t���O�p�ݒ�_�C�A���O�Ɋ֌W����n���h��
+// フラグ用設定ダイアログに関係するハンドル
 HWND FlagDlgHndl;
 
-// �I�����ꂽ�ϐ��̎�� (0:Communication, 1:Flag)
+// 選択された変数の種別 (0:Communication, 1:Flag)
 int SelVarType = 0;
 
-// �I�����ꂽ�ϐ���ID
+// 選択された変数のID
 int SelVarId = -1;
 
-// ���쎯�ʎq (1:Add, 2:Edit)
+// 操作識別子 (1:Add, 2:Edit)
 int OpType = 0;
 
-// �G�f�B�b�g�{�b�N�X�ւ̏o�͎�� (0:Binary, 1:UTF-8)
+// エディットボックスへの出力種別 (0:Binary, 1:UTF-8)
 int SelOutMode = 0;
 
-// �R�~���j�P�[�V�����p�ϐ��̍�Ɨ̈�
+// コミュニケーション用変数の作業領域
 BYTE* WorkDat = NULL;
 int WorkDatActSize = 0;
 
-// ���C���E�B���h�E�����s�����ǂ���
+// メインウィンドウが実行中かどうか
 BOOL RunFlag = FALSE;
 
 LRESULT CALLBACK VarConWndProc( HWND, UINT, WPARAM, LPARAM);
@@ -108,18 +108,18 @@ void SetIconToWnd(HWND TargetWndHndl)
 	}
 }
 
-// �R�~���j�P�[�V�����p�ϐ��ݒ�E�B���h�E�̃��j���[�̃`�F�b�N��Ԃ�ύX����
-// [in] : Type : ���j���[�̃`�F�b�N��� (0:Binary, 1:UTF-8)
+// コミュニケーション用変数設定ウィンドウのメニューのチェック状態を変更する
+// [in] : Type : メニューのチェック状態 (0:Binary, 1:UTF-8)
 void ChangeMenuCheckStatus(int Type)
 {
 	CheckMenuItem(GetSubMenu(GetMenu(CommWndHndl), 1), (Type == 0) ? 1 : 0, MF_BYPOSITION | MF_UNCHECKED);
 	CheckMenuItem(GetSubMenu(GetMenu(CommWndHndl), 1), (Type == 0) ? 0 : 1, MF_BYPOSITION | MF_CHECKED);
 }
 
-// �ϐ���ID���擾����
-// [in] : WndHndl : �R�~���j�P�[�V�����p�ϐ��ꗗ�܂��̓t���O�ϐ��ꗗ��ListView�E�B���h�E�n���h��
-// [in] : LvIndex : �I������Ă���ListView�A�C�e���̃C���f�b�N�X�l
-// [out] : �ϐ���ID
+// 変数のIDを取得する
+// [in] : WndHndl : コミュニケーション用変数一覧またはフラグ変数一覧のListViewウィンドウハンドル
+// [in] : LvIndex : 選択されているListViewアイテムのインデックス値
+// [out] : 変数のID
 int GetSelectedVariableId(HWND WndHndl, int LvIndex)
 {
 	TCHAR IdBuf[11] = L"\0";
@@ -384,14 +384,14 @@ void Var_SetVariableType(int Type)
 	}
 }
 
-// �I������Ă���P�̃A�C�e���̍s�ԍ����擾����
-// [in] : LstViwHndl : �Ώۃ��X�g�r���[�̃n���h��
-// [out] : �I�����ꂽ�A�C�e���̍s�ԍ��B�����̃A�C�e�����I������Ă���ꍇ -1��ԋp����B
+// 選択されている１つのアイテムの行番号を取得する
+// [in] : LstViwHndl : 対象リストビューのハンドル
+// [out] : 選択されたアイテムの行番号。複数のアイテムが選択されている場合 -1を返却する。
 int GetSelectedVlItem(HWND LstViwHndl)
 {
-	// �I������Ă���A�C�e���̐����擾����
-	int ItemCount = 0; // �I������Ă���A�C�e���̐�
-	int FndItem = 0; // �I�����ꂽ�A�C�e���̐���1�̏ꍇ�C���̃A�C�e���̔ԍ�
+	// 選択されているアイテムの数を取得する
+	int ItemCount = 0; // 選択されているアイテムの数
+	int FndItem = 0; // 選択されたアイテムの数が1つの場合，そのアイテムの番号
 	for (int RowLoop = 0; RowLoop < ListView_GetItemCount(LstViwHndl); RowLoop++) {
 		if (ListView_GetItemState(LstViwHndl, RowLoop, LVIS_SELECTED) == LVIS_SELECTED) {
 			FndItem = RowLoop;
@@ -404,8 +404,8 @@ int GetSelectedVlItem(HWND LstViwHndl)
 	return FndItem;
 }
 
-// ���X�g�r���[�̕������ڎw�莞�̋��ʏ����i�폜����CTrue����CFalse����ɓK�p�j
-// [in] : LstViwHndl: ���X�g�r���[�n���h��
+// リストビューの複数項目指定時の共通処理（削除操作，True操作，False操作に適用）
+// [in] : LstViwHndl: リストビューハンドル
 // [in] : Operation (0:FALSE, 1:TRUE, 2:Delete)
 void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 {
@@ -413,7 +413,7 @@ void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 	int FoundCount = 0;
 	UINT ret;
 
-	// �Œ�P�ȏ�̍��ڂ��I������Ă��邩�`�F�b�N���C����Ă��Ȃ���΃G���[�𔭐�������
+	// 最低１つ以上の項目が選択されているかチェックし，されていなければエラーを発生させる
 	for (int RowLoop = 0; RowLoop < ListView_GetItemCount(LstViwHndl); RowLoop++) {
 		ret = ListView_GetItemState(LstViwHndl, RowLoop, LVIS_SELECTED);
 		if (ret == LVIS_SELECTED) {
@@ -425,14 +425,14 @@ void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 		return;
 	}
 
-	// ���ڂ̍폜����̏ꍇ�C���[�U�[�Ɋm�F�𑣂�
+	// 項目の削除操作の場合，ユーザーに確認を促す
 	if (Operation == 2) {
 		if (MyMsgProc::StkYesNo(MyMsgProc::VAR_AREYOUSUREDELETE, WndHndl) == IDNO) {
 			return;
 		}
 	}
 
-	// �J��Ԃ�����
+	// 繰り返し処理
 	for (int RowLoop = 0; RowLoop < ListView_GetItemCount(LstViwHndl); RowLoop++) {
 		ret = ListView_GetItemState(LstViwHndl, RowLoop, LVIS_SELECTED);
 		if (ret == LVIS_SELECTED) {
@@ -448,17 +448,17 @@ void CommonProcedureAboutMultiItemsSelection(HWND LstViwHndl, int Operation)
 		}
 	}
 
-	// �Ō�ɕϐ��ꗗ�\���X�V����
+	// 最後に変数一覧表を更新する
 	ViewData(FALSE);
 }
 
-// �w�肳�ꂽ"Name"�����"Description"�G�f�B�b�g�{�b�N�X�ɒl��ݒ肷��
-// [in] : LstViwHndl : ���擾���̃��X�g�r���[�̃n���h��
-// [in] : Row : ���擾���̃��X�g�r���[�̍s�ԍ�
-// [in] : OwnerHndl : �I�[�i�[�ƂȂ�_�C�A���O�܂��̓E�B���h�E�̃n���h��
-// [in] : NameEbxId : "Name"�G�f�B�b�g�{�b�N�X��ID
-// [in] : DescEbxId : "Description"�G�f�B�b�g�{�b�N�X��ID
-// [out] : �ύX�ΏۂƂȂ����ϐ���ID��Ԃ�
+// 指定された"Name"および"Description"エディットボックスに値を設定する
+// [in] : LstViwHndl : 情報取得元のリストビューのハンドル
+// [in] : Row : 情報取得元のリストビューの行番号
+// [in] : OwnerHndl : オーナーとなるダイアログまたはウィンドウのハンドル
+// [in] : NameEbxId : "Name"エディットボックスのID
+// [in] : DescEbxId : "Description"エディットボックスのID
+// [out] : 変更対象となった変数のIDを返す
 int SetNameAndDescription(HWND LstViwHndl, int Row, HWND OwnerHndl, int NameEbxId, int DescEbxId)
 {
 	wchar_t IdBuf[10] = L"";
@@ -474,13 +474,13 @@ int SetNameAndDescription(HWND LstViwHndl, int Row, HWND OwnerHndl, int NameEbxI
 	return Ret;
 }
 
-// �G�f�B�b�g�{�b�N�X�ɓ��͂��ꂽ����������|�W�g���Ɋi�[����
-// [in] : LstViwHndl : ID(�I�����ꂽ�s��ID)�̎擾���ƂȂ郊�X�g�r���[�̃n���h��
-// [in] : OwnerHndl : �I�[�i�[�ƂȂ�_�C�A���O�܂��̓E�B���h�E�̃n���h��
-// [in] : NameEbxId : "Name"�G�f�B�b�g�{�b�N�X��ID
-// [in] : DescEbxId : "Description"�G�f�B�b�g�{�b�N�X��ID
-// [in] : Id : ����ΏۂƂȂ�ϐ���ID
-// [out] : ����Ώۂ̕ϐ���ID (-1:�i�[�Ɏ��s)
+// エディットボックスに入力された文字列をリポジトリに格納する
+// [in] : LstViwHndl : ID(選択された行のID)の取得元となるリストビューのハンドル
+// [in] : OwnerHndl : オーナーとなるダイアログまたはウィンドウのハンドル
+// [in] : NameEbxId : "Name"エディットボックスのID
+// [in] : DescEbxId : "Description"エディットボックスのID
+// [in] : Id : 操作対象となる変数のID
+// [out] : 操作対象の変数のID (-1:格納に失敗)
 int StoreNameAndDescriptionWithId(HWND LstViwHndl, HWND OwnerHndl, int NameEbxId, int DescEbxId, int Id)
 {
 	TCHAR Name[32];
@@ -491,18 +491,18 @@ int StoreNameAndDescriptionWithId(HWND LstViwHndl, HWND OwnerHndl, int NameEbxId
 	return VarCon_ChangeNameAndDescription(Id, Name, Description);
 }
 
-// �E�B���h�E�^�C�g����ύX����
-// [in] : TargetWndHndl : �ύX����E�B���h�E�̃n���h��
-// [in] : Id : �E�B���h�E�^�C�g����ɕt�����Ƃ��ĕ\������ϐ���ID�B-1�̂Ƃ��\�����Ȃ�
-// [in] : Operation : ���쎯�ʎq (1:Add, 2:Edit)
+// ウィンドウタイトルを変更する
+// [in] : TargetWndHndl : 変更するウィンドウのハンドル
+// [in] : Id : ウィンドウタイトル上に付加情報として表示する変数のID。-1のとき表示しない
+// [in] : Operation : 操作識別子 (1:Add, 2:Edit)
 void ChangeWindowTitle(HWND TargetWndHndl, int Id, int Operation)
 {
-	TCHAR OrgBuf[128]; // ���̕�����
-	TCHAR ChgBuf[128]; // �ύX��̕�����
-	TCHAR Ope[16]; // �I�y���[�V������
+	TCHAR OrgBuf[128]; // 元の文字列
+	TCHAR ChgBuf[128]; // 変更後の文字列
+	TCHAR Ope[16]; // オペレーション名
 
 	GetWindowText(TargetWndHndl, OrgBuf, 128);
-	// �I�y���[�V��������ݒ肷��
+	// オペレーション名を設定する
 	if (Operation == 1) {
 		lstrcpy(Ope, MyMsgProc::GetMsg(MyMsgProc::COMMON_ADD));
 	} else if (Operation == 2) {
@@ -510,7 +510,7 @@ void ChangeWindowTitle(HWND TargetWndHndl, int Id, int Operation)
 	} else {
 		lstrcpy(Ope, MyMsgProc::GetMsg(MyMsgProc::COMMON_UNKNOWN));
 	}
-	// �E�B���h�E�^�C�g���̐ݒ�
+	// ウィンドウタイトルの設定
 	if (Id != -1) {
 		wsprintf(ChgBuf, _T("%s %s  (ID=%d)"), Ope, OrgBuf, Id);
 	} else {
@@ -519,12 +519,12 @@ void ChangeWindowTitle(HWND TargetWndHndl, int Id, int Operation)
 	SetWindowText(TargetWndHndl, ChgBuf);
 }
 
-// �ϐ���ǉ�����
-// [in] : TargetWndHndl : ���O���́^�������̓G�f�B�b�g�{�b�N�X�̐e�̃n���h��
-// [in] : NameId : ���O���̓G�f�B�b�g�{�b�N�X��ID
-// [in] : DescId : �������̓G�f�B�b�g�{�b�N�X��ID
-// [in] : Type : �ϐ��̎�� (0: �R�~���j�P�[�V�����p�ϐ�, 1:�t���O�p�ϐ�)
-// [out] : �ǉ������ϐ���ID�l (-1:�ǉ��Ɏ��s)
+// 変数を追加する
+// [in] : TargetWndHndl : 名前入力／説明入力エディットボックスの親のハンドル
+// [in] : NameId : 名前入力エディットボックスのID
+// [in] : DescId : 説明入力エディットボックスのID
+// [in] : Type : 変数の種別 (0: コミュニケーション用変数, 1:フラグ用変数)
+// [out] : 追加した変数のID値 (-1:追加に失敗)
 int AddVariable(HWND TargetWndHndl, int NameId, int DescId, int Type)
 {
 	TCHAR Name[32];
@@ -535,10 +535,10 @@ int AddVariable(HWND TargetWndHndl, int NameId, int DescId, int Type)
 	return VarCon_AddVariableRecord(Name, Desc, Type);
 }
 
-// ���X�g�r���[�̍��ڂ��_�u���N���b�N���ꂽ�Ƃ��̏���
-// [in] : ListViewHndl : ���X�g�r���[�̃n���h��
-// [in] : lParam : ���b�Z�[�W���f�B�X�p�b�`�����Ƃ���LPARAM�l
-// [out] : �_�u���N���b�N���ꂽ���X�g�r���[�̍��ڂ̍s�ԍ���Ԃ� (-1:�_�u���N���b�N�����ӏ����L���͈͊O)
+// リストビューの項目がダブルクリックされたときの処理
+// [in] : ListViewHndl : リストビューのハンドル
+// [in] : lParam : メッセージをディスパッチしたときのLPARAM値
+// [out] : ダブルクリックされたリストビューの項目の行番号を返す (-1:ダブルクリックした箇所が有効範囲外)
 int ListViewDoubleClicked(HWND ListViewHndl, LPARAM lParam)
 {
 	NMITEMACTIVATE* NmItemActivate = (NMITEMACTIVATE*)lParam;
@@ -556,9 +556,9 @@ int ListViewDoubleClicked(HWND ListViewHndl, LPARAM lParam)
 	return -1;
 }
 
-// �G�f�B�b�g�{�b�N�X�̓��e���R�~���j�P�[�V�����p��Ɨ̈�ɔ��f����
-// [in] : EdBxHndl : �ΏۂƂȂ�G�f�B�b�g�{�b�N�X�̃n���h��
-// [in] : Type : �G�f�B�b�g�{�b�N�X�̎�� (0:�o�C�i��(16�i��)�o��, 1:�e�L�X�g�o��)
+// エディットボックスの内容をコミュニケーション用作業領域に反映する
+// [in] : EdBxHndl : 対象となるエディットボックスのハンドル
+// [in] : Type : エディットボックスの種別 (0:バイナリ(16進数)出力, 1:テキスト出力)
 void ReplaceCommVariable(HWND EdBxHndl, int Type)
 {
 	if (Type == 0) {
@@ -571,15 +571,15 @@ void ReplaceCommVariable(HWND EdBxHndl, int Type)
 		WorkDatActSize = WideCharToMultiByte(CP_UTF8, 0, WcBuf, ActLen, (LPSTR)WorkDat, 9999999, NULL, NULL);
 		if (ActLen != 0 && WorkDatActSize == 0) {
 			MyMsgProc::StkErr(MyMsgProc::VAR_BUFOVERFLOW, WndHndl);
-			WorkDatActSize = 9999999; // �G���[�����������Ƃ���WorkDat�̓��e���ς��Ȃ����Ƃ����ҁB��荇�������Ȃ������B
+			WorkDatActSize = 9999999; // エラーが発生したときにWorkDatの内容が変わらないことを期待。取り合えず問題なさそう。
 		}
 		delete [] WcBuf;
 	}
 }
 
-// �G�f�B�b�g�{�b�N�X�ɃR�~���j�P�[�V�����p��Ɨ̈���o�͂���
-// [in] : EdBxHndl : �o�͂���G�f�B�b�g�{�b�N�X�̃n���h��
-// [in] : Type : �o�͌`�� (0:�o�C�i��(16�i��)�o��, 1:�e�L�X�g�o��)
+// エディットボックスにコミュニケーション用作業領域を出力する
+// [in] : EdBxHndl : 出力するエディットボックスのハンドル
+// [in] : Type : 出力形態 (0:バイナリ(16進数)出力, 1:テキスト出力)
 void OutputCommVariable(HWND EdBxHndl, int Type)
 {
 	if (Type == 1) {
@@ -588,7 +588,7 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 			SendMessage(EdBxHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)_T(""));
 			RedrawWindow(CommWndHndl, NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME | RDW_ALLCHILDREN);
 		} else {
-			TCHAR* OutDat = new TCHAR[WorkDatActSize * 2 + 1]; // UTF-8�o�͂̕K�v�e�ʂ��m��
+			TCHAR* OutDat = new TCHAR[WorkDatActSize * 2 + 1]; // UTF-8出力の必要容量を確保
 			int TransSize = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, (LPCSTR)WorkDat, WorkDatActSize, OutDat, WorkDatActSize * 2);
 			if (TransSize != 0) {
 				OutDat[TransSize] = 0;
@@ -607,7 +607,7 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 
 	if (Type == 0) {
 		int NumOfLine = WorkDatActSize / 32 + 1;
-		TCHAR* OutDat = new TCHAR[NumOfLine * 85]; // �o�C�i��(16�i��)�o�͂̕K�v�e�ʂ��m��
+		TCHAR* OutDat = new TCHAR[NumOfLine * 85]; // バイナリ(16進数)出力の必要容量を確保
 		int OrgCurPtr = 0;
 		TCHAR* OutCurPtr = OutDat;
 		for (int CurLine = 0; CurLine < NumOfLine; CurLine++) {
@@ -637,8 +637,8 @@ void OutputCommVariable(HWND EdBxHndl, int Type)
 	}
 }
 
-// �t�@�C���I���_�C�A���O�Ŏw�肵���t�@�C�����G�f�B�b�g�{�b�N�X�ɓǍ���
-// [in] WinHndl : �t�@�C���I���_�C�A���O�̐e�ƂȂ�E�B���h�E�̃n���h��
+// ファイル選択ダイアログで指定したファイルをエディットボックスに読込む
+// [in] WinHndl : ファイル選択ダイアログの親となるウィンドウのハンドル
 // [out] int : Result code (0: Sucess, -1: Error)
 int OpenFileX(HWND WinHndl)
 {
@@ -669,7 +669,7 @@ int OpenFileX(HWND WinHndl)
 		return -1;
 	};
 
-	//�t�@�C���T�C�Y���`�F�b�N����
+	//ファイルサイズをチェックする
 	DWORD HighSize = 0;
 	DWORD LowSize = 0;
 	LowSize = GetFileSize(FileHndl, &HighSize);
@@ -693,8 +693,8 @@ int OpenFileX(HWND WinHndl)
 	return 0;
 }
 
-// �G�f�B�b�g�{�b�N�X�̓��e���t�@�C���I���_�C�A���O�Ŏw�肵���t�@�C���ɏ�������
-// [in] WinHndl : �t�@�C���I���_�C�A���O�̐e�ƂȂ�E�B���h�E�̃n���h��
+// エディットボックスの内容をファイル選択ダイアログで指定したファイルに書き込む
+// [in] WinHndl : ファイル選択ダイアログの親となるウィンドウのハンドル
 // [out] int : Result code (0: Sucess, -1: Error)
 int SaveFileX(HWND WinHndl)
 {
@@ -765,13 +765,13 @@ BOOL VarConEdit_SelectFolder(TCHAR* FolderPath)
 
 void VarConEdit_Export(HWND LstViwHndl)
 {
-	// �t���O�p�ϐ��Ȃ�Ώ������I����
+	// フラグ用変数ならば処理を終える
 	if (SelVarType == 1) {
 		MyMsgProc::StkErr(MyMsgProc::VAR_FLAGVARNOT, WndHndl);
 		return;
 	}
 
-	// �t�H���_�w��_�C�A���O���J��
+	// フォルダ指定ダイアログを開く
 	TCHAR ExportPath[MAX_PATH];
 	if (VarConEdit_SelectFolder(ExportPath) == FALSE) {
 		return;
@@ -784,17 +784,17 @@ void VarConEdit_Export(HWND LstViwHndl)
 			ListView_GetItemText(LstViwHndl, RowLoop, 0, IdBuf, 10);
 			int Id = StrToInt(IdBuf);
 
-			// Name��Description�̎擾
+			// NameとDescriptionの取得
 			TCHAR Name[32];
 			TCHAR Desc[64];
 			VarCon_GetVariableNameAndDesc(Id, Name, Desc);
 
-			// �R�~���j�P�[�V�����p�ϐ��i�[�̈�̐���
+			// コミュニケーション用変数格納領域の生成
 			int CommDatLength = VarCon_GetCommunicationVariableSize(Id);
 			BYTE* CommDat = new BYTE[CommDatLength + 1];
 			VarCon_GetCommunicationVariable(Id, CommDat, CommDatLength);
 
-			// �t�@�C������
+			// ファイル生成
 			TCHAR TmpPath[MAX_PATH];
 			lstrcpy(TmpPath, ExportPath);
 			lstrcat(TmpPath, _T("\\"));
@@ -825,13 +825,13 @@ void VarConEdit_Export(HWND LstViwHndl)
 
 void VarConEdit_Import()
 {
-	// �t���O�p�ϐ��Ȃ�Ώ������I����
+	// フラグ用変数ならば処理を終える
 	if (SelVarType == 1) {
 		MyMsgProc::StkErr(MyMsgProc::VAR_FLAGVARNOT, WndHndl);
 		return;
 	}
 
-	// �t�H���_�w��_�C�A���O���J��
+	// フォルダ指定ダイアログを開く
 	TCHAR ImportPath[MAX_PATH];
 	if (VarConEdit_SelectFolder(ImportPath) == FALSE) {
 		return;
@@ -847,19 +847,19 @@ void VarConEdit_Import()
 		return;
 	}
 	do {
-		// �w�肳�ꂽ�t�H���_�ɑ��݂���.xxx�t�@�C���̖��̂��擾����
+		// 指定されたフォルダに存在する.xxxファイルの名称を取得する
 		TCHAR TmpFileName[MAX_PATH];
 		lstrcpy(TmpFileName, Fd.cFileName);
 		lstrcpy(TmpPath, ImportPath);
 		lstrcat(TmpPath, _T("\\"));
 		lstrcat(TmpPath, TmpFileName);
 
-		// �R�~���j�P�[�V�����p�ϐ������擾����
+		// コミュニケーション用変数名を取得する
 		TCHAR VarName[50];
-		lstrcpyn(VarName, TmpFileName, 36); //�g���q�܂�
+		lstrcpyn(VarName, TmpFileName, 36); //拡張子含む
 		VarName[lstrlen(VarName) - 4] = 0;
 
-		// �t�@�C����ǂݍ���
+		// ファイルを読み込む
 		HANDLE FileHndl = CreateFile(TmpPath, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (FileHndl == INVALID_HANDLE_VALUE) {
 			MyMsgProc::StkErr(MyMsgProc::VAR_IMPERR, TmpPath, WndHndl);
@@ -873,7 +873,7 @@ void VarConEdit_Import()
 			MyMsgProc::StkErr(MyMsgProc::VAR_BUFOVERFLOW, WndHndl);
 			LowSize = 9999999;
 		}
-		BYTE* CommDat = new BYTE[LowSize + 10000]; // 10000�����Z���闝�R�́CVarCon_UpdateCommunicationVariable��10000�o�C�g���̏������݂��s������
+		BYTE* CommDat = new BYTE[LowSize + 10000]; // 10000を加算する理由は，VarCon_UpdateCommunicationVariableで10000バイト毎の書き込みを行うため
 		SetFilePointer(FileHndl, NULL, NULL, FILE_BEGIN);
 		DWORD TmpSize = 0;
 		if (ReadFile(FileHndl, (LPVOID)CommDat, LowSize, &TmpSize, NULL) == 0) {
@@ -899,7 +899,7 @@ void VarConEdit_Import()
 }
 
 /****************************************************************************/
-// �t���O�p�ϐ��ݒ�_�C�A���O�{�b�N�X
+// フラグ用変数設定ダイアログボックス
 LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int WmId    = LOWORD(wParam); 
@@ -911,7 +911,7 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	if (message == WM_COMMAND) {
 		if (HIWORD(wParam) == BN_CLICKED) {
-			// OK�{�^���������ꂽ�Ƃ�
+			// OKボタンが押されたとき
 			if (LOWORD(wParam) == IDC_VARFLAGBTNOK) {
 				if (OpType == 1) {
 					if (VarCon_CheckCommunicationVariableSize(-1) == FALSE || VarCon_CheckVariableCount() == FALSE) {
@@ -948,7 +948,7 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 					return TRUE;
 				}
 			}
-			// Cancel�{�^���������ꂽ�Ƃ�
+			// Cancelボタンが押されたとき
 			if (LOWORD(wParam) == IDC_VARFLAGBTNCANCEL) {
 				EnableWindow(WndHndl, TRUE);
 				DestroyWindow(hDlg);
@@ -971,7 +971,7 @@ LRESULT CALLBACK FlagDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 /****************************************************************************/
-// �R�~���j�P�[�V�����p�ϐ��ݒ�_�C�A���O�{�b�N�X
+// コミュニケーション用変数設定ダイアログボックス
 LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	RECT Wrect;
@@ -1035,7 +1035,7 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				OutputCommVariable(CommEdit, 1);
 				break;
 			}
-			// OK�{�^���������ꂽ�Ƃ�
+			// OKボタンが押されたとき
 			if (LOWORD(wParam) == IDC_VARCOMMBTNOK) {
 				if (OpType == 1) {
 					ReplaceCommVariable(CommEdit, SelOutMode);
@@ -1084,28 +1084,28 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					break;
 				}
 			}
-			// Cancel�{�^���������ꂽ�Ƃ�
+			// Cancelボタンが押されたとき
 			if (LOWORD(wParam) == IDC_VARCOMMBTNCANCEL) {
 				EnableWindow(WndHndl, TRUE);
 				DestroyWindow(hWnd);
 				// ViewData(FALSE); // ##10085
 				break;
 			}
-			// Close���j���[���I�����ꂽ�Ƃ�
+			// Closeメニューが選択されたとき
 			if (LOWORD(wParam) == ID_VARFILE_CLOSEX) {
 				EnableWindow(WndHndl, TRUE);
 				DestroyWindow(hWnd);
 				// ViewData(FALSE); // ##10085
 				break;
 			}
-			// Open���j���[���I�����ꂽ�Ƃ�
+			// Openメニューが選択されたとき
 			if (LOWORD(wParam) == ID_VARFILE_OPENX) {
 				if (OpenFileX(WndHndl) == -1) {
 					MyMsgProc::StkErr(MyMsgProc::FILEACCESSERROR, WndHndl);
 				}
 				break;
 			}
-			// Save���j���[���I�����ꂽ�Ƃ�
+			// Saveメニューが選択されたとき
 			if (LOWORD(wParam) == ID_VARFILE_SAVEX) {
 				if (SaveFileX(WndHndl) == -1) {
 					MyMsgProc::StkErr(MyMsgProc::FILEACCESSERROR, WndHndl);
@@ -1126,7 +1126,7 @@ LRESULT CALLBACK CommProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 /****************************************************************************/
-// �ϐ��ꗗ�_�C�A���O�{�b�N�X
+// 変数一覧ダイアログボックス
 LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	RECT Wrect;
@@ -1155,13 +1155,13 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		ButtonFlagTrueWndHndl  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_TRUE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGTRUE, InstHndl, NULL);
 		ButtonFlagFalseWndHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::COMMON_FALSE), WS_CHILD | WS_VISIBLE, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGFALSE, InstHndl, NULL);
 
-		// ���X�g�r���[���쐬����
+		// リストビューを作成する
 		ComListWndHndl = CreateWindowEx(0, WC_LISTVIEW, _T(""), WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SHOWSELALWAYS, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARCOMMLV, InstHndl, NULL);
 		ListView_SetExtendedListViewStyle(ComListWndHndl, LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
 		FlgListWndHndl = CreateWindowEx(0, WC_LISTVIEW, _T(""), WS_CHILD | WS_VISIBLE | LVS_REPORT | LVS_SHOWSELALWAYS, 0, 0, 0, 0, hWnd, (HMENU)IDC_VARFLAGLV, InstHndl, NULL);
 		ListView_SetExtendedListViewStyle(FlgListWndHndl, LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
 
-		// ���X�g�r���[�̃A�C�e���̍����𒲐߂���
+		// リストビューのアイテムの高さを調節する
 		{
 			HIMAGELIST ImLstHndl = ImageList_Create(1, 20, ILC_COLOR8 | ILC_MASK, 1, 0);
 			ImageList_AddIcon(ImLstHndl, LoadIcon(InstHndl,  MAKEINTRESOURCE(IDI_VARICON2)));
@@ -1175,7 +1175,7 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 
 		ViewData(TRUE);
 
-		WorkDat = new BYTE[10000000]; // ��Ɨ̈�m��
+		WorkDat = new BYTE[10000000]; // 作業領域確保
 
 		break;
 	case WM_CLOSE:
@@ -1244,18 +1244,18 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				break;
 			} else if (LOWORD(wParam) == IDC_VARFLAGADDBUTTON) {
 				OpType = 1;
-				// �t���O�p�ϐ��ݒ�_�C�A���O���N������
+				// フラグ用変数設定ダイアログを起動する
 				FlagDlgHndl = CreateDialog(InstHndl, MAKEINTRESOURCE(IDD_VARFLAGDLG), hWnd, (DLGPROC)FlagDlg);
 				SetIconToWnd(FlagDlgHndl);
 				ShowWindow(FlagDlgHndl, SW_SHOW);
 				EnableWindow(WndHndl, FALSE);
-				// �E�B���h�E�^�C�g����ύX����
+				// ウィンドウタイトルを変更する
 				ChangeWindowTitle(FlagDlgHndl, -1, 1);
 				break;
 			} else if (LOWORD(wParam) == IDC_VARCOMMADDBUTTON) {
 				OpType = 1;
 				SelOutMode = 0;
-				// �R�~���j�P�[�V�����p�ϐ��ݒ�E�B���h�E���N������
+				// コミュニケーション用変数設定ウィンドウを起動する
 				RECT WndRect;
 				GetWindowRect(WndHndl, &WndRect);
 				CommWndHndl = CreateWindow(_T("Communication"), _T("communication variable"), WS_CAPTION | WS_SYSMENU | WS_DLGFRAME | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX, CW_USEDEFAULT, CW_USEDEFAULT, 770, 450, WndHndl, NULL, InstHndl, NULL);
@@ -1263,52 +1263,52 @@ LRESULT CALLBACK VarConWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				SetIconToWnd(CommWndHndl);
 				ShowWindow(CommWndHndl, SW_SHOW);
 				EnableWindow(WndHndl, FALSE);
-				// �E�B���h�E�^�C�g����ύX����
+				// ウィンドウタイトルを変更する
 				ChangeWindowTitle(CommWndHndl, -1, 1);
-				// ���j���[�`�F�b�N
+				// メニューチェック
 				ChangeMenuCheckStatus(0);
-				// �G�f�B�b�g�{�b�N�X�̍X�V
+				// エディットボックスの更新
 				OutputCommVariable(CommEdit, 0);
 				break;
 			} else if (LOWORD(wParam) == IDC_VARFLAGEDITBUTTON) {
 				OpType = 2;
-				// �I������Ă���P�̃A�C�e���̍s�ԍ����擾����
+				// 選択されている１つのアイテムの行番号を取得する
 				int SelItem = GetSelectedVlItem(FlgListWndHndl);
 				if (SelItem == -1) {
 					MyMsgProc::StkErr(MyMsgProc::VAR_SELECTEDNOTONE, hWnd);
 					break;
 				}
-				// �Ώۂ̕ϐ������|�W�g���ɑ��݂��邩�m�F����
+				// 対象の変数がリポジトリに存在するか確認する
 				if (VarCon_CheckVariableExistence(GetSelectedVariableId(FlgListWndHndl, SelItem)) == FALSE) {
 					MyMsgProc::StkErr(MyMsgProc::VAR_ALREADYDELETED, WndHndl);
 					break;
 				}
-				// �t���O�p�ϐ��ݒ�_�C�A���O���N������
+				// フラグ用変数設定ダイアログを起動する
 				FlagDlgHndl = CreateDialog(InstHndl, MAKEINTRESOURCE(IDD_VARFLAGDLG), hWnd, (DLGPROC)FlagDlg);
 				SetIconToWnd(FlagDlgHndl);
 				ShowWindow(FlagDlgHndl, SW_SHOW);
 				EnableWindow(WndHndl, FALSE);
-				// "Name"��"Description"�̐ݒ�
+				// "Name"と"Description"の設定
 				SelVarId = SetNameAndDescription(FlgListWndHndl, SelItem, FlagDlgHndl, IDC_VARFLAGNAMEEDIT, IDC_VARFLAGDESCEDIT);
-				// �E�B���h�E�^�C�g����ύX����
+				// ウィンドウタイトルを変更する
 				ChangeWindowTitle(FlagDlgHndl, SelVarId, 2);
 				break;
 			} else if (LOWORD(wParam) == IDC_VARCOMMEDITBUTTON) {
 COMMEDIT:
 				OpType = 2;
 				SelOutMode = 0;
-				// �I������Ă���P�̃A�C�e���̍s�ԍ����擾����
+				// 選択されている１つのアイテムの行番号を取得する
 				int SelItem = GetSelectedVlItem(ComListWndHndl);
 				if (SelItem == -1) {
 					MyMsgProc::StkErr(MyMsgProc::VAR_SELECTEDNOTONE, hWnd);
 					break;
 				}
-				// �Ώۂ̕ϐ������|�W�g���ɑ��݂��邩�m�F����
+				// 対象の変数がリポジトリに存在するか確認する
 				if (VarCon_CheckVariableExistence(GetSelectedVariableId(ComListWndHndl, SelItem)) == FALSE) {
 					MyMsgProc::StkErr(MyMsgProc::VAR_ALREADYDELETED, WndHndl);
 					break;
 				}
-				// �R�~���j�P�[�V�����p�ϐ��ݒ�E�B���h�E���N������
+				// コミュニケーション用変数設定ウィンドウを起動する
 				RECT WndRect;
 				GetWindowRect(WndHndl, &WndRect);
 				CommWndHndl = CreateWindow(_T("Communication"), _T("communication variable"), WS_CAPTION | WS_SYSMENU | WS_DLGFRAME | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX, CW_USEDEFAULT, CW_USEDEFAULT, 770, 450, WndHndl, NULL, InstHndl, NULL);
@@ -1316,13 +1316,13 @@ COMMEDIT:
 				SetIconToWnd(CommWndHndl);
 				ShowWindow(CommWndHndl, SW_SHOW);
 				EnableWindow(WndHndl, FALSE);
-				// "Name"��"Description"�̐ݒ�
+				// "Name"と"Description"の設定
 				SelVarId = SetNameAndDescription(ComListWndHndl, SelItem, CommBkGndWndHndl, IDC_VARCOMMNAMEEDIT, IDC_VARCOMMDESCEDIT);
-				// �E�B���h�E�^�C�g����ύX����
+				// ウィンドウタイトルを変更する
 				ChangeWindowTitle(CommWndHndl, SelVarId, 2);
-				// ���j���[�`�F�b�N
+				// メニューチェック
 				ChangeMenuCheckStatus(0);
-				// �G�f�B�b�g�{�b�N�X�̍X�V
+				// エディットボックスの更新
 				OutputCommVariable(CommEdit, 0);
 				break;
 			} else if (LOWORD(wParam) == IDC_VARFLAGDELBUTTON) {
@@ -1344,7 +1344,7 @@ COMMEDIT:
 		}
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	case WM_DESTROY:
-		delete [] WorkDat; // ��Ɨ̈�J��
+		delete [] WorkDat; // 作業領域開放
 		RunFlag = FALSE;
 		PostQuitMessage(0);
 		break;

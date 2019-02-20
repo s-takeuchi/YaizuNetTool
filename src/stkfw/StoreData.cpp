@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -105,7 +105,7 @@ void StoreData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 		SendMessage(StDtPrefixHndl, EM_SETLIMITTEXT, (WPARAM)26, (LPARAM)0);
 		SendMessage(StDtNumHndl, EM_SETLIMITTEXT, (WPARAM)5, (LPARAM)0);
 
-		// ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ì€–Ú‚Æ‚µ‚Ä’Ç‰Á‚·‚é
+		// ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã‚’ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã®é …ç›®ã¨ã—ã¦è¿½åŠ ã™ã‚‹
 		MaxIndex = 0;
 		RecordData* VarRecs = VarCon_GetVariableRecords();
 		RecordData* CurVarRec = VarRecs;
@@ -130,15 +130,15 @@ void StoreData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 			}
 		}
 
-		// ‘€ìí•Ê‚Ì‰Šú‰»
+		// æ“ä½œç¨®åˆ¥ã®åˆæœŸåŒ–
 		SelectedType = GetLoadStoreType(CurrentId);
 		ChangeSettingType(SelectedType);
 
-		// ƒvƒŒƒtƒBƒbƒNƒXİ’è
+		// ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹è¨­å®š
 		GetLoadStorePrefix(CurrentId, SpecifiedPrefix);
 		SendMessage(StDtPrefixHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)SpecifiedPrefix);
 
-		// ƒvƒŒƒtƒBƒbƒNƒXŒã‚ÌÌ”ÔŠJn”Ô†İ’è
+		// ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹å¾Œã®æ¡ç•ªé–‹å§‹ç•ªå·è¨­å®š
 		SpecifiedStartNum = GetLoadStoreStartNum(CurrentId);
 		TCHAR Buf[10];
 		wsprintf(Buf, _T("%d"), SpecifiedStartNum);

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <tchar.h>
 #include "..\..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
 
@@ -18,7 +18,7 @@ public:
 	// Get this instance
 	static LowDbAccess* GetInstance();
 
-	// Propertyƒe[ƒuƒ‹
+	// Propertyãƒ†ãƒ¼ãƒ–ãƒ«
 	int GetPropertyInteger(TCHAR*, int);
 	void SetPropertyInteger(TCHAR*, int, int);
 	void InsertProperty(TCHAR*, int, int, int, TCHAR*, TCHAR*, TCHAR*);
@@ -29,7 +29,7 @@ public:
 	int GetAllLinkInfos(int[500], int[500], int[500], int[500]);
 	int GetViewElementMenus(int[100], TCHAR[100][256], TCHAR[100][256]);
 
-	// ViewElementƒe[ƒuƒ‹
+	// ViewElementãƒ†ãƒ¼ãƒ–ãƒ«
 	int GetViewElementIdsFromType(int*, int, int);
 	int GetViewElementIds(int[256], int);
 	int GetViewElementNamesAndIdsFromUdpType(TCHAR[256][32], int[256], int);
@@ -48,7 +48,7 @@ public:
 	int GetAllViewElementRecords(int[1000], TCHAR[1000][32], int[1000], int[1000], int[1000], int[1000], int[1000][10], int[1000][10]);
 	void GetMaxLinkInfo(int[100], int[100]);
 
-	// ElementInfoƒe[ƒuƒ‹
+	// ElementInfoãƒ†ãƒ¼ãƒ–ãƒ«
 	int GetElementInfoParamInt(int, int);
 	void SetElementInfoParamInt(int, int, int);
 	void GetElementInfoParamStr(int, TCHAR[256], int);
@@ -69,10 +69,10 @@ public:
 	// Delete all records of specified table
 	int DeleteAllRecords(TCHAR[TABLE_NAME_SIZE]);
 
-	// ƒe[ƒuƒ‹‚ªXV‚³‚ê‚Ä‚¢‚éê‡TRUE‚ğ•Ô‚·
+	// ãƒ†ãƒ¼ãƒ–ãƒ«ãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚‹å ´åˆTRUEã‚’è¿”ã™
 	BOOL IsUpdated(int);
 
-	// ƒ[ƒNƒXƒy[ƒXƒTƒCƒY‚¨‚æ‚ÑƒOƒŠƒbƒhó‘Ô‚ğ•Ô‹pEİ’è‚·‚é
+	// ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚µã‚¤ã‚ºãŠã‚ˆã³ã‚°ãƒªãƒƒãƒ‰çŠ¶æ…‹ã‚’è¿”å´ãƒ»è¨­å®šã™ã‚‹
 	BOOL GetWorkspaceInfo(int*, int*, int*);
 	BOOL ChangeWorkspace(int, int, int);
 	void SetWorkspaceGridType(int);

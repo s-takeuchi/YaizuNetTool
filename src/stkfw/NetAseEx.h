@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "..\stklib\OfficeASE.h"
 
 class NetAseEx : public OfficeASE  

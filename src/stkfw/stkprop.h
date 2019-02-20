@@ -1,3 +1,3 @@
-int DllShowProperty(int);
+﻿int DllShowProperty(int);
 void AddAllSocketInfo();
 void DeleteAllSocketInfo();

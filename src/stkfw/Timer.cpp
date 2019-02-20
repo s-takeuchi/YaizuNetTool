@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -91,7 +91,7 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 			SendMessage(CbSecondHndl, CB_ADDSTRING, 0, (LPARAM)TmpBuf);
 		}
 
-		// ”NŒŽ“úŽž•ª•b‚Ì‰Šú‰»
+		// å¹´æœˆæ—¥æ™‚åˆ†ç§’ã®åˆæœŸåŒ–
 		SYSTEMTIME SysTm;
 		DWORD HighTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1);
 		DWORD LowTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
@@ -110,13 +110,13 @@ void Timer(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT messa
 		SendMessage(CbMinuteHndl, CB_SETCURSEL, SysTm.wMinute, 0);
 		SendMessage(CbSecondHndl, CB_SETCURSEL, SysTm.wSecond, 0);
 
-		// ‘Ò‚¿ŽžŠÔ‚Ì‰Šú‰»
+		// å¾…ã¡æ™‚é–“ã®åˆæœŸåŒ–
 		int WaitTm = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3);
 		TCHAR WaitTmBuf[20];
 		wsprintf(WaitTmBuf, _T("%d"), WaitTm);
 		SendMessage(EdWaitHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)WaitTmBuf);
 
-		// ƒ‰ƒWƒIƒ{ƒ^ƒ“‰Šú‰»
+		// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³åˆæœŸåŒ–
 		SelectedType = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4);
 		ChangeTimerType(SelectedType);
 	}

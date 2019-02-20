@@ -1,4 +1,4 @@
-#include <shlwapi.h>
+ï»¿#include <shlwapi.h>
 #include "LowDbAccess.h"
 #include "..\..\..\..\YaizuComLib\src\\stkdata\stkdata.h"
 #include "..\..\..\..\YaizuComLib\src\\stkdata\stkdataapi.h"
@@ -39,10 +39,10 @@ LowDbAccess* LowDbAccess::GetInstance()
 //
 /////////////////////////////////////////////////////////////////////////
 
-// w’è‚µ‚½ƒvƒƒpƒeƒB‚Ìn”Ô–Ú‚ÌValueInt’l‚ğæ“¾‚·‚é
-// Name: in: ƒvƒƒpƒeƒB–¼
-// Index: in: æ“¾‚·‚éValueInt‘®«‚ÌƒCƒ“ƒfƒbƒNƒX ("ValueInt1"=1, "ValueInt2"=2, "ValueInt3"=3)
-// –ß‚è’l: æ“¾‚µ‚½’l
+// æŒ‡å®šã—ãŸãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®nç•ªç›®ã®ValueIntå€¤ã‚’å–å¾—ã™ã‚‹
+// Name: in: ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å
+// Index: in: å–å¾—ã™ã‚‹ValueIntå±æ€§ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ ("ValueInt1"=1, "ValueInt2"=2, "ValueInt3"=3)
+// æˆ»ã‚Šå€¤: å–å¾—ã—ãŸå€¤
 int LowDbAccess::GetPropertyInteger(TCHAR* Name, int Index)
 {
 	int Ret = 0;
@@ -61,10 +61,10 @@ int LowDbAccess::GetPropertyInteger(TCHAR* Name, int Index)
 	return Ret;
 }
 
-// w’è‚µ‚½ƒvƒƒpƒeƒB‚Ìn”Ô–Ú‚ÌValueInt’l‚ğİ’è‚·‚é
-// Name: in: ƒvƒƒpƒeƒB–¼
-// Index: in: æ“¾‚·‚éValueInt‘®«‚ÌƒCƒ“ƒfƒbƒNƒX ("ValueInt1"=1, "ValueInt2"=2, "ValueInt3"=3)
-// Value: in: İ’è‚·‚é’l
+// æŒ‡å®šã—ãŸãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®nç•ªç›®ã®ValueIntå€¤ã‚’è¨­å®šã™ã‚‹
+// Name: in: ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å
+// Index: in: å–å¾—ã™ã‚‹ValueIntå±æ€§ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ ("ValueInt1"=1, "ValueInt2"=2, "ValueInt3"=3)
+// Value: in: è¨­å®šã™ã‚‹å€¤
 void LowDbAccess::SetPropertyInteger(TCHAR* Name, int Index, int Value)
 {
 	TCHAR* AtrName[3] = {_T("ValueInt1"), _T("ValueInt2"), _T("ValueInt3")};
@@ -84,14 +84,14 @@ void LowDbAccess::SetPropertyInteger(TCHAR* Name, int Index, int Value)
 	delete UpdateRd;
 }
 
-// Propertyƒe[ƒuƒ‹‚ÉƒŒƒR[ƒh‚ğ‘}“ü‚·‚é
-// Name: in: ƒvƒƒpƒeƒB–¼
-// ValInt1: in: ValueInt1‚Ì’l
-// ValInt2: in: ValueInt2‚Ì’l
-// ValInt3: in: ValueInt3‚Ì’l
-// ValStr1: in: ValueStr1‚Ì’l
-// ValStr2: in: ValueStr2‚Ì’l
-// ValStr3: in: ValueStr3‚Ì’l
+// Propertyãƒ†ãƒ¼ãƒ–ãƒ«ã«ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’æŒ¿å…¥ã™ã‚‹
+// Name: in: ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å
+// ValInt1: in: ValueInt1ã®å€¤
+// ValInt2: in: ValueInt2ã®å€¤
+// ValInt3: in: ValueInt3ã®å€¤
+// ValStr1: in: ValueStr1ã®å€¤
+// ValStr2: in: ValueStr2ã®å€¤
+// ValStr3: in: ValueStr3ã®å€¤
 void LowDbAccess::InsertProperty(TCHAR* Name, int ValInt1, int ValInt2, int ValInt3, TCHAR* ValStr1, TCHAR* ValStr2, TCHAR* ValStr3)
 {
 	ColumnData* ColDat[7];
@@ -109,8 +109,8 @@ void LowDbAccess::InsertProperty(TCHAR* Name, int ValInt1, int ValInt2, int ValI
 	delete InsertRd;
 }
 
-// w’è‚µ‚½ƒvƒƒpƒeƒB–¼‚ğ‚Â‘SƒŒƒR[ƒh‚ğíœ‚·‚é
-// Name: in: ƒvƒƒpƒeƒB–¼
+// æŒ‡å®šã—ãŸãƒ—ãƒ­ãƒ‘ãƒ†ã‚£åã‚’æŒã¤å…¨ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å‰Šé™¤ã™ã‚‹
+// Name: in: ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å
 void LowDbAccess::DeleteProperty(TCHAR* Name)
 {
 	ColumnData* ColDat[1];
@@ -147,11 +147,11 @@ void LowDbAccess::DeleteProperty(TCHAR* Name, int ValInt1, int ValInt2, int ValI
 	delete DeleteRd;
 }
 
-// ƒ[ƒNƒXƒy[ƒXƒTƒCƒY‚¨‚æ‚ÑƒOƒŠƒbƒhó‘Ô‚ğ•Ô‹p‚·‚é
-// Width : out : Œ»İƒ[ƒNƒXƒy[ƒX‚Ì•(pixel)
-// Height : out : Œ»İ‚Ìƒ[ƒNƒXƒy[ƒX‚Ì‚‚³(pixel)
-// GridType : out : Œ»İ‚ÌƒOƒŠƒbƒhó‘Ô(1: 1pixel, 8:8pixel)
-// –ß‚è’l : ¬Œ÷^¸”s‚ğ¦‚·ƒtƒ‰ƒO (TRUE: ¬Œ÷, FALSE: ¸”s)
+// ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚µã‚¤ã‚ºãŠã‚ˆã³ã‚°ãƒªãƒƒãƒ‰çŠ¶æ…‹ã‚’è¿”å´ã™ã‚‹
+// Width : out : ç¾åœ¨ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®å¹…(pixel)
+// Height : out : ç¾åœ¨ã®ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®é«˜ã•(pixel)
+// GridType : out : ç¾åœ¨ã®ã‚°ãƒªãƒƒãƒ‰çŠ¶æ…‹(1: 1pixel, 8:8pixel)
+// æˆ»ã‚Šå€¤ : æˆåŠŸï¼å¤±æ•—ã‚’ç¤ºã™ãƒ•ãƒ©ã‚° (TRUE: æˆåŠŸ, FALSE: å¤±æ•—)
 BOOL LowDbAccess::GetWorkspaceInfo(int* Width, int* Height, int* GridTypeL)
 {
 	ColumnData* ColDat[1];
@@ -182,8 +182,8 @@ BOOL LowDbAccess::GetWorkspaceInfo(int* Width, int* Height, int* GridTypeL)
 	}
 }
 
-// ƒ[ƒNƒXƒy[ƒX‚ÌƒOƒŠƒbƒhí•Ê‚ğİ’è‚·‚é
-// GridType [in] : ƒOƒŠƒbƒhí•Ê
+// ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®ã‚°ãƒªãƒƒãƒ‰ç¨®åˆ¥ã‚’è¨­å®šã™ã‚‹
+// GridType [in] : ã‚°ãƒªãƒƒãƒ‰ç¨®åˆ¥
 void LowDbAccess::SetWorkspaceGridType(int GridType)
 {
 	ColumnData* ColDat[2];
@@ -198,9 +198,9 @@ void LowDbAccess::SetWorkspaceGridType(int GridType)
 	delete SearchRd;
 }
 
-// ViewElementí•Ê‚©‚çƒAƒCƒRƒ“í•Ê‚ğæ“¾‚·‚é
-// Type [in] : ViewElementí•Ê
-// Return : ƒAƒCƒRƒ“í•Ê
+// ViewElementç¨®åˆ¥ã‹ã‚‰ã‚¢ã‚¤ã‚³ãƒ³ç¨®åˆ¥ã‚’å–å¾—ã™ã‚‹
+// Type [in] : ViewElementç¨®åˆ¥
+// Return : ã‚¢ã‚¤ã‚³ãƒ³ç¨®åˆ¥
 int LowDbAccess::GetIconTypeByViewElementType(int Type)
 {
 	ColumnData* ColDat[2];
@@ -298,12 +298,12 @@ int LowDbAccess::GetAllLinkInfos(int LinkFm[500], int LinkTo[500], int LinkCt[50
 // MaxLinkFrom [out] : Link origin's max link count
 void LowDbAccess::GetMaxLinkInfo(int MaxLinkTo[100], int MaxLinkFrom[100])
 {
-	// MaxLinkTo‚¨‚æ‚ÑMaxLinkFrom”z—ñƒNƒŠƒA
+	// MaxLinkToãŠã‚ˆã³MaxLinkFromé…åˆ—ã‚¯ãƒªã‚¢
 	for (int MaxLinkLp = 0; MaxLinkLp < 100; MaxLinkLp++) {
 		MaxLinkTo[MaxLinkLp] = 0;
 		MaxLinkFrom[MaxLinkLp] = 0;
 	}
-	//"MaxLink"Property‚©‚ç‚Ì“Ç‚İ‚İ
+	//"MaxLink"Propertyã‹ã‚‰ã®èª­ã¿è¾¼ã¿
 	ColumnData* ColDat[1];
 	ColDat[0] = new ColumnDataWStr(_T("Name"), _T("MaxLink"));
 	RecordData* SearchRd = new RecordData(_T("Property"), ColDat, 1);
@@ -377,11 +377,11 @@ int LowDbAccess::GetViewElementMenus(int VeType[100], TCHAR VeTypeName[100][256]
 //
 /////////////////////////////////////////////////////////////////////////
 
-// ViewElementƒe[ƒuƒ‹‚ğŒŸõ‚µCw’è‚µ‚½í•Ê‚ğ‚Â—v‘f‚ÌID‚ğ”z—ñ‚Å•Ô‹p‚·‚é
-// Type: in: ŒŸõ‘ÎÛ‚Ìí•Ê
-// Ids: out: æ“¾‚·‚éID‚ğŠi”[‚·‚é”z—ñ
-// NumOfIds: in: æ“¾‚·‚éID‚ªŠi”[‚³‚ê‚é”z—ñ‚ÌƒTƒCƒY
-// –ß‚è’l: æ“¾‚µ‚½ID‚Ì”
+// ViewElementãƒ†ãƒ¼ãƒ–ãƒ«ã‚’æ¤œç´¢ã—ï¼ŒæŒ‡å®šã—ãŸç¨®åˆ¥ã‚’æŒã¤è¦ç´ ã®IDã‚’é…åˆ—ã§è¿”å´ã™ã‚‹
+// Type: in: æ¤œç´¢å¯¾è±¡ã®ç¨®åˆ¥
+// Ids: out: å–å¾—ã™ã‚‹IDã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+// NumOfIds: in: å–å¾—ã™ã‚‹IDãŒæ ¼ç´ã•ã‚Œã‚‹é…åˆ—ã®ã‚µã‚¤ã‚º
+// æˆ»ã‚Šå€¤: å–å¾—ã—ãŸIDã®æ•°
 int LowDbAccess::GetViewElementIdsFromType(int* Ids, int NumOfIds, int Type)
 {
 	ColumnData* ColDat[1];
@@ -408,10 +408,10 @@ int LowDbAccess::GetViewElementIdsFromType(int* Ids, int NumOfIds, int Type)
 	return CurrentNum;
 }
 
-// w’è‚µ‚½ğŒ‚Éˆê’v‚·‚é‘S‚Ä‚ÌViewElement‚ÌID‚ğ•Ô‹p‚·‚é
-// Ids : [out] : Type‚Åw’è‚µ‚½í•Ê‚ğ‚Â‘S‚Ä‚ÌViewElement‚ÌID‚ğŠi”[‚·‚é”z—ñ‚Ìƒ|ƒCƒ“ƒ^
-// Type : [in] : ID‚ğæ“¾‚·‚éğŒ
-// [return] : Ids‚ÉŠi”[‚µ‚½ID‚Ì”
+// æŒ‡å®šã—ãŸæ¡ä»¶ã«ä¸€è‡´ã™ã‚‹å…¨ã¦ã®ViewElementã®IDã‚’è¿”å´ã™ã‚‹
+// Ids : [out] : Typeã§æŒ‡å®šã—ãŸç¨®åˆ¥ã‚’æŒã¤å…¨ã¦ã®ViewElementã®IDã‚’æ ¼ç´ã™ã‚‹é…åˆ—ã®ãƒã‚¤ãƒ³ã‚¿
+// Type : [in] : IDã‚’å–å¾—ã™ã‚‹æ¡ä»¶
+// [return] : Idsã«æ ¼ç´ã—ãŸIDã®æ•°
 int LowDbAccess::GetViewElementIds(int Ids[256], int Type)
 {
 	ColumnData* ColSch[1];
@@ -1090,11 +1090,11 @@ void LowDbAccess::SetElementInfoParamStrAsInt(int CurrentId, int Index, int Valu
 	delete RecSch;
 }
 
-// w’è‚µ‚½ID‚ÌƒzƒXƒg–¼‚Ü‚½‚ÍIPƒAƒhƒŒƒX‚Æƒ|[ƒg”Ô†‚ğ•Ô‹p‚·‚é
-// TargetId : [in] : æ“¾‚·‚é‘ÎÛ‚ÌID
-// HostOrIpAddr : [out] : æ“¾‚µ‚½ƒzƒXƒg–¼‚Ü‚½‚ÍIPƒAƒhƒŒƒX
-// Port : [out] : æ“¾‚µ‚½ƒ|[ƒg”Ô†
-// [return] : Œ‹‰ÊƒR[ƒh (0: —LŒø, -1: –³Œø)
+// æŒ‡å®šã—ãŸIDã®ãƒ›ã‚¹ãƒˆåã¾ãŸã¯IPã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ãƒãƒ¼ãƒˆç•ªå·ã‚’è¿”å´ã™ã‚‹
+// TargetId : [in] : å–å¾—ã™ã‚‹å¯¾è±¡ã®ID
+// HostOrIpAddr : [out] : å–å¾—ã—ãŸãƒ›ã‚¹ãƒˆåã¾ãŸã¯IPã‚¢ãƒ‰ãƒ¬ã‚¹
+// Port : [out] : å–å¾—ã—ãŸãƒãƒ¼ãƒˆç•ªå·
+// [return] : çµæœã‚³ãƒ¼ãƒ‰ (0: æœ‰åŠ¹, -1: ç„¡åŠ¹)
 int LowDbAccess::GetHostIpAddrPort(int TargetId, TCHAR HostOrIpAddr[256], int* Port)
 {
 	int ResultCode = 0;
@@ -1108,7 +1108,7 @@ int LowDbAccess::GetHostIpAddrPort(int TargetId, TCHAR HostOrIpAddr[256], int* P
 	if (RetRec != NULL) {
 		ColumnDataInt* RetColType = (ColumnDataInt*)RetRec->GetColumn(1);
 		int Type = RetColType->GetValue();
-		// ƒzƒXƒg–¼^IPƒAƒhƒŒƒX‚¨‚æ‚Ñƒ|[ƒg”Ô†‚ª’¼w’è‚Ìê‡‚Ì‚İ
+		// ãƒ›ã‚¹ãƒˆåï¼IPã‚¢ãƒ‰ãƒ¬ã‚¹ãŠã‚ˆã³ãƒãƒ¼ãƒˆç•ªå·ãŒç›´æŒ‡å®šã®å ´åˆã®ã¿
 		if (Type == 0 || Type == 2) {
 			ColumnDataInt* RetColPort = (ColumnDataInt*)RetRec->GetColumn(3);
 			*Port = RetColPort->GetValue();
@@ -1369,9 +1369,9 @@ void LowDbAccess::UpdateElementInfoFromViewElement()
 	delete ResultRdEleIfIm;
 }
 
-// ƒe[ƒuƒ‹‚ªXV‚³‚ê‚Ä‚¢‚éê‡TRUE‚ğ•Ô‚·
-// OpType : in : ‘€ìí•Ê (0:‘S‘Ìƒ`ƒFƒbƒN, 1:‘S‘ÌƒŠƒZƒbƒg, 2:ElementInfo‚Ì‚İƒ`ƒFƒbƒN, 3:ElementInfo‚Ì‚İƒŠƒZƒbƒg)
-// –ß‚è’l : ‰½‚©•ÏX‚³‚ê‚Ä‚¢‚ê‚ÎTRUE, ‚»‚¤‚Å‚È‚¯‚ê‚ÎFALSE‚ğ•Ô‹p‚·‚é
+// ãƒ†ãƒ¼ãƒ–ãƒ«ãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚‹å ´åˆTRUEã‚’è¿”ã™
+// OpType : in : æ“ä½œç¨®åˆ¥ (0:å…¨ä½“ãƒã‚§ãƒƒã‚¯, 1:å…¨ä½“ãƒªã‚»ãƒƒãƒˆ, 2:ElementInfoã®ã¿ãƒã‚§ãƒƒã‚¯, 3:ElementInfoã®ã¿ãƒªã‚»ãƒƒãƒˆ)
+// æˆ»ã‚Šå€¤ : ä½•ã‹å¤‰æ›´ã•ã‚Œã¦ã„ã‚Œã°TRUE, ãã†ã§ãªã‘ã‚Œã°FALSEã‚’è¿”å´ã™ã‚‹
 BOOL LowDbAccess::IsUpdated(int OpType)
 {
 	BOOL Ret = FALSE;
@@ -1411,11 +1411,11 @@ BOOL LowDbAccess::IsUpdated(int OpType)
 	return Ret;
 }
 
-// ƒ[ƒNƒXƒy[ƒXƒTƒCƒY‚¨‚æ‚ÑƒOƒŠƒbƒhó‘Ô‚ğİ’è‚·‚é
-// Width : in : Œ»İƒ[ƒNƒXƒy[ƒX‚Ì•(pixel)
-// Height : in : Œ»İ‚Ìƒ[ƒNƒXƒy[ƒX‚Ì‚‚³(pixel)
-// GridType : in : Œ»İ‚ÌƒOƒŠƒbƒhó‘Ô(1: 1pixel, 8:8pixel)
-// –ß‚è’l : ¬Œ÷^¸”s‚ğ¦‚·ƒtƒ‰ƒO (TRUE: ¬Œ÷, FALSE: ¸”s)
+// ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚µã‚¤ã‚ºãŠã‚ˆã³ã‚°ãƒªãƒƒãƒ‰çŠ¶æ…‹ã‚’è¨­å®šã™ã‚‹
+// Width : in : ç¾åœ¨ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®å¹…(pixel)
+// Height : in : ç¾åœ¨ã®ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®é«˜ã•(pixel)
+// GridType : in : ç¾åœ¨ã®ã‚°ãƒªãƒƒãƒ‰çŠ¶æ…‹(1: 1pixel, 8:8pixel)
+// æˆ»ã‚Šå€¤ : æˆåŠŸï¼å¤±æ•—ã‚’ç¤ºã™ãƒ•ãƒ©ã‚° (TRUE: æˆåŠŸ, FALSE: å¤±æ•—)
 BOOL LowDbAccess::ChangeWorkspace(int Width, int Height, int GridTypeL)
 {
 	ColumnData* ColDat[4];

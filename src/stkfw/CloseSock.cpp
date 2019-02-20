@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -36,7 +36,7 @@ void ChangeUdpTcpOperationType(int Type, HWND RdoBtn1, HWND RdoBtn2, HWND CloseF
 
 void CloseSockSetMenu(HWND CloseHndl, int UdpFlag, int SelectedTargetId, int CurrentId)
 {
-	// Sender name‚Ì‰Šú‰»
+	// Sender nameã®åˆæœŸåŒ–
 	TCHAR SenderName[256][32];
 	int SenderId[256];
 	int MaxNum;

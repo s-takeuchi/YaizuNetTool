@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -369,14 +369,14 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		SendMessage(IpHndl, EM_SETLIMITTEXT, (WPARAM)255, (LPARAM)0);
 		SendMessage(PortHndl, EM_SETLIMITTEXT, (WPARAM)5, (LPARAM)0);
 
-		// ƒAƒCƒRƒ“İ—pƒhƒƒbƒvƒ_ƒEƒ“ƒŠƒXƒg‚Ì‰Šú‰»
+		// ã‚¢ã‚¤ã‚³ãƒ³è¨­ç”¨ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³ãƒªã‚¹ãƒˆã®åˆæœŸåŒ–
 		for (int Loop = 0; Loop < 10; Loop++) {
 			SendMessage(IconHndl, CB_ADDSTRING, 0, (LPARAM)ComboMenu[Loop]);
 		}
 		SelectedIcon = GetIconId(CurrentId);
 		SendMessage(IconHndl, CB_SETCURSEL, SelectedIcon - IconOffset, 0);
 
-		// ‘€ìí•Ê‚Ì‰Šú‰»
+		// æ“ä½œç¨®åˆ¥ã®åˆæœŸåŒ–
 		SelectedOpeType = GetOperationType(CurrentId);
 		ChangeOperationType(SelectedOpeType);
 
@@ -445,18 +445,18 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			}
 		}
 
-		// IP address/hostname‚Ì‰Šú‰»
+		// IP address/hostnameã®åˆæœŸåŒ–
 		TCHAR IpAddrHostname[256];
 		GetIpAddressOrHostname(CurrentId, IpAddrHostname);
 		SendMessage(IpHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)IpAddrHostname);
 
-		// Port‚Ì‰Šú‰»
+		// Portã®åˆæœŸåŒ–
 		int PortNum = GetPortNumber(CurrentId);
 		TCHAR Buf[10];
 		wsprintf(Buf, _T("%d"), PortNum);
 		SendMessage(PortHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 
-		// ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ì‰Šú‰»
+		// ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã®åˆæœŸåŒ–
 		SelectedCheck = GetCloseSockCheck(CurrentId);
 		if (SelectedCheck == 0) {
 			SendMessage(CloseSockHndl, BM_SETCHECK, BST_UNCHECKED, 0L);

@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -42,7 +42,7 @@ void Mapper(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT mess
 		SendMessage(MapperEdit2Hndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Prefix2);
 		SendMessage(NumHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)NumBuf);
 
-		// ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ì‰Šú‰»
+		// ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã®åˆæœŸåŒ–
 		UseOnceChk = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 2);
 		if (UseOnceChk == 0) {
 			SendMessage(UseOnceHndl, BM_SETCHECK, BST_UNCHECKED, 0L);

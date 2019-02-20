@@ -1,4 +1,4 @@
-#include <cwchar>
+ï»¿#include <cwchar>
 #include "ApiObj_Thread.h"
 #include "ExecElemMgr.h"
 #include "LowDbAccess.h"
@@ -12,7 +12,7 @@ int ApiObj_Thread::ElemStkThreadInit(int Id)
 
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
-	// ExecElemMgr‰Šú‰»
+	// ExecElemMgråˆæœŸåŒ–
 	ExecMgr->AddExecElem(Id);
 	ExecMgr->ThreadStatusChangedIntoStart(Id); // This line is required for appropriate running.
 
@@ -23,7 +23,7 @@ int ApiObj_Thread::ElemStkThreadFinal(int Id)
 {
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
-	// ExecElemMgrÅIˆ—
+	// ExecElemMgræœ€çµ‚å‡¦ç†
 	ExecMgr->ThreadStatusChangedIntoStop(Id);
 	ExecMgr->ClearLineType(Id);
 	ExecMgr->DeleteExecElem(Id);

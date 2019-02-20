@@ -1,4 +1,4 @@
-#include <cwchar>
+﻿#include <cwchar>
 #include "ApiObj.h"
 #include "ApiObj_Thread.h"
 #include "ApiObj_Log.h"

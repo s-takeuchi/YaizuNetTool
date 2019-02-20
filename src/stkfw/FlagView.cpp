@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -15,7 +15,7 @@ HWND CheckVar;
 
 int StkProp_CollectAndSetFlagVariable(HWND ComboB, int VarId[2000], int SelectedVarId)
 {
-	// ƒtƒ‰ƒO—p•Ï”‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ì€–Ú‚Æ‚µ‚Ä’Ç‰Á‚·‚é
+	// ãƒ•ãƒ©ã‚°ç”¨å¤‰æ•°ã‚’ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã®é …ç›®ã¨ã—ã¦è¿½åŠ ã™ã‚‹
 	int MaxIndex = 0;
 	RecordData* VarRecs = VarCon_GetVariableRecords();
 	RecordData* CurVarRec = VarRecs;

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "..\stklib\OfficeManagerASE.h"
 #include "NetAseEx.h"
 

@@ -1,4 +1,4 @@
-#include <winsock2.h>
+ï»¿#include <winsock2.h>
 #include "..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
 #include <windows.h>
 #include <tchar.h>
@@ -70,42 +70,42 @@ void PropTypeProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int Type = LowDbAccess::GetInstance()->GetViewElementTypeFromId(CurrentId);
 
-	// TCP Sender ‚Ü‚½‚Í TCP Receiver ‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// TCP Sender ã¾ãŸã¯ TCP Receiver ã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 1 || Type == 4 || Type == 7) {
 		RecvInit(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Store data ‚Ü‚½‚Í LoadData‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Store data ã¾ãŸã¯ LoadDataã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 2 || Type == 5 || Type == 8) {
 		StoreData(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Check flag‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Check flagã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 10) {
 		CheckFlag(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Check data‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Check dataã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 11) {
 		CheckData(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
 	if (Type == 12) {
 		Timer(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Change flag‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Change flagã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 13) {
 		ChangeFlag(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Change data‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Change dataã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 14) {
 		ChgData(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Close port‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Close portã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 16) {
 		CloseSock(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Mapper‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Mapperã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 17) {
 		Mapper(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// Write file, Read file‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// Write file, Read fileã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 18 || Type == 19) {
 		FileAccess(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
@@ -113,7 +113,7 @@ void PropTypeProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lParam)
 	if (Type == 20) {
 		ExecProg(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
-	// UDP Sender ‚Ü‚½‚Í UDP Receiver ‚ÌƒfƒBƒXƒpƒbƒ`ˆ—
+	// UDP Sender ã¾ãŸã¯ UDP Receiver ã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‡¦ç†
 	if (Type == 21 || Type == 22 || Type == 23) {
 		UdpRecvSend(CurrentId, Type, StkPropInstHndl, WndHndl, message, wParam, lParam);
 	}
@@ -164,11 +164,11 @@ LRESULT CALLBACK PropProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lPar
 		OkButton      = CreateWindow(_T("BUTTON"), _T("OK"), WS_CHILD | WS_VISIBLE, Rect.right - 180, Rect.bottom - 40, 80, 30, WndHndl, (HMENU)IDC_BTNOK, StkPropInstHndl, NULL);
 		CancelButton  = CreateWindow(_T("BUTTON"), _T("Cancel"), WS_CHILD | WS_VISIBLE, Rect.right - 90, Rect.bottom - 40, 80, 30, WndHndl, (HMENU)IDC_BTNCANCEL, StkPropInstHndl, NULL);
 
-		// ƒrƒbƒgƒ}ƒbƒv‚Ìİ’è
+		// ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã®è¨­å®š
 		PropBitMap = LoadBitmap(StkPropInstHndl, MAKEINTRESOURCE(IDB_BITMAP1));
 		SendMessage(BmpWndHndl, STM_SETIMAGE, (WPARAM)IMAGE_BITMAP, (LPARAM)PropBitMap);
 
-		// ID•\¦—pƒGƒfƒBƒbƒgƒ{ƒbƒNƒX‚Ìİ’è
+		// IDè¡¨ç¤ºç”¨ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹ã®è¨­å®š
 		{
 			SendMessage(IdEditHndl, EM_SETREADONLY, (WPARAM)TRUE, (LPARAM)0);
 			TCHAR IdEditBuf[20];
@@ -176,7 +176,7 @@ LRESULT CALLBACK PropProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lPar
 			SendMessage(IdEditHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)IdEditBuf);
 		}
 
-		// Name•ÒW—pƒGƒfƒBƒbƒgƒ{ƒbƒNƒX‚Ìİ’è
+		// Nameç·¨é›†ç”¨ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹ã®è¨­å®š
 		TCHAR Name[32];
 		LowDbAccess::GetInstance()->GetViewElementNameFromId(CurrentId, Name);
 		SendMessage(NameEditHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Name);
@@ -204,7 +204,7 @@ LRESULT CALLBACK PropProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lPar
 				return 0;
 			}
 		}
-		// ƒ^ƒCƒv–ˆ‚Ì•\¦Ø‚è‘Ö‚¦ˆ—‚ğŒÄ‚Ño‚·
+		// ã‚¿ã‚¤ãƒ—æ¯ã®è¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆå‡¦ç†ã‚’å‘¼ã³å‡ºã™
 		PropTypeProc(WndHndl, message, wParam, lParam);
 		return DefWindowProc(WndHndl, message, wParam, lParam);
 	case WM_CLOSE:
@@ -217,11 +217,11 @@ LRESULT CALLBACK PropProc(HWND WndHndl, UINT message, WPARAM wParam, LPARAM lPar
 		PropTypeProc(WndHndl, message, wParam, lParam);
 		return 0;
 	default:
-		// ƒ^ƒCƒv–ˆ‚Ì•\¦Ø‚è‘Ö‚¦ˆ—‚ğŒÄ‚Ño‚·
+		// ã‚¿ã‚¤ãƒ—æ¯ã®è¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆå‡¦ç†ã‚’å‘¼ã³å‡ºã™
 		PropTypeProc(WndHndl, message, wParam, lParam);
 		return DefWindowProc(WndHndl, message, wParam, lParam);
 	}
-	// ƒ^ƒCƒv–ˆ‚Ì•\¦Ø‚è‘Ö‚¦ˆ—‚ğŒÄ‚Ño‚·
+	// ã‚¿ã‚¤ãƒ—æ¯ã®è¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆå‡¦ç†ã‚’å‘¼ã³å‡ºã™
 	PropTypeProc(WndHndl, message, wParam, lParam);
 	return 0;
 }
@@ -242,7 +242,7 @@ void StkPropSetIconToWnd(HWND TargetWndHndl)
 	}
 }
 
-int ShowProperty() // ##10085 –ß‚è’l‚ğ•ÏX
+int ShowProperty() // ##10085 æˆ»ã‚Šå€¤ã‚’å¤‰æ›´
 {
 	MSG msg;
 
@@ -278,7 +278,7 @@ void SyncElementInfoAndViewElement()
 	LowDbAccess::GetInstance()->UpdateElementInfoFromViewElement();
 }
 
-int DllShowProperty(int Id) // ##10085 –ß‚è’l‚ğ•ÏX
+int DllShowProperty(int Id) // ##10085 æˆ»ã‚Šå€¤ã‚’å¤‰æ›´
 {
 	CurrentId = Id;
 	StkPropInstHndl = GetModuleHandle(NULL);
@@ -292,22 +292,22 @@ void AddAllSocketInfo()
 
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
-	// StkSocketMgr‰Šú‰»
+	// StkSocketMgråˆæœŸåŒ–
 	// 0: Receiver, 1: Sender-Stopper, 2: Sender-Terminator, 21: UDP-Receiver, 22: UDP-Sender-Terminator, 23: UDP-Sender-Stopper
 	int TmpIds[6][256];
 	int NumOfElem[6];
-	// Receiver, Sender‚Ì‘SID‚ğæ“¾‚·‚é
+	// Receiver, Senderã®å…¨IDã‚’å–å¾—ã™ã‚‹
 	NumOfElem[0] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[0], 1);
 	NumOfElem[1] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[1], 7);
 	NumOfElem[2] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[2], 4);
 	NumOfElem[3] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[3], 21);
 	NumOfElem[4] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[4], 22);
 	NumOfElem[5] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[5], 23);
-	// Receiver‚ÆSender‚Ì‡Œv‚ªÅ‘å’l‚ğ’´‚¦‚½ê‡
+	// Receiverã¨Senderã®åˆè¨ˆãŒæœ€å¤§å€¤ã‚’è¶…ãˆãŸå ´åˆ
 	if (NumOfElem[0] + NumOfElem[1] + NumOfElem[2] + NumOfElem[3] + NumOfElem[4] + NumOfElem[5] >= 256) {
 		return;
 	}
-	// SocketInfoƒƒ“ƒo”z—ñ‚ğ¶¬‚·‚é
+	// SocketInfoãƒ¡ãƒ³ãƒé…åˆ—ã‚’ç”Ÿæˆã™ã‚‹
 	TCHAR TmpHostOrIpAddr[256];
 	int TmpPort;
 	for (int LoopType = 0; LoopType < 6; LoopType++ ) {
@@ -337,22 +337,22 @@ void DeleteAllSocketInfo()
 {
 	ExecElemMgr* ExecMgr = ExecElemMgr::GetInstance();
 
-	// StkSocketMgrI—¹ˆ—
+	// StkSocketMgrçµ‚äº†å‡¦ç†
 	// 0: Receiver, 1: Sender-Stopper, 2: Sender-Terminator
 	int TmpIds[6][256];
 	int NumOfElem[6];
-	// Receiver‚Ì‘SID‚ğæ“¾‚·‚é
+	// Receiverã®å…¨IDã‚’å–å¾—ã™ã‚‹
 	NumOfElem[0] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[0], 1);
 	NumOfElem[1] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[1], 7);
 	NumOfElem[2] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[2], 4);
 	NumOfElem[3] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[3], 21);
 	NumOfElem[4] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[4], 22);
 	NumOfElem[5] = LowDbAccess::GetInstance()->GetViewElementIds(TmpIds[5], 23);
-	// Receiver‚ÆSender‚Ì‡Œv‚ªÅ‘å’l‚ğ’´‚¦‚½ê‡
+	// Receiverã¨Senderã®åˆè¨ˆãŒæœ€å¤§å€¤ã‚’è¶…ãˆãŸå ´åˆ
 	if (NumOfElem[0] + NumOfElem[1] + NumOfElem[2] +NumOfElem[3] + NumOfElem[4] + NumOfElem[5] >= 256) {
 		return;
 	}
-	// SocketInfoƒƒ“ƒo”z—ñ‚©‚ç—v‘f‚ğíœ‚·‚é
+	// SocketInfoãƒ¡ãƒ³ãƒé…åˆ—ã‹ã‚‰è¦ç´ ã‚’å‰Šé™¤ã™ã‚‹
 	for (int LoopType = 0; LoopType < 6; LoopType++ ) {
 		for (int Loop = 0; Loop < NumOfElem[LoopType]; Loop++) {
 			StkSocket_DeleteInfo(TmpIds[LoopType][Loop]);

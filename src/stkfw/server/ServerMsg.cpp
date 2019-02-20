@@ -1,4 +1,4 @@
-#include <tchar.h>
+ï»¿#include <tchar.h>
 #include "..\..\..\..\YaizuComLib\src\\commonfunc\msgproc.h"
 #include "ServerMsg.h"
 
@@ -6,91 +6,91 @@ void ServerMsg::AddMsg()
 {
 	// =====================================================================================================
 	// 2503 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_SUCCESSCSC, _T("ƒ\ƒPƒbƒg‚Ì¶¬‚¨‚æ‚ÑCONNECT‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_SUCCESSCSC, _T("ã‚½ã‚±ãƒƒãƒˆã®ç”ŸæˆãŠã‚ˆã³CONNECTã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_SUCCESSCSC, _T("Creation of socket and connection succeeded."));
 
 	// 2504 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_SUCCESSCSBNLS, _T("ƒ\ƒPƒbƒg‚Ì¶¬CBIND‚¨‚æ‚ÑLISTEN‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_SUCCESSCSBNLS, _T("ã‚½ã‚±ãƒƒãƒˆã®ç”Ÿæˆï¼ŒBINDãŠã‚ˆã³LISTENã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_SUCCESSCSBNLS, _T("Creation of socket, binding and listening succeeded."));
 
 	// 2505 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_SOCKCLOSE, _T("ƒ\ƒPƒbƒg‚ÌƒNƒ[ƒY‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_SOCKCLOSE, _T("ã‚½ã‚±ãƒƒãƒˆã®ã‚¯ãƒ­ãƒ¼ã‚ºã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_SOCKCLOSE, _T("Closure of socket succeeded."));
 
 	// 2506 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_ACPTRECV, _T("ACCEPT—pƒ\ƒPƒbƒg‚Åƒf[ƒ^‚ğóM‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_ACPTRECV, _T("ACCEPTç”¨ã‚½ã‚±ãƒƒãƒˆã§ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_ACPTRECV, _T("Data received using the accepting socket."));
 
 	// 2507 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_CNCTRECV, _T("Ú‘±’†‚Ìƒ\ƒPƒbƒg‚Åƒf[ƒ^‚ª•ÔM‚³‚ê‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_CNCTRECV, _T("æ¥ç¶šä¸­ã®ã‚½ã‚±ãƒƒãƒˆã§ãƒ‡ãƒ¼ã‚¿ãŒè¿”ä¿¡ã•ã‚Œã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_CNCTRECV, _T("Data returned using the communicating socket."));
 
 	// 2508 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_ACPTSEND, _T("Ú‘±’†‚Ìƒ\ƒPƒbƒg‚Åƒf[ƒ^‚ğ•ÔM‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_ACPTSEND, _T("æ¥ç¶šä¸­ã®ã‚½ã‚±ãƒƒãƒˆã§ãƒ‡ãƒ¼ã‚¿ã‚’è¿”ä¿¡ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_ACPTSEND, _T("Data sent back using the communicating socket."));
 
 	// 2509 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_CNCTSEND, _T("CONNECT‚µ‚½ƒ\ƒPƒbƒg‚Åƒf[ƒ^‚ğ‘—M‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_CNCTSEND, _T("CONNECTã—ãŸã‚½ã‚±ãƒƒãƒˆã§ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_CNCTSEND, _T("Data sent using the connected socket."));
 
 	// 2510 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_SENDERROR, _T("ƒf[ƒ^‘—M‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_SENDERROR, _T("ãƒ‡ãƒ¼ã‚¿é€ä¿¡æ™‚ã«ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_SENDERROR, _T("An error occurred during data transmission."));
 
 	// 2511 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_RECVERROR, _T("ƒf[ƒ^óM‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_RECVERROR, _T("ãƒ‡ãƒ¼ã‚¿å—ä¿¡æ™‚ã«ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_RECVERROR, _T("An error occurred during data receipt."));
 
 	// 2512 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_NAMESOLVEERR, _T("w’è‚³‚ê‚½ƒzƒXƒg–¼‚Ì‰ğŒˆ‚É¸”s‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_NAMESOLVEERR, _T("æŒ‡å®šã•ã‚ŒãŸãƒ›ã‚¹ãƒˆåã®è§£æ±ºã«å¤±æ•—ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_NAMESOLVEERR, _T("Resolution of the specified host name failed."));
 
 	// 2513 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_CONNERROR, _T("w’è‚³‚ê‚½ƒzƒXƒg‚Ö‚ÌÚ‘±‚É¸”s‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_CONNERROR, _T("æŒ‡å®šã•ã‚ŒãŸãƒ›ã‚¹ãƒˆã¸ã®æ¥ç¶šã«å¤±æ•—ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_CONNERROR, _T("Connection to the specified host failed."));
 
 	// 2514 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_BINDLISTENERR, _T("BIND‚Ü‚½‚ÍLISTEN‚É¸”s‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_BINDLISTENERR, _T("BINDã¾ãŸã¯LISTENã«å¤±æ•—ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_BINDLISTENERR, _T("Binding or listening failed."));
 
 	// 2515 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_CREATEACCEPTSOCK, _T("ACCEPT—pƒ\ƒPƒbƒg‚Ì¶¬‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_CREATEACCEPTSOCK, _T("ACCEPTç”¨ã‚½ã‚±ãƒƒãƒˆã®ç”Ÿæˆã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_CREATEACCEPTSOCK, _T("Creation of accepting socket succeeded."));
 
 	// 2516 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_CLOSEACCEPTSOCK, _T("ACCEPT—pƒ\ƒPƒbƒg‚ÌƒNƒ[ƒY‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_CLOSEACCEPTSOCK, _T("ACCEPTç”¨ã‚½ã‚±ãƒƒãƒˆã®ã‚¯ãƒ­ãƒ¼ã‚ºã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_CLOSEACCEPTSOCK, _T("Closure of accepting socket succeeded."));
 
 	// 2517 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_CLOSELISTENACCEPTSOCK, _T("ACCEPT—pƒ\ƒPƒbƒg‚¨‚æ‚ÑLISTEN—pƒ\ƒPƒbƒg‚ÌƒNƒ[ƒY‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_CLOSELISTENACCEPTSOCK, _T("ACCEPTç”¨ã‚½ã‚±ãƒƒãƒˆãŠã‚ˆã³LISTENç”¨ã‚½ã‚±ãƒƒãƒˆã®ã‚¯ãƒ­ãƒ¼ã‚ºã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_CLOSELISTENACCEPTSOCK, _T("Closure of accept/listen sockets succeeded."));
 
 	// 2518 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_BINDERR, _T("BIND‚É¸”s‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_BINDERR, _T("BINDã«å¤±æ•—ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_BINDERR, _T("Binding to port failed."));
 
 	// 2519 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_SUCCESSCSBN, _T("UDPƒ\ƒPƒbƒg‚Ì¶¬‚¨‚æ‚ÑBIND‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_SUCCESSCSBN, _T("UDPã‚½ã‚±ãƒƒãƒˆã®ç”ŸæˆãŠã‚ˆã³BINDã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_SUCCESSCSBN, _T("Creation of socket and binding succeeded."));
 
 	// 2520 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_UDPRECV, _T("UDPƒ\ƒPƒbƒg‚Åƒf[ƒ^‚ğóM‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_UDPRECV, _T("UDPã‚½ã‚±ãƒƒãƒˆã§ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_UDPRECV, _T("Data received using UDP socket."));
 
 	// 2521 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_UDPSEND, _T("UDPƒ\ƒPƒbƒg‚Åƒf[ƒ^‚ğ‘—M‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_UDPSEND, _T("UDPã‚½ã‚±ãƒƒãƒˆã§ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡ã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_UDPSEND, _T("Data sent using UDP socket."));
 
 	// 2522 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_SUCCESSCS, _T("UDPƒ\ƒPƒbƒg‚Ì¶¬‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_SUCCESSCS, _T("UDPã‚½ã‚±ãƒƒãƒˆã®ç”Ÿæˆã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_SUCCESSCS, _T("Creation of UDP socket succeeded."));
 
 	// 2523 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_UDPSOCKCLOSE, _T("UDPƒ\ƒPƒbƒg‚ÌƒNƒ[ƒY‚É¬Œ÷‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(STKFW_LOG_UDPSOCKCLOSE, _T("UDPã‚½ã‚±ãƒƒãƒˆã®ã‚¯ãƒ­ãƒ¼ã‚ºã«æˆåŠŸã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(STKFW_LOG_UDPSOCKCLOSE, _T("Closure of UDP socket succeeded."));
 
 	// 2524 (NC5)
-	MessageProc::AddJpn(STKFW_LOG_UNKNOWN, _T("•s–¾"));
+	MessageProc::AddJpn(STKFW_LOG_UNKNOWN, _T("ä¸æ˜"));
 	MessageProc::AddEng(STKFW_LOG_UNKNOWN, _T("Unknown"));
 
 	// =====================================================================================================

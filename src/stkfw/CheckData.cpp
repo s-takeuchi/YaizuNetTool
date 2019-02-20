@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include "resource.h"
 #include "server\VarController.h"
@@ -92,7 +92,7 @@ void CheckData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 		ChkDatNotEqual = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_CHKDAT_NEQUAL), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 20, 320, Rect.right - 40, 20, WndHndl, (HMENU)IDC_CHKDAT_NOTEQUAL, InstHndl, NULL);
 		ChkDatVarCBox = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 230, 350, 200, 200, WndHndl, (HMENU)IDC_CHKDAT_VAR, InstHndl, NULL);
 
-		// ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ì€–Ú‚Æ‚µ‚Ä’Ç‰Á‚·‚é
+		// ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°ã‚’ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã®é …ç›®ã¨ã—ã¦è¿½åŠ ã™ã‚‹
 		MaxIndex = 0;
 		RecordData* VarRecs = VarCon_GetVariableRecords();
 		RecordData* CurVarRec = VarRecs;
@@ -117,7 +117,7 @@ void CheckData(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT m
 			}
 		}
 
-		// ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Ìİ’è
+		// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®è¨­å®š
 		SelectedType = GetChkDatType(CurrentId);
 		ChangeChkDatType(SelectedType);
 	}

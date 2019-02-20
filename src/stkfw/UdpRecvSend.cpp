@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include <commctrl.h>
@@ -107,7 +107,7 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 		SendMessage(IpHndl, EM_SETLIMITTEXT, (WPARAM)255, (LPARAM)0);
 		SendMessage(PortHndl, EM_SETLIMITTEXT, (WPARAM)5, (LPARAM)0);
 
-		// ‘€ìŽí•Ê‚Ì‰Šú‰»
+		// æ“ä½œç¨®åˆ¥ã®åˆæœŸåŒ–
 		SelectedOpeType = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 1); // Get operation type
 		ChangeOperationType(SelectedOpeType, RdoBtn1, RdoBtn2, IpHndl, PortHndl, TgtHndl);
 
@@ -146,18 +146,18 @@ void UdpRecvSend(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT
 			}
 		}
 
-		// IP address/hostname‚Ì‰Šú‰»
+		// IP address/hostnameã®åˆæœŸåŒ–
 		TCHAR IpAddrHostname[256];
 		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, IpAddrHostname, 1);
 		SendMessage(IpHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)IpAddrHostname);
 
-		// Port‚Ì‰Šú‰»
+		// Portã®åˆæœŸåŒ–
 		int PortNum = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 3); // Get port number
 		TCHAR Buf[10];
 		wsprintf(Buf, _T("%d"), PortNum);
 		SendMessage(PortHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 
-		// ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ì‰Šú‰»
+		// ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã®åˆæœŸåŒ–
 		SelectedCheck = LowDbAccess::GetInstance()->GetElementInfoParamInt(CurrentId, 4); // Close check box
 		if (SelectedCheck == 0) {
 			SendMessage(CloseSockHndl, BM_SETCHECK, BST_UNCHECKED, 0L);

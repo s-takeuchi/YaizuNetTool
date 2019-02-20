@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "..\..\..\..\YaizuComLib\src\commonfunc\StkObject.h"
 
 class ApiObj

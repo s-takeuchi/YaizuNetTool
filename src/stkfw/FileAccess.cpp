@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <tchar.h>
 #include <shlwapi.h>
 #include "resource.h"
@@ -6,12 +6,12 @@
 #include "MyMsgProc.h"
 #include "server\LowDbAccess.h"
 
-// ƒAƒNƒZƒXí•Ê‚ÉŠÖ‚·‚éƒ‰ƒWƒIƒ{ƒ^ƒ“‚Ìƒ`ƒFƒbƒN‚ğØ‚è‘Ö‚¦‚é
-// Type: in: ƒAƒNƒZƒXí•Ê(0: ã‘‚«, 1:‘}“ü, 2:˜AŒ‹)
-// FileAcAddHndl: in: ˜AŒ‹—pƒ‰ƒWƒIƒ{ƒ^ƒ“ƒnƒ“ƒhƒ‹
-// FileAcOverwHndl: in: ã‘‚«—pƒ‰ƒWƒIƒ{ƒ^ƒ“ƒnƒ“ƒhƒ‹
-// FileAcInsertHndl: in: ‘}“ü—pƒ‰ƒWƒIƒ{ƒ^ƒ“ƒnƒ“ƒhƒ‹
-// –ß‚è’l: ‚È‚µ
+// ã‚¢ã‚¯ã‚»ã‚¹ç¨®åˆ¥ã«é–¢ã™ã‚‹ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®ãƒã‚§ãƒƒã‚¯ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
+// Type: in: ã‚¢ã‚¯ã‚»ã‚¹ç¨®åˆ¥(0: ä¸Šæ›¸ã, 1:æŒ¿å…¥, 2:é€£çµ)
+// FileAcAddHndl: in: é€£çµç”¨ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ãƒãƒ³ãƒ‰ãƒ«
+// FileAcOverwHndl: in: ä¸Šæ›¸ãç”¨ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ãƒãƒ³ãƒ‰ãƒ«
+// FileAcInsertHndl: in: æŒ¿å…¥ç”¨ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ãƒãƒ³ãƒ‰ãƒ«
+// æˆ»ã‚Šå€¤: ãªã—
 void ChangeAccessType(int Type, HWND FileAcAddHndl, HWND FileAcOverwHndl, HWND FileAcInsertHndl)
 {
 	if (Type == 0) {
@@ -42,14 +42,14 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 	static int AccessType = 0;
 
 	if (message == WM_CREATE) {
-		// ƒtƒ@ƒCƒ‹ƒpƒX‚Ìİ’è
+		// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®è¨­å®š
 		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_FILEACCESS_NAME), WS_CHILD | WS_VISIBLE, Rect.left + 40, 110, Rect.right - 60, 60, WndHndl, NULL, InstHndl, NULL);
 		FileNameEditHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 200, 180, 250, 24, WndHndl, NULL, InstHndl, NULL);
 		SendMessage(FileNameEditHndl, EM_SETLIMITTEXT, (WPARAM)254, (LPARAM)0);
 		TCHAR BufPath[256];
 		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, BufPath, 1);
 		SendMessage(FileNameEditHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)BufPath);
-		// ‘‚«‚İí•Ê‚Ìİ’è
+		// æ›¸ãè¾¼ã¿ç¨®åˆ¥ã®è¨­å®š
 		int OverwMsg;
 		int AddMsg;
 		int InsertMsg;
@@ -70,7 +70,7 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 	}
 	if (message == WM_COMMAND) {
 		if (HIWORD(wParam) == BN_CLICKED) {
-			// ‘‚«‚İí•Ê‚Ì•ÏX‚ğŒŸ’m
+			// æ›¸ãè¾¼ã¿ç¨®åˆ¥ã®å¤‰æ›´ã‚’æ¤œçŸ¥
 			if (LOWORD(wParam) == IDC_FILEAC_OVERWRITE) {
 				ChangeAccessType(0, FileAcAddHndl, FileAcOverwHndl, FileAcInsertHndl);
 				AccessType = 0;
@@ -83,7 +83,7 @@ void FileAccess(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT 
 				ChangeAccessType(2, FileAcAddHndl, FileAcOverwHndl, FileAcInsertHndl);
 				AccessType = 2;
 			}
-			// OKƒ{ƒ^ƒ“‰Ÿ‰º‚ğŒŸ’m
+			// OKãƒœã‚¿ãƒ³æŠ¼ä¸‹ã‚’æ¤œçŸ¥
 			if (LOWORD(wParam) == IDC_BTNOK) {
 				TCHAR BufPath[256];
 				SendMessage(FileNameEditHndl, WM_GETTEXT, (WPARAM)255, (LPARAM)BufPath);

@@ -1,4 +1,4 @@
-#include <tchar.h>
+ï»¿#include <tchar.h>
 #include "..\..\..\YaizuComLib\src\\commonfunc\msgproc.h"
 #include "MyMsgProc.h"
 
@@ -6,63 +6,63 @@ void MyMsgProc::AddMsg()
 {
 	// =====================================================================================================
 	//2101 (NC2)
-	MessageProc::AddJpn(STKFW_RUNNINGORPROPOPEN, _T("ƒXƒŒƒbƒh‚ªÀs’†‚©ƒvƒƒpƒeƒBƒ_ƒCƒAƒƒOƒ{ƒbƒNƒX‚ªŠJ‚¢‚½‚Ü‚Ü‚Ì‚½‚ß‘€ì‚ğÀs‚Å‚«‚Ü‚¹‚ñB\r\nƒXƒŒƒbƒh‚ğ’â~‚·‚é‚©ƒvƒƒpƒeƒBƒ_ƒCƒAƒƒOƒ{ƒbƒNƒX‚ğ•Â‚¶‚½‚ ‚ÆÄ“x‘€ì‚ğ‚İ‚Ä‚­‚¾‚³‚¢B"));
+	MessageProc::AddJpn(STKFW_RUNNINGORPROPOPEN, _T("ã‚¹ãƒ¬ãƒƒãƒ‰ãŒå®Ÿè¡Œä¸­ã‹ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒœãƒƒã‚¯ã‚¹ãŒé–‹ã„ãŸã¾ã¾ã®ãŸã‚æ“ä½œã‚’å®Ÿè¡Œã§ãã¾ã›ã‚“ã€‚\r\nã‚¹ãƒ¬ãƒƒãƒ‰ã‚’åœæ­¢ã™ã‚‹ã‹ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒœãƒƒã‚¯ã‚¹ã‚’é–‰ã˜ãŸã‚ã¨å†åº¦æ“ä½œã‚’è©¦ã¿ã¦ãã ã•ã„ã€‚"));
 	MessageProc::AddEng(STKFW_RUNNINGORPROPOPEN, _T("The operation cannot be performed because threads are running and/or a property dialog box is open.\r\nStop all threads and/or close the property dialog box, then try again."));
 
 	//2102 (NC2)
-	MessageProc::AddJpn(STKFW_OUTOFRANGE, _T("”ÍˆÍw’èƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B\r\n“KØ‚Èƒ[ƒNƒXƒy[ƒX‚ÌƒTƒCƒY‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B\r\n  - • [512 ` 2048]\r\n  - ‚‚³ [400 ` 2048]"));
+	MessageProc::AddJpn(STKFW_OUTOFRANGE, _T("ç¯„å›²æŒ‡å®šã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚\r\né©åˆ‡ãªãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®ã‚µã‚¤ã‚ºã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚\r\n  - å¹… [512 ï½ 2048]\r\n  - é«˜ã• [400 ï½ 2048]"));
 	MessageProc::AddEng(STKFW_OUTOFRANGE, _T("An out-of-range error has occurred.\r\nSpecify a valid workspace size.\r\n  - Width [512 to 2048]\r\n  - Height [400 to 2048]"));
 
 	//2103 (NC1)
-	MessageProc::AddJpn(STKFW_DATASAVEFAILED, _T("ƒf[ƒ^‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½B\r\nŸ‚Ì€–Ú‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B\r\n- ‘ÎÛƒtƒHƒ‹ƒ_‚ÌƒAƒNƒZƒXŒ ŒÀ‚ª³‚µ‚¢‚©B\r\n- w’è‚µ‚½ƒtƒ@ƒCƒ‹‚ª‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ÅŠù‚Ég—p‚³‚ê‚Ä‚¢‚È‚¢‚©B"));
+	MessageProc::AddJpn(STKFW_DATASAVEFAILED, _T("ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\r\næ¬¡ã®é …ç›®ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚\r\n- å¯¾è±¡ãƒ•ã‚©ãƒ«ãƒ€ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©é™ãŒæ­£ã—ã„ã‹ã€‚\r\n- æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§æ—¢ã«ä½¿ç”¨ã•ã‚Œã¦ã„ãªã„ã‹ã€‚"));
 	MessageProc::AddEng(STKFW_DATASAVEFAILED, _T("Data save failed.\r\nCheck the items below.\r\n- Whether the access rights of the target folder are correct.\r\n- The specified file has not already been used by another program."));
 
 	//2104 (NC3)
-	MessageProc::AddJpn(STKFW_FILEINVALID, _T("w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Í•s³‚Å‚·B\r\nŸ‚Ì€–Ú‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B\r\n- “KØ‚Èƒtƒ@ƒCƒ‹ƒpƒX‚ªw’è‚³‚ê‚Ä‚¢‚é‚©B\r\n- w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Í‚±‚ÌƒvƒƒOƒ‰ƒ€‚ğ—p‚¢‚Ä¶¬‚³‚ê‚Ä‚¢‚é‚©B\r\n- ƒtƒ@ƒCƒ‹‚ÌƒAƒNƒZƒXŒ ŒÀ‚ª³‚µ‚¢‚©B"));
+	MessageProc::AddJpn(STKFW_FILEINVALID, _T("æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸æ­£ã§ã™ã€‚\r\næ¬¡ã®é …ç›®ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚\r\n- é©åˆ‡ãªãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã‹ã€‚\r\n- æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã¯ã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’ç”¨ã„ã¦ç”Ÿæˆã•ã‚Œã¦ã„ã‚‹ã‹ã€‚\r\n- ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©é™ãŒæ­£ã—ã„ã‹ã€‚"));
 	MessageProc::AddEng(STKFW_FILEINVALID, _T("The specified file is invalid.\r\nCheck the items below.\r\n- A valid file path is specified.\r\n- The specified file was created using this program.\r\n- The access rights of the file are correct."));
 
 	//2106 (---)
-	MessageProc::AddJpn(STKFW_RUNNING, _T("Às’†..."));
+	MessageProc::AddJpn(STKFW_RUNNING, _T("å®Ÿè¡Œä¸­..."));
 	MessageProc::AddEng(STKFW_RUNNING, _T("Running..."));
 
 	//2107 (NC1)
-	MessageProc::AddJpn(STKFW_NODLL, _T("DLLƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ü‚¹‚ñB\r\n‚±‚ÌƒvƒƒOƒ‰ƒ€‚©‚çƒAƒNƒZƒX‰Â”\‚È“KØ‚ÈƒtƒHƒ‹ƒ_‚ÉDLLƒtƒ@ƒCƒ‹‚ğƒRƒs[‚µ‚Ä‚­‚¾‚³‚¢B"));
+	MessageProc::AddJpn(STKFW_NODLL, _T("DLLãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚\r\nã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªé©åˆ‡ãªãƒ•ã‚©ãƒ«ãƒ€ã«DLLãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã—ã¦ãã ã•ã„ã€‚"));
 	MessageProc::AddEng(STKFW_NODLL, _T("No DLL file exists.\r\nCopy the DLL file to an appropriate folder that can be accessed by this program."));
 
 	//2108 (NC1)
-	MessageProc::AddJpn(STKFW_DLLINVALID, _T("ƒ[ƒh‚³‚ê‚½DLLƒtƒ@ƒCƒ‹‚Í•s³‚Å‚·B\r\nDLL‚ªŸ‚ÌŠÖ”‚ğÀ‘•‚µ‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢B\r\n[DllShowProperty]"));
+	MessageProc::AddJpn(STKFW_DLLINVALID, _T("ãƒ­ãƒ¼ãƒ‰ã•ã‚ŒãŸDLLãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸æ­£ã§ã™ã€‚\r\nDLLãŒæ¬¡ã®é–¢æ•°ã‚’å®Ÿè£…ã—ã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ãã ã•ã„ã€‚\r\n[DllShowProperty]"));
 	MessageProc::AddEng(STKFW_DLLINVALID, _T("The loaded DLL is invalid.\r\nCheck that the DLL implements the following function:\r\n[DllShowProperty]"));
 
 	//2110 (---)
-	MessageProc::AddJpn(STKFW_ADD_PROCESSING_ELEMENT, _T("ˆ——v‘f‚Ì’Ç‰Á"));
+	MessageProc::AddJpn(STKFW_ADD_PROCESSING_ELEMENT, _T("å‡¦ç†è¦ç´ ã®è¿½åŠ "));
 	MessageProc::AddEng(STKFW_ADD_PROCESSING_ELEMENT, _T("Add Processing Element"));
 
 	//2111 (---)
-	MessageProc::AddJpn(STKFW_DEL_PROCESSING_ELEMENT, _T("ˆ——v‘f‚Ìíœ"));
+	MessageProc::AddJpn(STKFW_DEL_PROCESSING_ELEMENT, _T("å‡¦ç†è¦ç´ ã®å‰Šé™¤"));
 	MessageProc::AddEng(STKFW_DEL_PROCESSING_ELEMENT, _T("Delete Processing Element"));
 
 	//2112 (---)
-	MessageProc::AddJpn(STKFW_ADD_LINK, _T("ŠÖ˜Aü‚Ì’Ç‰Á"));
+	MessageProc::AddJpn(STKFW_ADD_LINK, _T("é–¢é€£ç·šã®è¿½åŠ "));
 	MessageProc::AddEng(STKFW_ADD_LINK, _T("Add Link"));
 
 	//2113 (---)
-	MessageProc::AddJpn(STKFW_DEL_LINK, _T("ŠÖ˜Aü‚Ìíœ"));
+	MessageProc::AddJpn(STKFW_DEL_LINK, _T("é–¢é€£ç·šã®å‰Šé™¤"));
 	MessageProc::AddEng(STKFW_DEL_LINK, _T("Delete Link"));
 
 	//2120 (NC3)
-	MessageProc::AddJpn(STKFW_DBVERSION_OLD, _T("“Ç‚İ‚ñ‚¾ƒtƒ@ƒCƒ‹‚ÍŒÃ‚¢ƒo[ƒWƒ‡ƒ“‚ÌStkFw‚ğ—p‚¢‚Äì¬‚³‚ê‚Ä‚¢‚Ü‚·B\r\nŒ»İ‚Ìƒo[ƒWƒ‡ƒ“‚Åg—p‚Å‚«‚é‚æ‚¤‚ÉStkFw‚Íƒf[ƒ^‚ğ•ÏŠ·‚µ‚Ü‚·B"));
+	MessageProc::AddJpn(STKFW_DBVERSION_OLD, _T("èª­ã¿è¾¼ã‚“ã ãƒ•ã‚¡ã‚¤ãƒ«ã¯å¤ã„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®StkFwã‚’ç”¨ã„ã¦ä½œæˆã•ã‚Œã¦ã„ã¾ã™ã€‚\r\nç¾åœ¨ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã§ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«StkFwã¯ãƒ‡ãƒ¼ã‚¿ã‚’å¤‰æ›ã—ã¾ã™ã€‚"));
 	MessageProc::AddEng(STKFW_DBVERSION_OLD, _T("The loaded file was generated with an old version of StkFw.\r\nIn order to use the file with the current version, StkFw will migrate the data."));
 
 	//2121 (NC3)
-	MessageProc::AddJpn(STKFW_DBVERSION_UNKNOWN, _T("“Ç‚İ‚ñ‚¾ƒtƒ@ƒCƒ‹‚Í•s–¾‚Èƒo[ƒWƒ‡ƒ“‚ÌStkFw‚ğ—p‚¢‚Äì¬‚³‚ê‚Ä‚¢‚Ü‚·B\r\nStkFw‚Í‚±‚Ìƒtƒ@ƒCƒ‹‚ğg—p‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB"));
+	MessageProc::AddJpn(STKFW_DBVERSION_UNKNOWN, _T("èª­ã¿è¾¼ã‚“ã ãƒ•ã‚¡ã‚¤ãƒ«ã¯ä¸æ˜ãªãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®StkFwã‚’ç”¨ã„ã¦ä½œæˆã•ã‚Œã¦ã„ã¾ã™ã€‚\r\nStkFwã¯ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ç”¨ã™ã‚‹ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚"));
 	MessageProc::AddEng(STKFW_DBVERSION_UNKNOWN, _T("The loaded file was generated with an unknown version of StkFw.\r\nStkFw cannot handle this file."));
 
 	//2123 (NC3)
-	MessageProc::AddJpn(STKFW_COMPARAM_INVALID, _T("w’è‚³‚ê‚½ƒpƒ‰ƒ[ƒ^‚Í•s³‚Å‚·B\r\nw’è‰Â”\‚Èƒpƒ‰ƒ[ƒ^‚ÍC/startC/stopallC/open ‚Ì‚İ‚Å‚·B"));
+	MessageProc::AddJpn(STKFW_COMPARAM_INVALID, _T("æŒ‡å®šã•ã‚ŒãŸãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯ä¸æ­£ã§ã™ã€‚\r\næŒ‡å®šå¯èƒ½ãªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯ï¼Œ/startï¼Œ/stopallï¼Œ/open ã®ã¿ã§ã™ã€‚"));
 	MessageProc::AddEng(STKFW_COMPARAM_INVALID, _T("The specified parameter is invalid.\r\nThe only valid parameters are /start, /stopall and /open."));
 
 	//2124 (NC3)
-	MessageProc::AddJpn(STKFW_COMPARAM_NOFILE, _T("w’è‚³‚ê‚½ƒpƒ‰ƒ[ƒ^‚Í•s³‚Å‚·B\r\n/start‚¨‚æ‚Ñ/openƒpƒ‰ƒ[ƒ^‚É‚ÍSTDƒtƒ@ƒCƒ‹‚Ö‚ÌƒpƒXw’è‚ª•K—v‚Å‚·B"));
+	MessageProc::AddJpn(STKFW_COMPARAM_NOFILE, _T("æŒ‡å®šã•ã‚ŒãŸãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯ä¸æ­£ã§ã™ã€‚\r\n/startãŠã‚ˆã³/openãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«ã¯STDãƒ•ã‚¡ã‚¤ãƒ«ã¸ã®ãƒ‘ã‚¹æŒ‡å®šãŒå¿…è¦ã§ã™ã€‚"));
 	MessageProc::AddEng(STKFW_COMPARAM_NOFILE, _T("The specified parameter is invalid.\r\nThe file path to the STD file must be input after the parameters (/start and /open) are specified."));
 
 	//2125 (---)
@@ -70,390 +70,390 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(STKFW_MANUAL_PLACE, _T("\\manual\\eng\\index.htm"));
 
 	//2126 (---)
-	MessageProc::AddJpn(STKFW_CHG_WORKSPACE_SIZE, _T("ƒ[ƒNƒXƒy[ƒXƒTƒCƒY•ÏX"));
+	MessageProc::AddJpn(STKFW_CHG_WORKSPACE_SIZE, _T("ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚µã‚¤ã‚ºå¤‰æ›´"));
 	MessageProc::AddEng(STKFW_CHG_WORKSPACE_SIZE, _T("Change workspace size"));
 
 	//2127 (---)
-	MessageProc::AddJpn(STKFW_GRID_ONOFF, _T("ƒOƒŠƒbƒh"));
+	MessageProc::AddJpn(STKFW_GRID_ONOFF, _T("ã‚°ãƒªãƒƒãƒ‰"));
 	MessageProc::AddEng(STKFW_GRID_ONOFF, _T("Grid"));
 
 	// =====================================================================================================
 	//2201 (NC2)
-	MessageProc::AddJpn(VAR_SELECTEDNOTONE, _T("•Ï”‚ªw’è‚³‚ê‚Ä‚¢‚È‚¢‚©C2‚ÂˆÈã‚Ì•Ï”‚ªw’è‚³‚ê‚Ü‚µ‚½B\r\n1‚Â‚Ì•Ï”‚Ì‚İw’è‰Â”\‚Å‚·B"));
+	MessageProc::AddJpn(VAR_SELECTEDNOTONE, _T("å¤‰æ•°ãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„ã‹ï¼Œ2ã¤ä»¥ä¸Šã®å¤‰æ•°ãŒæŒ‡å®šã•ã‚Œã¾ã—ãŸã€‚\r\n1ã¤ã®å¤‰æ•°ã®ã¿æŒ‡å®šå¯èƒ½ã§ã™ã€‚"));
 	MessageProc::AddEng(VAR_SELECTEDNOTONE, _T("No variable or more than one variable has been specified.\r\nOnly one variable may be specified."));
 
 	//2202 (NC2)
-	MessageProc::AddJpn(VAR_AREYOUSUREDELETE, _T("w’è‚µ‚½•Ï”‚ğíœ‚µ‚Ä‚à—Ç‚¢‚Å‚·‚©B"));
+	MessageProc::AddJpn(VAR_AREYOUSUREDELETE, _T("æŒ‡å®šã—ãŸå¤‰æ•°ã‚’å‰Šé™¤ã—ã¦ã‚‚è‰¯ã„ã§ã™ã‹ã€‚"));
 	MessageProc::AddEng(VAR_AREYOUSUREDELETE, _T("Are you sure you want to delete the specified variable(s)?"));
 
 	//2203 (NC2)
-	MessageProc::AddJpn(VAR_NOITEMSELECTED, _T("•Ï”‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB\r\n‚P‚ÂˆÈã‚Ì•Ï”‚ğw’è‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B"));
+	MessageProc::AddJpn(VAR_NOITEMSELECTED, _T("å¤‰æ•°ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\r\nï¼‘ã¤ä»¥ä¸Šã®å¤‰æ•°ã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚"));
 	MessageProc::AddEng(VAR_NOITEMSELECTED, _T("No variable has been specified.\r\nPlease specify one or more variables."));
 
 	//2204 (NC2)
-	MessageProc::AddJpn(VAR_NOTTRANSUTF8, _T("UTF-8‚É•ÏŠ·‚Å‚«‚È‚¢ƒR[ƒh‚ª‘¶İ‚·‚é‚½‚ßC\r\nUFT-8•\¦‰æ–Ê‚É‘JˆÚ‚Å‚«‚Ü‚¹‚ñB"));
+	MessageProc::AddJpn(VAR_NOTTRANSUTF8, _T("UTF-8ã«å¤‰æ›ã§ããªã„ã‚³ãƒ¼ãƒ‰ãŒå­˜åœ¨ã™ã‚‹ãŸã‚ï¼Œ\r\nUFT-8è¡¨ç¤ºç”»é¢ã«é·ç§»ã§ãã¾ã›ã‚“ã€‚"));
 	MessageProc::AddEng(VAR_NOTTRANSUTF8, _T("The screen cannot be changed to UTF-8 view \r\nbecause the program has found code that cannot be rendered in UTF-8."));
 
 	//2205 (NC2)
-	MessageProc::AddJpn(VAR_INVALIDNAME, _T("•s³‚È•Ï”–¼‚ªw’è‚³‚ê‚Ü‚µ‚½B\r\nw’è‚µ‚½•Ï”–¼‚ğŠm”F‚µ‚ÄÄ“xÀs‚µ‚Ä‚­‚¾‚³‚¢B"));
+	MessageProc::AddJpn(VAR_INVALIDNAME, _T("ä¸æ­£ãªå¤‰æ•°åãŒæŒ‡å®šã•ã‚Œã¾ã—ãŸã€‚\r\næŒ‡å®šã—ãŸå¤‰æ•°åã‚’ç¢ºèªã—ã¦å†åº¦å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚"));
 	MessageProc::AddEng(VAR_INVALIDNAME, _T("Invalid variable name specified.\r\nCheck the specified variable name and then try again."));
 
 	//2206 (NC2)
-	MessageProc::AddJpn(VAR_ALREADYDELETED, _T("•ÒW‘ÎÛ‚Ì•Ï”‚ÍŠù‚Éíœ‚³‚ê‚Ä‚¢‚Ü‚·B\r\n•ÒW‘€ì‚ÍÀs‚Å‚«‚Ü‚¹‚ñB"));
+	MessageProc::AddJpn(VAR_ALREADYDELETED, _T("ç·¨é›†å¯¾è±¡ã®å¤‰æ•°ã¯æ—¢ã«å‰Šé™¤ã•ã‚Œã¦ã„ã¾ã™ã€‚\r\nç·¨é›†æ“ä½œã¯å®Ÿè¡Œã§ãã¾ã›ã‚“ã€‚"));
 	MessageProc::AddEng(VAR_ALREADYDELETED, _T("The edit operation can not be performed because \r\nthe edit target variable has been deleted."));
 
 	//2207 (NC2)
-	MessageProc::AddJpn(VAR_INVALIDTYPE, _T("•ÒW‘ÎÛ‚Ì•Ï”‚ÍŠù‚ÉˆÙ‚È‚éí•Ê‚Ì•Ï”‚Æ‚µ‚Äg—p‚³‚ê‚Ä‚¢‚Ü‚·B\r\n•ÒW‘€ì‚ÍÀs‚Å‚«‚Ü‚¹‚ñB"));
+	MessageProc::AddJpn(VAR_INVALIDTYPE, _T("ç·¨é›†å¯¾è±¡ã®å¤‰æ•°ã¯æ—¢ã«ç•°ãªã‚‹ç¨®åˆ¥ã®å¤‰æ•°ã¨ã—ã¦ä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã™ã€‚\r\nç·¨é›†æ“ä½œã¯å®Ÿè¡Œã§ãã¾ã›ã‚“ã€‚"));
 	MessageProc::AddEng(VAR_INVALIDTYPE, _T("The edit operation can not be performed because \r\nthe target variable has already been used as another type of variable."));
 
 	//2208 (NC3)
-	MessageProc::AddJpn(VAR_BUFOVERFLOW, _T("•Ï”‚Ì’·‚³‚ªãŒÀ‚Ì10MƒoƒCƒg‚ğ’´‚¦‚Ü‚µ‚½B\r\nãŒÀ‚ğ’´‚¦‚½ƒf[ƒ^‚ÍØ‚èæ‚ç‚ê‚Ü‚·B"));
+	MessageProc::AddJpn(VAR_BUFOVERFLOW, _T("å¤‰æ•°ã®é•·ã•ãŒä¸Šé™ã®10Mãƒã‚¤ãƒˆã‚’è¶…ãˆã¾ã—ãŸã€‚\r\nä¸Šé™ã‚’è¶…ãˆãŸãƒ‡ãƒ¼ã‚¿ã¯åˆ‡ã‚Šå–ã‚‰ã‚Œã¾ã™ã€‚"));
 	MessageProc::AddEng(VAR_BUFOVERFLOW, _T("The length of the variable specified exceeds the upper limit of 10 MB.\r\nAny data over this limit will be omitted."));
 
 	//2209 (NC2)
-	MessageProc::AddJpn(VAR_MAXVARSIZE, _T("•Ï”‚ğŠi”[‚·‚éƒƒ‚ƒŠ—e—Ê‚ªãŒÀ‚ğ’´‚¦‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(VAR_MAXVARSIZE, _T("å¤‰æ•°ã‚’æ ¼ç´ã™ã‚‹ãƒ¡ãƒ¢ãƒªå®¹é‡ãŒä¸Šé™ã‚’è¶…ãˆã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(VAR_MAXVARSIZE, _T("The memory size available for storing variable data has exceeded the upper limit."));
 
 	//2210 (NC3)
-	MessageProc::AddJpn(VAR_FLAGVARNOT, _T("ƒtƒ‰ƒO—p•Ï”‚ÍCƒCƒ“ƒ|[ƒg^ƒGƒNƒXƒ|[ƒg‚ğs‚¤‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñB"));
+	MessageProc::AddJpn(VAR_FLAGVARNOT, _T("ãƒ•ãƒ©ã‚°ç”¨å¤‰æ•°ã¯ï¼Œã‚¤ãƒ³ãƒãƒ¼ãƒˆï¼ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã‚’è¡Œã†ã“ã¨ã¯ã§ãã¾ã›ã‚“ã€‚"));
 	MessageProc::AddEng(VAR_FLAGVARNOT, _T("Import/export operation of the flag variable cannot be performed."));
 
 	//2211 (NC3)
-	MessageProc::AddJpn(VAR_FOLDERSETERR, _T("w’è‚³‚ê‚½ƒCƒ“ƒ|[ƒgCƒGƒNƒXƒ|[ƒgƒtƒHƒ‹ƒ_‚Í•s³‚Å‚·B\r\nƒtƒHƒ‹ƒ_‚ğŠm”F‚µCÄ“x‘€ì‚ğÀs‚µ‚Ä‚­‚¾‚³‚¢B"));
+	MessageProc::AddJpn(VAR_FOLDERSETERR, _T("æŒ‡å®šã•ã‚ŒãŸã‚¤ãƒ³ãƒãƒ¼ãƒˆï¼Œã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã¯ä¸æ­£ã§ã™ã€‚\r\nãƒ•ã‚©ãƒ«ãƒ€ã‚’ç¢ºèªã—ï¼Œå†åº¦æ“ä½œã‚’å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚"));
 	MessageProc::AddEng(VAR_FOLDERSETERR, _T("An invalid import/export folder has been specified.\r\nCheck the folder and try again."));
 
 	//2212 (NC3)
-	MessageProc::AddJpn(VAR_IMPERR, _T("ƒCƒ“ƒ|[ƒg‘€ì‚ª¸”s‚µ‚Ü‚µ‚½B\r\nƒtƒHƒ‹ƒ_‚ÌƒAƒNƒZƒXŒ ŒÀ‚Ü‚½‚Íƒtƒ@ƒCƒ‹–¼‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B"));
+	MessageProc::AddJpn(VAR_IMPERR, _T("ã‚¤ãƒ³ãƒãƒ¼ãƒˆæ“ä½œãŒå¤±æ•—ã—ã¾ã—ãŸã€‚\r\nãƒ•ã‚©ãƒ«ãƒ€ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©é™ã¾ãŸã¯ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚"));
 	MessageProc::AddEng(VAR_IMPERR, _T("Import operation failed.\r\nCheck the folder permissions and file names."));
 
 	//2213 (NC3)
-	MessageProc::AddJpn(VAR_EXPERR, _T("ƒGƒNƒXƒ|[ƒg‘€ì‚ª¸”s‚µ‚Ü‚µ‚½B\r\nƒtƒHƒ‹ƒ_‚ÌƒAƒNƒZƒXŒ ŒÀ‚â‹ó‚«ƒfƒBƒXƒN—e—ÊC‘I‘ğ‚µ‚½•Ï”–¼‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B"));
+	MessageProc::AddJpn(VAR_EXPERR, _T("ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆæ“ä½œãŒå¤±æ•—ã—ã¾ã—ãŸã€‚\r\nãƒ•ã‚©ãƒ«ãƒ€ã®ã‚¢ã‚¯ã‚»ã‚¹æ¨©é™ã‚„ç©ºããƒ‡ã‚£ã‚¹ã‚¯å®¹é‡ï¼Œé¸æŠã—ãŸå¤‰æ•°åã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚"));
 	MessageProc::AddEng(VAR_EXPERR, _T("Export operation failed.\r\nCheck the folder permissions, the amount of free disk space and the variable names specified."));
 
 	//2214 (NC3)
-	MessageProc::AddJpn(VAR_NOIMPTARGET, _T("w’è‚µ‚½ƒtƒHƒ‹ƒ_‚É‚ÍƒCƒ“ƒ|[ƒg‘ÎÛƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ü‚¹‚ñB\r\nƒCƒ“ƒ|[ƒg‘ÎÛƒtƒ@ƒCƒ‹‚ÌŠg’£q‚Í\".xxx\"‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B"));
+	MessageProc::AddJpn(VAR_NOIMPTARGET, _T("æŒ‡å®šã—ãŸãƒ•ã‚©ãƒ«ãƒ€ã«ã¯ã‚¤ãƒ³ãƒãƒ¼ãƒˆå¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚\r\nã‚¤ãƒ³ãƒãƒ¼ãƒˆå¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã®æ‹¡å¼µå­ã¯\".xxx\"ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚"));
 	MessageProc::AddEng(VAR_NOIMPTARGET, _T("No import target file exists in the folder specified.\r\nThe extension of import target files must be \".xxx\"."));
 
 	//2215 (NC3)
-	MessageProc::AddJpn(VAR_NOEXPTARGET, _T("•Ï”‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB\r\nˆê‚ÂˆÈã‚Ì•Ï”‚ğw’è‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B"));
+	MessageProc::AddJpn(VAR_NOEXPTARGET, _T("å¤‰æ•°ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\r\nä¸€ã¤ä»¥ä¸Šã®å¤‰æ•°ã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚"));
 	MessageProc::AddEng(VAR_NOEXPTARGET, _T("No variables have been specified.\r\nMore than one variable must be specified."));
 
 	// =====================================================================================================
 	// 2300 (---)
-	MessageProc::AddJpn(PROP_NAME, _T("–¼Ì"));
+	MessageProc::AddJpn(PROP_NAME, _T("åç§°"));
 	MessageProc::AddEng(PROP_NAME, _T("Name"));
 
 	// 2301 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_START, _T("“ü—Íƒf[ƒ^‚Í...‚©‚çŠJn‚·‚é"));
+	MessageProc::AddJpn(PROP_CHKDAT_START, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã‹ã‚‰é–‹å§‹ã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHKDAT_START, _T("Input data starts with..."));
 
 	// 2302 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_NSTART, _T("“ü—Íƒf[ƒ^‚Í...‚©‚çŠJn‚µ‚È‚¢"));
+	MessageProc::AddJpn(PROP_CHKDAT_NSTART, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã‹ã‚‰é–‹å§‹ã—ãªã„"));
 	MessageProc::AddEng(PROP_CHKDAT_NSTART, _T("Input data does not start with..."));
 
 	// 2303 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_END, _T("“ü—Íƒf[ƒ^‚Í...‚ÅI—¹‚·‚é"));
+	MessageProc::AddJpn(PROP_CHKDAT_END, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã§çµ‚äº†ã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHKDAT_END, _T("Input data ends with..."));
 
 	// 2304 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_NEND, _T("“ü—Íƒf[ƒ^‚Í...‚ÅI—¹‚µ‚È‚¢"));
+	MessageProc::AddJpn(PROP_CHKDAT_NEND, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã§çµ‚äº†ã—ãªã„"));
 	MessageProc::AddEng(PROP_CHKDAT_NEND, _T("Input data does not end with..."));
 
 	// 2305 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_CONT, _T("“ü—Íƒf[ƒ^‚Í...‚ğŠÜ‚Ş"));
+	MessageProc::AddJpn(PROP_CHKDAT_CONT, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã‚’å«ã‚€"));
 	MessageProc::AddEng(PROP_CHKDAT_CONT, _T("Input data contains..."));
 
 	// 2306 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_NCONT, _T("“ü—Íƒf[ƒ^‚Í...‚ğŠÜ‚Ü‚È‚¢"));
+	MessageProc::AddJpn(PROP_CHKDAT_NCONT, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã‚’å«ã¾ãªã„"));
 	MessageProc::AddEng(PROP_CHKDAT_NCONT, _T("Input data does not contain..."));
 
 	// 2307 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_EQUAL, _T("“ü—Íƒf[ƒ^‚Í...‚Æˆê’v‚·‚é"));
+	MessageProc::AddJpn(PROP_CHKDAT_EQUAL, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã¨ä¸€è‡´ã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHKDAT_EQUAL, _T("Input data is equal to..."));
 
 	// 2308 (NC2)
-	MessageProc::AddJpn(PROP_CHKDAT_NEQUAL, _T("“ü—Íƒf[ƒ^‚Í...‚Æˆê’v‚µ‚È‚¢"));
+	MessageProc::AddJpn(PROP_CHKDAT_NEQUAL, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¯...ã¨ä¸€è‡´ã—ãªã„"));
 	MessageProc::AddEng(PROP_CHKDAT_NEQUAL, _T("Input data is not equal to..."));
 
 	// 2311 (NC2)
-	MessageProc::AddJpn(PROP_CHGDAT_INSERT, _T("“ü—Íƒf[ƒ^‚ÌŠJnƒoƒCƒg‚É(A)‚ğ‘}“ü‚·‚é"));
+	MessageProc::AddJpn(PROP_CHGDAT_INSERT, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®é–‹å§‹ãƒã‚¤ãƒˆã«(A)ã‚’æŒ¿å…¥ã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHGDAT_INSERT, _T("Insert (A) at the start byte of the input data."));
 
 	// 2312 (NC2)
-	MessageProc::AddJpn(PROP_CHGDAT_JOIN, _T("“ü—Íƒf[ƒ^‚ÌI—¹ƒoƒCƒg‚É(A)‚ğ˜AŒ‹‚·‚é"));
+	MessageProc::AddJpn(PROP_CHGDAT_JOIN, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®çµ‚äº†ãƒã‚¤ãƒˆã«(A)ã‚’é€£çµã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHGDAT_JOIN, _T("Join (A) to the end byte of the input data."));
 
 	// 2313 (NC2)
-	MessageProc::AddJpn(PROP_CHGDAT_REPLACE, _T("“ü—Íƒf[ƒ^‚©‚ç(A)‚ğŒŸõ‚µ(B)‚É’u‚«Š·‚¦‚é"));
+	MessageProc::AddJpn(PROP_CHGDAT_REPLACE, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰(A)ã‚’æ¤œç´¢ã—(B)ã«ç½®ãæ›ãˆã‚‹"));
 	MessageProc::AddEng(PROP_CHGDAT_REPLACE, _T("Search for (A) in the input data and replace with (B)."));
 
 	// 2314 (NC2)
-	MessageProc::AddJpn(PROP_CHGDAT_EXTRACT, _T("“ü—Íƒf[ƒ^‚©‚ç(A)‚Ån‚Ü‚è(B)‚ÅI‚í‚é—Ìˆæ‚ğ’Šo‚·‚é"));
+	MessageProc::AddJpn(PROP_CHGDAT_EXTRACT, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰(A)ã§å§‹ã¾ã‚Š(B)ã§çµ‚ã‚ã‚‹é ˜åŸŸã‚’æŠ½å‡ºã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHGDAT_EXTRACT, _T("Extract an area that starts with (A) and ends with (B) from the input data."));
 
 	// 2315 (NC2)
-	MessageProc::AddJpn(PROP_CHGDAT_DROP, _T("“ü—Íƒf[ƒ^‚ğÌ‚Ä‹óƒf[ƒ^‚ğ•Ô‚·"));
+	MessageProc::AddJpn(PROP_CHGDAT_DROP, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’æ¨ã¦ç©ºãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™"));
 	MessageProc::AddEng(PROP_CHGDAT_DROP, _T("Drop the input data and return empty data."));
 
 	// 2316 (NC2)
-	MessageProc::AddJpn(PROP_CHGDAT_RESET, _T("“ü—Íƒf[ƒ^‚ğÌ‚Ä(A)‚ÉƒŠƒZƒbƒg‚·‚é"));
+	MessageProc::AddJpn(PROP_CHGDAT_RESET, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’æ¨ã¦(A)ã«ãƒªã‚»ãƒƒãƒˆã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHGDAT_RESET, _T("Drop the input data and reset to (A)."));
 
 	// 2320 (NC2)
-	MessageProc::AddJpn(PROP_CLOSEPORT, _T("ƒNƒ[ƒY‚·‚éƒ\ƒPƒbƒg"));
+	MessageProc::AddJpn(PROP_CLOSEPORT, _T("ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ã‚½ã‚±ãƒƒãƒˆ"));
 	MessageProc::AddEng(PROP_CLOSEPORT, _T("Socket to be closed"));
 
 	// 2321 (NC2)
-	MessageProc::AddJpn(PROP_TIMER_PAST, _T("Ÿ‚É¦‚·“ú•t‚Æ‚ªŒo‰ß‚µ‚½‚çŸ‚ÌƒXƒeƒbƒv‚ÉˆÚ‚é"));
+	MessageProc::AddJpn(PROP_TIMER_PAST, _T("æ¬¡ã«ç¤ºã™æ—¥ä»˜ã¨æ™‚åˆ»ãŒçµŒéã—ãŸã‚‰æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã«ç§»ã‚‹"));
 	MessageProc::AddEng(PROP_TIMER_PAST, _T("Progress to the next step if the date and time shown below are in the past."));
 
 	// 2322 (NC2)
-	MessageProc::AddJpn(PROP_TIMER_WAIT, _T("ˆê’èŠÔ‘Ò‚Á‚½‚ ‚ÆŸ‚ÌƒXƒeƒbƒv‚ÉˆÚ‚é"));
+	MessageProc::AddJpn(PROP_TIMER_WAIT, _T("ä¸€å®šæ™‚é–“å¾…ã£ãŸã‚ã¨æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã«ç§»ã‚‹"));
 	MessageProc::AddEng(PROP_TIMER_WAIT, _T("Progress to the next step after sleeping."));
 
 	// 2323 (---)
-	MessageProc::AddJpn(PROP_TIMER_SEC, _T("(•b) 0-3600"));
+	MessageProc::AddJpn(PROP_TIMER_SEC, _T("(ç§’) 0-3600"));
 	MessageProc::AddEng(PROP_TIMER_SEC, _T("(Sec) 0-3600"));
 
 	// 2324 (NC2)
-	MessageProc::AddJpn(PROP_MAP_SEARCH, _T("ŒŸõ‘ÎÛ•Ï”–¼‚ÌƒvƒŒƒtƒBƒbƒNƒX"));
+	MessageProc::AddJpn(PROP_MAP_SEARCH, _T("æ¤œç´¢å¯¾è±¡å¤‰æ•°åã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"));
 	MessageProc::AddEng(PROP_MAP_SEARCH, _T("Prefix of search target variable name."));
 
 	// 2325 (NC2)
-	MessageProc::AddJpn(PROP_MAP_REPLACE, _T("’uŠ·‚¦‘ÎÛ•Ï”–¼‚ÌƒvƒŒƒtƒBƒbƒNƒX"));
+	MessageProc::AddJpn(PROP_MAP_REPLACE, _T("ç½®æ›ãˆå¯¾è±¡å¤‰æ•°åã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"));
 	MessageProc::AddEng(PROP_MAP_REPLACE, _T("Prefix of replacement target variable name"));
 
 	// 2326 (NC2)
-	MessageProc::AddJpn(PROP_MAP_START, _T("Ÿ‚Ì’l‚©‚ç©“®Ì”Ô‚³‚ê‚é"));
+	MessageProc::AddJpn(PROP_MAP_START, _T("æ¬¡ã®å€¤ã‹ã‚‰è‡ªå‹•æ¡ç•ªã•ã‚Œã‚‹"));
 	MessageProc::AddEng(PROP_MAP_START, _T("Auto numbering from the next value"));
 
 	// 2327 (NC3)
-	MessageProc::AddJpn(PROP_MAP_USEONCE, _T("Še•Ï”‚Ö‚Ìƒ}ƒbƒsƒ“ƒO‚Íˆê“x‚¾‚¯g—p‚³‚ê‚é"));
+	MessageProc::AddJpn(PROP_MAP_USEONCE, _T("å„å¤‰æ•°ã¸ã®ãƒãƒƒãƒ”ãƒ³ã‚°ã¯ä¸€åº¦ã ã‘ä½¿ç”¨ã•ã‚Œã‚‹"));
 	MessageProc::AddEng(PROP_MAP_USEONCE, _T("The mapping to each variable is used only once."));
 
 	// 2331 (NC2)
-	MessageProc::AddJpn(PROP_CHECK_TRUE, _T("TRUE‚È‚ç‚ÎŸ‚ÌƒXƒeƒbƒv‚ÉˆÚ‚é"));
+	MessageProc::AddJpn(PROP_CHECK_TRUE, _T("TRUEãªã‚‰ã°æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã«ç§»ã‚‹"));
 	MessageProc::AddEng(PROP_CHECK_TRUE, _T("If TRUE, progress to the next step."));
 
 	// 2332 (NC2)
-	MessageProc::AddJpn(PROP_CHECK_FALSE, _T("FALSE‚È‚ç‚ÎŸ‚ÌƒXƒeƒbƒv‚ÉˆÚ‚é"));
+	MessageProc::AddJpn(PROP_CHECK_FALSE, _T("FALSEãªã‚‰ã°æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã«ç§»ã‚‹"));
 	MessageProc::AddEng(PROP_CHECK_FALSE, _T("If FALSE, progress to the next step."));
 
 	// 2333 (NC2)
-	MessageProc::AddJpn(PROP_CHANGE_TRUE, _T("ƒtƒ‰ƒO‚ğTRUE‚É‚·‚é"));
+	MessageProc::AddJpn(PROP_CHANGE_TRUE, _T("ãƒ•ãƒ©ã‚°ã‚’TRUEã«ã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHANGE_TRUE, _T("Change flag to TRUE."));
 
 	// 2334 (NC2)
-	MessageProc::AddJpn(PROP_CHANGE_FALSE, _T("ƒtƒ‰ƒO‚ğFALSE‚É‚·‚é"));
+	MessageProc::AddJpn(PROP_CHANGE_FALSE, _T("ãƒ•ãƒ©ã‚°ã‚’FALSEã«ã™ã‚‹"));
 	MessageProc::AddEng(PROP_CHANGE_FALSE, _T("Change flag to FALSE."));
 
 	// 2341 (NC2)
-	MessageProc::AddJpn(PROP_LOAD_VAR, _T("Ÿ‚Ì•Ï”‚©‚çƒf[ƒ^‚ğ“Ç‚Ş"));
+	MessageProc::AddJpn(PROP_LOAD_VAR, _T("æ¬¡ã®å¤‰æ•°ã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’èª­è¾¼ã‚€"));
 	MessageProc::AddEng(PROP_LOAD_VAR, _T("Load data from the following variable."));
 
 	// 2342 (NC2)
-	MessageProc::AddJpn(PROP_LOAD_CONT, _T("Ÿ‚Ì•Ï”‚©‚ç˜A‘±“I‚Éƒf[ƒ^‚ğ“Ç‚Ş"));
+	MessageProc::AddJpn(PROP_LOAD_CONT, _T("æ¬¡ã®å¤‰æ•°ã‹ã‚‰é€£ç¶šçš„ã«ãƒ‡ãƒ¼ã‚¿ã‚’èª­è¾¼ã‚€"));
 	MessageProc::AddEng(PROP_LOAD_CONT, _T("Load data from the following variables continuously."));
 
 	// 2343 (NC2)
-	MessageProc::AddJpn(PROP_STORE_VAR, _T("Ÿ‚Ì•Ï”‚Éƒf[ƒ^‚ğ‘‚«‚Ş"));
+	MessageProc::AddJpn(PROP_STORE_VAR, _T("æ¬¡ã®å¤‰æ•°ã«ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚€"));
 	MessageProc::AddEng(PROP_STORE_VAR, _T("Store data into the following variable."));
 
 	// 2344 (NC2)
-	MessageProc::AddJpn(PROP_STORE_CONT, _T("Ÿ‚Ì•Ï”‚É˜A‘±“I‚Éƒf[ƒ^‚ğ‘‚«‚Ş"));
+	MessageProc::AddJpn(PROP_STORE_CONT, _T("æ¬¡ã®å¤‰æ•°ã«é€£ç¶šçš„ã«ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚€"));
 	MessageProc::AddEng(PROP_STORE_CONT, _T("Store data into the following variables continuously."));
 
 	// 2345 (---)
-	MessageProc::AddJpn(PROP_DATA_COMM, _T("ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“—p•Ï”"));
+	MessageProc::AddJpn(PROP_DATA_COMM, _T("ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨å¤‰æ•°"));
 	MessageProc::AddEng(PROP_DATA_COMM, _T("Communication variable"));
 
 	// 2346 (---)
-	MessageProc::AddJpn(PROP_DATA_PREF, _T("•Ï”–¼‚ÌƒvƒŒƒtƒBƒbƒNƒX"));
+	MessageProc::AddJpn(PROP_DATA_PREF, _T("å¤‰æ•°åã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"));
 	MessageProc::AddEng(PROP_DATA_PREF, _T("Prefix of variable name"));
 
 	// 2347 (NC3)
-	MessageProc::AddJpn(PROP_DATA_NUM, _T("Ÿ‚Ì’l‚©‚ç‚Ì©“®Ì”Ô"));
+	MessageProc::AddJpn(PROP_DATA_NUM, _T("æ¬¡ã®å€¤ã‹ã‚‰ã®è‡ªå‹•æ¡ç•ª"));
 	MessageProc::AddEng(PROP_DATA_NUM, _T("Auto numbering from the next value"));
 
 	// 2351 (NC2)
-	MessageProc::AddJpn(PROP_NET_RECV, _T("w’è‚µ‚½IPƒAƒhƒŒƒX‚Æƒ|[ƒg‚©‚çƒf[ƒ^‚ğóM‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_RECV, _T("æŒ‡å®šã—ãŸIPã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ãƒãƒ¼ãƒˆã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_RECV, _T("Receive data using the specified IP address and port."));
 
 	// 2352 (NC5)
-	MessageProc::AddJpn(PROP_NET_RECVTGT, _T("w’è‚µ‚½‘—M—v‘f‚ÌÚ‘±æ‚©‚çƒf[ƒ^‚ğóM‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_RECVTGT, _T("æŒ‡å®šã—ãŸé€ä¿¡è¦ç´ ã®æ¥ç¶šå…ˆã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_RECVTGT, _T("Receive data from the connection target of the specified sender element."));
 
 	// 2353 (NC2)
-	MessageProc::AddJpn(PROP_NET_SEND, _T("w’è‚µ‚½IPƒAƒhƒŒƒX‚Æƒ|[ƒg‚Éƒf[ƒ^‚ğ‘—M‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_SEND, _T("æŒ‡å®šã—ãŸIPã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ãƒãƒ¼ãƒˆã«ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡ã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_SEND, _T("Send data to the specified IP address and port."));
 
 	// 2354 (NC5)
-	MessageProc::AddJpn(PROP_NET_SENDTGT, _T("w’è‚µ‚½óM—v‘f‚ÌÚ‘±æ‚Éƒf[ƒ^‚ğ‘—M‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_SENDTGT, _T("æŒ‡å®šã—ãŸå—ä¿¡è¦ç´ ã®æ¥ç¶šå…ˆã«ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡ã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_SENDTGT, _T("Send data to the connection target of the specified receiver element."));
 
 	// 2355 (NC2)
-	MessageProc::AddJpn(PROP_NET_CLOSE_AFTERSEND, _T("ƒf[ƒ^‘—MŒãƒ\ƒPƒbƒg‚ğƒNƒ[ƒY‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_CLOSE_AFTERSEND, _T("ãƒ‡ãƒ¼ã‚¿é€ä¿¡å¾Œã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_CLOSE_AFTERSEND, _T("Close socket after sending data."));
 
 	// 2356 (NC2)
-	MessageProc::AddJpn(PROP_NET_CLOSE_AFTERRECV, _T("ƒf[ƒ^óMŒãƒ\ƒPƒbƒg‚ğƒNƒ[ƒY‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_CLOSE_AFTERRECV, _T("ãƒ‡ãƒ¼ã‚¿å—ä¿¡å¾Œã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_CLOSE_AFTERRECV, _T("Close socket after receiving data."));
 
 	// 2357 (NC4)
-	MessageProc::AddJpn(PROP_NET_TIMEOUT, _T("ÅIƒAƒNƒZƒXˆÈ~‚Éƒ^ƒCƒ€ƒAƒEƒg‚ğŒŸ’m‚µ‚½"));
+	MessageProc::AddJpn(PROP_NET_TIMEOUT, _T("æœ€çµ‚ã‚¢ã‚¯ã‚»ã‚¹ä»¥é™ã«ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã‚’æ¤œçŸ¥ã—ãŸ"));
 	MessageProc::AddEng(PROP_NET_TIMEOUT, _T("Time-out detected after last access."));
 
 	// 2358 (---)
-	MessageProc::AddJpn(PROP_NET_SENDER, _T("‘—M—v‘f–¼"));
+	MessageProc::AddJpn(PROP_NET_SENDER, _T("é€ä¿¡è¦ç´ å"));
 	MessageProc::AddEng(PROP_NET_SENDER, _T("Sender name"));
 
 	// 2359 (---)
-	MessageProc::AddJpn(PROP_NET_RECEIVER, _T("óM—v‘f–¼"));
+	MessageProc::AddJpn(PROP_NET_RECEIVER, _T("å—ä¿¡è¦ç´ å"));
 	MessageProc::AddEng(PROP_NET_RECEIVER, _T("Receiver name"));
 
 	// 2360 (---)
-	MessageProc::AddJpn(PROP_NET_ICON, _T("ƒAƒCƒRƒ“"));
+	MessageProc::AddJpn(PROP_NET_ICON, _T("ã‚¢ã‚¤ã‚³ãƒ³"));
 	MessageProc::AddEng(PROP_NET_ICON, _T("Icon"));
 
 	// 2361 (---)
-	MessageProc::AddJpn(PROP_NET_IPADDR, _T("IPƒAƒhƒŒƒX/ƒzƒXƒg–¼"));
+	MessageProc::AddJpn(PROP_NET_IPADDR, _T("IPã‚¢ãƒ‰ãƒ¬ã‚¹/ãƒ›ã‚¹ãƒˆå"));
 	MessageProc::AddEng(PROP_NET_IPADDR, _T("IP address/hostname"));
 
 	// 2362 (---)
-	MessageProc::AddJpn(PROP_NET_PORT, _T("ƒ|[ƒg”Ô†"));
+	MessageProc::AddJpn(PROP_NET_PORT, _T("ãƒãƒ¼ãƒˆç•ªå·"));
 	MessageProc::AddEng(PROP_NET_PORT, _T("Port"));
 
 	// 2363 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESS_NAME, _T("ƒvƒƒOƒ‰ƒ€‚ªƒAƒNƒZƒX‚·‚éƒtƒ@ƒCƒ‹–¼‚ğw’è\r\nƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚©‚ç‚Ì‘Š‘ÎƒpƒX‚ğw’è‚·‚é•K—v‚ª‚ ‚éB(—á:\"..\\data\\test.bin\")\r\nƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚Í’ÊíC‘ÎÛ‚Ì\".std\"ƒtƒ@ƒCƒ‹‚ªŠi”[‚³‚ê‚Ä‚¢‚éƒtƒHƒ‹ƒ_‚Æ‚È‚éB"));
+	MessageProc::AddJpn(PROP_FILEACCESS_NAME, _T("ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®š\r\nã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚(ä¾‹:\"..\\data\\test.bin\")\r\nã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã¯é€šå¸¸ï¼Œå¯¾è±¡ã®\".std\"ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã¨ãªã‚‹ã€‚"));
 	MessageProc::AddEng(PROP_FILEACCESS_NAME, _T("Specify the file name used by the program. \r\nThe relative path from the current folder should be given (ex: \"..\\data\\test.bin\"). \r\nThe current folder is normally set as the one containing the target \".std\" file."));
 
 	// 2364 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESSW_ADD, _T("Šù‘¶‚Ìƒtƒ@ƒCƒ‹‚ÌÅŒã‚Éƒf[ƒ^‚ğ˜AŒ‹‚·‚é"));
+	MessageProc::AddJpn(PROP_FILEACCESSW_ADD, _T("æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã«ãƒ‡ãƒ¼ã‚¿ã‚’é€£çµã™ã‚‹"));
 	MessageProc::AddEng(PROP_FILEACCESSW_ADD, _T("Add data to the end of the existing file."));
 
 	// 2365 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESSW_INSERT, _T("Šù‘¶‚Ìƒtƒ@ƒCƒ‹‚Ìæ“ª‚É‚Éƒf[ƒ^‚ğ‘}“ü‚·‚é"));
+	MessageProc::AddJpn(PROP_FILEACCESSW_INSERT, _T("æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®å…ˆé ­ã«ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥ã™ã‚‹"));
 	MessageProc::AddEng(PROP_FILEACCESSW_INSERT, _T("Insert data at the start of the existing file."));
 
 	// 2366 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESSW_OVERWRITE, _T("Šù‘¶‚Ìƒtƒ@ƒCƒ‹‚ğã‘‚«‚·‚é"));
+	MessageProc::AddJpn(PROP_FILEACCESSW_OVERWRITE, _T("æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸Šæ›¸ãã™ã‚‹"));
 	MessageProc::AddEng(PROP_FILEACCESSW_OVERWRITE, _T("Overwrite the existing file."));
 
 	// 2367 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESSR_ADD, _T("“ü—Íƒf[ƒ^‚ÌI—¹ƒoƒCƒg‚É“Ç‚İ‚ñ‚¾ƒf[ƒ^‚ğ˜AŒ‹‚·‚é"));
+	MessageProc::AddJpn(PROP_FILEACCESSR_ADD, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®çµ‚äº†ãƒã‚¤ãƒˆã«èª­ã¿è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã‚’é€£çµã™ã‚‹"));
 	MessageProc::AddEng(PROP_FILEACCESSR_ADD, _T("Add loaded data to the end byte of the input data."));
 
 	// 2368 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESSR_INSERT, _T("“ü—Íƒf[ƒ^‚ÌŠJnƒoƒCƒg‚É“Ç‚İ‚ñ‚¾ƒf[ƒ^‚ğ‘}“ü‚·‚é"));
+	MessageProc::AddJpn(PROP_FILEACCESSR_INSERT, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®é–‹å§‹ãƒã‚¤ãƒˆã«èª­ã¿è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥ã™ã‚‹"));
 	MessageProc::AddEng(PROP_FILEACCESSR_INSERT, _T("Insert loaded data at the start byte of the input data."));
 
 	// 2369 (NC4)
-	MessageProc::AddJpn(PROP_FILEACCESSR_OVERWRITE, _T("ƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚ñ‚¾ƒf[ƒ^‚ğo—Í‚·‚é"));
+	MessageProc::AddJpn(PROP_FILEACCESSR_OVERWRITE, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã‚’å‡ºåŠ›ã™ã‚‹"));
 	MessageProc::AddEng(PROP_FILEACCESSR_OVERWRITE, _T("Output data read from the file."));
 
 	// 2370 (NC4)
-	MessageProc::AddJpn(PROP_EXECPROG_COMMAND, _T("ŠO•”ƒvƒƒOƒ‰ƒ€‚Ö‚ÌƒpƒX‚ğw’è"));
+	MessageProc::AddJpn(PROP_EXECPROG_COMMAND, _T("å¤–éƒ¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¸ã®ãƒ‘ã‚¹ã‚’æŒ‡å®š"));
 	MessageProc::AddEng(PROP_EXECPROG_COMMAND, _T("Specify the path to the external program."));
 
 	// 2371 (NC4)
-	MessageProc::AddJpn(PROP_EXECPROG_WAIT, _T("Às‚µ‚½ƒvƒƒOƒ‰ƒ€‚ªI—¹‚·‚é‚Ü‚Å‘Ò‹@‚·‚é"));
+	MessageProc::AddJpn(PROP_EXECPROG_WAIT, _T("å®Ÿè¡Œã—ãŸãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒçµ‚äº†ã™ã‚‹ã¾ã§å¾…æ©Ÿã™ã‚‹"));
 	MessageProc::AddEng(PROP_EXECPROG_WAIT, _T("Wait until the program executed is finished."));
 
 	// 2372 (NC4)
-	MessageProc::AddJpn(PROP_EXECPROG_CURRDIR, _T("ŠO•”ƒvƒƒOƒ‰ƒ€Às‚ÌƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚ğw’è\r\nƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚ğw’è‚µ‚È‚¢ê‡C‘ÎÛ‚Ì\".std\"ƒtƒ@ƒCƒ‹‚ª”z’u‚³‚ê‚½ƒtƒHƒ‹ƒ_‚ªƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚Æ‚È‚éB"));
+	MessageProc::AddJpn(PROP_EXECPROG_CURRDIR, _T("å¤–éƒ¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ å®Ÿè¡Œæ™‚ã®ã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã‚’æŒ‡å®š\r\nã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã‚’æŒ‡å®šã—ãªã„å ´åˆï¼Œå¯¾è±¡ã®\".std\"ãƒ•ã‚¡ã‚¤ãƒ«ãŒé…ç½®ã•ã‚ŒãŸãƒ•ã‚©ãƒ«ãƒ€ãŒã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã¨ãªã‚‹ã€‚"));
 	MessageProc::AddEng(PROP_EXECPROG_CURRDIR, _T("Specify the current folder during external program execution. \r\nIf the current folder is not specified, the one containing the target \".std\" file will be set."));
 
 	// 2373 (NC4)
-	MessageProc::AddJpn(PROP_EXECPROG_STDOUT, _T("ŠO•”ƒvƒƒOƒ‰ƒ€‚ªSTDOUT‚Ö‘‚«‚ñ‚¾ƒf[ƒ^‚ğŸ‚Ìˆ——v‘f‚É“n‚·"));
+	MessageProc::AddJpn(PROP_EXECPROG_STDOUT, _T("å¤–éƒ¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒSTDOUTã¸æ›¸ãè¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã®å‡¦ç†è¦ç´ ã«æ¸¡ã™"));
 	MessageProc::AddEng(PROP_EXECPROG_STDOUT, _T("Pass data written by the external program to STDOUT to the next element."));
 
 	// 2374 (NC4)
-	MessageProc::AddJpn(PROP_EXECPROG_STDIN, _T("–{ˆ——v‘f‚Ì“ü—Íƒf[ƒ^‚ğŠO•”ƒvƒƒOƒ‰ƒ€‚ÌSTDIN‚É“n‚·"));
+	MessageProc::AddJpn(PROP_EXECPROG_STDIN, _T("æœ¬å‡¦ç†è¦ç´ ã®å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’å¤–éƒ¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®STDINã«æ¸¡ã™"));
 	MessageProc::AddEng(PROP_EXECPROG_STDIN, _T("Pass the input data of this processing element to STDIN."));
 
 	// 2375 (NC4)
-	MessageProc::AddJpn(PROP_NET_UNCOND, _T("–³ğŒ‚ÅŸ‚Ìˆ——v‘f‚ÉˆÚ‚é"));
+	MessageProc::AddJpn(PROP_NET_UNCOND, _T("ç„¡æ¡ä»¶ã§æ¬¡ã®å‡¦ç†è¦ç´ ã«ç§»ã‚‹"));
 	MessageProc::AddEng(PROP_NET_UNCOND, _T("Proceed unconditionally to the next processing element."));
 
-	// 2376 (š)
-	MessageProc::AddJpn(PROP_NET_EXCEEDSIZE, _T("óMƒf[ƒ^ƒTƒCƒY‚ªw’è‚µ‚½’l‚É’B‚µ‚½ [1-9,999,999 ƒoƒCƒg]"));
+	// 2376 (â˜…)
+	MessageProc::AddJpn(PROP_NET_EXCEEDSIZE, _T("å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºãŒæŒ‡å®šã—ãŸå€¤ã«é”ã—ãŸ [1-9,999,999 ãƒã‚¤ãƒˆ]"));
 	MessageProc::AddEng(PROP_NET_EXCEEDSIZE, _T("The size of the data received reached the preset value. [1-9,999,999 bytes]"));
 
-	// 2377 (š)
-	MessageProc::AddJpn(PROP_NET_RECVSTR, _T("w’è‚µ‚½ƒf[ƒ^‚ğóM‚µ‚½"));
+	// 2377 (â˜…)
+	MessageProc::AddJpn(PROP_NET_RECVSTR, _T("æŒ‡å®šã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã—ãŸ"));
 	MessageProc::AddEng(PROP_NET_RECVSTR, _T("Specified data received."));
 
 	// 2378 (NC4)
-	MessageProc::AddJpn(PROP_NET_TERMCOND, _T("I—¹ğŒ"));
+	MessageProc::AddJpn(PROP_NET_TERMCOND, _T("çµ‚äº†æ¡ä»¶"));
 	MessageProc::AddEng(PROP_NET_TERMCOND, _T("Termination condition"));
 
 	// 2379 (NC4)
-	MessageProc::AddJpn(PROP_NET_CLOSEDETECT, _T("‘—M‘¤ƒ\ƒPƒbƒg‚ªƒNƒ[ƒY‚³‚ê‚½‚Æ‚«‚¾‚¯Ÿ‚Ìˆ——v‘f‚ÉˆÚ‚é"));
+	MessageProc::AddJpn(PROP_NET_CLOSEDETECT, _T("é€ä¿¡å´ã‚½ã‚±ãƒƒãƒˆãŒã‚¯ãƒ­ãƒ¼ã‚ºã•ã‚ŒãŸã¨ãã ã‘æ¬¡ã®å‡¦ç†è¦ç´ ã«ç§»ã‚‹"));
 	MessageProc::AddEng(PROP_NET_CLOSEDETECT, _T("Proceed to the next processing element only when the sender socket is closed."));
 
 	// 2380 (---)
-	MessageProc::AddJpn(PROP_NET_CLOSEFORCE, _T("‹­§“I‚ÉƒNƒ[ƒY‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_CLOSEFORCE, _T("å¼·åˆ¶çš„ã«ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_CLOSEFORCE, _T("Force close"));
 
 	// 2381 (---)
-	MessageProc::AddJpn(PROP_NET_CLOSEUDPPORT, _T("UDPƒ\ƒPƒbƒg‚ğƒNƒ[ƒY‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_CLOSEUDPPORT, _T("UDPã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_CLOSEUDPPORT, _T("Close UDP socket"));
 
 	// 2382 (---)
-	MessageProc::AddJpn(PROP_NET_CLOSETCPPORT, _T("TCPƒ\ƒPƒbƒg‚ğƒNƒ[ƒY‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_CLOSETCPPORT, _T("TCPã‚½ã‚±ãƒƒãƒˆã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_CLOSETCPPORT, _T("Close TCP socket"));
 
 	// 2383 (NC6)
-	MessageProc::AddJpn(PROP_NET_PROCEEDEVENIFNODATARECV, _T("ƒf[ƒ^–¢óM‚Å‚àŸ‚Ìˆ——v‘f‚É‘JˆÚ‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_PROCEEDEVENIFNODATARECV, _T("ãƒ‡ãƒ¼ã‚¿æœªå—ä¿¡ã§ã‚‚æ¬¡ã®å‡¦ç†è¦ç´ ã«é·ç§»ã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_PROCEEDEVENIFNODATARECV, _T("Proceed even if no data are received."));
 
 	// 2384 (NC7)
-	MessageProc::AddJpn(PROP_NET_RECVMULTI, _T("w’è‚µ‚½óM—v‘f‚©‚çƒf[ƒ^‚ğóM‚·‚é"));
+	MessageProc::AddJpn(PROP_NET_RECVMULTI, _T("æŒ‡å®šã—ãŸå—ä¿¡è¦ç´ ã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã™ã‚‹"));
 	MessageProc::AddEng(PROP_NET_RECVMULTI, _T("Receive data from the specified receiver element."));
 
-	// 2385 (š)
-	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTPƒwƒbƒ_‚ÌContent-Length‚Ü‚½‚Í\"Transfer-Encoding: chunked\"‚É‚µ‚½‚ª‚¤"));
+	// 2385 (â˜…)
+	MessageProc::AddJpn(PROP_NET_HTTPCONTLEN, _T("HTTPãƒ˜ãƒƒãƒ€ã®Content-Lengthã¾ãŸã¯\"Transfer-Encoding: chunked\"ã«ã—ãŸãŒã†"));
 	MessageProc::AddEng(PROP_NET_HTTPCONTLEN, _T("Depend on Content-Length or \"Transfer-Encoding: chunked\" in HTTP header."));
 
-	// 2386 (š)
-	MessageProc::AddJpn(PROP_NET_TIMEOUTINTERVAL, _T("ƒ^ƒCƒ€ƒAƒEƒg(msec)"));
+	// 2386 (â˜…)
+	MessageProc::AddJpn(PROP_NET_TIMEOUTINTERVAL, _T("ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ(msec)"));
 	MessageProc::AddEng(PROP_NET_TIMEOUTINTERVAL, _T("Timeout(msec)"));
 
-	// 2387 (š)
-	MessageProc::AddJpn(PROP_HTTPHEADER_DELETEFROM, _T("“ü—Íƒf[ƒ^‚©‚çHTTPƒwƒbƒ_‚ğæ‚èœ‚­"));
+	// 2387 (â˜…)
+	MessageProc::AddJpn(PROP_HTTPHEADER_DELETEFROM, _T("å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰HTTPãƒ˜ãƒƒãƒ€ã‚’å–ã‚Šé™¤ã"));
 	MessageProc::AddEng(PROP_HTTPHEADER_DELETEFROM, _T("Delete HTTP header from input data"));
 
-	// 2388 (š)
-	MessageProc::AddJpn(PROP_HTTPHEADER_INSERTINTO, _T("o—Íƒf[ƒ^‚ÉHTTPƒwƒbƒ_‚ğ‘}“ü‚·‚é"));
+	// 2388 (â˜…)
+	MessageProc::AddJpn(PROP_HTTPHEADER_INSERTINTO, _T("å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã«HTTPãƒ˜ãƒƒãƒ€ã‚’æŒ¿å…¥ã™ã‚‹"));
 	MessageProc::AddEng(PROP_HTTPHEADER_INSERTINTO, _T("Insert HTTP header into output data"));
 
-	// 2389 (š)
+	// 2389 (â˜…)
 	MessageProc::AddJpn(PROP_HTTPHEADER_CONTLEN, _T("Content-Length"));
 	MessageProc::AddEng(PROP_HTTPHEADER_CONTLEN, _T("Content-Length"));
 
-	// 2390 (š)
+	// 2390 (â˜…)
 	MessageProc::AddJpn(PROP_HTTPHEADER_DATE, _T("Date"));
 	MessageProc::AddEng(PROP_HTTPHEADER_DATE, _T("Date"));
 
-	// 2391 (š)
+	// 2391 (â˜…)
 	MessageProc::AddJpn(PROP_HTTPHEADER_REQUEST, _T("Request"));
 	MessageProc::AddEng(PROP_HTTPHEADER_REQUEST, _T("Request"));
 
-	// 2392 (š)
+	// 2392 (â˜…)
 	MessageProc::AddJpn(PROP_HTTPHEADER_RESPONSE, _T("Response"));
 	MessageProc::AddEng(PROP_HTTPHEADER_RESPONSE, _T("Response"));
 
 	// =====================================================================================================
 	// 2400 (---)
-	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - ƒXƒŒƒbƒhƒRƒ“ƒgƒ[ƒ‰\r\n"));
+	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - ã‚¹ãƒ¬ãƒƒãƒ‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©\r\n"));
 	MessageProc::AddEng(STKFW_LOG_TITLE, _T("StkFw - Thread controller\r\n"));
 
 	// 2401 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_START, _T("ƒXƒŒƒbƒhƒRƒ“ƒgƒ[ƒ‰‚ÍƒƒO‚Ìo—Í‚ğŠJn‚µ‚Ü‚µ‚½B\r\n"));
+	MessageProc::AddJpn(STKFW_LOG_START, _T("ã‚¹ãƒ¬ãƒƒãƒ‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã¯ãƒ­ã‚°ã®å‡ºåŠ›ã‚’é–‹å§‹ã—ã¾ã—ãŸã€‚\r\n"));
 	MessageProc::AddEng(STKFW_LOG_START, _T("The thread controller has started logging.\r\n"));
 
 	// 2402 (NC3)
-	MessageProc::AddJpn(STKFW_LOG_STOP, _T("ƒXƒŒƒbƒhƒRƒ“ƒgƒ[ƒ‰‚ÍƒƒO‚Ìo—Í‚ğ’â~‚µ‚Ü‚µ‚½B\r\n"));
+	MessageProc::AddJpn(STKFW_LOG_STOP, _T("ã‚¹ãƒ¬ãƒƒãƒ‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã¯ãƒ­ã‚°ã®å‡ºåŠ›ã‚’åœæ­¢ã—ã¾ã—ãŸã€‚\r\n"));
 	MessageProc::AddEng(STKFW_LOG_STOP, _T("The thread controller has stopped logging.\r\n"));
 
 	// =====================================================================================================
@@ -461,31 +461,31 @@ void MyMsgProc::AddMsg()
 
 	// =====================================================================================================
 	//2902 (NC2)
-	MessageProc::AddJpn(FILEACCESSERROR, _T("ƒtƒ@ƒCƒ‹ƒAƒNƒZƒXƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B"));
+	MessageProc::AddJpn(FILEACCESSERROR, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ã‚¯ã‚»ã‚¹ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"));
 	MessageProc::AddEng(FILEACCESSERROR, _T("A file access error has occurred."));
 
 	//2903 (NC1)
-	MessageProc::AddJpn(NEEDADMINRIGHTS, _T("‚±‚ÌƒvƒƒOƒ‰ƒ€‚ğÀs‚·‚é‚½‚ß‚É‚ÍLocal Administrator‚ÌŒ ŒÀ‚ª•K—v‚Å‚·B\r\nƒvƒƒOƒ‰ƒ€‚ÍI—¹‚µ‚Ü‚·B\r\n\r\n"));
+	MessageProc::AddJpn(NEEDADMINRIGHTS, _T("ã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’å®Ÿè¡Œã™ã‚‹ãŸã‚ã«ã¯Local Administratorã®æ¨©é™ãŒå¿…è¦ã§ã™ã€‚\r\nãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯çµ‚äº†ã—ã¾ã™ã€‚\r\n\r\n"));
 	MessageProc::AddEng(NEEDADMINRIGHTS, _T("You need local administrator's rights to run this program.\r\nThe program will be terminated.\r\n\r\n"));
 
 	//2904 (NC3)
-	MessageProc::AddJpn(DATAUPDATED, _T("ƒvƒƒOƒ‰ƒ€‚ªg—p‚·‚éƒf[ƒ^‚ÍXV‚³‚ê‚Ä‚¢‚Ü‚·B\r\nƒf[ƒ^‚ª¸‚í‚ê‚Ü‚·‚ª‘€ì‚ğ‘±‚¯‚Ä—Ç‚¢‚Å‚·‚©B"));
+	MessageProc::AddJpn(DATAUPDATED, _T("ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒä½¿ç”¨ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã¯æ›´æ–°ã•ã‚Œã¦ã„ã¾ã™ã€‚\r\nãƒ‡ãƒ¼ã‚¿ãŒå¤±ã‚ã‚Œã¾ã™ãŒæ“ä½œã‚’ç¶šã‘ã¦è‰¯ã„ã§ã™ã‹ã€‚"));
 	MessageProc::AddEng(DATAUPDATED, _T("Program data updated.\r\nData will be lost. Continue operation?"));
 
 	//2931 (---)
-	MessageProc::AddJpn(COMMON_ADD, _T("’Ç‰Á"));
+	MessageProc::AddJpn(COMMON_ADD, _T("è¿½åŠ "));
 	MessageProc::AddEng(COMMON_ADD, _T("Add"));
 
 	//2932 (---)
-	MessageProc::AddJpn(COMMON_DELETE, _T("íœ"));
+	MessageProc::AddJpn(COMMON_DELETE, _T("å‰Šé™¤"));
 	MessageProc::AddEng(COMMON_DELETE, _T("Delete"));
 
 	//2933 (---)
-	MessageProc::AddJpn(COMMON_EDIT, _T("•ÒW"));
+	MessageProc::AddJpn(COMMON_EDIT, _T("ç·¨é›†"));
 	MessageProc::AddEng(COMMON_EDIT, _T("Edit"));
 
 	//2934 (---)
-	MessageProc::AddJpn(COMMON_REFRESH, _T("XV"));
+	MessageProc::AddJpn(COMMON_REFRESH, _T("æ›´æ–°"));
 	MessageProc::AddEng(COMMON_REFRESH, _T("Refresh"));
 
 	//2935 (---)
@@ -497,7 +497,7 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(COMMON_FALSE, _T("False"));
 
 	//2937 (---)
-	MessageProc::AddJpn(COMMON_UNKNOWN, _T("•s–¾"));
+	MessageProc::AddJpn(COMMON_UNKNOWN, _T("ä¸æ˜"));
 	MessageProc::AddEng(COMMON_UNKNOWN, _T("Unknown"));
 
 	//2941 (---)
@@ -505,156 +505,156 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(COMMON_OK, _T("OK"));
 
 	//2942 (---)
-	MessageProc::AddJpn(COMMON_CANCEL, _T("·¬İ¾Ù"));
+	MessageProc::AddJpn(COMMON_CANCEL, _T("ï½·ï½¬ï¾ï½¾ï¾™"));
 	MessageProc::AddEng(COMMON_CANCEL, _T("Cancel"));
 
 	// =====================================================================================================
 	//9100 (NC2)
-	MessageProc::AddJpn(SFW_100_1, _T("StkFw ‰Šúƒo[ƒWƒ‡ƒ“‚ğƒŠƒŠ[ƒX‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_1, _T("StkFw åˆæœŸãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’ãƒªãƒªãƒ¼ã‚¹ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_1, _T("StkFw initial version was released."));
 
 	//9101 [10015] (NC2)
-	MessageProc::AddJpn(SFW_100_110_1, _T("ƒŠƒ|ƒWƒgƒŠƒf[ƒ^‚ğƒZ[ƒu^ƒ[ƒh‚µ‚½ƒtƒHƒ‹ƒ_‚ªCStkFwÄ‹N“®Œã‚Ì‰ŠúƒtƒHƒ‹ƒ_‚Éİ’è‚³‚ê‚é•s‹ï‡‚ğC³‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_110_1, _T("ãƒªãƒã‚¸ãƒˆãƒªãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒ¼ãƒ–ï¼ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ•ã‚©ãƒ«ãƒ€ãŒï¼ŒStkFwå†èµ·å‹•å¾Œã®åˆæœŸãƒ•ã‚©ãƒ«ãƒ€ã«è¨­å®šã•ã‚Œã‚‹ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_110_1, _T("The bug involving the folder for loaded/saved repository data being configured as the initial folder after restarting StkFw was fixed."));
 
 	//9102 [10017] (NC2)
-	MessageProc::AddJpn(SFW_100_110_2, _T("ƒAƒCƒRƒ“–¼‚Ì•\¦‚ªƒAƒCƒRƒ“‚Ì’†S‚©‚ç‚¸‚ê‚é•s‹ï‡‚ğC³‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_110_2, _T("ã‚¢ã‚¤ã‚³ãƒ³åã®è¡¨ç¤ºãŒã‚¢ã‚¤ã‚³ãƒ³ã®ä¸­å¿ƒã‹ã‚‰ãšã‚Œã‚‹ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_110_2, _T("The bug involving the icon name being misaligned from the center of the icon was fixed."));
 
 	//9103 [10018, 10020, 10025] (NC2)
-	MessageProc::AddJpn(SFW_100_110_3, _T("–{ƒ\ƒtƒgƒEƒFƒA‚Ì–Ú“I‚ğƒeƒXƒgEƒtƒŒ[ƒ€ƒ[ƒN‚©‚çƒeƒXƒgx‰‡ƒ\ƒtƒgƒEƒFƒA‚É•ÏX‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_110_3, _T("æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®ç›®çš„ã‚’ãƒ†ã‚¹ãƒˆãƒ»ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯ã‹ã‚‰ãƒ†ã‚¹ãƒˆæ”¯æ´ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã«å¤‰æ›´ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_110_3, _T("The purpose of the software was changed from provision of a test framework to testing support."));
 
 	//9104 [10034] (NC2)
-	MessageProc::AddJpn(SFW_100_110_4, _T("ƒ‹[ƒvƒoƒbƒNƒlƒbƒgƒ[ƒNƒAƒ_ƒvƒ^’Ç‰Á^íœƒ_ƒCƒAƒƒO‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_110_4, _T("ãƒ«ãƒ¼ãƒ—ãƒãƒƒã‚¯ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚¢ãƒ€ãƒ—ã‚¿è¿½åŠ ï¼å‰Šé™¤ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_110_4, _T("Support for addition/removal of a loopback network adapter dialog was added."));
 
 	//9105 [10040] (NC2)
-	MessageProc::AddJpn(SFW_100_110_5, _T("OSÄ‹N“®Œã‚É’Ç‰Á/íœ‚µ‚½IPƒAƒhƒŒƒX‚ª‚à‚Æ‚É‚à‚Ç‚éIPƒAƒhƒŒƒXƒEƒBƒU[ƒh‚Ì•s‹ï‡‚ğC³‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_110_5, _T("OSå†èµ·å‹•å¾Œã«è¿½åŠ /å‰Šé™¤ã—ãŸIPã‚¢ãƒ‰ãƒ¬ã‚¹ãŒã‚‚ã¨ã«ã‚‚ã©ã‚‹IPã‚¢ãƒ‰ãƒ¬ã‚¹ã‚¦ã‚£ã‚¶ãƒ¼ãƒ‰ã®ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_110_5, _T("A bug in the Add/remove IP address wizard involving the flushing of added/removed IP addresses after operating system reboot was fixed."));
 
 	//9106 [10052] (NC2)
-	MessageProc::AddJpn(SFW_100_110_6, _T("•Ï”ŠÇ—‹@”\(Variable Controller)‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_100_110_6, _T("å¤‰æ•°ç®¡ç†æ©Ÿèƒ½(Variable Controller)ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_100_110_6, _T("Support for variable management functionality (Variable Controller) was added."));
 
 	//9107 [10074] (NC3)
-	MessageProc::AddJpn(SFW_110_120_1, _T("AdministratorsƒOƒ‹[ƒv‚É‘®‚³‚È‚¢ƒ†[ƒU[‚ªStkFw‚ğg—p‚Å‚«‚é‚æ‚¤‚É‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_1, _T("Administratorsã‚°ãƒ«ãƒ¼ãƒ—ã«å±ã•ãªã„ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒStkFwã‚’ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_1, _T("Support enabled for StkFw operation by non-administrator-group users."));
 
 	//9108 [10075] (NC3)
-	MessageProc::AddJpn(SFW_110_120_2, _T("ƒXƒŒƒbƒhƒRƒ“ƒgƒ[ƒ‰‚Å’ÊMƒƒOo—Í‹@”\‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_2, _T("ã‚¹ãƒ¬ãƒƒãƒ‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã§é€šä¿¡ãƒ­ã‚°å‡ºåŠ›æ©Ÿèƒ½ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_2, _T("Support enabled for communication logging functionality on thread controller."));
 
 	//9109 [10078] (NC3)
-	MessageProc::AddJpn(SFW_110_120_3, _T("Windows 7, Windows Server 2003, Windows Server 2008‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_3, _T("Windows 7, Windows Server 2003, Windows Server 2008ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_3, _T("Support enabled for Windows 7, Windows Server 2003 and Windows Server 2008."));
 
 	//9110 [10079] (NC3)
-	MessageProc::AddJpn(SFW_110_120_4, _T("•¡”‚ÌƒƒCƒ“ƒRƒ“ƒ\[ƒ‹‚ğ“¯‚É‹N“®‚Å‚«‚é‚æ‚¤‚É‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_4, _T("è¤‡æ•°ã®ãƒ¡ã‚¤ãƒ³ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’åŒæ™‚ã«èµ·å‹•ã§ãã‚‹ã‚ˆã†ã«ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_4, _T("Support enabled for simultaneous launch of multiple main consoles."));
 
 	//9111 [10080] (NC3)
-	MessageProc::AddJpn(SFW_110_120_5, _T("ƒoƒbƒNƒOƒ‰ƒEƒ“ƒhƒvƒƒZƒX‚Æ‚µ‚ÄƒXƒŒƒbƒh‚ğÀs‚·‚é‹@”\‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_5, _T("ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ãƒ—ãƒ­ã‚»ã‚¹ã¨ã—ã¦ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹æ©Ÿèƒ½ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_5, _T("Support enabled for thread execution as a background process."));
 
 	//9112 [10081] (NC3)
-	MessageProc::AddJpn(SFW_110_120_6, _T("•¡”‚Ì•Ï”‚ÌƒGƒNƒXƒ|[ƒg^ƒCƒ“ƒ|[ƒg‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_6, _T("è¤‡æ•°ã®å¤‰æ•°ã®ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆï¼ã‚¤ãƒ³ãƒãƒ¼ãƒˆã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_6, _T("Support enabled for import and export of multiple variable specifications."));
 
 	//9113 [10083] (NC3)
-	MessageProc::AddJpn(SFW_110_120_7, _T("•¡”‚ÌƒXƒŒƒbƒh‚ª1‚Â‚ÌƒXƒŒƒbƒh‚É˜AŒ‹‚·‚éƒf[ƒ^ƒtƒ[‚ÅCƒf[ƒ^ƒtƒ[‚ÌI’[‚Æ‚È‚éˆ——v‘f‚Éˆ—‚ª“’B‚µ‚Ä‚àCˆê•”‚ÌƒXƒŒƒbƒh‚Ìˆ—‚ªŠ®—¹‚µ‚È‚¢•s‹ï‡‚ğC³‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_7, _T("è¤‡æ•°ã®ã‚¹ãƒ¬ãƒƒãƒ‰ãŒ1ã¤ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã«é€£çµã™ã‚‹ãƒ‡ãƒ¼ã‚¿ãƒ•ãƒ­ãƒ¼ã§ï¼Œãƒ‡ãƒ¼ã‚¿ãƒ•ãƒ­ãƒ¼ã®çµ‚ç«¯ã¨ãªã‚‹å‡¦ç†è¦ç´ ã«å‡¦ç†ãŒåˆ°é”ã—ã¦ã‚‚ï¼Œä¸€éƒ¨ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã®å‡¦ç†ãŒå®Œäº†ã—ãªã„ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_7, _T("Fixed bug whereby data flow in which multiple threads leading to a single thread did not terminate even when processing reached the end of the element."));
 
 	//9114 [10084] (NC4)
-	MessageProc::AddJpn(SFW_110_120_8, _T("•¡”‚ÌƒXƒŒƒbƒh‚ª1‚Â‚ÌƒXƒŒƒbƒh‚É˜AŒ‹‚·‚éƒf[ƒ^ƒtƒ[‚ÅCƒf[ƒ^‚ª•s³‚Éã‘‚«‚³‚ê‚½‚èC—]•ª‚Éˆ—‚³‚ê‚é•s‹ï‡‚ğC³‚µ‚½B"));
+	MessageProc::AddJpn(SFW_110_120_8, _T("è¤‡æ•°ã®ã‚¹ãƒ¬ãƒƒãƒ‰ãŒ1ã¤ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã«é€£çµã™ã‚‹ãƒ‡ãƒ¼ã‚¿ãƒ•ãƒ­ãƒ¼ã§ï¼Œãƒ‡ãƒ¼ã‚¿ãŒä¸æ­£ã«ä¸Šæ›¸ãã•ã‚ŒãŸã‚Šï¼Œä½™åˆ†ã«å‡¦ç†ã•ã‚Œã‚‹ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_110_120_8, _T("Bugs relating to invalid data overwritten and unnecessary data processing on data flow in which multiple threads led to a single thread have been fixed."));
 
 	//9115 (NC4)
-	MessageProc::AddJpn(SFW_120_130_1, _T("ƒtƒ@ƒCƒ‹‚Ö‚Ì‘‚«‚İ‚¨‚æ‚Ñƒtƒ@ƒCƒ‹‚©‚ç‚Ì“Ç‚İ‚İ‚ğs‚¤ˆ——v‘f‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_120_130_1, _T("ãƒ•ã‚¡ã‚¤ãƒ«ã¸ã®æ›¸ãè¾¼ã¿ãŠã‚ˆã³ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã®èª­ã¿è¾¼ã¿ã‚’è¡Œã†å‡¦ç†è¦ç´ ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_120_130_1, _T("Support enabled for writing/reading of file processing elements."));
 
 	//9116 (NC4)
-	MessageProc::AddJpn(SFW_120_130_2, _T("ŠO•”ƒvƒƒOƒ‰ƒ€‚ğÀs‚·‚éˆ——v‘f‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_120_130_2, _T("å¤–éƒ¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’å®Ÿè¡Œã™ã‚‹å‡¦ç†è¦ç´ ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_120_130_2, _T("Support enabled for processing of elements that execute external programs."));
 
 	//9117 (NC4)
-	MessageProc::AddJpn(SFW_120_130_3, _T("‘SƒXƒŒƒbƒhˆêŠ‡ŠJn^’â~‹@”\‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_120_130_3, _T("å…¨ã‚¹ãƒ¬ãƒƒãƒ‰ä¸€æ‹¬é–‹å§‹ï¼åœæ­¢æ©Ÿèƒ½ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_120_130_3, _T("Support enabled for start/stop all threads function."));
 
 	//9118 (NC4)
-	MessageProc::AddJpn(SFW_120_130_4, _T("TCP receiver‚ÌI—¹ğŒ‚ğw’è‚Å‚«‚é‚æ‚¤‚É‚µ‚½BV‚½‚Éƒf[ƒ^’·’´‚¦ŒŸ’m‚Æƒf[ƒ^ˆê’vŒŸ’m‚ğI—¹ğŒ‚Æ‚µ‚Ä’Ç‰Á‚µ‚½B"));
+	MessageProc::AddJpn(SFW_120_130_4, _T("TCP receiverã®çµ‚äº†æ¡ä»¶ã‚’æŒ‡å®šã§ãã‚‹ã‚ˆã†ã«ã—ãŸã€‚æ–°ãŸã«ãƒ‡ãƒ¼ã‚¿é•·è¶…ãˆæ¤œçŸ¥ã¨ãƒ‡ãƒ¼ã‚¿ä¸€è‡´æ¤œçŸ¥ã‚’çµ‚äº†æ¡ä»¶ã¨ã—ã¦è¿½åŠ ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_120_130_4, _T("Support enabled for specification of TCP receiver termination conditions. Detection of excess data length and data matching newly added as termination conditions."));
 
 	//9119 (NC5)
-	MessageProc::AddJpn(SFW_130_140_1, _T("‹­§ƒNƒ[ƒY‚ÆÚ‘±æ‚ÌƒVƒƒƒbƒgƒ_ƒEƒ“ŒŸ’m‚É‚æ‚éƒNƒ[ƒY‚Ì2‚Â‚Ìƒ\ƒPƒbƒgƒNƒ[ƒY•û–@‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_130_140_1, _T("å¼·åˆ¶ã‚¯ãƒ­ãƒ¼ã‚ºã¨æ¥ç¶šå…ˆã®ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³æ¤œçŸ¥ã«ã‚ˆã‚‹ã‚¯ãƒ­ãƒ¼ã‚ºã®2ã¤ã®ã‚½ã‚±ãƒƒãƒˆã‚¯ãƒ­ãƒ¼ã‚ºæ–¹æ³•ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_130_140_1, _T("Support enabled for two socket closure methods (forced close and peer shutdown detection close)."));
 
 	//9120 (NC5)
-	MessageProc::AddJpn(SFW_130_140_2, _T("ƒ[ƒNƒXƒy[ƒXƒTƒCƒY‚ğ•ÏX‚Å‚«‚é‚æ‚¤‚É‚µ‚½B"));
+	MessageProc::AddJpn(SFW_130_140_2, _T("ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚µã‚¤ã‚ºã‚’å¤‰æ›´ã§ãã‚‹ã‚ˆã†ã«ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_130_140_2, _T("Support enabled for workspace size change."));
 
 	//9121 (NC5)
-	MessageProc::AddJpn(SFW_130_140_3, _T("ˆ——v‘f‚Ì’Ç‰Á‚ÉŠÖ‚·‚éŠK‘w‰»‚³‚ê‚½ƒƒjƒ…[‚ğ’ñ‹Ÿ‚µ‚½B"));
+	MessageProc::AddJpn(SFW_130_140_3, _T("å‡¦ç†è¦ç´ ã®è¿½åŠ ã«é–¢ã™ã‚‹éšå±¤åŒ–ã•ã‚ŒãŸãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’æä¾›ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_130_140_3, _T("Support enabled for hierarchical menu for addition of processing element operations."));
 
 	//9122 (NC5)
-	MessageProc::AddJpn(SFW_130_140_4, _T("UDP receiverˆ——v‘f‚¨‚æ‚ÑUDP senderˆ——v‘f‚ğV‚½‚ÉƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_130_140_4, _T("UDP receiverå‡¦ç†è¦ç´ ãŠã‚ˆã³UDP senderå‡¦ç†è¦ç´ ã‚’æ–°ãŸã«ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_130_140_4, _T("Support enabled for UDP receiver processing element and UDP sender processing element."));
 
 	//9123 (NC5)
-	MessageProc::AddJpn(SFW_130_140_5, _T("ƒ\ƒPƒbƒgƒNƒ[ƒY‚ÉŒë‚Á‚½ˆ——v‘f‚ÌID‚ªƒƒO‚Éo—Í‚³‚ê‚é•s—Ç‚ğ‘Îô‚µ‚½B"));
+	MessageProc::AddJpn(SFW_130_140_5, _T("ã‚½ã‚±ãƒƒãƒˆã‚¯ãƒ­ãƒ¼ã‚ºæ™‚ã«èª¤ã£ãŸå‡¦ç†è¦ç´ ã®IDãŒãƒ­ã‚°ã«å‡ºåŠ›ã•ã‚Œã‚‹ä¸è‰¯ã‚’å¯¾ç­–ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_130_140_5, _T("Logged bug relating to invalid ID for processing element fixed."));
 
 	//9124 (NC5)
-	MessageProc::AddJpn(SFW_130_140_6, _T("Windows 8, Windows Server 2012, Windows Server 2003 R2, Windows Server 2008 R2‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_130_140_6, _T("Windows 8, Windows Server 2012, Windows Server 2003 R2, Windows Server 2008 R2ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_130_140_6, _T("Support enabled for Windows 8, Windows Server 2012, Windows Server 2003 R2 and Windows Server 2008 R2."));
 
 	//9125 (NC7)
-	MessageProc::AddJpn(SFW_140_150_1, _T("ƒCƒ“ƒXƒg[ƒ‰ƒvƒƒOƒ‰ƒ€iƒtƒ@ƒCƒ‹j‚ğ‚Ğ‚Æ‚Â‚ÌMSIƒtƒ@ƒCƒ‹‚É“‡‚µ‚½B"));
+	MessageProc::AddJpn(SFW_140_150_1, _T("ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ©ãƒ—ãƒ­ã‚°ãƒ©ãƒ ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ï¼‰ã‚’ã²ã¨ã¤ã®MSIãƒ•ã‚¡ã‚¤ãƒ«ã«çµ±åˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_140_150_1, _T("Installer program files integrated into a single MSI file."));
 
 	//9126 (NC7)
-	MessageProc::AddJpn(SFW_140_150_2, _T("“¯ˆêƒ|[ƒg‚Å•¡”ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚Ì“¯Ú‘±‚ğ‰Â”\‚É‚µ‚½B"));
+	MessageProc::AddJpn(SFW_140_150_2, _T("åŒä¸€ãƒãƒ¼ãƒˆã§è¤‡æ•°ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®åŒæ™‚æ¥ç¶šã‚’å¯èƒ½ã«ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_140_150_2, _T("Support enabled for multiple-client connections using the same port number."));
 
 	//9127 (NC7)
-	MessageProc::AddJpn(SFW_140_150_3, _T("/open‚Ü‚½‚Í/startƒpƒ‰ƒ[ƒ^w’è‚Å‹N“®‚µ‚½‚Æ‚«‚ÉCƒJƒŒƒ“ƒgƒtƒHƒ‹ƒ_‚ª.stdƒtƒ@ƒCƒ‹‚ª”z’u‚³‚ê‚½ƒtƒHƒ‹ƒ_‚ÆˆÙ‚È‚é•s—Ç‚ğ‘Îô‚µ‚½B"));
+	MessageProc::AddJpn(SFW_140_150_3, _T("/openã¾ãŸã¯/startãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æŒ‡å®šã§èµ·å‹•ã—ãŸã¨ãã«ï¼Œã‚«ãƒ¬ãƒ³ãƒˆãƒ•ã‚©ãƒ«ãƒ€ãŒ.stdãƒ•ã‚¡ã‚¤ãƒ«ãŒé…ç½®ã•ã‚ŒãŸãƒ•ã‚©ãƒ«ãƒ€ã¨ç•°ãªã‚‹ä¸è‰¯ã‚’å¯¾ç­–ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_140_150_3, _T("Fixed a bug whereby the current folder was not configured as the folder where the .std file was placed when the program was launched with /open and /start parameters."));
 
 	//9128 (NC7)
-	MessageProc::AddJpn(SFW_140_150_4, _T("ƒXƒŒƒbƒh’â~‚É“¯‚¶óM—v‘f‚ªç’·‚Èƒ\ƒPƒbƒgƒNƒ[ƒY‚ÌƒƒO‚ğo—Í‚·‚é•s—Ç‚ğ‘Îô‚µ‚½B"));
+	MessageProc::AddJpn(SFW_140_150_4, _T("ã‚¹ãƒ¬ãƒƒãƒ‰åœæ­¢æ™‚ã«åŒã˜å—ä¿¡è¦ç´ ãŒå†—é•·ãªã‚½ã‚±ãƒƒãƒˆã‚¯ãƒ­ãƒ¼ã‚ºã®ãƒ­ã‚°ã‚’å‡ºåŠ›ã™ã‚‹ä¸è‰¯ã‚’å¯¾ç­–ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_140_150_4, _T("Fixed a bug whereby redundant logs relating to socket closing were generated by the same receiver element when threads were stopped."));
 
 	//9129 (NC7)
-	MessageProc::AddJpn(SFW_140_150_5, _T("IPv6‚É‚æ‚éÚ‘±‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_140_150_5, _T("IPv6ã«ã‚ˆã‚‹æ¥ç¶šã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_140_150_5, _T("Support for IPv6 connectivity enabled."));
 
 	//9130 (NC5-Simular)
-	MessageProc::AddJpn(SFW_140_150_6, _T("Windows 8.1, Windows 10, Windows Server 2012 R2‚ğƒTƒ|[ƒg‚µ‚½B"));
+	MessageProc::AddJpn(SFW_140_150_6, _T("Windows 8.1, Windows 10, Windows Server 2012 R2ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_140_150_6, _T("Support enabled for Windows 8.1, Windows 10 and Windows Server 2012 R2."));
 
-	//9131 (š)
-	MessageProc::AddJpn(SFW_150_160_1, _T("TCP receiver‚ÌI—¹ğŒ‚Æ‚µ‚ÄCHTTPƒwƒbƒ_‚ÌContent-Length‚Éw’è‚³‚ê‚½ƒTƒCƒY‚Ìƒf[ƒ^óM‚ğV‚½‚ÉƒTƒ|[ƒg‚µ‚½B"));
+	//9131 (â˜…)
+	MessageProc::AddJpn(SFW_150_160_1, _T("TCP receiverã®çµ‚äº†æ¡ä»¶ã¨ã—ã¦ï¼ŒHTTPãƒ˜ãƒƒãƒ€ã®Content-Lengthã«æŒ‡å®šã•ã‚ŒãŸã‚µã‚¤ã‚ºã®ãƒ‡ãƒ¼ã‚¿å—ä¿¡ã‚’æ–°ãŸã«ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_150_160_1, _T("Support enabled for data reception which the specified size of Content-Length in HTTP header as a new termination condition of TCP receiver."));
 
-	//9132 (š)
-	MessageProc::AddJpn(SFW_150_160_2, _T("HTTPƒwƒbƒ_‚Ì’Ç‰Á‚¨‚æ‚Ñíœ‚ğ‰Â”\‚É‚·‚éˆ——v‘f‚ğV‚½‚ÉƒTƒ|[ƒg‚µ‚½B"));
+	//9132 (â˜…)
+	MessageProc::AddJpn(SFW_150_160_2, _T("HTTPãƒ˜ãƒƒãƒ€ã®è¿½åŠ ãŠã‚ˆã³å‰Šé™¤ã‚’å¯èƒ½ã«ã™ã‚‹å‡¦ç†è¦ç´ ã‚’æ–°ãŸã«ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_150_160_2, _T("Support enabled for removal and addition of HTTP header as a new processing element."));
 
-	//9133 (š)
-	MessageProc::AddJpn(SFW_150_160_3, _T("Windows Server 2016‚ğƒTƒ|[ƒg‚µ‚½B"));
+	//9133 (â˜…)
+	MessageProc::AddJpn(SFW_150_160_3, _T("Windows Server 2016ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_150_160_3, _T("Support enabled for Windows Server 2016."));
 
-	//9134 (š)
-	MessageProc::AddJpn(SFW_160_170_1, _T("ƒvƒƒpƒeƒBƒ_ƒCƒAƒƒOƒ{ƒbƒNƒX‚ÅHTTPƒwƒbƒ_‚ğ•ÒW’†‚ÉCHTTPƒwƒbƒ_‚Ìˆê•”‚ª•s³‚Éíœ‚³‚ê‚é•s‹ï‡‚ğC³‚µ‚½B"));
+	//9134 (â˜…)
+	MessageProc::AddJpn(SFW_160_170_1, _T("ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒœãƒƒã‚¯ã‚¹ã§HTTPãƒ˜ãƒƒãƒ€ã‚’ç·¨é›†ä¸­ã«ï¼ŒHTTPãƒ˜ãƒƒãƒ€ã®ä¸€éƒ¨ãŒä¸æ­£ã«å‰Šé™¤ã•ã‚Œã‚‹ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_160_170_1, _T("Fixed a bug which a part of HTTP header string is inappropriately deleted when user edits the string on property dialog box of HTTP Header."));
 
-	//9135 (š)
-	MessageProc::AddJpn(SFW_160_170_2, _T("ƒŒƒXƒ|ƒ“ƒXƒf[ƒ^“à‚ÌHTTPƒwƒbƒ_•”‚ğHTTP headerˆ——v‘f‚ªíœ‚Å‚«‚È‚¢•s‹ï‡‚ğC³‚µ‚½B"));
+	//9135 (â˜…)
+	MessageProc::AddJpn(SFW_160_170_2, _T("ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿å†…ã®HTTPãƒ˜ãƒƒãƒ€éƒ¨ã‚’HTTP headerå‡¦ç†è¦ç´ ãŒå‰Šé™¤ã§ããªã„ä¸å…·åˆã‚’ä¿®æ­£ã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_160_170_2, _T("Fixed a bug which HTTP header processing element cannot delete a HTTP header part in response data."));
 
-	//9136 (š)
-	MessageProc::AddJpn(SFW_160_170_3, _T("TCP receiver‚ÌI—¹ğŒ‚Æ‚µ‚ÄCHTTPƒwƒbƒ_‚Ì\"Transfer-Encoding: chunked\"‚Ìw’è‚ğV‚½‚ÉƒTƒ|[ƒg‚µ‚½B"));
+	//9136 (â˜…)
+	MessageProc::AddJpn(SFW_160_170_3, _T("TCP receiverã®çµ‚äº†æ¡ä»¶ã¨ã—ã¦ï¼ŒHTTPãƒ˜ãƒƒãƒ€ã®\"Transfer-Encoding: chunked\"ã®æŒ‡å®šã‚’æ–°ãŸã«ã‚µãƒãƒ¼ãƒˆã—ãŸã€‚"));
 	MessageProc::AddEng(SFW_160_170_3, _T("Support enabled for \"Transfer-Encoding: chunked\" specification in HTTP header as a new termination condition of TCP receiver."));
 
 	// =====================================================================================================

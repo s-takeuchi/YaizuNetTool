@@ -1,4 +1,4 @@
-#include "..\stklib\ActorStatus.h"
+﻿#include "..\stklib\ActorStatus.h"
 #include "NetAseEx.h"
 #include "NetManagerAseEx.h"
 #include "stklibtest.h"

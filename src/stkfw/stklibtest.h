@@ -1,4 +1,4 @@
-int ResetWorkspace(int);
+﻿int ResetWorkspace(int);
 int ResetThreadController(bool);
 int SetViewToDb();
 int GetViewFromDb();
