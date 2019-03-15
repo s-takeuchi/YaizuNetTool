@@ -11,6 +11,7 @@
 #include <psapi.h>
 #include <Lm.h>
 
+#include "../../../YaizuComLib/src/StkPl.h"
 #include "resource.h"
 
 #include "..\stklib\GameStatus.h"
@@ -21,7 +22,6 @@
 
 #include "..\..\..\YaizuComLib\src\stkthread\stkthread.h"
 #include "..\..\..\YaizuComLib\src\stkthreadgui\stkthreadgui.h"
-#include "..\..\..\YaizuComLib\src\commonfunc\StkGeneric.h"
 #include "..\..\..\YaizuComLib\src\\commonfunc\StkObject.h"
 
 #include "VarCon.h"
@@ -527,7 +527,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 		// Change current folder
 		TCHAR ConvFullPath[MAX_PATH];
-		StkGeneric::GetInstance()->GetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
+		StkPlGetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
 		SetCurrentDirectory(ConvFullPath);
 
 		DbMigration();
@@ -597,7 +597,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		} else {
 			// Change current folder
 			TCHAR ConvFullPath[MAX_PATH];
-			StkGeneric::GetInstance()->GetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
+			StkPlGetFullPathWithoutFileName(CurrentStdFileName, ConvFullPath);
 			SetCurrentDirectory(ConvFullPath);
 
 			DbMigration();
