@@ -68,7 +68,7 @@
       </LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;Psapi.lib;shell32.lib;Debug\stklib.lib;Debug\stkdata.lib;Debug\stk_about.lib;Debug\stkthread.lib;Debug\stkthreadgui.lib;Debug\commonfunc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;Psapi.lib;shell32.lib;Debug\stklib.lib;Debug\stkdata.lib;Debug\stk_about.lib;Debug\stkthread.lib;Debug\stkthreadgui.lib;Debug\commonfunc.lib;Debug\stkpl.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -92,7 +92,7 @@
       </LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;shell32.lib;Psapi.lib;Release\stklib.lib;Release\stkdata.lib;Release\stk_about.lib;Release\stkthread.lib;Release\stkthreadgui.lib;Release\commonfunc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;shell32.lib;Psapi.lib;Release\stklib.lib;Release\stkdata.lib;Release\stk_about.lib;Release\stkthread.lib;Release\stkthreadgui.lib;Release\commonfunc.lib;Release\stkpl.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <StackReserveSize>3000000</StackReserveSize>

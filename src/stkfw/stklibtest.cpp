@@ -11,7 +11,7 @@
 #include <psapi.h>
 #include <Lm.h>
 
-#include "../../../YaizuComLib/src/StkPl.h"
+#include "../../../YaizuComLib/src/stkpl/StkPl.h"
 #include "resource.h"
 
 #include "..\stklib\GameStatus.h"
