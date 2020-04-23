@@ -8,7 +8,7 @@ However, if the behavior (i.e., communication with other network elements) of th
 StkFw can be used to facilitate the control of data communication on an IP network based on its superior user interface. It simulates behavior identical to that of testing programs and reduces the overall cost of
 testing during the target software's development by eliminating the need to create a dedicated testing program.
 
-![scr1](https://user-images.githubusercontent.com/4883168/79982466-56fab380-84e1-11ea-9b46-6769a9d2aca7.png)
+![stkfw01](https://user-images.githubusercontent.com/4883168/80099770-f8e5d300-85a9-11ea-90fc-92215f15ac83.jpg)
 
 ## System requirements
 StkFw works on systems with the following specifications:
