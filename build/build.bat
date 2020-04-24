@@ -5,37 +5,39 @@ echo =========================================
 echo Build YaizuNetTool
 echo =========================================
 
-if defined APPVEYOR (
-  set MSBUILD="msbuild.exe"
-  set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.exe"
+if defined GITHUBACTIONS (
+  echo For GitHub Actions
+  set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\msbuild.exe"
+  set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\devenv.com"
   set SEVENZIP="7z.exe"
   set LCOUNTER=""
+  goto definitionend
 )
 
-if not defined APPVEYOR (
-  set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
-  set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.exe"
-  set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
-  set LCOUNTER="C:\Program Files (x86)\lcounter\lcounter.exe"
+set LOCALMACHINE="true"
+
+set MSBUILD="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
+set DEVENV="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com"
+set SEVENZIP="C:\Program Files\7-Zip\7z.exe"
+set LCOUNTER="C:\Program Files (x86)\lcounter\lcounter.exe"
+
+echo;
+echo This batch file requires softwares shown below.
+echo 1. Microsoft Visual Studio 2017
+echo 2. 7-Zip 9.20
+echo 3. Line Counter
+
+if not exist %MSBUILD% (
+  exit
+) else if not exist %DEVENV% (
+  exit
+) else if not exist %SEVENZIP% (
+  exit
+) else if not exist %LCOUNTER% (
+  exit
 )
 
-if not defined APPVEYOR (
-  echo;
-  echo This batch file requires softwares shown below.
-  echo 1. Microsoft Visual Studio 2017
-  echo 2. 7-Zip 9.20
-  echo 3. Line Counter
-
-  if not exist %MSBUILD% (
-    exit
-  ) else if not exist %DEVENV% (
-    exit
-  ) else if not exist %SEVENZIP% (
-    exit
-  ) else if not exist %LCOUNTER% (
-    exit
-  )
-)
+:definitionend
 
 
 rem ########## Initializing ##########
@@ -96,6 +98,7 @@ if not exist "..\doc\man\jpn\." goto ERRORRAISED
 rem ########## Deployment of files and folders ##########
 echo;
 echo Deployment of files and folders...
+
 mkdir stkfw
 mkdir stkfw\sample
 mkdir stkfw\manual
@@ -118,36 +121,41 @@ copy "..\doc\man\jpn\*.*" stkfw\manual\jpn
 
 
 rem ########## Making installer ##########
-echo;
-echo Making installer...
-%DEVENV% "setup\setup1.sln" /rebuild Release
-mkdir deployment
-copy ..\doc\readme\ReadmeJPN.txt deployment
-copy ..\doc\readme\ReadmeENG.txt deployment
-copy setup\Release\stkfw.msi deployment
+if defined LOCALMACHINE (
+  echo;
+  echo Making installer...
+  %DEVENV% "setup\setup1.sln" /rebuild Release
+  mkdir deployment
+  copy ..\doc\readme\ReadmeJPN.txt deployment
+  copy ..\doc\readme\ReadmeENG.txt deployment
+  copy setup\Release\stkfw.msi deployment
+)
 
 
 rem ########## ZIP packing ##########
-echo;
-echo ZIP packing stage...
-cd deployment
-%SEVENZIP% a sfw170_beta.zip stkfw.msi
-%SEVENZIP% a sfw170_beta.zip ReadmeJPN.txt
-%SEVENZIP% a sfw170_beta.zip ReadmeENG.txt
-del ReadmeJPN.txt
-del ReadmeENG.txt
-del stkfw.msi
-cd..
+if defined LOCALMACHINE (
+  echo;
+  echo ZIP packing stage...
+  cd deployment
+  %SEVENZIP% a sfw170_beta.zip stkfw.msi
+  %SEVENZIP% a sfw170_beta.zip ReadmeJPN.txt
+  %SEVENZIP% a sfw170_beta.zip ReadmeENG.txt
+  del ReadmeJPN.txt
+  del ReadmeENG.txt
+  del stkfw.msi
+  cd..
+)
 
 
 rem ########## build complete ##########
-if not defined APPVEYOR (
+if defined LOCALMACHINE (
   echo;
   %LCOUNTER% ..\src /subdir
 )
+
 echo;
 echo All building processes of StkFw have been successfully finished.
-if not defined APPVEYOR (
+if defined LOCALMACHINE (
   pause
 )
 exit /B %ERRORLEVEL%
@@ -157,7 +165,7 @@ rem ########## Error ##########
 :ERRORRAISED
 echo;
 echo Build error occurred.
-if not defined APPVEYOR (
+if defined LOCALMACHINE (
   pause
 )
 exit /B 1
