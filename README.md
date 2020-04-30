@@ -1,6 +1,6 @@
-# StkFw
+# StkFw 1.6.0
 
-## StkFw summary
+## Summary of StkFw
 StkFw is a test support software solution that simulates environments in which multiple pieces of software and/or hardware work together on an IP network.
 In the development of software designed to work and cooperate with complex and valuable elements (software and/or hardware) on a network, the use of a testing program that simulates network element behavior is a well-known
 solution for reducing overall development costs.
