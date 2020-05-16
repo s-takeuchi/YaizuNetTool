@@ -33,9 +33,7 @@ LRESULT CALLBACK StkIpDlg2( HWND, UINT, WPARAM, LPARAM );
 LRESULT CALLBACK StkIpDlg3( HWND, UINT, WPARAM, LPARAM );
 LRESULT CALLBACK StkIpDlg4( HWND, UINT, WPARAM, LPARAM );
 
-int AddIpAddressToNetworkAdapter(DWORD, TCHAR*, TCHAR*);
 int AddIpAddressToNetworkFriendly(TCHAR[1024], TCHAR*, TCHAR*);
-int DeleteIpAddressFromNetworkAdapter(DWORD, TCHAR*);
 int DeleteIpAddressFromNetworkFriendly(TCHAR[1024], TCHAR*);
 
 int GetIpAddressOnNetworkAdapter(int, TCHAR*);
@@ -72,16 +70,16 @@ BOOL StkIpDlg(HINSTANCE hInstance)
 	while (TRUE) {
 		switch (stage) {
 		case 0:
-			retcode = DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_1, ParentWinHndl, (DLGPROC)StkIpDlg1);
+			retcode = (int)DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_1, ParentWinHndl, (DLGPROC)StkIpDlg1);
 			break;
 		case 1:
-			retcode = DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_2, ParentWinHndl, (DLGPROC)StkIpDlg2);
+			retcode = (int)DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_2, ParentWinHndl, (DLGPROC)StkIpDlg2);
 			break;
 		case 2:
-			retcode = DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_3, ParentWinHndl, (DLGPROC)StkIpDlg3);
+			retcode = (int)DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_3, ParentWinHndl, (DLGPROC)StkIpDlg3);
 			break;
 		case 3:
-			retcode = DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_4, ParentWinHndl, (DLGPROC)StkIpDlg4);
+			retcode = (int)DialogBox(hInstance, (LPCTSTR)IDD_STK_IP_DLG_4, ParentWinHndl, (DLGPROC)StkIpDlg4);
 			break;
 		default:
 			return TRUE;
@@ -200,7 +198,7 @@ LRESULT CALLBACK StkIpDlg2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 		}
 		if (HIWORD(wParam) == CBN_SELCHANGE) {
 			if (LOWORD(wParam) == IDC_STK_IP_DLG_2_C0) {
-				TmpSelectedAd = SendDlgItemMessage(hDlg, IDC_STK_IP_DLG_2_C0, CB_GETCURSEL, 0, 0);
+				TmpSelectedAd = (int)SendDlgItemMessage(hDlg, IDC_STK_IP_DLG_2_C0, CB_GETCURSEL, 0, 0);
 				if (TmpSelectedAd != -1) {
 					SelectedAd = TmpSelectedAd;
 					TargetAdIndex = AdIndex[SelectedAd];
@@ -313,14 +311,7 @@ LRESULT CALLBACK StkIpDlg3(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 				StkIpDlgMsg::ParameterError(hDlg);
 				break;
 			}
-			OSVERSIONINFO VerInfo;
-			VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-			GetVersionEx(&VerInfo);
-			if (VerInfo.dwMajorVersion == 5 && VerInfo.dwMinorVersion == 0) {
-				StkIpDlgMsg::RestrictionOfEffect(hDlg);
-			} else {
-				StkIpDlgMsg::TakeALongTime(hDlg);
-			}
+			StkIpDlgMsg::TakeALongTime(hDlg);
 			if (OperationLoop(ip1, ip2, ip3, ip4, MaskIp1, MaskIp2, MaskIp3, MaskIp4, StrToInt(NumOfIp), AddFlag) == -1) {
 				StkIpDlgMsg::NetworkConfigChangeError(hDlg);
 			}
@@ -433,35 +424,6 @@ LRESULT CALLBACK StkIpDlg4(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
     return FALSE;
 }
 
-/********** Add IP address into system **********/
-// Return code  1 : Success
-// Return code  0 : The IP address has already been registered
-// Return code -1 : An error occurred
-int AddIpAddressToNetworkAdapter(DWORD AdIndex, TCHAR* IpAddr, TCHAR* IpMask)
-{
-	char IpAddrS[16];
-	char IpMaskS[16];
-
-	sprintf_s(IpAddrS, "%S", IpAddr);
-	sprintf_s(IpMaskS, "%S", IpMask);
-	UINT InetIpAddr = inet_addr(IpAddrS);
-	UINT InetIpMask = inet_addr(IpMaskS);
-	ULONG NTEContext = 0;
-	ULONG NTEInstance = 0;
-	DWORD RetCode;
-
-	RetCode = AddIPAddress(InetIpAddr, InetIpMask, AdIndex, &NTEContext, &NTEInstance);
-	if (RetCode == NO_ERROR) {
-		return 1;
-	} else if (RetCode == 0xC000022A ||    // Windows 2000 'STATUS_DUPLICATE_OBJECTID'
-			   RetCode == ERROR_DUP_DOMAINNAME ||    // Windows XP
-			   RetCode == ERROR_OBJECT_ALREADY_EXISTS) {    // Windows Vista
-		return 0;
-	} else {
-		return -1;
-	}
-}
-
 /********** Add IP address into system. **********/
 // Return Code     1 : Success
 // Return code    -1 : An error occurred
@@ -492,26 +454,6 @@ int AddIpAddressToNetworkFriendly(TCHAR TargetAdName[1024], TCHAR* IpAddr, TCHAR
 		Buf = Buf->Next;
 	}
 #endif
-	return -1;
-}
-
-/********** Delete IP address from system **********/
-// Return code  1 : Success (The IP address has been deleted)
-// Return code  0 : The IP address has already been deleted)
-// Return code -1 : An error occurred
-int DeleteIpAddressFromNetworkAdapter(DWORD AdIndex, TCHAR* IpAddr)
-{
-	DWORD TargetContext;
-
-	TargetContext = GetContextOnNetworkAdapter(AdIndex, IpAddr);
-	if (TargetContext == 0) {
-		return 0;
-	}
-	if (TargetContext != -1) {
-		if (DeleteIPAddress(TargetContext) == NO_ERROR) {
-			return 1;
-		}
-	}
 	return -1;
 }
 
@@ -562,30 +504,18 @@ int OperationLoop(TCHAR* Ip1, TCHAR* Ip2, TCHAR* Ip3, TCHAR* Ip4, TCHAR* Mask1, 
 	lstrcat(Mask, Mask4);
 	unsigned long Ret = ConvertToLongFromIpEle(Ip1, Ip2, Ip3, Ip4);
 
-	OSVERSIONINFO VerInfo;
-	VerInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	GetVersionEx(&VerInfo);
-
 	for (unsigned long i = Ret; i < Ret + NumOfIp; i++) {
 		TCHAR IpStr[16];
 		ConvertToIpStrFromLong(i, IpStr);
 		if (AddFlag == TRUE) {
 			DWORD RetAdd;
-			if (VerInfo.dwMajorVersion == 5 && VerInfo.dwMinorVersion == 0) {
-				RetAdd = AddIpAddressToNetworkAdapter(TargetAdIndex, IpStr, Mask); // Windows 2000
-			} else {
-				RetAdd = AddIpAddressToNetworkFriendly(TargetAdName, IpStr, Mask); // Windows XP, Vista
-			}
+			RetAdd = AddIpAddressToNetworkFriendly(TargetAdName, IpStr, Mask); // Windows XP, Vista
 			if (RetAdd == -1) {
 				return -1;
 			}
 		} else {
 			DWORD RetDel;
-			if (VerInfo.dwMajorVersion == 5 && VerInfo.dwMinorVersion == 0) {
-				RetDel = DeleteIpAddressFromNetworkAdapter(TargetAdIndex, IpStr); // Windows 2000
-			} else {
-				RetDel = DeleteIpAddressFromNetworkFriendly(TargetAdName, IpStr); // Windows XP, Vista
-			}
+			RetDel = DeleteIpAddressFromNetworkFriendly(TargetAdName, IpStr); // Windows XP, Vista
 			if (RetDel == -1) {
 				return -1;
 			}

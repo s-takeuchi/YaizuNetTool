@@ -13,5 +13,4 @@ public:
 	static int NoNetworkAdapterFoundError(HWND);
 	static int ParameterError(HWND);
 	static int TakeALongTime(HWND);
-	static int RestrictionOfEffect(HWND);
 };

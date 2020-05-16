@@ -66,11 +66,3 @@ int StkIpDlgMsg::TakeALongTime(HWND hDlg)
 		STK_IP_DLG_TITLE, 
 		MB_OK | MB_ICONINFORMATION | MB_APPLMODAL);
 }
-
-int StkIpDlgMsg::RestrictionOfEffect(HWND hDlg)
-{
-	return MessageBox(hDlg, 
-		_T("The changes performed by this wizard will be effective until the operating system is shut down."),
-		STK_IP_DLG_TITLE, 
-		MB_OK | MB_ICONINFORMATION | MB_APPLMODAL);
-}
