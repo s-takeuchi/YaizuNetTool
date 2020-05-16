@@ -24,7 +24,7 @@ int ExecElem_ReadFile::Execute()
 	int InputDatLength = GetDataLength();
 
 	// 作業用領域
-	BYTE* WorkDat;
+	BYTE* WorkDat = NULL;
 	int WorkDatLength;
 	DWORD TmpSize = 0;
 
