@@ -19,20 +19,9 @@ typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 
 int RunCommand(HWND DlgHndl, int OperationCode)
 {
-	BOOL Wow64Flag = FALSE;
-	LPFN_ISWOW64PROCESS FnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(_T("kernel32")), "IsWow64Process");
 	TCHAR CmdName[40];
 
-	if (NULL != FnIsWow64Process) {
-		if (!FnIsWow64Process(GetCurrentProcess(), &Wow64Flag)) {
-			Wow64Flag = FALSE;
-		}
-	}
-	if (Wow64Flag) {
-		lstrcpy(CmdName, _T("lbadpt64.exe "));
-	} else {
-		lstrcpy(CmdName, _T("lbadpt32.exe "));
-	}
+	lstrcpy(CmdName, _T("lbadpt64.exe "));
 	switch (OperationCode) {
 	case 0:
 		lstrcat(CmdName, _T("get"));

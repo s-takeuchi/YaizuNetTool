@@ -59,7 +59,7 @@ echo Building fwdel.sln...
 %MSBUILD% "..\src\fwdel\fwdel.sln" /t:clean;build /p:Configuration=Release
 IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building lbadpt.sln...
-%MSBUILD% "..\src\lbadpt\lbadpt.sln" /t:clean;build /p:Configuration=Release
+%MSBUILD% "..\src\lbadpt\lbadpt.sln" /t:clean;build /p:Configuration=Release /p:platform="x64"
 IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building stk_ip_dlg.sln...
 %MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release
@@ -78,8 +78,7 @@ if not exist "..\src\fwadd\Release\fwadd.exe" goto ERRORRAISED
 echo Checking "fwdel.exe" existence...
 if not exist "..\src\fwdel\Release\fwdel.exe" goto ERRORRAISED
 echo Checking "lbadpt.exe, lbadpt32.exe, lbadpt64.exe" existence...
-if not exist "..\src\lbadpt\Release\lbadpt.exe" goto ERRORRAISED
-if not exist "..\src\lbadpt\devcon\lbadpt32.exe" goto ERRORRAISED
+if not exist "..\src\lbadpt\x64\Release\lbadpt.exe" goto ERRORRAISED
 if not exist "..\src\lbadpt\devcon\lbadpt64.exe" goto ERRORRAISED
 echo Checking "stk_ip_dlg.exe" existence...
 if not exist "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" goto ERRORRAISED
@@ -104,8 +103,7 @@ mkdir stkfw\manual\jpn
 copy "..\..\YaizuComLib\src\stkdatagui\x64\Release\stkdatagui.exe" stkfw
 copy "..\src\fwadd\Release\fwadd.exe" setup
 copy "..\src\fwdel\Release\fwdel.exe" setup
-copy "..\src\lbadpt\Release\lbadpt.exe" stkfw
-copy "..\src\lbadpt\devcon\lbadpt32.exe" stkfw
+copy "..\src\lbadpt\x64\Release\lbadpt.exe" stkfw
 copy "..\src\lbadpt\devcon\lbadpt64.exe" stkfw
 copy "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" stkfw
 copy "..\src\stkfw\x64\Release\stkfw.exe" stkfw
