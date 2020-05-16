@@ -47,7 +47,7 @@ void ExecElem::add_log(const wchar_t* name, const wchar_t* msg)
 
 	log_mutex.lock();
 
-	int tmp_buf_len = max_log_size + wcslen(msg) + 100;
+	int tmp_buf_len = max_log_size + (int)wcslen(msg) + 100;
 	wchar_t *tmp_buf = new TCHAR[tmp_buf_len];
 
 	time_t now;
@@ -91,7 +91,7 @@ int ExecElem::get_log_size()
 {
 	std::call_once(init_log_flag, &init_log);
 
-	return wcslen(log);
+	return (int)wcslen(log);
 }
 
 int ExecElem::get_max_log_size()

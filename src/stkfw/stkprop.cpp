@@ -270,7 +270,7 @@ int ShowProperty() // ##10085 戻り値を変更
 		DispatchMessage(&msg);
 	}
 
-	return msg.wParam;
+	return (int)msg.wParam;
 }
 
 void SyncElementInfoAndViewElement()

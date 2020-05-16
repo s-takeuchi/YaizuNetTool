@@ -589,7 +589,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				if (Type == 1) {
 					TCHAR CondDummyStr[10];
 
-					int SelFinCnd = SendMessage(FinishCondHndl, CB_GETCURSEL, 0, 0);
+					int SelFinCnd = (int)SendMessage(FinishCondHndl, CB_GETCURSEL, 0, 0);
 					if (SelFinCnd == 0) {
 						SetCondition(CurrentId, 0);
 						SetTimeoutInterval(CurrentId, 0);
@@ -608,7 +608,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						}
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 3) {
-						int SelFinCnd = SendMessage(SpecVarRecvHndl, CB_GETCURSEL, 0, 0);
+						int SelFinCnd = (int)SendMessage(SpecVarRecvHndl, CB_GETCURSEL, 0, 0);
 						int CondDummy = FinConVarIds[SelFinCnd];
 						if (CondDummy == 0) {
 							CondDummy = -1;

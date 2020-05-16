@@ -50,7 +50,7 @@ if exist deployment rmdir /S /Q deployment
 rem ########## Building ##########
 echo;
 echo Building stkdatagui.sln...
-%MSBUILD% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /t:clean;build /p:Configuration=Release
+%MSBUILD% "..\..\YaizuComLib\src\stkdatagui\stkdatagui.sln" /t:clean;build /p:Configuration=Release /p:platform="x64"
 IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building fwadd.sln...
 %MSBUILD% "..\src\fwadd\fwadd.sln" /t:clean;build /p:Configuration=Release
@@ -64,17 +64,15 @@ IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building stk_ip_dlg.sln...
 %MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release
 IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
-%MSBUILD% "..\src\stk_ip_dlg\stk_ip_dlg.sln" /t:clean;build /p:Configuration=Release_win2k
-IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 echo Building stklibtest.sln...
-%MSBUILD% "..\src\stkfw\stklibtest.sln" /t:clean;build /p:Configuration=Release
+%MSBUILD% "..\src\stkfw\stklibtest.sln" /t:clean;build /p:Configuration=Release /p:platform="x64"
 IF %ERRORLEVEL% NEQ 0 goto ERRORRAISED
 
 
 rem ########## Checking file existence ##########
 echo;
 echo Checking "stkdatagui.exe" existence...
-if not exist "..\..\YaizuComLib\src\stkdatagui\Release\stkdatagui.exe" goto ERRORRAISED
+if not exist "..\..\YaizuComLib\src\stkdatagui\x64\Release\stkdatagui.exe" goto ERRORRAISED
 echo Checking "fwadd.exe" existence...
 if not exist "..\src\fwadd\Release\fwadd.exe" goto ERRORRAISED
 echo Checking "fwdel.exe" existence...
@@ -83,11 +81,10 @@ echo Checking "lbadpt.exe, lbadpt32.exe, lbadpt64.exe" existence...
 if not exist "..\src\lbadpt\Release\lbadpt.exe" goto ERRORRAISED
 if not exist "..\src\lbadpt\devcon\lbadpt32.exe" goto ERRORRAISED
 if not exist "..\src\lbadpt\devcon\lbadpt64.exe" goto ERRORRAISED
-echo Checking "stk_ip_dlg.exe, stk_ip_dlg_win2k.exe" existence...
-if not exist "..\src\stk_ip_dlg\Release_win2k\stk_ip_dlg_win2k.exe" goto ERRORRAISED
+echo Checking "stk_ip_dlg.exe" existence...
 if not exist "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" goto ERRORRAISED
 echo Checking "stkfw.exe" existence...
-if not exist "..\src\stkfw\Release\stkfw.exe" goto ERRORRAISED
+if not exist "..\src\stkfw\x64\Release\stkfw.exe" goto ERRORRAISED
 echo Checking sample data folder existence...
 if not exist "..\src\sample\." goto ERRORRAISED
 echo Checking manual folder existence...
@@ -104,17 +101,14 @@ mkdir stkfw\sample
 mkdir stkfw\manual
 mkdir stkfw\manual\eng
 mkdir stkfw\manual\jpn
-mkdir stkfw\stk_ip_dlg
-mkdir stkfw\stk_ip_dlg_win2k
-copy "..\..\YaizuComLib\src\stkdatagui\Release\stkdatagui.exe" stkfw
+copy "..\..\YaizuComLib\src\stkdatagui\x64\Release\stkdatagui.exe" stkfw
 copy "..\src\fwadd\Release\fwadd.exe" setup
 copy "..\src\fwdel\Release\fwdel.exe" setup
 copy "..\src\lbadpt\Release\lbadpt.exe" stkfw
 copy "..\src\lbadpt\devcon\lbadpt32.exe" stkfw
 copy "..\src\lbadpt\devcon\lbadpt64.exe" stkfw
-copy "..\src\stk_ip_dlg\Release_win2k\stk_ip_dlg_win2k.exe" stkfw\stk_ip_dlg_win2k
-copy "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" stkfw\stk_ip_dlg
-copy "..\src\stkfw\Release\stkfw.exe" stkfw
+copy "..\src\stk_ip_dlg\Release\stk_ip_dlg.exe" stkfw
+copy "..\src\stkfw\x64\Release\stkfw.exe" stkfw
 copy "..\src\sample\*.*" stkfw\sample
 copy "..\doc\man\eng\*.*" stkfw\manual\eng
 copy "..\doc\man\jpn\*.*" stkfw\manual\jpn
@@ -137,9 +131,9 @@ if defined LOCALMACHINE (
   echo;
   echo ZIP packing stage...
   cd deployment
-  %SEVENZIP% a sfw170_beta.zip stkfw.msi
-  %SEVENZIP% a sfw170_beta.zip ReadmeJPN.txt
-  %SEVENZIP% a sfw170_beta.zip ReadmeENG.txt
+  %SEVENZIP% a sfw170.zip stkfw.msi
+  %SEVENZIP% a sfw170.zip ReadmeJPN.txt
+  %SEVENZIP% a sfw170.zip ReadmeENG.txt
   del ReadmeJPN.txt
   del ReadmeENG.txt
   del stkfw.msi

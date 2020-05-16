@@ -87,7 +87,7 @@ int ExecElem_HttpHeader::Execute()
 					GmtTime.tm_min,
 					GmtTime.tm_sec);
 				/***** Make time string end *****/
-				date_work_len = strlen(date_work);
+				date_work_len = (int)strlen(date_work);
 				if (new_data_ptr + date_work_len - new_data < 10000000 - 1) {
 					strncpy_s(new_data_ptr, 10000000 - (new_data_ptr - new_data), date_work, date_work_len);
 					new_data_ptr += date_work_len;
@@ -95,8 +95,8 @@ int ExecElem_HttpHeader::Execute()
 			} else if (strncmp(presented_http_header_ptr, "Content-Length: <automatically replaced>\r\n", 42) == 0) {
 				char cont_len_work[128] = "";
 				int cont_len_work_len = 0;
-				sprintf_s(cont_len_work, 128, "Content-Length: %d\r\n", data_end_ptr - data_ptr);
-				cont_len_work_len = strlen(cont_len_work);
+				sprintf_s(cont_len_work, 128, "Content-Length: %d\r\n", (int)(data_end_ptr - data_ptr));
+				cont_len_work_len = (int)strlen(cont_len_work);
 				if (new_data_ptr + cont_len_work_len - new_data < 10000000 - 1) {
 					strncpy_s(new_data_ptr, 10000000 - (new_data_ptr - new_data), cont_len_work, cont_len_work_len);
 					new_data_ptr += cont_len_work_len;
@@ -126,6 +126,6 @@ int ExecElem_HttpHeader::Execute()
 	}
 	delete data;
 	SetData(new_data);
-	SetDataLength(new_data_ptr - new_data);
+	SetDataLength((int)(new_data_ptr - new_data));
 	return 0;
 }

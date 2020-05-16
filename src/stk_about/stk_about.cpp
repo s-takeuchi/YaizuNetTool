@@ -125,8 +125,8 @@ LRESULT CALLBACK AboutDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		SendMessage(AboutTitle, EM_SETREADONLY, (WPARAM)TRUE, (LPARAM)0);
 
 		// Sets icon information
-		IconHndlrS = (HICON)LoadImage(StkAboutInstHndl, (LPCTSTR)StkAbout_IconAbout, IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
-		IconHndlrB = (HICON)LoadImage(StkAboutInstHndl, (LPCTSTR)StkAbout_IconAbout, IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
+		IconHndlrS = (HICON)LoadImage(StkAboutInstHndl, (LPCTSTR)MAKEINTRESOURCE(StkAbout_IconAbout), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
+		IconHndlrB = (HICON)LoadImage(StkAboutInstHndl, (LPCTSTR)MAKEINTRESOURCE(StkAbout_IconAbout), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
 		if (IconHndlrS == NULL || IconHndlrB == NULL) {
 			ErrorInternalIconSet(hWnd);
 			break;

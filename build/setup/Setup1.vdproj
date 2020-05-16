@@ -58,12 +58,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E8C3EA4FFC8478AB7F0FD3B6607C0DB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_216D82DD4A3047C5BE31053959521639"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -202,6 +196,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9056C1E113334EE18083F2F9DD268D6A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_944CC6DEBD0E4FC595D8D90788D9E7B5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -209,12 +209,6 @@
         "Entry"
         {
         "MsmKey" = "8:_97DED91AEE0B4F509044A92B85EEAB41"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A03AD035B9344023A48634232BF56B41"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -540,26 +534,6 @@
             "Tag" = "8:"
             "Folder" = "8:_6C63A593FA374CDD94AC1ED553EBC819"
             "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E8C3EA4FFC8478AB7F0FD3B6607C0DB"
-            {
-            "SourcePath" = "8:..\\stkfw\\stk_ip_dlg_win2k\\stk_ip_dlg_win2k.exe"
-            "TargetName" = "8:stk_ip_dlg_win2k.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_97FCD525D5B643BE93DA5E33308CDBBB"
-            "Condition" = "8:VersionNT=500"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -1033,6 +1007,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9056C1E113334EE18083F2F9DD268D6A"
+            {
+            "SourcePath" = "8:..\\stkfw\\stk_ip_dlg.exe"
+            "TargetName" = "8:stk_ip_dlg.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_97FCD525D5B643BE93DA5E33308CDBBB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_944CC6DEBD0E4FC595D8D90788D9E7B5"
             {
             "SourcePath" = "8:..\\stkfw\\lbadpt.exe"
@@ -1060,26 +1054,6 @@
             "Tag" = "8:"
             "Folder" = "8:_B90FE834D9F74AD892A0335C1FF08CAF"
             "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A03AD035B9344023A48634232BF56B41"
-            {
-            "SourcePath" = "8:..\\stkfw\\stk_ip_dlg\\stk_ip_dlg.exe"
-            "TargetName" = "8:stk_ip_dlg.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_97FCD525D5B643BE93DA5E33308CDBBB"
-            "Condition" = "8:VersionNT>500"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -1468,7 +1442,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_97FCD525D5B643BE93DA5E33308CDBBB"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -1560,7 +1534,7 @@
         "ARPIconIndex" = "3:15100"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -1701,7 +1675,7 @@
             "Icon" = "8:_944CC6DEBD0E4FC595D8D90788D9E7B5"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6F0F20081C70405EBE983901170FA405"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_674BDFB672C8457EBFD03A0504F3FB1C"
             {
             "Name" = "8:IP Address Wizard"
             "Arguments" = "8:"
@@ -1709,10 +1683,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:107"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A03AD035B9344023A48634232BF56B41"
+            "Target" = "8:_9056C1E113334EE18083F2F9DD268D6A"
             "Folder" = "8:_3AFBBF2FA30F414C9373C7C305FA70C0"
             "WorkingFolder" = "8:_97FCD525D5B643BE93DA5E33308CDBBB"
-            "Icon" = "8:_A03AD035B9344023A48634232BF56B41"
+            "Icon" = "8:_9056C1E113334EE18083F2F9DD268D6A"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_70C0CE15D46A47E0BE514A8C2DB8B3F7"
@@ -1727,20 +1701,6 @@
             "Folder" = "8:_2432D5E66D514AA996F47707A3A38146"
             "WorkingFolder" = "8:_9C127D246EE946DBA4D0DB21DEC8167E"
             "Icon" = "8:_F13762C26FA443E19976D05156628CEA"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8E681D76142040F98347B48C5E479399"
-            {
-            "Name" = "8:IP Address Wizard (Windows 2000)"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:107"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_1E8C3EA4FFC8478AB7F0FD3B6607C0DB"
-            "Folder" = "8:_3AFBBF2FA30F414C9373C7C305FA70C0"
-            "WorkingFolder" = "8:_97FCD525D5B643BE93DA5E33308CDBBB"
-            "Icon" = "8:_1E8C3EA4FFC8478AB7F0FD3B6607C0DB"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_923B6E46948145DA82BE70A13BE5404E"
