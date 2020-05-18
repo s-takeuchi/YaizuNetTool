@@ -1486,7 +1486,7 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:StkFw"
-        "ProductCode" = "8:{8A9364CE-386C-4018-AB69-1E5B607A7703}"
+        "ProductCode" = "8:{3762D1E7-5AEE-4668-80A5-3DA21AF1F3D7}"
         "PackageCode" = "8:{A51C7C4E-8B97-4B21-8FD6-5F3B95A1E9F7}"
         "UpgradeCode" = "8:{C0E18522-6454-4A3F-96D3-885161618F1B}"
         "AspNetVersion" = "8:2.0.50727.0"
