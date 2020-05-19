@@ -33,11 +33,9 @@ Memory: 512 MB or more
 Free disk space: 20 MB or more
 
 Operating systems/editions supported:
-Windows 7 Professional/Ultimate SP1
-Windows 10 Pro
-Windows Server 2012 Standard
-Windows Server 2012 R2 Standard
-Windows Server 2016 Standard
+Windows 10 (Only 64 bit edition)
+Windows Server 2016
+Windows Server 2019
 
 
 =================================================
@@ -122,44 +120,18 @@ Windows Server 2016 Standard
 
 
 =================================================
-4.License Agreement
-
-The MIT License (MIT)
-
-Copyright (c) 2018 Shinya Takeuchi
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-=================================================
-5.Installation
+4.Installation
 
 Execute stkfw.msi and launch the installer.
 Follow the on-screen dialog prompts.
 
 
 =================================================
-6.Contact
+5.Contact
 
 URL: https://github.com/s-takeuchi/
 Please use the E-mail address below for inquiries about this product.
 
-bamboo@rj.dream.jp
+sy-takeuchi@outlook.com
 Shinya Takeuchi
 

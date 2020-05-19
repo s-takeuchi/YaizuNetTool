@@ -89,6 +89,8 @@ if not exist "..\src\sample\." goto ERRORRAISED
 echo Checking manual folder existence...
 if not exist "..\doc\man\eng\." goto ERRORRAISED
 if not exist "..\doc\man\jpn\." goto ERRORRAISED
+echo Checking LICENSE existence...
+if not exist "..\LICENSE" goto ERRORRAISED
 
 
 rem ########## Deployment of files and folders ##########
@@ -110,6 +112,7 @@ copy "..\src\stkfw\x64\Release\stkfw.exe" stkfw
 copy "..\src\sample\*.*" stkfw\sample
 copy "..\doc\man\eng\*.*" stkfw\manual\eng
 copy "..\doc\man\jpn\*.*" stkfw\manual\jpn
+copy "..\LICENSE" stkfw
 
 
 rem ########## Making installer ##########

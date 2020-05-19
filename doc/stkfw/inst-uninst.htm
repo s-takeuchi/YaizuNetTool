@@ -1,14 +1,11 @@
-﻿<HEAD>
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<HEAD>
+<title>Installation/Uninstallation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="content-style-type" content="text/css">
 <link rel="stylesheet" href="./style.css" type="text/css">
 </HEAD>
-
-<style type="text/css">
-<!--
-.spc { margin-left: 2em; margin-right: 0em; }
--->
-</style>
 
 <BODY>
 <div id="container">
@@ -43,16 +40,18 @@ StkFwのインストール処理は以下の1つのファイルで実現され�
 <TR><TD>(a)</TD><TD>default.std</TD><TD>StkFw起動時に読込まれるリポジトリデータ（デフォルトリポジトリデータ）。<br>バージョン1.4.0以降このファイルは存在しません。</TD></TR>
 <TR><TD>(a)</TD><TD>fwadd.exe</TD><TD>ファイアウォール例外追加用EXEファイル。インストール時にインストーラから実行されます。</TD></TR>
 <TR><TD>(a)</TD><TD>fwdel.exe</TD><TD>ファイアウォール例外削除用EXEファイル。アンインストール時にアンインストーラから実行されます。</TD></TR>
-<TR><TD>(a)</TD><TD>lbadpt32.exe</TD><TD>lbadpt.dllから呼び出される実行ファイル(x86)。ループバックアダプタを追加／削除します。</TD></TR>
+<TR><TD>(a)</TD><TD>lbadpt32.exe</TD><TD>lbadpt.dllから呼び出される実行ファイル(x86)。ループバックアダプタを追加／削除します。バージョン1.7.0以降このファイルは存在しません。</TD></TR>
 <TR><TD>(a)</TD><TD>lbadpt64.exe</TD><TD>lbadpt.dllから呼び出される実行ファイル(x86-64)。ループバックアダプタを追加／削除します。</TD></TR>
 <TR><TD>(a)</TD><TD>lbadpt.exe</TD><TD>ループバックアダプタ追加／削除用プログラム</TD></TR>
 <TR><TD>(a)</TD><TD>stk_ip_dlg.exe</TD><TD>IPアドレスウィザード。
 インストール対象(Windows 2000 Professional／それ以外)により配置されるファイルが異なります。<BR>
-VersionNT=500のときWindows 2000 Professional用のファイルを配置し，VersionNT>500のとき他のバージョン用ファイルを配置します。
+VersionNT=500のときWindows 2000 Professional用のファイルを配置し，VersionNT>500のとき他のバージョン用ファイルを配置します。<br/>
+バージョン1.7.0以降は，常に同一のファイルが配置されます。<br/>
 </TD></TR>
 <TR><TD>(a)</TD><TD>stkdatagui.exe</TD><TD>リポジトリ管理プログラム(StkData)用データファイル(.std)を管理するGUI。</TD></TR>
 <TR><TD>(a)</TD><TD>stkfw.exe</TD><TD>StkFwの実行ファイル</TD></TR>
 <TR><TD>(a)</TD><TD>Title.bmp</TD><TD>インストーラのダイアログ上に表示される画像</TD></TR>
+<TR><TD>(a)</TD><TD>LICENSE</TD><TD>ライセンスファイル。バージョン1.7.0以降配置されます。</TD></TR>
 <TR><TD>(b)</TD><TD>DummyWebServer.std</TD><TD>サンプル用リポジトリデータ</TD></TR>
 <TR><TD>(b)</TD><TD>TELNET-Server.std</TD><TD>サンプル用リポジトリデータ</TD></TR>
 <TR><TD>(b)</TD><TD>TunnelPage.std</TD><TD>サンプル用リポジトリデータ</TD></TR>
@@ -114,8 +113,10 @@ netsh firewall delete allowedprogram ＜インストール先＞\StkFw\stkfw.exe
 <P>
 
 <H2 ID="C.5">C.5 アップグレードインストールについて</H2>
-インストール対象マシンに，既に過去のバージョンのStkFwがインストールされている場合，
-はじめに過去のバージョンのStkFwのアンインストール処理が実行されます。<P>
+既に古いバージョンのStkFwがインストールされている場合，古いバージョンのStkFwを削除したあと，新しいバージョンをインストールする必要があります。<br/>
+アップグレードインストールはサポートされていません。
 
 </div>
 </BODY>
+
+</html>
