@@ -65,7 +65,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;Psapi.lib;shell32.lib;x64\Debug\stklib.lib;x64\Debug\stkdata.lib;x64\Debug\stk_about.lib;x64\Debug\stkthread.lib;x64\Debug\stkthreadgui.lib;x64\Debug\commonfunc.lib;x64\Debug\stkpl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;Psapi.lib;shell32.lib;x64\Debug\stklib.lib;x64\Debug\stkdata.lib;x64\Debug\stk_about.lib;x64\Debug\stkthread.lib;x64\Debug\stkthreadgui.lib;x64\Debug\commonfunc.lib;x64\Debug\stkpl.lib;Crypt32.lib;C:\Program Files\OpenSSL-Win64\lib\VC\static\libssl64MTd.lib;C:\Program Files\OpenSSL-Win64\lib\VC\static\libcrypto64MTd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;shell32.lib;Psapi.lib;x64\Release\stklib.lib;x64\Release\stkdata.lib;x64\Release\stk_about.lib;x64\Release\stkthread.lib;x64\Release\stkthreadgui.lib;x64\Release\commonfunc.lib;x64\Release\stkpl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shlwapi.lib;Netapi32.lib;Ws2_32.lib;comctl32.lib;shell32.lib;Psapi.lib;x64\Release\stklib.lib;x64\Release\stkdata.lib;x64\Release\stk_about.lib;x64\Release\stkthread.lib;x64\Release\stkthreadgui.lib;x64\Release\commonfunc.lib;x64\Release\stkpl.lib;Crypt32.lib;C:\Program Files\OpenSSL-Win64\lib\VC\static\libssl64MT.lib;C:\Program Files\OpenSSL-Win64\lib\VC\static\libcrypto64MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <StackReserveSize>3000000</StackReserveSize>
