@@ -142,10 +142,6 @@ void ExecElem::StkPropOutputLog()
 	int Id;
 	int ParamInt1, ParamInt2;
 	TCHAR ParamStr1[256], ParamStr2[256];
-	static BOOL BlkFlag = FALSE;
-
-	for (; BlkFlag == TRUE;); // Wait for BlkFlag == FALSE;
-	BlkFlag = TRUE;
 
 	int NumOfLogs = StkSocket_GetNumOfLogs();
 	for (int Loop = 0; Loop < NumOfLogs; Loop++) {
@@ -235,7 +231,6 @@ void ExecElem::StkPropOutputLog()
 			break;
 		}
 	}
-	BlkFlag = FALSE;
 }
 
 // Constructor
