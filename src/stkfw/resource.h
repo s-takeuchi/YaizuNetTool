@@ -17,6 +17,7 @@
 #define IDC_RECVINIT_FINISHCOND         2025
 #define IDC_RECVINIT_RECVCOND           2026
 #define IDC_RECVINIT_PROCEEDNODATRECV   2027
+#define IDC_RECVINIT_CHUNKOPT           2028
 #define IDC_LOADDATA_VAR                2030
 #define IDC_LOADSTORE_RADIO1            2041
 #define IDC_LOADSTORE_RADIO2            2042
