@@ -443,6 +443,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_HTTPHEADER_RESPONSE, _T("Response"));
 	MessageProc::AddEng(PROP_HTTPHEADER_RESPONSE, _T("Response"));
 
+	// 2393 (★)
+	MessageProc::AddJpn(PROP_NET_CHUNKOPTION, _T("Chunk受信時の振る舞い"));
+	MessageProc::AddEng(PROP_NET_CHUNKOPTION, _T("Chunk options"));
+
 	// =====================================================================================================
 	// 2400 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));

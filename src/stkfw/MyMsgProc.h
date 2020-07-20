@@ -115,6 +115,7 @@ public:
 	static const int PROP_HTTPHEADER_DATE = 2390;
 	static const int PROP_HTTPHEADER_REQUEST = 2391;
 	static const int PROP_HTTPHEADER_RESPONSE = 2392;
+	static const int PROP_NET_CHUNKOPTION = 2393;
 
 	static const int STKFW_LOG_TITLE = 2400;
 	static const int STKFW_LOG_START = 2401;

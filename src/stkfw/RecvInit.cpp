@@ -150,7 +150,7 @@ void ChangeOperationType(int Type)
 // SpecVarRecvHndl [in] : Variable name for string
 // ProceedNoDatRecvHndl [in] : Check box for proceeding next with no data
 // SelectedProceedNoDatRecv [in] : Initial state of check box
-void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND LabelTimeoutIntvl, HWND WaitCondHndl, HWND LenCondHndl, HWND SpecVarRecvHndl, HWND ProceedNoDatRecvHndl, HWND ChunkOptionHndl, int SelectedProceedNoDatRecv, int TimeoutIntvl)
+void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND LabelTimeoutIntvl, HWND WaitCondHndl, HWND LenCondHndl, HWND SpecVarRecvHndl, HWND ProceedNoDatRecvHndl, HWND LabelChunkOption, HWND ChunkOptionHndl, int SelectedProceedNoDatRecv, int TimeoutIntvl)
 {
 	if (Type == 1) {
 		TCHAR Buf[10];
@@ -161,6 +161,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
+			ShowWindow(LabelChunkOption, SW_HIDE);
 			ShowWindow(ChunkOptionHndl, SW_HIDE);
 		} else if (CondValue == 2) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 1, 0);
@@ -169,6 +170,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(ProceedNoDatRecvHndl, SW_HIDE);
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
+			ShowWindow(LabelChunkOption, SW_HIDE);
 			ShowWindow(ChunkOptionHndl, SW_HIDE);
 		} else if (CondValue == 1) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 2, 0);
@@ -184,6 +186,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			}
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
+			ShowWindow(LabelChunkOption, SW_HIDE);
 			ShowWindow(ChunkOptionHndl, SW_HIDE);
 		} else if (CondValue < 0) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 3, 0);
@@ -201,6 +204,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_SHOW);
 			SendMessage(SpecVarRecvHndl, CB_SETCURSEL, 0, 0);
+			ShowWindow(LabelChunkOption, SW_HIDE);
 			ShowWindow(ChunkOptionHndl, SW_HIDE);
 		} else if (CondValue == 3) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
@@ -216,6 +220,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			}
 			ShowWindow(LenCondHndl, SW_HIDE);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
+			ShowWindow(LabelChunkOption, SW_SHOW);
 			ShowWindow(ChunkOptionHndl, SW_SHOW);
 		} else {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 4, 0);
@@ -233,6 +238,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			SendMessage(LenCondHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 			ShowWindow(LenCondHndl, SW_SHOW);
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
+			ShowWindow(LabelChunkOption, SW_HIDE);
 			ShowWindow(ChunkOptionHndl, SW_HIDE);
 		}
 	}
@@ -288,6 +294,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 	static HWND LenCondHndl; // For edit box of length
 	static HWND SpecVarRecvHndl; // For combo box of comm-variables
 	static HWND ChunkOptionHndl; // For chunk options
+	static HWND LabelChunkOption; // chunk option label
 
 	// Drop down menu for finish condition "string"
 	static int FinConVarIds[1000];
@@ -371,7 +378,11 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				SendMessage(SpecVarRecvHndl, CB_ADDSTRING, 0, (LPARAM)FinConVarNames[Loop]);
 			}
 
-			ChunkOptionHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.right - 240, 440, 230, 200, WndHndl, (HMENU)IDC_RECVINIT_CHUNKOPT, InstHndl, NULL);
+			LabelChunkOption = CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CHUNKOPTION), WS_CHILD | WS_VISIBLE, Rect.left + 20, 440,
+				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CHUNKOPTION)) + 30,
+				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CHUNKOPTION)),
+				WndHndl, NULL, InstHndl, NULL);
+			ChunkOptionHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.right - 280, 440, 270, 200, WndHndl, (HMENU)IDC_RECVINIT_CHUNKOPT, InstHndl, NULL);
 			//FinConVarCnt = VarCon_GetAllCommVariableNames(FinConVarIds, FinConVarNames);
 			//for (int Loop = 0; Loop < FinConVarCnt; Loop++) {
 			//	SendMessage(SpecVarRecvHndl, CB_ADDSTRING, 0, (LPARAM)FinConVarNames[Loop]);
@@ -447,7 +458,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 
 			int CondValue = GetCondition(CurrentId);
 			int TimeoutIntvl = GetTimeoutInterval(CurrentId);
-			UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, ChunkOptionHndl, SelectedProceedNoDatRecv, TimeoutIntvl);
+			UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, LabelChunkOption, ChunkOptionHndl, SelectedProceedNoDatRecv, TimeoutIntvl);
 			if (CondValue < 0) {
 				CondValue *= -1;
 				for (int Loop = 0; Loop < FinConVarCnt; Loop++) {
@@ -540,7 +551,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					SelectedProceedNoDatRecv = 0;
 				} else {
 				}
-				UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, ChunkOptionHndl, 0, TimeoutIntvl);
+				UpdateFinishCondition(CondValue, Type, FinishCondHndl, LabelTimeoutIntvl, WaitCondHndl, LenCondHndl, SpecVarRecvHndl, ProceedNoDatRecvHndl, LabelChunkOption, ChunkOptionHndl, 0, TimeoutIntvl);
 			}
 		}
 		if (HIWORD(wParam) == BN_CLICKED) {
