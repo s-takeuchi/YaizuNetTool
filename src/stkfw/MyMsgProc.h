@@ -116,6 +116,10 @@ public:
 	static const int PROP_HTTPHEADER_REQUEST = 2391;
 	static const int PROP_HTTPHEADER_RESPONSE = 2392;
 	static const int PROP_NET_CHUNKOPTION = 2393;
+	static const int PROP_NET_SINGLE_CHUNK_CONT = 2394;
+	static const int PROP_NET_ALL_CHUNKS_CONT = 2395;
+	static const int PROP_NET_SINGLE_CHUNK_NOCONT = 2396;
+	static const int PROP_NET_ALL_CHUNKS_NOCONT = 2397;
 
 	static const int STKFW_LOG_TITLE = 2400;
 	static const int STKFW_LOG_START = 2401;

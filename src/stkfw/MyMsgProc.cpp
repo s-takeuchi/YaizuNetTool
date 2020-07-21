@@ -447,6 +447,22 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_CHUNKOPTION, _T("Chunk受信時の振る舞い"));
 	MessageProc::AddEng(PROP_NET_CHUNKOPTION, _T("Chunk options"));
 
+	// 2394 (★)
+	MessageProc::AddJpn(PROP_NET_SINGLE_CHUNK_CONT, _T("1 Chunk受信で遷移 / 制御コード付き"));
+	MessageProc::AddEng(PROP_NET_SINGLE_CHUNK_CONT, _T("1 chunk reception / with control char"));
+
+	// 2395 (★)
+	MessageProc::AddJpn(PROP_NET_ALL_CHUNKS_CONT, _T("全Chunk受信で遷移 / 制御コード付き"));
+	MessageProc::AddEng(PROP_NET_ALL_CHUNKS_CONT, _T("All chunks reception / with control char"));
+
+	// 2396 (★)
+	MessageProc::AddJpn(PROP_NET_SINGLE_CHUNK_NOCONT, _T("1 Chunk受信で遷移 / 制御コード無し"));
+	MessageProc::AddEng(PROP_NET_SINGLE_CHUNK_NOCONT, _T("1 chunk reception / without control char"));
+
+	// 2397 (★)
+	MessageProc::AddJpn(PROP_NET_ALL_CHUNKS_NOCONT, _T("全Chunk受信で遷移 / 制御コード無し"));
+	MessageProc::AddEng(PROP_NET_ALL_CHUNKS_NOCONT, _T("All chunks reception / without control char"));
+
 	// =====================================================================================================
 	// 2400 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));
