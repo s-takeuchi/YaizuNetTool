@@ -206,7 +206,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			SendMessage(SpecVarRecvHndl, CB_SETCURSEL, 0, 0);
 			ShowWindow(LabelChunkOption, SW_HIDE);
 			ShowWindow(ChunkOptionHndl, SW_HIDE);
-		} else if (CondValue == 3) {
+		} else if (CondValue >= 3 && CondValue <= 6) {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 5, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
 			wsprintf(Buf, _T("%d"), TimeoutIntvl);
@@ -222,6 +222,7 @@ void UpdateFinishCondition(int CondValue, int Type, HWND FinishCondHndl, HWND La
 			ShowWindow(SpecVarRecvHndl, SW_HIDE);
 			ShowWindow(LabelChunkOption, SW_SHOW);
 			ShowWindow(ChunkOptionHndl, SW_SHOW);
+			SendMessage(ChunkOptionHndl, CB_SETCURSEL, CondValue - 3, 0);
 		} else {
 			SendMessage(FinishCondHndl, CB_SETCURSEL, 4, 0);
 			ShowWindow(LabelTimeoutIntvl, SW_SHOW);
@@ -383,10 +384,10 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CHUNKOPTION)),
 				WndHndl, NULL, InstHndl, NULL);
 			ChunkOptionHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.right - 280, 440, 270, 200, WndHndl, (HMENU)IDC_RECVINIT_CHUNKOPT, InstHndl, NULL);
-			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SINGLE_CHUNK_CONT));
-			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ALL_CHUNKS_CONT));
-			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SINGLE_CHUNK_NOCONT));
 			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ALL_CHUNKS_NOCONT));
+			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SINGLE_CHUNK_NOCONT));
+			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ALL_CHUNKS_CONT));
+			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SINGLE_CHUNK_CONT));
 		}
 
 		// Length limitation for edit boxes of the IP address and the port
@@ -467,6 +468,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					}
 				}
 			}
+			SendMessage(ChunkOptionHndl, CB_SETCURSEL, CondValue - 3, 0);
 		}
 
 		// IP address/hostnameの初期化
@@ -670,7 +672,9 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						}
 						SetTimeoutInterval(CurrentId, CondDummy);
 					} else if (SelFinCnd == 5) {
-						SetCondition(CurrentId, 3);
+						int SelChunkCond = (int)SendMessage(ChunkOptionHndl, CB_GETCURSEL, 0, 0);
+						SelChunkCond += 3;
+						SetCondition(CurrentId, SelChunkCond);
 						SendMessage(WaitCondHndl, WM_GETTEXT, (WPARAM)10, (LPARAM)CondDummyStr);
 						int CondDummy = StrToInt(CondDummyStr);
 						if (CondDummy < 0) {
