@@ -103,8 +103,8 @@ mkdir stkfw\manual
 mkdir stkfw\manual\eng
 mkdir stkfw\manual\jpn
 copy "..\..\YaizuComLib\src\stkdatagui\x64\Release\stkdatagui.exe" stkfw
-copy "..\src\fwadd\Release\fwadd.exe" setup
-copy "..\src\fwdel\Release\fwdel.exe" setup
+copy "..\src\fwadd\x64\Release\fwadd.exe" setup
+copy "..\src\fwdel\x64\Release\fwdel.exe" setup
 copy "..\src\lbadpt\x64\Release\lbadpt.exe" stkfw
 copy "..\src\lbadpt\devcon\lbadpt64.exe" stkfw
 copy "..\src\stk_ip_dlg\x64\Release\stk_ip_dlg.exe" stkfw

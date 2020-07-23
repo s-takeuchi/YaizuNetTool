@@ -72,6 +72,11 @@ int ExecElem_Receiver::Execute()
 		}
 	}
 
+	// Inf the finish condition shows the Content-Length condition, acquire option parameter
+	if (FinishCondition >= 3 && FinishCondition <= 6) {
+		VarDatSize = FinishCondition - 0b00000011;
+	}
+
 	// データの受信
 	BYTE* Buf = new BYTE[10000000];
 	int ActSize = 0;
@@ -82,7 +87,7 @@ int ExecElem_Receiver::Execute()
 		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_UNCONDITIONAL;
 	} else if (FinishCondition == 1) {
 		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_TIMEOUT;
-	} else if (FinishCondition == 3) {
+	} else if (FinishCondition >= 3 && FinishCondition <= 6) {
 		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_CONTENTLENGTH;
 	} else if (FinishCondition == 2) {
 		RevisedFinishCondition = STKSOCKET_RECV_FINISHCOND_PEERCLOSURE;
