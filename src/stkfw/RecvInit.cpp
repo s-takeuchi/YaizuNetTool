@@ -383,7 +383,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CHUNKOPTION)) + 30,
 				GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_CHUNKOPTION)),
 				WndHndl, NULL, InstHndl, NULL);
-			ChunkOptionHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.right - 280, 440, 270, 200, WndHndl, (HMENU)IDC_RECVINIT_CHUNKOPT, InstHndl, NULL);
+			ChunkOptionHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, Rect.right - 290, 440, 280, 200, WndHndl, (HMENU)IDC_RECVINIT_CHUNKOPT, InstHndl, NULL);
 			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ALL_CHUNKS_NOCONT));
 			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SINGLE_CHUNK_NOCONT));
 			SendMessage(ChunkOptionHndl, CB_ADDSTRING, 0, (LPARAM)MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ALL_CHUNKS_CONT));
