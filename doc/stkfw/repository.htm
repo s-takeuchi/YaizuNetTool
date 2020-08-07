@@ -308,9 +308,9 @@ ViewElementが何も存在しない場合，
         HTTPヘッダにContent-Lengthが指定されていない場合，下記のように動作する。ParamInt6でタイムアウト間隔を指定可能。
         <p>
         3 : HTTPヘッダに"Transfer-Encoding: chunked"が指定されている場合，全Chunk受信後に移行。出力データに制御コードは含まれない。"Transfer-Encoding: chunked"が指定されていない場合，HTTPヘッダを受信後に移行。<br/>
-        4 : 1Chunk受信後に以降。出力データに制御コードは含まれない。<br/>
+        4 : 1Chunk受信後に移行。出力データに制御コードは含まれない。<br/>
         5 : HTTPヘッダに"Transfer-Encoding: chunked"が指定されている場合，全Chunk受信後に移行。出力データに制御コードは含まれる。"Transfer-Encoding: chunked"が指定されていない場合，HTTPヘッダを受信後に移行。<br/>
-        6 : 1Chunk受信後に以降。出力データに制御コードは含まれる。<br/>
+        6 : 1Chunk受信後に移行。出力データに制御コードは含まれる。<br/>
         </p>
     </li>
     <li>
