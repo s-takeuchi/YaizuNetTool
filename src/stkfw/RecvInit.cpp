@@ -329,21 +329,36 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 	GetClientRect(WndHndl, &Rect);
 
 	if (message == WM_CREATE) {
-		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ICON), WS_CHILD | WS_VISIBLE, 100, 102, 80, 20, WndHndl, NULL, InstHndl, NULL);
-		IconHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 100, 200, 200, WndHndl, (HMENU)IDC_RECVINIT_ICON, InstHndl, NULL);
-		RdoBtn1  = CreateWindow(_T("BUTTON"), Radio1, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 135, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_ID, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_IPADDR), WS_CHILD | WS_VISIBLE, 50, 167, 140, 20, WndHndl, NULL, InstHndl, NULL);
-		IpHndl   = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 190, 165, 200, 24, WndHndl, NULL, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PORT), WS_CHILD | WS_VISIBLE, 60, 202, 80, 20, WndHndl, NULL, InstHndl, NULL);
-		PortHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 190, 200, 70, 24, WndHndl, NULL, InstHndl, NULL);
-		RdoBtn2  = CreateWindow(_T("BUTTON"), Radio2, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 230, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
-		CreateWindow(_T("STATIC"), Target, WS_CHILD | WS_VISIBLE, 70, 262, 100, 20, WndHndl, NULL, InstHndl, NULL);
-		SendHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 260, 200, 200, WndHndl, (HMENU)IDC_NET_SENDER, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_ICON), WS_CHILD | WS_VISIBLE, 100, 97, 80, 20, WndHndl, NULL, InstHndl, NULL);
+		IconHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 95, 200, 200, WndHndl, (HMENU)IDC_RECVINIT_ICON, InstHndl, NULL);
+
+		RdoBtn1  = CreateWindow(_T("BUTTON"), Radio1, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 125, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_ID, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_IPADDR), WS_CHILD | WS_VISIBLE, Rect.left + 30, 152,
+			GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_IPADDR)) + 30,
+			GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_IPADDR)),
+			WndHndl, NULL, InstHndl, NULL);
+		IpHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 170, 150, 200, 24, WndHndl, NULL, InstHndl, NULL);
+
+		CreateWindow(_T("STATIC"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PORT), WS_CHILD | WS_VISIBLE, Rect.left + 30, 182,
+			GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PORT)) + 30,
+			GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_PORT)),
+			WndHndl, NULL, InstHndl, NULL);
+		PortHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 170, 180, 60, 24, WndHndl, NULL, InstHndl, NULL);
+
+		RdoBtn2  = CreateWindow(_T("BUTTON"), Radio2, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 240, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
+		CreateWindow(_T("STATIC"), Target, WS_CHILD | WS_VISIBLE, Rect.left + 30, 267,
+			GetMsgWidth(WndHndl, Target) + 30,
+			GetMsgHeight(WndHndl, Target),
+			WndHndl, NULL, InstHndl, NULL);
+		SendHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 170, 265, 200, 200, WndHndl, (HMENU)IDC_NET_SENDER, InstHndl, NULL);
 
 		if (Type == 1) {
-			RdoBtn3  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVMULTI), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 290, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_RC, InstHndl, NULL);
-			CreateWindow(_T("STATIC"), TargetRecver, WS_CHILD | WS_VISIBLE, 70, 322, 100, 20, WndHndl, NULL, InstHndl, NULL);
-			RecvHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 190, 320, 200, 200, WndHndl, (HMENU)IDC_NET_RECEIVER, InstHndl, NULL);
+			RdoBtn3  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVMULTI), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 295, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_RC, InstHndl, NULL);
+			CreateWindow(_T("STATIC"), TargetRecver, WS_CHILD | WS_VISIBLE, Rect.left + 30, 322,
+				GetMsgWidth(WndHndl, (TCHAR*)TargetRecver) + 30,
+				GetMsgHeight(WndHndl, (TCHAR*)TargetRecver),
+				WndHndl, NULL, InstHndl, NULL);
+			RecvHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 170, 320, 200, 200, WndHndl, (HMENU)IDC_NET_RECEIVER, InstHndl, NULL);
 		}
 
 		CloseSockHndl = CreateWindow(_T("BUTTON"), CloseMsg, WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 10, 355, 240, 20, WndHndl, (HMENU)IDC_NET_CLOSESOCK, InstHndl, NULL);
