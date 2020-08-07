@@ -12,6 +12,10 @@ int GetMsgHeight(HWND, TCHAR*);
 HWND IconHndl;
 HWND IpHndl;
 HWND PortHndl;
+HWND SslTlsHndl;
+HWND SvrCertPath;
+HWND SvrKeyPath;
+HWND CaCertPath;
 HWND RdoBtn1;
 HWND RdoBtn2;
 HWND RdoBtn3;
@@ -345,6 +349,17 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			WndHndl, NULL, InstHndl, NULL);
 		PortHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 170, 180, 60, 24, WndHndl, NULL, InstHndl, NULL);
 
+		SslTlsHndl = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SSLTLS), WS_CHILD | WS_VISIBLE | BS_CHECKBOX, Rect.left + 30, 212,
+			GetMsgWidth(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SSLTLS)) + 30,
+			GetMsgHeight(WndHndl, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SSLTLS)),
+			WndHndl, (HMENU)IDC_NET_SSLTLS, InstHndl, NULL);
+		if (Type == 1) {
+			SvrKeyPath = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 130, 210, 170, 24, WndHndl, NULL, InstHndl, NULL);
+			SvrCertPath = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 320, 210, 170, 24, WndHndl, NULL, InstHndl, NULL);
+		} else {
+			CaCertPath = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 130, 210, 340, 24, WndHndl, NULL, InstHndl, NULL);
+		}
+
 		RdoBtn2  = CreateWindow(_T("BUTTON"), Radio2, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 240, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
 		CreateWindow(_T("STATIC"), Target, WS_CHILD | WS_VISIBLE, Rect.left + 30, 267,
 			GetMsgWidth(WndHndl, Target) + 30,
@@ -352,6 +367,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			WndHndl, NULL, InstHndl, NULL);
 		SendHndl = CreateWindowEx(WS_EX_CLIENTEDGE, _T("COMBOBOX"), _T(""), WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL, 170, 265, 200, 200, WndHndl, (HMENU)IDC_NET_SENDER, InstHndl, NULL);
 
+		// Only for TCP receiver
 		if (Type == 1) {
 			RdoBtn3  = CreateWindow(_T("BUTTON"), MyMsgProc::GetMsg(MyMsgProc::PROP_NET_RECVMULTI), WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 295, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_RC, InstHndl, NULL);
 			CreateWindow(_T("STATIC"), TargetRecver, WS_CHILD | WS_VISIBLE, Rect.left + 30, 322,

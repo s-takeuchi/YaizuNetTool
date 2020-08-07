@@ -120,6 +120,7 @@ public:
 	static const int PROP_NET_SINGLE_CHUNK_NOCONT = 2395;
 	static const int PROP_NET_ALL_CHUNKS_CONT = 2396;
 	static const int PROP_NET_SINGLE_CHUNK_CONT = 2397;
+	static const int PROP_NET_SSLTLS = 2398;
 
 	static const int STKFW_LOG_TITLE = 2400;
 	static const int STKFW_LOG_START = 2401;

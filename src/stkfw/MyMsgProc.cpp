@@ -463,6 +463,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_SINGLE_CHUNK_CONT, _T("1 Chunk受信で遷移 / 制御コード付き"));
 	MessageProc::AddEng(PROP_NET_SINGLE_CHUNK_CONT, _T("1 chunk reception / with control char"));
 
+	// 2398 (★)
+	MessageProc::AddJpn(PROP_NET_SSLTLS, _T("SSL/TLS"));
+	MessageProc::AddEng(PROP_NET_SSLTLS, _T("SSL/TLS"));
+
 	// =====================================================================================================
 	// 2400 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));

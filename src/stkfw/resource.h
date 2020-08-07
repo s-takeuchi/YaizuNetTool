@@ -9,6 +9,7 @@
 #define IDC_NET_RECEIVER                2012
 #define IDC_NET_CLOSESOCK               2013
 #define IDC_NET_CLOSEFORCE              2014
+#define IDC_NET_SSLTLS                  2015
 #define IDC_NET_OPETYPE_ID              2020
 #define IDC_NET_OPETYPE_SD              2021
 #define IDC_NET_OPETYPE_RC              2022
