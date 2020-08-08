@@ -104,6 +104,35 @@ void SetIpAddressOrHostname(int CurrentId, TCHAR SetStr[256])
 	LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, SetStr, 1);
 }
 
+bool GetFlagProceedEvenIfNoDatRecv(int CurrentId)
+{
+	TCHAR TmpBuf[256] = _T("");
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, TmpBuf, 2);
+	if (lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
+		return true;
+	}
+	return false;
+}
+
+void SetFlagProceedEventIfNoDatRecv(int CurrentId, bool Flag)
+{
+	if (Flag == true) {
+		LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T("PROCEED;"), 2);
+	} else {
+		LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 2);
+	}
+}
+
+bool GetSslTlsStatus(int CurrentId)
+{
+	return true;
+}
+
+void SetSslTlsStatus(int CurrentId, bool Flag)
+{
+
+}
+
 // Flag == TRUE ... sender names and IDs can be acquired.
 // Flag == FALSE && RemovalId == -1 ... receiver names and IDs can be acquired.
 // Flag == FALSE && RemovalId != -1 ... receiver names and IDs can be acquired. But the information regarding RemovalId cannot be acquired.
@@ -257,6 +286,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 	static int SelectedCheck = 0;
 	static int SelectedCondition = 0;
 	static int SelectedProceedNoDatRecv = 0;
+	static int SelectedSslTlsCheck = 0;
 
 	TCHAR ComboMenu[10][64] = {_T("Desktop PC A"), _T("Rack servers"), _T("Midrange storage device"),
 								_T("Server"), _T("Thin client"), _T("Mainframe A"),
@@ -480,9 +510,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 
 		// Initialize for each finish conditions
 		if (Type == 1) {
-			TCHAR TmpBuf[256];
-			LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, TmpBuf, 2);
-			if (lstrcmp(TmpBuf, _T("PROCEED;")) == 0) {
+			if (GetFlagProceedEvenIfNoDatRecv(CurrentId)) {
 				SelectedProceedNoDatRecv = 1;
 			} else {
 				SelectedProceedNoDatRecv = 0;
@@ -513,7 +541,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		wsprintf(Buf, _T("%d"), PortNum);
 		SendMessage(PortHndl, WM_SETTEXT, (WPARAM)0, (LPARAM)Buf);
 
-		// チェックボックスの初期化
+		// Close socket check box initialization
 		SelectedCheck = GetCloseSockCheck(CurrentId);
 		if (SelectedCheck == 0) {
 			SendMessage(CloseSockHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
@@ -528,6 +556,17 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			SendMessage(CloseForceHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
 			EnableWindow(CloseForceHndl, TRUE);
 		}
+
+		// SSL/TLS check box initialization
+		if (SelectedSslTlsCheck == 0) {
+			if (Type == 1) {
+				EnableWindow(SvrKeyPath, FALSE);
+				EnableWindow(SvrCertPath, FALSE);
+			} else {
+				EnableWindow(CaCertPath, FALSE);
+			}
+		}
+		
 	}
 	if (message == WM_COMMAND) {
 		if (HIWORD(wParam) == CBN_SELCHANGE) {
@@ -610,6 +649,27 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					SelectedCheck = 1;
 					SendMessage(CloseForceHndl, BM_SETCHECK, BST_CHECKED, 0L);
 					EnableWindow(CloseForceHndl, TRUE);
+				}
+			}
+			if (LOWORD(wParam) == IDC_NET_SSLTLS) {
+				if (SelectedSslTlsCheck == 0) {
+					SelectedSslTlsCheck = 1;
+					SendMessage(SslTlsHndl, BM_SETCHECK, BST_CHECKED, 0L);
+					if (Type == 1) {
+						EnableWindow(SvrKeyPath, TRUE);
+						EnableWindow(SvrCertPath, TRUE);
+					} else {
+						EnableWindow(CaCertPath, TRUE);
+					}
+				} else {
+					SelectedSslTlsCheck = 0;
+					SendMessage(SslTlsHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
+					if (Type == 1) {
+						EnableWindow(SvrKeyPath, FALSE);
+						EnableWindow(SvrCertPath, FALSE);
+					} else {
+						EnableWindow(CaCertPath, FALSE);
+					}
 				}
 			}
 			if (LOWORD(wParam) == IDC_RECVINIT_PROCEEDNODATRECV) {
@@ -718,9 +778,9 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					} else {
 					}
 					if (SelectedProceedNoDatRecv == 1) {
-						LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T("PROCEED;"), 2);
+						SetFlagProceedEventIfNoDatRecv(CurrentId, true);
 					} else {
-						LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 2);
+						SetFlagProceedEventIfNoDatRecv(CurrentId, false);
 					}
 				}
 			}
