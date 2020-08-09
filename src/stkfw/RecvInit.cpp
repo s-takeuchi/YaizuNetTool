@@ -123,14 +123,59 @@ void SetFlagProceedEventIfNoDatRecv(int CurrentId, bool Flag)
 	}
 }
 
-bool GetSslTlsStatus(int CurrentId)
+bool GetSslTlsStatus(int CurrentId, int Type)
 {
-	return true;
+	TCHAR TmpCrt[256] = _T("");
+	TCHAR TmpKey[256] = _T("");
+	if (Type == 1) {
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, TmpCrt, 3);
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, TmpKey, 4);
+		if (lstrcmp(TmpCrt, _T("")) == 0 && lstrcmp(TmpKey, _T("")) == 0) {
+			return false;
+		}
+		return true;
+	} else {
+		LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, TmpCrt, 3);
+		if (lstrcmp(TmpCrt, _T("")) == 0) {
+			return false;
+		}
+		return true;
+	}
 }
 
-void SetSslTlsStatus(int CurrentId, bool Flag)
+void SetSslTlsStatus(int CurrentId, int Type, bool Flag)
 {
+	if (Type == 1) {
+		if (Flag == false) {
+			LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 3);
+			LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 4);
+		}
+	} else {
+		if (Flag == false) {
+			LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 3);
+			LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, _T(""), 4);
+		}
+	}
+}
 
+void GetSslTlsCertPath(int CurrentId, TCHAR CertPath[256])
+{
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, CertPath, 3);
+}
+
+void SetSslTlsCertPath(int CurrentId, TCHAR* CertPath)
+{
+	LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, CertPath, 3);
+}
+
+void GetSslTlsKeyPath(int CurrentId, TCHAR KeyPath[256])
+{
+	LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, KeyPath, 4);
+}
+
+void SetSslTlsKeyPath(int CurrentId, TCHAR* KeyPath)
+{
+	LowDbAccess::GetInstance()->SetElementInfoParamStr(CurrentId, KeyPath, 4);
 }
 
 // Flag == TRUE ... sender names and IDs can be acquired.
@@ -286,7 +331,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 	static int SelectedCheck = 0;
 	static int SelectedCondition = 0;
 	static int SelectedProceedNoDatRecv = 0;
-	static int SelectedSslTlsCheck = 0;
+	static bool SelectedSslTlsCheck = false;
 
 	TCHAR ComboMenu[10][64] = {_T("Desktop PC A"), _T("Rack servers"), _T("Midrange storage device"),
 								_T("Server"), _T("Thin client"), _T("Mainframe A"),
@@ -385,9 +430,12 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			WndHndl, (HMENU)IDC_NET_SSLTLS, InstHndl, NULL);
 		if (Type == 1) {
 			SvrKeyPath = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 130, 210, 170, 24, WndHndl, NULL, InstHndl, NULL);
+			SendMessage(SvrKeyPath, EM_SETLIMITTEXT, (WPARAM)255, (LPARAM)0);
 			SvrCertPath = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 320, 210, 170, 24, WndHndl, NULL, InstHndl, NULL);
+			SendMessage(SvrCertPath, EM_SETLIMITTEXT, (WPARAM)255, (LPARAM)0);
 		} else {
 			CaCertPath = CreateWindowEx(WS_EX_CLIENTEDGE, _T("EDIT"), _T(""), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 130, 210, 340, 24, WndHndl, NULL, InstHndl, NULL);
+			SendMessage(CaCertPath, EM_SETLIMITTEXT, (WPARAM)255, (LPARAM)0);
 		}
 
 		RdoBtn2  = CreateWindow(_T("BUTTON"), Radio2, WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, Rect.left + 10, 240, Rect.right - 20, 20, WndHndl, (HMENU)IDC_NET_OPETYPE_SD, InstHndl, NULL);
@@ -558,15 +606,27 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		}
 
 		// SSL/TLS check box initialization
-		if (SelectedSslTlsCheck == 0) {
-			if (Type == 1) {
-				EnableWindow(SvrKeyPath, FALSE);
-				EnableWindow(SvrCertPath, FALSE);
-			} else {
-				EnableWindow(CaCertPath, FALSE);
-			}
+		SelectedSslTlsCheck = GetSslTlsStatus(CurrentId, Type);
+		if (SelectedSslTlsCheck) {
+			SendMessage(SslTlsHndl, BM_SETCHECK, BST_CHECKED, 0L);
+		} else {
+			SendMessage(SslTlsHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
 		}
-		
+		if (Type == 1) {
+			EnableWindow(SvrCertPath, SelectedSslTlsCheck);
+			EnableWindow(SvrKeyPath, SelectedSslTlsCheck);
+			TCHAR CertPathBuf[256] = _T("");
+			TCHAR KeyPathBuf[256] = _T("");
+			GetSslTlsCertPath(CurrentId, CertPathBuf);
+			GetSslTlsKeyPath(CurrentId, KeyPathBuf);
+			SendMessage(SvrCertPath, WM_SETTEXT, (WPARAM)0, (LPARAM)CertPathBuf);
+			SendMessage(SvrKeyPath, WM_SETTEXT, (WPARAM)0, (LPARAM)KeyPathBuf);
+		} else {
+			EnableWindow(CaCertPath, SelectedSslTlsCheck);
+			TCHAR CertPathBuf[256] = _T("");
+			GetSslTlsCertPath(CurrentId, CertPathBuf);
+			SendMessage(CaCertPath, WM_SETTEXT, (WPARAM)0, (LPARAM)CertPathBuf);
+		}
 	}
 	if (message == WM_COMMAND) {
 		if (HIWORD(wParam) == CBN_SELCHANGE) {
@@ -652,8 +712,8 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				}
 			}
 			if (LOWORD(wParam) == IDC_NET_SSLTLS) {
-				if (SelectedSslTlsCheck == 0) {
-					SelectedSslTlsCheck = 1;
+				if (SelectedSslTlsCheck == false) {
+					SelectedSslTlsCheck = true;
 					SendMessage(SslTlsHndl, BM_SETCHECK, BST_CHECKED, 0L);
 					if (Type == 1) {
 						EnableWindow(SvrKeyPath, TRUE);
@@ -662,7 +722,7 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 						EnableWindow(CaCertPath, TRUE);
 					}
 				} else {
-					SelectedSslTlsCheck = 0;
+					SelectedSslTlsCheck = false;
 					SendMessage(SslTlsHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
 					if (Type == 1) {
 						EnableWindow(SvrKeyPath, FALSE);
@@ -701,6 +761,21 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					PortNumber = 65535;
 				}
 				SetPortNumber(CurrentId, PortNumber);
+
+				if (Type == 1) {
+					TCHAR CertPath[256] = _T("");
+					TCHAR KeyPath[256] = _T("");
+					SendMessage(SvrCertPath, WM_GETTEXT, (WPARAM)10, (LPARAM)CertPath);
+					SendMessage(SvrKeyPath, WM_GETTEXT, (WPARAM)10, (LPARAM)KeyPath);
+					SetSslTlsCertPath(CurrentId, CertPath);
+					SetSslTlsKeyPath(CurrentId, KeyPath);
+				} else {
+					TCHAR CertPath[256] = _T("");
+					SendMessage(CaCertPath, WM_GETTEXT, (WPARAM)10, (LPARAM)CertPath);
+					SetSslTlsCertPath(CurrentId, CertPath);
+					SetSslTlsKeyPath(CurrentId, _T(""));
+				}
+				SetSslTlsStatus(CurrentId, Type, SelectedSslTlsCheck);
 
 				// Set finish condition
 				if (Type == 1) {
