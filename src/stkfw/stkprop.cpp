@@ -313,10 +313,26 @@ void AddAllSocketInfo()
 	for (int LoopType = 0; LoopType < 6; LoopType++ ) {
 		for (int Loop = 0; Loop < NumOfElem[LoopType]; Loop++) {
 			if (LowDbAccess::GetInstance()->GetHostIpAddrPort(TmpIds[LoopType][Loop], TmpHostOrIpAddr, &TmpPort) == 0 &&
-				LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 0) { // Listen socket case
-				if (LoopType <= 2) {
+				LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 0) { //IP address & port direct specification case
+				if (LoopType <= 2) { // For stream
 					StkSocket_AddInfo(TmpIds[LoopType][Loop], STKSOCKET_TYPE_STREAM, (LoopType == 0)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
-				} else {
+					// Check SSL/TLS configuration
+					if (LoopType == 0) {
+						TCHAR CertPathBuf[256] = _T("");
+						TCHAR KeyPathBuf[256] = _T("");
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, CertPathBuf, 3);
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, KeyPathBuf, 4);
+						if (lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
+							// Enable SSL/TLS
+						}
+					} else {
+						TCHAR CertPathBuf[256] = _T("");
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, CertPathBuf, 3);
+						if (lstrcmp(CertPathBuf, _T("")) != 0) {
+							// Enable SSL/TLS
+						}
+					}
+				} else { // For datagram
 					StkSocket_AddInfo(TmpIds[LoopType][Loop], STKSOCKET_TYPE_DGRAM, (LoopType == 3)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
 				}
 			} else if (LowDbAccess::GetInstance()->GetTcpRecvOperationTypeInElementInfo(TmpIds[LoopType][Loop]) == 2) { // Accept socket case

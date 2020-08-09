@@ -121,10 +121,13 @@ public:
 	static const int PROP_NET_ALL_CHUNKS_CONT = 2396;
 	static const int PROP_NET_SINGLE_CHUNK_CONT = 2397;
 	static const int PROP_NET_SSLTLS = 2398;
+	static const int PROP_NET_SSLTLS_PATH_TO_SVR_CRT = 2399;
+	static const int PROP_NET_SSLTLS_PATH_TO_KEYFILE = 2400;
+	static const int PROP_NET_SSLTLS_PATH_TO_CA_CRT = 2401;
 
-	static const int STKFW_LOG_TITLE = 2400;
-	static const int STKFW_LOG_START = 2401;
-	static const int STKFW_LOG_STOP = 2402;
+	static const int STKFW_LOG_TITLE = 2490;
+	static const int STKFW_LOG_START = 2491;
+	static const int STKFW_LOG_STOP = 2492;
 
 	// 2500 - 2899 : Reserved by server code
 

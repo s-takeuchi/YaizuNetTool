@@ -619,12 +619,21 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			TCHAR KeyPathBuf[256] = _T("");
 			GetSslTlsCertPath(CurrentId, CertPathBuf);
 			GetSslTlsKeyPath(CurrentId, KeyPathBuf);
+			if (lstrcmp(CertPathBuf, _T("")) == 0) {
+				lstrcpy(CertPathBuf, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SSLTLS_PATH_TO_SVR_CRT));
+			}
+			if (lstrcmp(KeyPathBuf, _T("")) == 0) {
+				lstrcpy(KeyPathBuf, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SSLTLS_PATH_TO_KEYFILE));
+			}
 			SendMessage(SvrCertPath, WM_SETTEXT, (WPARAM)0, (LPARAM)CertPathBuf);
 			SendMessage(SvrKeyPath, WM_SETTEXT, (WPARAM)0, (LPARAM)KeyPathBuf);
 		} else {
 			EnableWindow(CaCertPath, SelectedSslTlsCheck);
 			TCHAR CertPathBuf[256] = _T("");
 			GetSslTlsCertPath(CurrentId, CertPathBuf);
+			if (lstrcmp(CertPathBuf, _T("")) == 0) {
+				lstrcpy(CertPathBuf, MyMsgProc::GetMsg(MyMsgProc::PROP_NET_SSLTLS_PATH_TO_CA_CRT));
+			}
 			SendMessage(CaCertPath, WM_SETTEXT, (WPARAM)0, (LPARAM)CertPathBuf);
 		}
 	}
@@ -765,13 +774,13 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 				if (Type == 1) {
 					TCHAR CertPath[256] = _T("");
 					TCHAR KeyPath[256] = _T("");
-					SendMessage(SvrCertPath, WM_GETTEXT, (WPARAM)10, (LPARAM)CertPath);
-					SendMessage(SvrKeyPath, WM_GETTEXT, (WPARAM)10, (LPARAM)KeyPath);
+					SendMessage(SvrCertPath, WM_GETTEXT, (WPARAM)255, (LPARAM)CertPath);
+					SendMessage(SvrKeyPath, WM_GETTEXT, (WPARAM)255, (LPARAM)KeyPath);
 					SetSslTlsCertPath(CurrentId, CertPath);
 					SetSslTlsKeyPath(CurrentId, KeyPath);
 				} else {
 					TCHAR CertPath[256] = _T("");
-					SendMessage(CaCertPath, WM_GETTEXT, (WPARAM)10, (LPARAM)CertPath);
+					SendMessage(CaCertPath, WM_GETTEXT, (WPARAM)255, (LPARAM)CertPath);
 					SetSslTlsCertPath(CurrentId, CertPath);
 					SetSslTlsKeyPath(CurrentId, _T(""));
 				}

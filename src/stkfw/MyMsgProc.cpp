@@ -467,16 +467,28 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(PROP_NET_SSLTLS, _T("SSL/TLS"));
 	MessageProc::AddEng(PROP_NET_SSLTLS, _T("SSL/TLS"));
 
+	// 2399 (★)
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("サーバー証明書ファイル(.crt)へのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Path to server certificate file(.crt)"));
+
+	// 2400 (★)
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("秘密鍵ファイル(.key)へのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("Path to private key file(.key)"));
+
+	// 2401 (★)
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("認証局証明書ファイル(.crt)へのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("Path to CA certificate file(.crt)"));
+
 	// =====================================================================================================
-	// 2400 (---)
+	// 2490 (---)
 	MessageProc::AddJpn(STKFW_LOG_TITLE, _T("StkFw - スレッドコントローラ\r\n"));
 	MessageProc::AddEng(STKFW_LOG_TITLE, _T("StkFw - Thread controller\r\n"));
 
-	// 2401 (NC3)
+	// 2491 (NC3)
 	MessageProc::AddJpn(STKFW_LOG_START, _T("スレッドコントローラはログの出力を開始しました。\r\n"));
 	MessageProc::AddEng(STKFW_LOG_START, _T("The thread controller has started logging.\r\n"));
 
-	// 2402 (NC3)
+	// 2492 (NC3)
 	MessageProc::AddJpn(STKFW_LOG_STOP, _T("スレッドコントローラはログの出力を停止しました。\r\n"));
 	MessageProc::AddEng(STKFW_LOG_STOP, _T("The thread controller has stopped logging.\r\n"));
 
