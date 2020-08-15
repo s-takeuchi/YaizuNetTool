@@ -9,6 +9,7 @@
 #include "server\LowDbAccess.h"
 #include "MyMsgProc.h"
 #include "StkProp.h"
+#include "../../../YaizuComLib/src/stkpl/StkPl.h"
 #include "..\..\..\YaizuComLib\src\\commonfunc\StkObject.h"
 
 void RecvInit(int, int, HINSTANCE, HWND, UINT, WPARAM, LPARAM);
@@ -320,16 +321,24 @@ void AddAllSocketInfo()
 					if (LoopType == 0) {
 						TCHAR CertPathBuf[256] = _T("");
 						TCHAR KeyPathBuf[256] = _T("");
-						LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, CertPathBuf, 3);
-						LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, KeyPathBuf, 4);
+						char CertPathUtf8[256 * 6] = "";
+						char KeyPathUtf8[256 * 6] = "";
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(TmpIds[LoopType][Loop], CertPathBuf, 3);
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(TmpIds[LoopType][Loop], KeyPathBuf, 4);
+						StkPlConvWideCharToUtf8(CertPathUtf8, 256 * 6, CertPathBuf);
+						StkPlConvWideCharToUtf8(KeyPathUtf8, 256 * 6, KeyPathBuf);
 						if (lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
-							// Enable SSL/TLS
+							// Enable SSL/TLS for receiver
+							StkSocket_SecureForRecv(TmpIds[LoopType][Loop], KeyPathUtf8, CertPathUtf8);
 						}
 					} else {
 						TCHAR CertPathBuf[256] = _T("");
-						LowDbAccess::GetInstance()->GetElementInfoParamStr(CurrentId, CertPathBuf, 3);
+						char CertPathUtf8[256 * 6] = "";
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(TmpIds[LoopType][Loop], CertPathBuf, 3);
+						StkPlConvWideCharToUtf8(CertPathUtf8, 256 * 6, CertPathBuf);
 						if (lstrcmp(CertPathBuf, _T("")) != 0) {
-							// Enable SSL/TLS
+							// Enable SSL/TLS for sender
+							StkSocket_SecureForSend(TmpIds[LoopType][Loop], CertPathUtf8, NULL);
 						}
 					}
 				} else { // For datagram
