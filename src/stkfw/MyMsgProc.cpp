@@ -468,16 +468,16 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(PROP_NET_SSLTLS, _T("SSL/TLS"));
 
 	// 2399 (★)
-	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("サーバー証明書ファイル(.crt)へのパス"));
-	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Path to server certificate file(.crt)"));
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Server証明書ファイルへのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Path to server cert file"));
 
 	// 2400 (★)
-	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("秘密鍵ファイル(.key)へのパス"));
-	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("Path to private key file(.key)"));
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("秘密鍵ファイルへのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("Path to private key file"));
 
 	// 2401 (★)
-	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("認証局証明書ファイル(.crt)へのパス"));
-	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("Path to CA certificate file(.crt)"));
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("CA証明書ファイルへのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("Path to CA cert file"));
 
 	// =====================================================================================================
 	// 2490 (---)
@@ -692,6 +692,10 @@ void MyMsgProc::AddMsg()
 	//9136 (★)
 	MessageProc::AddJpn(SFW_160_170_3, _T("TCP receiverの終了条件として，HTTPヘッダの\"Transfer-Encoding: chunked\"の指定を新たにサポートした。"));
 	MessageProc::AddEng(SFW_160_170_3, _T("Support enabled for \"Transfer-Encoding: chunked\" specification in HTTP header as a new termination condition of TCP receiver."));
+
+	//9137 (★)
+	MessageProc::AddJpn(SFW_160_170_4, _T("SSL/TLSによる接続をサポートした。"));
+	MessageProc::AddEng(SFW_160_170_4, _T("Support enabled for SSL/LTS connection."));
 
 	// =====================================================================================================
 }
