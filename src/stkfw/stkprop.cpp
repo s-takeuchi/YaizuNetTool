@@ -349,7 +349,20 @@ void AddAllSocketInfo()
 					int CorrId = LowDbAccess::GetInstance()->GetTcpRecvCorrespodingIdInElementInfo(TmpIds[LoopType][Loop]);
 					LowDbAccess::GetInstance()->GetHostIpAddrPort(CorrId, TmpHostOrIpAddr, &TmpPort);
 					if (StkSocket_GetStatus(CorrId) == -1) {
-						StkSocket_AddInfo(CorrId, STKSOCKET_TYPE_STREAM, (LoopType == 0)? STKSOCKET_ACTIONTYPE_RECEIVER : STKSOCKET_ACTIONTYPE_SENDER, TmpHostOrIpAddr, TmpPort);
+						StkSocket_AddInfo(CorrId, STKSOCKET_TYPE_STREAM, STKSOCKET_ACTIONTYPE_RECEIVER, TmpHostOrIpAddr, TmpPort);
+
+						TCHAR CertPathBuf[256] = _T("");
+						TCHAR KeyPathBuf[256] = _T("");
+						char CertPathUtf8[256 * 6] = "";
+						char KeyPathUtf8[256 * 6] = "";
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(CorrId, CertPathBuf, 3);
+						LowDbAccess::GetInstance()->GetElementInfoParamStr(CorrId, KeyPathBuf, 4);
+						StkPlConvWideCharToUtf8(CertPathUtf8, 256 * 6, CertPathBuf);
+						StkPlConvWideCharToUtf8(KeyPathUtf8, 256 * 6, KeyPathBuf);
+						if (lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
+							// Enable SSL/TLS for receiver
+							StkSocket_SecureForRecv(CorrId, KeyPathUtf8, CertPathUtf8);
+						}
 					}
 					StkSocket_CopyInfo(TmpIds[LoopType][Loop], CorrId);
 				}
