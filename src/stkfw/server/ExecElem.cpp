@@ -215,15 +215,27 @@ void ExecElem::StkPropOutputLog()
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_SUCCESSCS:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCS), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"), ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SUCCESSCS), ParamStr1, ParamInt1);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_UDPSOCKCLOSE:
-			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPSOCKCLOSE), ParamStr1, ParamInt1);
+			wsprintf(DummyBuf, _T("%s  <%s:%d>\r\n"), ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UDPSOCKCLOSE), ParamStr1, ParamInt1);
 			add_log(Name, DummyBuf);
 			break;
 		case STKSOCKET_LOG_BINDERR:
 			ErrorLog(Id, ServerMsg::GetMsg(ServerMsg::STKFW_LOG_BINDERR), ParamInt2);
+			break;
+		case STKSOCKET_LOG_PRIVATEKEY:
+			wsprintf(DummyBuf, _T("%s %s \"%s\"\r\n"), ServerMsg::GetMsg(ServerMsg::STKFW_LOG_PRIVATEKEYLOAD), (ParamInt1 == 0) ? L"Success" : L"Failure", ParamStr1);
+			add_log(Name, DummyBuf);
+			break;
+		case STKSOCKET_LOG_SERVERCERT:
+			wsprintf(DummyBuf, _T("%s %s \"%s\"\r\n"), ServerMsg::GetMsg(ServerMsg::STKFW_LOG_SERVERCERTLOAD), (ParamInt1 == 0) ? L"Success" : L"Failure", ParamStr1);
+			add_log(Name, DummyBuf);
+			break;
+		case STKSOCKET_LOG_CACERT:
+			wsprintf(DummyBuf, _T("%s %s \"%s\"\r\n"), ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CACERTLOAD), (ParamInt1 == 0) ? L"Success" : L"Failure", ParamStr1);
+			add_log(Name, DummyBuf);
 			break;
 		default:
 			wsprintf(DummyBuf, _T("%s Msg=%d\r\n"),  ServerMsg::GetMsg(ServerMsg::STKFW_LOG_UNKNOWN), Msg);

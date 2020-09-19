@@ -93,6 +93,18 @@ void ServerMsg::AddMsg()
 	MessageProc::AddJpn(STKFW_LOG_UNKNOWN, _T("不明"));
 	MessageProc::AddEng(STKFW_LOG_UNKNOWN, _T("Unknown"));
 
+	// 2525 (★)
+	MessageProc::AddJpn(STKFW_LOG_PRIVATEKEYLOAD, _T("SSL/TLS-秘密鍵の読み込み"));
+	MessageProc::AddEng(STKFW_LOG_PRIVATEKEYLOAD, _T("SSL/TLS-Private key loading"));
+
+	// 2526 (★)
+	MessageProc::AddJpn(STKFW_LOG_SERVERCERTLOAD, _T("SSL/TLS-サーバー証明書の読み込み"));
+	MessageProc::AddEng(STKFW_LOG_SERVERCERTLOAD, _T("SSL/TLS-Server certificate loading"));
+
+	// 2527 (★)
+	MessageProc::AddJpn(STKFW_LOG_CACERTLOAD, _T("SSL/TLS-CA証明書の読み込み"));
+	MessageProc::AddEng(STKFW_LOG_CACERTLOAD, _T("SSL/TLS-CA certificate loading"));
+
 	// =====================================================================================================
 }
 
