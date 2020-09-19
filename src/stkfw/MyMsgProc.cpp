@@ -468,16 +468,16 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddEng(PROP_NET_SSLTLS, _T("SSL/TLS"));
 
 	// 2399 (★)
-	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Server証明書ファイルへのパス"));
-	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Path to server cert file"));
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Server証明書へのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_SVR_CRT, _T("Path to server certificate"));
 
 	// 2400 (★)
 	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("秘密鍵ファイルへのパス"));
 	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_KEYFILE, _T("Path to private key file"));
 
 	// 2401 (★)
-	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("CA証明書ファイルへのパス"));
-	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("Path to CA cert file"));
+	MessageProc::AddJpn(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("CA証明書へのパス"));
+	MessageProc::AddEng(PROP_NET_SSLTLS_PATH_TO_CA_CRT, _T("Path to CA certificate"));
 
 	// =====================================================================================================
 	// 2490 (---)
