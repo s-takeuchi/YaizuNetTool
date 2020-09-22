@@ -741,6 +741,7 @@ void output_log()
 		}
 		delete res_obj;
 	}
+	delete obj;
 
 	// Clear log
 	obj = ApiObj::CreateObject(ApiObj::METHOD_POST, L"/api/log/");

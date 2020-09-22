@@ -13,8 +13,8 @@ StkObject* ApiObj_Log::Execute(StkObject* ReqObj, int Method, wchar_t Url[ApiObj
 		if (wcscmp(acquired_log, L"") != NULL) {
 			obj = new StkObject(L"");
 			obj->AppendChildElement(new StkObject(L"log", acquired_log));
-			delete[] acquired_log;
 		}
+		delete[] acquired_log;
 		*ResultCode = 200;
 		return obj;
 	}
