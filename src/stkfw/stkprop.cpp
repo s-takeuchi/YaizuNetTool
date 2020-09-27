@@ -393,6 +393,7 @@ void DeleteAllSocketInfo()
 	// SocketInfoメンバ配列から要素を削除する
 	for (int LoopType = 0; LoopType < 6; LoopType++ ) {
 		for (int Loop = 0; Loop < NumOfElem[LoopType]; Loop++) {
+			StkSocket_Unsecure(TmpIds[LoopType][Loop]);
 			StkSocket_DeleteInfo(TmpIds[LoopType][Loop]);
 		}
 	}
