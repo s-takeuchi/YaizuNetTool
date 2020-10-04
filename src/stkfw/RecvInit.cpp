@@ -186,9 +186,9 @@ int GetTargetNameArray(TCHAR TargetName[256][32], int TargetId[256], BOOL Flag, 
 	return LowDbAccess::GetInstance()->GetTcpSenderReceiver(TargetName, TargetId, Flag, MaFlag, RemovalId);
 }
 
-void ChangeOperationType(int Type)
+void ChangeOperationType(int OpeType, bool SslTlsCheck)
 {
-	if (Type == 0) {
+	if (OpeType == 0) {
 		SendMessage(RdoBtn1, BM_SETCHECK, BST_CHECKED, 0L);
 		SendMessage(RdoBtn2, BM_SETCHECK, BST_UNCHECKED, 0L);
 		SendMessage(RdoBtn3, BM_SETCHECK, BST_UNCHECKED, 0L);
@@ -196,8 +196,12 @@ void ChangeOperationType(int Type)
 		EnableWindow(PortHndl, TRUE);
 		EnableWindow(SendHndl, FALSE);
 		EnableWindow(RecvHndl, FALSE);
+		EnableWindow(SslTlsHndl, TRUE);
+		EnableWindow(SvrCertPath, SslTlsCheck);
+		EnableWindow(SvrKeyPath, SslTlsCheck);
+		EnableWindow(CaCertPath, SslTlsCheck);
 	}
-	if (Type == 1) {
+	if (OpeType == 1) {
 		SendMessage(RdoBtn1, BM_SETCHECK, BST_UNCHECKED, 0L);
 		SendMessage(RdoBtn2, BM_SETCHECK, BST_CHECKED, 0L);
 		SendMessage(RdoBtn3, BM_SETCHECK, BST_UNCHECKED, 0L);
@@ -205,8 +209,12 @@ void ChangeOperationType(int Type)
 		EnableWindow(PortHndl, FALSE);
 		EnableWindow(SendHndl, TRUE);
 		EnableWindow(RecvHndl, FALSE);
+		EnableWindow(SslTlsHndl, FALSE);
+		EnableWindow(SvrCertPath, FALSE);
+		EnableWindow(SvrKeyPath, FALSE);
+		EnableWindow(CaCertPath, FALSE);
 	}
-	if (Type == 2) {
+	if (OpeType == 2) {
 		SendMessage(RdoBtn1, BM_SETCHECK, BST_UNCHECKED, 0L);
 		SendMessage(RdoBtn2, BM_SETCHECK, BST_UNCHECKED, 0L);
 		SendMessage(RdoBtn3, BM_SETCHECK, BST_CHECKED, 0L);
@@ -214,6 +222,10 @@ void ChangeOperationType(int Type)
 		EnableWindow(PortHndl, FALSE);
 		EnableWindow(SendHndl, FALSE);
 		EnableWindow(RecvHndl, TRUE);
+		EnableWindow(SslTlsHndl, FALSE);
+		EnableWindow(SvrCertPath, FALSE);
+		EnableWindow(SvrKeyPath, FALSE);
+		EnableWindow(CaCertPath, FALSE);
 	}
 }
 
@@ -512,7 +524,8 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 
 		// 操作種別の初期化
 		SelectedOpeType = GetOperationType(CurrentId);
-		ChangeOperationType(SelectedOpeType);
+		SelectedSslTlsCheck = GetSslTlsStatus(CurrentId, Type);
+		ChangeOperationType(SelectedOpeType, SelectedSslTlsCheck);
 
 		// Initialization of the target name
 		{
@@ -606,15 +619,12 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 		}
 
 		// SSL/TLS check box initialization
-		SelectedSslTlsCheck = GetSslTlsStatus(CurrentId, Type);
 		if (SelectedSslTlsCheck) {
 			SendMessage(SslTlsHndl, BM_SETCHECK, BST_CHECKED, 0L);
 		} else {
 			SendMessage(SslTlsHndl, BM_SETCHECK, BST_UNCHECKED, 0L);
 		}
 		if (Type == 1) {
-			EnableWindow(SvrCertPath, SelectedSslTlsCheck);
-			EnableWindow(SvrKeyPath, SelectedSslTlsCheck);
 			TCHAR CertPathBuf[256] = _T("");
 			TCHAR KeyPathBuf[256] = _T("");
 			GetSslTlsCertPath(CurrentId, CertPathBuf);
@@ -628,7 +638,6 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			SendMessage(SvrCertPath, WM_SETTEXT, (WPARAM)0, (LPARAM)CertPathBuf);
 			SendMessage(SvrKeyPath, WM_SETTEXT, (WPARAM)0, (LPARAM)KeyPathBuf);
 		} else {
-			EnableWindow(CaCertPath, SelectedSslTlsCheck);
 			TCHAR CertPathBuf[256] = _T("");
 			GetSslTlsCertPath(CurrentId, CertPathBuf);
 			if (lstrcmp(CertPathBuf, _T("")) == 0) {
@@ -871,15 +880,15 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 			if (LOWORD(wParam) == IDC_BTNCANCEL) {
 			}
 			if (LOWORD(wParam) == IDC_NET_OPETYPE_ID) {
-				ChangeOperationType(0);
+				ChangeOperationType(0, SelectedSslTlsCheck);
 				SelectedOpeType = 0;
 			}
 			if (LOWORD(wParam) == IDC_NET_OPETYPE_SD) {
-				ChangeOperationType(1);
+				ChangeOperationType(1, SelectedSslTlsCheck);
 				SelectedOpeType = 1;
 			}
 			if (LOWORD(wParam) == IDC_NET_OPETYPE_RC) {
-				ChangeOperationType(2);
+				ChangeOperationType(2, SelectedSslTlsCheck);
 				SelectedOpeType = 2;
 			}
 		}
