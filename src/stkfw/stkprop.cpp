@@ -327,7 +327,7 @@ void AddAllSocketInfo()
 						LowDbAccess::GetInstance()->GetElementInfoParamStr(TmpIds[LoopType][Loop], KeyPathBuf, 4);
 						StkPlConvWideCharToUtf8(CertPathUtf8, 256 * 6, CertPathBuf);
 						StkPlConvWideCharToUtf8(KeyPathUtf8, 256 * 6, KeyPathBuf);
-						if (lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
+						if (StkSocket_GetSecureStatus(TmpIds[LoopType][Loop]) == 0 && lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
 							// Enable SSL/TLS for receiver
 							StkSocket_SecureForRecv(TmpIds[LoopType][Loop], KeyPathUtf8, CertPathUtf8);
 						}
@@ -359,7 +359,7 @@ void AddAllSocketInfo()
 						LowDbAccess::GetInstance()->GetElementInfoParamStr(CorrId, KeyPathBuf, 4);
 						StkPlConvWideCharToUtf8(CertPathUtf8, 256 * 6, CertPathBuf);
 						StkPlConvWideCharToUtf8(KeyPathUtf8, 256 * 6, KeyPathBuf);
-						if (lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
+						if (StkSocket_GetSecureStatus(CorrId) == 0 && lstrcmp(CertPathBuf, _T("")) != 0 && lstrcmp(KeyPathBuf, _T("")) != 0) {
 							// Enable SSL/TLS for receiver
 							StkSocket_SecureForRecv(CorrId, KeyPathUtf8, CertPathUtf8);
 						}
