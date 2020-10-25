@@ -66,6 +66,9 @@ public:
 	void UpdateHttpHeaderInfo(int, int, wchar_t[1024]);
 	void GetHttpHeaderInfo(int, int*, wchar_t[1024]);
 
+	// Does corresponding element exist?
+	bool DoesCorrespondingElementExist(int);
+		
 	// Delete all records of specified table
 	int DeleteAllRecords(TCHAR[TABLE_NAME_SIZE]);
 

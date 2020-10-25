@@ -29,6 +29,7 @@ public:
 	static const int STKFW_LOG_PRIVATEKEYLOAD = 2525;
 	static const int STKFW_LOG_SERVERCERTLOAD = 2526;
 	static const int STKFW_LOG_CACERTLOAD = 2527;
+	static const int STKFW_LOG_CANNOTCLOSE = 2528;
 
 	static void AddMsg();
 	static TCHAR* GetMsg(int);

@@ -1,5 +1,6 @@
 ﻿#include <windows.h>
 #include "..\..\..\..\YaizuComLib\src\\stksocket\stksocket.h"
+#include "ServerMsg.h"
 #include "ExecElem_Receiver.h"
 #include "VarController.h"
 #include "LowDbAccess.h"
@@ -144,10 +145,19 @@ int ExecElem_Receiver::Execute()
 	// 受信後ソケットをクローズする場合
 	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 4);
 	if (IsClose != 0) {
-		if (SpecType == 0 || SpecType == 2) {
-			StkSocket_CloseAccept(TargetId, TargetId, (IsClose == 2) ? TRUE : FALSE);
+		bool CorElemExistFlag = LowDbAccess::GetInstance()->DoesCorrespondingElementExist(ElementId);
+		if (!CorElemExistFlag) {
+			if (SpecType == 0 || SpecType == 2) {
+				StkSocket_CloseAccept(TargetId, TargetId, (IsClose == 2) ? TRUE : FALSE);
+			} else {
+				StkSocket_Disconnect(TargetId, ElementId, (IsClose == 2) ? TRUE : FALSE);
+			}
 		} else {
-			StkSocket_Disconnect(TargetId, ElementId, (IsClose == 2) ? TRUE : FALSE);
+			TCHAR Name[32] = _T("");
+			TCHAR DummyBuf[128] = _T("");
+			wsprintf(DummyBuf, _T("%s\r\n"), ServerMsg::GetMsg(ServerMsg::STKFW_LOG_CANNOTCLOSE));
+			LowDbAccess::GetInstance()->GetViewElementNameFromId(ElementId, Name);
+			add_log(Name, DummyBuf);
 		}
 	}
 	StkPropOutputLog();

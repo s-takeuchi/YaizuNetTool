@@ -105,6 +105,10 @@ void ServerMsg::AddMsg()
 	MessageProc::AddJpn(STKFW_LOG_CACERTLOAD, _T("SSL/TLS-CA証明書の読み込み"));
 	MessageProc::AddEng(STKFW_LOG_CACERTLOAD, _T("SSL/TLS-CA certificate loading"));
 
+	// 2528 (★)
+	MessageProc::AddJpn(STKFW_LOG_CANNOTCLOSE, _T("同一ソケットを使って同じ接続先と通信する別の要素が存在するため，ソケットはクローズできません。"));
+	MessageProc::AddEng(STKFW_LOG_CANNOTCLOSE, _T("The socket cannot be closed because the other element which connects to the same element using same socket exists."));
+
 	// =====================================================================================================
 }
 

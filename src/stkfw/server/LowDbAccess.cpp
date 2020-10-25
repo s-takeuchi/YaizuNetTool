@@ -1269,11 +1269,50 @@ void LowDbAccess::GetHttpHeaderInfo(int target_id, int* input_bin, wchar_t http_
 
 
 
+
 /////////////////////////////////////////////////////////////////////////
 //
 // For multiple tables
 //
 /////////////////////////////////////////////////////////////////////////
+
+bool LowDbAccess::DoesCorrespondingElementExist(int TargetId)
+{
+	ColumnData* ElmColSch[2];
+	ElmColSch[0] = new ColumnDataInt(_T("ParamInt1"), 1);
+	ElmColSch[1] = new ColumnDataInt(_T("ParamInt2"), TargetId);
+	RecordData* ElmRecSch = new RecordData(_T("ElementInfo"), ElmColSch, 2);
+	LockTable(_T("ElementInfo"), LOCK_SHARE);
+	RecordData* ElmRetRec = GetRecord(ElmRecSch);
+	UnlockTable(_T("ElementInfo"));
+	if (ElmRetRec != NULL) {
+		ColumnDataInt* ElmRetCol = (ColumnDataInt*)ElmRetRec->GetColumn(L"Id");
+		int FoundId = ElmRetCol->GetValue();
+
+		ColumnData* VeColSch[1];
+		VeColSch[0] = new ColumnDataInt(_T("Id"), FoundId);
+		RecordData* VeRecSch = new RecordData(_T("ViewElement"), VeColSch, 1);
+		LockTable(_T("ViewElement"), LOCK_SHARE);
+		RecordData* VeRetRec = GetRecord(VeRecSch);
+		UnlockTable(_T("ViewElement"));
+		if (VeRetRec != NULL) {
+			ColumnDataInt* VeRetCol = (ColumnDataInt*)VeRetRec->GetColumn(L"Type");
+			int FoundType = VeRetCol->GetValue();
+			if (FoundType == 1 || FoundType == 4 || FoundType == 7) {
+				delete VeRecSch;
+				delete VeRetRec;
+				delete ElmRecSch;
+				delete ElmRetRec;
+				return true;
+			}
+			delete VeRetRec;
+		}
+		delete VeRecSch;
+		delete ElmRetRec;
+	}
+	delete ElmRecSch;
+	return false;
+}
 
 void LowDbAccess::UpdateElementInfoFromViewElement()
 {
