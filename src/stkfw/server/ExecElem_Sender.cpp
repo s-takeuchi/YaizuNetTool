@@ -30,6 +30,10 @@ int ExecElem_Sender::Execute()
 	}
 	StkPropOutputLog();
 
+	while (TryLockShared(TargetId) == false) {
+		Sleep(1);
+	}
+
 	// データ送信
 	int DatSize = GetDataLength();
 	BYTE* Dat = (BYTE*)GetData();
@@ -56,10 +60,13 @@ int ExecElem_Sender::Execute()
 	}
 	StkPropOutputLog();
 	if (Ret == SOCKET_ERROR) {
+		UnlockShared(TargetId);
 		return 2;
 	}
 	if (ElementType == SENDER_R) {
+		UnlockShared(TargetId);
 		return 1;
 	}
+	UnlockShared(TargetId);
 	return 0;
 }

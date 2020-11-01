@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <memory.h>
 #include <mutex>
+#include <shared_mutex>
 #include <cwchar>
 #include <ctime>
 #include "VarController.h"
@@ -27,11 +28,137 @@
 #include "ExecElem_HttpHeader.h"
 #include "ExecElem_NothingToDo.h"
 
+// Logging functions
 wchar_t *ExecElem::log;
 std::mutex ExecElem::log_mutex;
 int ExecElem::max_log_size;
 int ExecElem::log_update_version;
 std::once_flag ExecElem::init_log_flag;
+
+// Lock management
+std::mutex ExecElem::LockMutex;
+ExecElem::LockMgr ExecElem::LockMgrImpl[MAXNUM_LOCK];
+int ExecElem::LockMgrCount = 0;
+
+ExecElem::LockMgr* ExecElem::GetLockMgr(int Target)
+{
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			LockMutex.unlock();
+			return &LockMgrImpl[Loop];
+		}
+	}
+	LockMutex.unlock();
+	return NULL;
+}
+
+void ExecElem::LockShared(int Target)
+{
+	wchar_t Buf[32] = L"";
+	wsprintf(Buf, L"LockShared %d", Target);
+	add_log(Buf, L"\r\n");
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			LockMgrImpl[Loop].LockObj.lock_shared();
+			LockMutex.unlock();
+			return;
+		}
+	}
+	LockMgrImpl[LockMgrCount].LockTarget = Target;
+	LockMgrImpl[LockMgrCount].LockObj.lock_shared();
+	LockMgrCount++;
+	LockMutex.unlock();
+}
+
+void ExecElem::UnlockShared(int Target)
+{
+	wchar_t Buf[32] = L"";
+	wsprintf(Buf, L"UnlockShared %d", Target);
+	add_log(Buf, L"\r\n");
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			LockMgrImpl[Loop].LockObj.unlock_shared();
+			LockMutex.unlock();
+			return;
+		}
+	}
+	LockMutex.unlock();
+}
+
+bool ExecElem::TryLockShared(int Target)
+{
+	wchar_t Buf[32] = L"";
+	wsprintf(Buf, L"TryLockShared %d", Target);
+	add_log(Buf, L"\r\n");
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			bool Flag = LockMgrImpl[Loop].LockObj.try_lock_shared();
+			LockMutex.unlock();
+			return Flag;
+		}
+	}
+	LockMgrImpl[LockMgrCount].LockTarget = Target;
+	bool Flag = LockMgrImpl[LockMgrCount].LockObj.try_lock_shared();
+	LockMgrCount++;
+	LockMutex.unlock();
+	return Flag;
+}
+
+void ExecElem::Lock(int Target)
+{
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			LockMgrImpl[Loop].LockObj.lock();
+			LockMutex.unlock();
+			return;
+		}
+	}
+	LockMgrImpl[LockMgrCount].LockTarget = Target;
+	LockMgrImpl[LockMgrCount].LockObj.lock();
+	LockMgrCount++;
+	LockMutex.unlock();
+}
+
+void ExecElem::Unlock(int Target)
+{
+	wchar_t Buf[32] = L"";
+	wsprintf(Buf, L"Unlock %d", Target);
+	add_log(Buf, L"\r\n");
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			LockMgrImpl[Loop].LockObj.unlock();
+			LockMutex.unlock();
+			return;
+		}
+	}
+	LockMutex.unlock();
+}
+
+bool ExecElem::TryLock(int Target)
+{
+	wchar_t Buf[32] = L"";
+	wsprintf(Buf, L"TryLock %d", Target);
+	add_log(Buf, L"\r\n");
+	LockMutex.lock();
+	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
+		if (Target == LockMgrImpl[Loop].LockTarget) {
+			bool Flag = LockMgrImpl[Loop].LockObj.try_lock();
+			LockMutex.unlock();
+			return Flag;
+		}
+	}
+	LockMgrImpl[LockMgrCount].LockTarget = Target;
+	bool Flag = LockMgrImpl[LockMgrCount].LockObj.try_lock();
+	LockMgrCount++;
+	LockMutex.unlock();
+	return Flag;
+}
 
 void ExecElem::init_log()
 {

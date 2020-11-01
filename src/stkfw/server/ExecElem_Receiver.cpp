@@ -55,6 +55,10 @@ int ExecElem_Receiver::Execute()
 	}
 	StkPropOutputLog();
 
+	while (TryLockShared(TargetId) == false) {
+		Sleep(1);
+	}
+
 	// 終了条件設定
 	int FinishCondition = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 5);
 	int FinishCondTimeout = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 6);
@@ -69,6 +73,7 @@ int ExecElem_Receiver::Execute()
 			VarDat = new BYTE[VarDatSize];
 			VarCon_GetCommunicationVariable(VarId, VarDat, VarDatSize);
 		} else {
+			UnlockShared(TargetId);
 			return 2;
 		}
 	}
@@ -106,6 +111,7 @@ int ExecElem_Receiver::Execute()
 	// データ受信中エラー発生／ソケット切断
 	if (ActSize == SOCKET_ERROR || ActSize == -1) {
 		delete Buf;
+		UnlockShared(TargetId);
 		return 2;
 	}
 	// 接続先ソケットがクローズされた
@@ -117,6 +123,7 @@ int ExecElem_Receiver::Execute()
 		}
 		delete Buf;
 		StkPropOutputLog();
+		UnlockShared(TargetId);
 		return 2;
 	}
 	// タイムアウト
@@ -128,9 +135,11 @@ int ExecElem_Receiver::Execute()
 			SetDataLength(0);
 			SetData(TmpVarDat);
 			delete Buf;
+			UnlockShared(TargetId);
 			return 0;
 		} else {
 			delete Buf;
+			UnlockShared(TargetId);
 			return 2;
 		}
 	}
@@ -161,5 +170,6 @@ int ExecElem_Receiver::Execute()
 		}
 	}
 	StkPropOutputLog();
+	UnlockShared(TargetId);
 	return 0;
 }

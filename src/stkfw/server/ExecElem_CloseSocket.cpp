@@ -20,6 +20,9 @@ int ExecElem_CloseSocket::Execute()
 		return 0;
 	}
 	int IsClose = LowDbAccess::GetInstance()->GetElementInfoParamInt(ElementId, 2);
+	while (TryLock(TargetId) == false) {
+		Sleep(1);
+	}
 	if (TargetType == 1) {
 		StkSocket_CloseAccept(TargetId, ElementId, (IsClose == 1) ? TRUE : FALSE);
 	}
@@ -29,6 +32,7 @@ int ExecElem_CloseSocket::Execute()
 	if (TargetType == 22 || TargetType == 23) {
 		StkSocket_Disconnect(TargetId, ElementId, FALSE);
 	}
+	Unlock(TargetId);
 	StkPropOutputLog();
 	return 0;
 }

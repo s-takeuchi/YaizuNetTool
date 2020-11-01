@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <windows.h>
 #include <mutex>
+#include <shared_mutex>
 
 class ExecElem
 {
@@ -78,6 +79,29 @@ public:
 	static int get_max_log_size();
 	static void change_size(const int);
 // Logging functions end
+
+// Lock management start
+protected:
+	class LockMgr {
+	public:
+		int LockTarget;
+		std::shared_mutex LockObj;
+		LockMgr() {
+			LockTarget = -1;
+		}
+	};
+	static std::mutex LockMutex;
+	static const int MAXNUM_LOCK = 2000;
+	static LockMgr LockMgrImpl[MAXNUM_LOCK];
+	static int LockMgrCount;
+	static LockMgr* GetLockMgr(int);
+	static void LockShared(int);
+	static void UnlockShared(int);
+	static bool TryLockShared(int);
+	static void Lock(int);
+	static void Unlock(int);
+	static bool TryLock(int);
+// Lock management end
 
 public:
 	// Constructor
