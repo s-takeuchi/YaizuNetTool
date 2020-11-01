@@ -55,9 +55,6 @@ ExecElem::LockMgr* ExecElem::GetLockMgr(int Target)
 
 void ExecElem::LockShared(int Target)
 {
-	wchar_t Buf[32] = L"";
-	wsprintf(Buf, L"LockShared %d", Target);
-	add_log(Buf, L"\r\n");
 	LockMutex.lock();
 	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
 		if (Target == LockMgrImpl[Loop].LockTarget) {
@@ -74,9 +71,6 @@ void ExecElem::LockShared(int Target)
 
 void ExecElem::UnlockShared(int Target)
 {
-	wchar_t Buf[32] = L"";
-	wsprintf(Buf, L"UnlockShared %d", Target);
-	add_log(Buf, L"\r\n");
 	LockMutex.lock();
 	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
 		if (Target == LockMgrImpl[Loop].LockTarget) {
@@ -90,9 +84,6 @@ void ExecElem::UnlockShared(int Target)
 
 bool ExecElem::TryLockShared(int Target)
 {
-	wchar_t Buf[32] = L"";
-	wsprintf(Buf, L"TryLockShared %d", Target);
-	add_log(Buf, L"\r\n");
 	LockMutex.lock();
 	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
 		if (Target == LockMgrImpl[Loop].LockTarget) {
@@ -126,9 +117,6 @@ void ExecElem::Lock(int Target)
 
 void ExecElem::Unlock(int Target)
 {
-	wchar_t Buf[32] = L"";
-	wsprintf(Buf, L"Unlock %d", Target);
-	add_log(Buf, L"\r\n");
 	LockMutex.lock();
 	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
 		if (Target == LockMgrImpl[Loop].LockTarget) {
@@ -142,9 +130,6 @@ void ExecElem::Unlock(int Target)
 
 bool ExecElem::TryLock(int Target)
 {
-	wchar_t Buf[32] = L"";
-	wsprintf(Buf, L"TryLock %d", Target);
-	add_log(Buf, L"\r\n");
 	LockMutex.lock();
 	for (int Loop = 0; Loop < LockMgrCount; Loop++) {
 		if (Target == LockMgrImpl[Loop].LockTarget) {
