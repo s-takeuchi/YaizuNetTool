@@ -23,6 +23,12 @@ ExecElemMgr::~ExecElemMgr()
 {
 }
 
+// Clear lock management
+void ExecElemMgr::ClearLockMgr()
+{
+	ExecElem::ClearLockMgr();
+}
+
 // Get this instance
 ExecElemMgr* ExecElemMgr::GetInstance()
 {

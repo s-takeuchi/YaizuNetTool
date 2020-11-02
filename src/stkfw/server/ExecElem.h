@@ -101,6 +101,9 @@ protected:
 	static void Lock(int);
 	static void Unlock(int);
 	static bool TryLock(int);
+
+public:
+	static void ClearLockMgr();
 // Lock management end
 
 public:

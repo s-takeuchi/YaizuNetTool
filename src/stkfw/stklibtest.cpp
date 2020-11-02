@@ -36,6 +36,7 @@
 #include "stkprop.h"
 #include "server\LowDbAccess.h"
 #include "server\ApiObj.h"
+#include "server\ExecElemMgr.h"
 
 #include "MyMsgProc.h"
 
@@ -782,6 +783,7 @@ void StartProc(void)
 	As.StartActorAction();
 
 	AddAllSocketInfo();
+	ExecElemMgr::GetInstance()->ClearLockMgr();
 
 	LeaveCriticalSection(&NetGseEx::CritSect);
 }
@@ -828,6 +830,7 @@ void StartProcForCmd(void)
 {
 	AddStkThreadLog(MyMsgProc::GetMsg(MyMsgProc::STKFW_LOG_START));
 	AddAllSocketInfo();
+	ExecElemMgr::GetInstance()->ClearLockMgr();
 }
 
 void StopProcForCmd(void)

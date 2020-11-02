@@ -62,4 +62,6 @@ public:
 	// リンクの種別をクリアする
 	void ClearLineType(int );
 
+	// Clear lock management
+	void ClearLockMgr();
 };

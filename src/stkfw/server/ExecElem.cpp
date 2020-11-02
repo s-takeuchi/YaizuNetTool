@@ -145,6 +145,11 @@ bool ExecElem::TryLock(int Target)
 	return Flag;
 }
 
+void ExecElem::ClearLockMgr()
+{
+	ExecElem::LockMgrCount = 0;
+}
+
 void ExecElem::init_log()
 {
 	max_log_size = 1000;
