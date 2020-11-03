@@ -1649,7 +1649,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_49A87388320B418D82493C6322C5405C"
             {
-            "Name" = "8:TunnelPage"
+            "Name" = "8:Sample_TunnelPage"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1691,7 +1691,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_70C0CE15D46A47E0BE514A8C2DB8B3F7"
             {
-            "Name" = "8:_Sender"
+            "Name" = "8:Sample_Sender"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1705,7 +1705,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_923B6E46948145DA82BE70A13BE5404E"
             {
-            "Name" = "8:_Receiver"
+            "Name" = "8:Sample_Receiver"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1719,7 +1719,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DC7FE06EDE5B4A91984DE40F9C0B0590"
             {
-            "Name" = "8:DummyWebServer"
+            "Name" = "8:Sample_DummyWebServer"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1733,7 +1733,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F4C6F9717E7D4FF9BA23791B906F3791"
             {
-            "Name" = "8:GetDateAndTime"
+            "Name" = "8:Sample_GetDateAndTime"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
