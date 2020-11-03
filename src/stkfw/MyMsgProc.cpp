@@ -697,6 +697,10 @@ void MyMsgProc::AddMsg()
 	MessageProc::AddJpn(SFW_160_170_4, _T("SSL/TLSによる接続をサポートした。"));
 	MessageProc::AddEng(SFW_160_170_4, _T("Support enabled for SSL/LTS connection."));
 
+	//9138 (★)
+	MessageProc::AddJpn(SFW_160_170_5, _T("Windows Server 2019をサポートした。"));
+	MessageProc::AddEng(SFW_160_170_5, _T("Support enabled for Windows Server 2019."));
+
 	// =====================================================================================================
 }
 

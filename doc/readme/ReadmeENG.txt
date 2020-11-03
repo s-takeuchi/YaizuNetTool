@@ -118,6 +118,7 @@ Windows Server 2019
 (3) Fixed a bug which HTTP header processing element cannot delete a HTTP
     header part in response data.
 (4) Support enabled for SSL/LTS connection.
+(5) Support enabled for Windows Server 2019.
 
 
 =================================================
