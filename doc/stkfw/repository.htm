@@ -328,8 +328,8 @@ ViewElementが何も存在しない場合，
 空文字: データ未受信→次の処理要素に遷移しない<br>
 "PROCEED;": データ未受信→次の処理要素に遷移する<br>
 </td></tr>
-<tr><td>ParamStr3</td><td>TCP receiverの場合，PEMファイル(サーバー証明書)へのパス。TCP senderの場合，PEMファイル(認証局証明書)へのパス。</td></tr>
-<tr><td>ParamStr4</td><td>TCP receiverの場合，KEYファイル(秘密鍵)へのパス。TCP senderの場合，使用されない。</td></tr>
+<tr><td>ParamStr3</td><td>PEMファイル(サーバー証明書)へのパス</td></tr>
+<tr><td>ParamStr4</td><td>KEYファイル(秘密鍵)へのパス</td></tr>
 </TABLE>
 <P>
 <H3>(2) 対応する要素の種別が"TCP sender"の場合</H3>
@@ -339,6 +339,7 @@ ViewElementが何も存在しない場合，
 <TR><TD>ParamInt3</TD><TD>ポート番号</TD></TR>
 <TR><TD>ParamInt4</TD><TD>データ送信後のソケットのクローズ有無<BR>(0: クローズしない, 1:クローズする(強制クローズ), 2:クローズする(接続先のシャットダウン／クローズを待つ))</TD></TR>
 <TR><TD>ParamStr1</TD><TD>ホスト名/IPアドレス</TD></TR>
+<tr><td>ParamStr3</td><td>PEMファイル(認証局証明書)へのパス</td></tr>
 </TABLE>
 <P>
 <H3>(3) 対応する要素の種別が"Load Data"の場合</H3>

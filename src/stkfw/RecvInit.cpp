@@ -791,7 +791,6 @@ void RecvInit(int CurrentId, int Type, HINSTANCE InstHndl, HWND WndHndl, UINT me
 					TCHAR CertPath[256] = _T("");
 					SendMessage(CaCertPath, WM_GETTEXT, (WPARAM)256, (LPARAM)CertPath);
 					SetSslTlsCertPath(CurrentId, CertPath);
-					SetSslTlsKeyPath(CurrentId, _T(""));
 				}
 				SetSslTlsStatus(CurrentId, Type, SelectedSslTlsCheck);
 
