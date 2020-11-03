@@ -845,7 +845,7 @@ int SetAboutInfo()
 	SetStkAboutIconBug(IDI_ABOUTBUG);
 	SetStkAboutIconEnhance(IDI_ABOUTENH);
 	TCHAR Title[512];
-	wsprintf(Title, _T("StkFw\r\nVersion 1.7.0 (beta)  ,  Build date:[%S, %S]\r\nCopyright (C) 2018  Shinya Takeuchi.  All Rights Reserved."), __DATE__, __TIME__);
+	wsprintf(Title, _T("StkFw\r\nVersion 1.7.0  ,  Build date:[%S, %S]\r\nCopyright (C) 2020  Shinya Takeuchi.  All Rights Reserved."), __DATE__, __TIME__);
 	SetAboutTitle(Title);
 
 	ClearHistoryItem();

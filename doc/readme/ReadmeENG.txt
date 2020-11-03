@@ -117,6 +117,7 @@ Windows Server 2019
     header as a new termination condition of TCP receiver.
 (3) Fixed a bug which HTTP header processing element cannot delete a HTTP
     header part in response data.
+(4) Support enabled for SSL/LTS connection.
 
 
 =================================================
