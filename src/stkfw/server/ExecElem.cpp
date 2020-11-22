@@ -504,6 +504,7 @@ void ExecElem::SetDataLength(int Len)
 // Thread status was changed into "Start"
 void ExecElem::ThreadStatusChangedIntoStart()
 {
+	StkSocket_ClearForceStop(ElementId);
 }
 
 // Thread status was changed into "Stop"
