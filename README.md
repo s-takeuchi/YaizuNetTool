@@ -1,4 +1,4 @@
-# StkFw 1.6.0
+# StkFw 1.7.0
 
 ## Summary of StkFw
 StkFw is a test support software solution that simulates environments in which multiple pieces of software and/or hardware work together on an IP network.
@@ -17,13 +17,18 @@ StkFw works on systems with the following specifications:
 - Memory: 512 MB or more  
 - Free disk space: 20 MB or more  
 - Operating systems/editions supported:  
-  Windows 7 Professional/Ultimate SP1  
-  Windows 10 Pro  
-  Windows Server 2012 Standard  
-  Windows Server 2012 R2 Standard  
-  Windows Server 2016 Standard  
+  Windows 10 (Only 64 bit edition)
+  Windows Server 2016
+  Windows Server 2019
 
 ## Change history
+### Version 1.6.0 ---> 1.7.0
+- Fixed a bug which a part of HTTP header string is inappropriately deleted when user edits the string on property dialog box of HTTP Header.
+- Support enabled for "Transfer-Encoding: chunked" specification in HTTP header as a new termination condition of TCP receiver.
+- Fixed a bug which HTTP header processing element cannot delete a HTTP header part in response data.
+- Support enabled for SSL/LTS connection.
+- Support enabled for Windows Server 2019.
+
 ### Version 1.5.0 ---> 1.6.0
 
 - Support enabled for data reception which the specified size of Content-Length in HTTP header as a new terminate condition of TCP receiver.
@@ -39,7 +44,7 @@ StkFw works on systems with the following specifications:
 - Support for IPv6 connectivity enabled.
 - Support enabled for Windows 8.1, Windows 10 and Windows Server 2012 R2.
 
-
 ## Download
+[1.7.0 Release: 2020/11/23](https://github.com/s-takeuchi/YaizuNetTool/releases/tag/1.7.0)  
 [1.6.0 Release: 2018/11/04](https://github.com/s-takeuchi/YaizuNetTool/releases/tag/1.6.0)  
 [1.5.0 Release: 2015/12/10](https://github.com/s-takeuchi/YaizuNetTool/releases/tag/1.5.0)  
