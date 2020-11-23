@@ -17,9 +17,9 @@ StkFw works on systems with the following specifications:
 - Memory: 512 MB or more  
 - Free disk space: 20 MB or more  
 - Operating systems/editions supported:  
-  Windows 10 (Only 64 bit edition)
-  Windows Server 2016
-  Windows Server 2019
+  Windows 10 (Only 64 bit edition)  
+  Windows Server 2016  
+  Windows Server 2019  
 
 ## Change history
 ### Version 1.6.0 ---> 1.7.0
